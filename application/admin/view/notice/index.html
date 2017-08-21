@@ -1,0 +1,123 @@
+{extend name="base/common"}
+
+{block name="style"}
+<style>
+    .shadow{width: 100%;height: 100%;position: absolute;left: 0;top: 0;background: rgba(0,0,0,0.4);z-index: 88;}
+</style>
+{/block}
+
+{block name="page-header"}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>信息驿站</h2>
+        <ol class="breadcrumb">
+            <li>
+                通知公告
+            </li>
+            <li class="active">
+                <strong><a href="{:Url('Notice/index')}">列表页</a></strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+{/block}
+
+{block name="main"}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <form method="get" action="index.html" class="pull-left mail-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" name="search" placeholder="搜索标题">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-sm btn-primary">搜索</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="ibox-tools">
+                        <a data-toggle="modal" class="btn btn-sm btn-primary" href="{:Url('Notice/edit')}">添加</a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th><input class="i-checks check-all" type="checkbox"></th>
+                                <th style="width: 400px">标题</th>
+                                <th>时间</th>
+                                <th>地点</th>
+                                <th>发布人</th>
+                                <th>截止时间</th>
+                                <th>推送类型</th>
+                                <th>创建人</th>
+                                <th>创建时间</th>
+                                <th>是否推荐</th>
+                                <th>推送操作</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {volist name="list" id="vo"}
+                            <tr>
+                                <td><input type="checkbox" class="i-checks" name="input[]"></td>
+                                <td>{$vo.title}</td>
+                                <!--数据库字段里 是 0 模型类   但是读取出来已经转化 -->
+                                {eq name="$vo.start_time" value="1970-01-01 08:00"}
+                                <td></td>
+                                {else/}
+                                <td>{$vo.start_time}</td>
+                                {/eq}
+                                <td>{$vo->address}</td>
+                                <td>{$vo->publisher}</td>
+                                <td>{$vo.end_time}</td>
+                                <td>{$vo.type_text}</td>
+                                <td>{$vo->user->nickname}</td>
+                                <td>{$vo.create_time|time_format="Y-m-d"}</td>
+                                <td>{$vo.recommend_text}</td>
+                                {eq name="$vo.push" value="0"}
+                                <td> <a href="{:Url('push','id='.$vo.id)}" class="ajax-get confirm label label-info">开始推送</a></td>
+                                {else/}
+                                <td><span class="label label-info" style="background: #999">已推送</span></td>
+                                {/eq}
+                                <td>
+                                    <a href="{:Url('Notice/edit?id='.$vo['id'])}">修改</a>&emsp;
+                                    <a href="{:Url('Notice/del?id='.$vo['id'])}" class="confirm ajax-del">删除</a>
+                                </td>
+                            </tr>
+                            {/volist}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="10">
+                                    <div class="page">{$_page}</div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<iframe id="iframe" src="" style="height: 80%;width: 392px;z-index: 99;position: absolute;top: 10%;border: 0;left: 32%;background: #fff;display: none;" scrolling="auto" seamless></iframe>
+<div class="shadow" style="display: none"></div>
+{/block}
+
+{block name="script"}
+<script src="/admin/js/plugins/iCheck/icheck.min.js"></script>
+<script>
+    $(document).ready(function(){
+        highlight_subnav("{:Url('Notice/index')}");
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+    });
+</script>
+{/block}
