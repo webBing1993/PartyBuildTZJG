@@ -25,23 +25,25 @@
                         <div class="spe_title"></div>
                         <div class="shadow_box">
                             <div class="content">
+                                {volist name="banner1" id="ba"}
                                 <a href="">
                                     <div class="roll_box">
                                         <div class="s_tag">通知公告</div>
-                                        <img class="s_img" src="">
-                                        <div class="s_title">的点点滴滴多多</div>
+                                        <img class="s_img" src="{$ba.front_cover}">
+                                        <div class="s_title">{$ba.title}</div>
                                         <div class="sent_detail">
-                                            <span class="tissue">之图党支部</span>
-                                            <span class="time">2017-8-22</span>
+                                            <span class="tissue">{$ba.publisher}</span>
+                                            <span class="time">{$ba.create_time}</span>
                                         </div>
                                         <div class="footer">
                                             <div class="scan">
                                                 <img src="/home/images/notice/scan2.png">
-                                                <span>33</span>
+                                                <span>{$ba.views}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </a>
+                                {/volist}
                             </div>
 
                         </div>
@@ -54,20 +56,22 @@
                 <!--通知列表-->
                 <div class="lists notice">
                     <div class="tag"> —— 精彩活动.寓教于乐 —— </div>
+                    {volist name="list1" id="lo"}
                     <a href="" class="list">
-                        <img src="" alt="图片" class="img">
-                        <div class="s_title">的点点滴滴多多</div>
+                        <img src="{$lo.front_cover}" alt="图片" class="img">
+                        <div class="s_title">{$lo.title}</div>
                         <div class="sent_detail">
-                            <span class="tissue">之图党支部</span>
-                            <span class="time">2017-8-22</span>
+                            <span class="tissue">{$lo.publisher}</span>
+                            <span class="time">{$lo.create_time}</span>
                         </div>
                         <div class="footer">
                             <div class="scan">
                                 <img src="/home/images/notice/scan2.png">
-                                <span>33</span>
+                                <span>{$lo.views}</span>
                             </div>
                         </div>
                     </a>
+                    {/volist}
                 </div>
             </div>
             <div id="item2mobile" class="mui-slider-item mui-control-content">
@@ -77,23 +81,25 @@
                         <div class="spe_title"></div>
                         <div class="shadow_box">
                             <div class="content">
+                                {volist name="banner2" id="bn"}
                                 <a href="">
                                     <div class="roll_box">
                                         <div class="s_tag">党建动态</div>
-                                        <img class="s_img" src="">
-                                        <div class="s_title">的点点滴滴多多</div>
+                                        <img class="s_img" src="{$bn.front_cover}">
+                                        <div class="s_title">{$bn.title}</div>
                                         <div class="sent_detail">
-                                            <span class="tissue">之图党支部</span>
-                                            <span class="time">2017-8-22</span>
+                                            <span class="tissue">{$bn.publisher}</span>
+                                            <span class="time">{$bn.create_time}</span>
                                         </div>
                                         <div class="footer">
                                             <div class="scan">
                                                 <img src="/home/images/notice/scan2.png">
-                                                <span>33</span>
+                                                <span>{$bn.views}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </a>
+                                {/volist}
                             </div>
 
                         </div>
@@ -106,20 +112,22 @@
                 <!--党建动态-->
                 <div class="lists dynamic">
                     <div class="tag"> —— 精彩活动.寓教于乐 —— </div>
+                    {volist name="list2" id="li"}
                     <a href="" class="list">
-                        <img src="" alt="图片" class="img">
-                        <div class="s_title">的点点滴滴多多</div>
+                        <img src="{$li.front_cover}" alt="图片" class="img">
+                        <div class="s_title">{$li.title}</div>
                         <div class="sent_detail">
-                            <span class="tissue">之图党支部</span>
-                            <span class="time">2017-8-22</span>
+                            <span class="tissue">{$li.publisher}</span>
+                            <span class="time">{$li.create_time}</span>
                         </div>
                         <div class="footer">
                             <div class="scan">
                                 <img src="/home/images/notice/scan2.png">
-                                <span>33</span>
+                                <span>{$li.views}</span>
                             </div>
                         </div>
                     </a>
+                    {/volist}
                 </div>
             </div>
         </div>
@@ -203,7 +211,7 @@
         }
                 $.ajax({
                     type:"post",
-                    url:"{:Url('Learn/indexmore')}",
+                    url:"{:Url('Notice/more')}",
                     data:{
                         length:len,
                         type:c
