@@ -1,0 +1,95 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/list/title-pos-time.css">
+<title>主题党日</title>
+{/block}
+
+{block name="body"}
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+        <div class="list">
+            <ul>
+                <a href="">
+                    <p>主题党日</p>
+                    <span>之图党支部</span>
+                    <span>2017-8-21</span>
+                </a>
+            </ul>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script>
+    window.onload = function() {
+        if ($(".list ul a").length < 10) {
+            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+        } else {
+            mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+        }
+    }
+
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
+        }
+    });
+
+    //上拉加载更多
+    function loadScroll(){
+        var len  = $(".list ul a").length;
+        $.ajax({
+            type:"post",
+            url: "{:Url('News/listmore')}",
+            data:{
+                length:len
+            },
+            beforeSend: function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                if(data.code == 1){
+                    addLists(data);
+                    var dataLen =data.data.length;
+                    if(data.data.length == 5){
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                    }else{
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                    }
+                }else{
+                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                }
+            }
+        })
+    }
+
+    //加载更多列表
+    function addLists(data){
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++){
+            var list = lists[i];
+            html +=
+                    '<a>'+
+                    '<p>主题党日</p>'+
+                    '<span>之图党支部</span>'+
+                    '<span>2017-8-21</span>'+
+                    '</a>'
+        }
+        $('.list ul').append(html);
+    }
+
+    //触发点击事件
+    mui('#refreshContainer').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    });
+</script>
+{/block}

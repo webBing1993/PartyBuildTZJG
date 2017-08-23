@@ -1,0 +1,273 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/notice/index.css">
+<link rel="stylesheet" href="/home/css/notice/navbar.css">
+{/block}
+
+{block name="body"}
+<div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+    <a class="mui-control-item" href="#item1mobile" data-index="0">
+        <span>通知公告</span>
+    </a>
+    <a class="mui-control-item" href="#item2mobile" data-index="1">
+        <span>党建动态</span>
+    </a>
+    <img src="/home/images/common/note.png">
+</div>
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+        <div class="mui-slider-group">
+            <div id="item1mobile" class="mui-slider-item mui-control-content">
+                <div class="current_special">
+                    <img src="" class="bac_img">
+                    <div class="fuzzy">
+                        <div class="spe_title"></div>
+                        <div class="shadow_box">
+                            <div class="content">
+                                <a href="">
+                                    <div class="roll_box">
+                                        <div class="s_tag">通知公告</div>
+                                        <img class="s_img" src="">
+                                        <div class="s_title">的点点滴滴多多</div>
+                                        <div class="sent_detail">
+                                            <span class="tissue">之图党支部</span>
+                                            <span class="time">2017-8-22</span>
+                                        </div>
+                                        <div class="footer">
+                                            <div class="scan">
+                                                <img src="/home/images/notice/scan2.png">
+                                                <span>33</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="change">
+                            <img src="/home/images/notice/change.png">换一个
+                        </div>
+                    </div>
+                </div>
+
+                <!--通知列表-->
+                <div class="lists notice">
+                    <div class="tag"> —— 精彩活动.寓教于乐 —— </div>
+                    <a href="" class="list">
+                        <img src="" alt="图片" class="img">
+                        <div class="s_title">的点点滴滴多多</div>
+                        <div class="sent_detail">
+                            <span class="tissue">之图党支部</span>
+                            <span class="time">2017-8-22</span>
+                        </div>
+                        <div class="footer">
+                            <div class="scan">
+                                <img src="/home/images/notice/scan2.png">
+                                <span>33</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div id="item2mobile" class="mui-slider-item mui-control-content">
+                <div class="current_special">
+                    <img src="" class="bac_img">
+                    <div class="fuzzy">
+                        <div class="spe_title"></div>
+                        <div class="shadow_box">
+                            <div class="content">
+                                <a href="">
+                                    <div class="roll_box">
+                                        <div class="s_tag">党建动态</div>
+                                        <img class="s_img" src="">
+                                        <div class="s_title">的点点滴滴多多</div>
+                                        <div class="sent_detail">
+                                            <span class="tissue">之图党支部</span>
+                                            <span class="time">2017-8-22</span>
+                                        </div>
+                                        <div class="footer">
+                                            <div class="scan">
+                                                <img src="/home/images/notice/scan2.png">
+                                                <span>33</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="change">
+                            <img src="/home/images/notice/change.png">换一个
+                        </div>
+                    </div>
+                </div>
+
+                <!--党建动态-->
+                <div class="lists dynamic">
+                    <div class="tag"> —— 精彩活动.寓教于乐 —— </div>
+                    <a href="" class="list">
+                        <img src="" alt="图片" class="img">
+                        <div class="s_title">的点点滴滴多多</div>
+                        <div class="sent_detail">
+                            <span class="tissue">之图党支部</span>
+                            <span class="time">2017-8-22</span>
+                        </div>
+                        <div class="footer">
+                            <div class="scan">
+                                <img src="/home/images/notice/scan2.png">
+                                <span>33</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+  </div>
+    </div>
+
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script>
+    var c =  parseInt(window.location.href.split("index/c/")[1]);
+    $(function(){
+        //tab初始化和数据存储
+        var co = getCookie("type");
+        if(co == 0 || co == 1 ){
+            c = co;
+        }else{
+            c =  parseInt(window.location.href.split("index/c/")[1]);
+        }
+        $("#tab a").eq(c).addClass('mui-active');
+        $(".mui-slider-group>div").eq(c).addClass('mui-active');
+    })
+
+    window.onload = function() {
+        if(c==0){
+            if ($(".notice a").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==1){
+            if ($(".dynamic a").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }
+    }
+
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
+        }
+    });
+
+    /**
+     * 切换精彩专题
+     * @param e
+     */
+    var tonext = function(e){
+        var box =$('.box');
+        var len = box.length;
+        var this_ = $(e ).parents('.box');
+        var index = this_.index();
+        index = index == len ? 0:index;
+        $('.box_up').find('img' ).hide();
+        box.eq(index).show().siblings('.box' ).hide();
+        box.eq(index).find('img' ).fadeIn();
+    };
+
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
+        }
+    });
+
+    function loadScroll(){
+        if(c==0){
+            var len = $(".notice a").length;
+        }else if(c==1){
+            var len = $(".dynamic a").length;
+        }
+                $.ajax({
+                    type:"post",
+                    url:"{:Url('Learn/indexmore')}",
+                    data:{
+                        length:len,
+                        type:c
+                    },
+                    beforeSend: function(XMLHttpRequest){
+                    },
+                    success:function(data){
+                        if(data.code == 1){
+                            addCourse(data,c);
+                            var dataLen =data.data.length;
+                            if(data.data.length == 5){
+                                mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                            }else{
+                                mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                            }
+                        }else{
+                            mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                        }
+                    }
+                })
+    }
+    function addCourse(data,type) {
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for (var i = 0; i < len; i++) {
+            var list = lists[i];
+            if (list.type == 1) {
+                html +=
+                        '<a>' +
+                        '<img src="' + list.path + '" alt="图片" class="img">' +
+                        '<div class="title limit">' + list.title + '</div>' +
+                        '<span class="study">' + list.views + '人学习过</span>' +
+                        '</a>'
+            }
+            if (type == 0) {
+                $(".notice").append(html);
+            } else if (type == 1) {
+                $(".dynamic").append(html);
+            }
+        }
+    }
+
+
+    //tab点击事件
+    mui('#tab').on('tap', 'a', function(e) {
+        $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
+        c = this.getAttribute("data-index");
+        mui('#refreshContainer').pullRefresh().refresh(true);
+        if(c==0){
+            if($(".notice ul li").length<10){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==1){
+            if($(".dynamic ul li").length<10){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }
+        setCookie('type',c);
+    })
+
+</script>
+{/block}

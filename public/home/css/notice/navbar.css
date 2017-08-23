@@ -1,0 +1,278 @@
+
+.current_special {
+  position: relative;
+  width: 100%;
+}
+.current_special .bac_img {
+  width: 100%;
+  height: 5.2rem;
+  position: absolute;
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -filter: blur(10px);
+  filter: blur(10px);
+}
+.current_special .fuzzy {
+  z-index: 55;
+  width: 100%;
+  height: 8rem;
+  background: rgba(0, 0, 0, 0.1);
+  position: relative;
+  top: 0;
+}
+.current_special .fuzzy .spe_title {
+  font-size:0.38rem;
+  color: #666666;
+  width: 100%;
+  height: 0.48rem;
+  line-height:  0.48rem;
+  text-align: center;
+  padding: 0 0.48rem;
+}
+.current_special .fuzzy .shadow_box {
+  width: 5.6rem;
+  height: 6.5rem;
+  border-radius: 8px;
+  background: rgba(153, 153, 153, 0.6);
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  transform: rotate(3deg);
+  margin: 0 auto;
+  position: relative;
+}
+.content a{
+  display: block;
+}
+.current_special .fuzzy .shadow_box .content {
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 4px;
+}
+.current_special .fuzzy .shadow_box .content .roll_box {
+  width: 100%;
+  height: 100%;
+  padding: 0.13rem;
+}
+.current_special .fuzzy .shadow_box .content .roll_box .s_tag,
+.current_special .fuzzy .shadow_box .content .roll_box .s_tag1 {
+  width: 2.12rem;
+  height: 0.64rem;
+  position: absolute;
+  right: 0.13rem;
+  background-image: url("/home/images/notice/bj.png");
+  background-size: 100% 100%;
+  font-size: 0.32rem;
+  color: #ffffff;
+  padding-left: 0.56rem;
+  line-height: 0.64rem;
+}
+.current_special .fuzzy .shadow_box .content .roll_box .s_tag1 {
+  background-image: url("/home/images/bj3.png");
+  padding-left: 27px;
+}
+.current_special .fuzzy .shadow_box .content .roll_box .s_img {
+  width: 100%;
+  height: 4rem;
+  border-radius: 4px;
+}
+.current_special .fuzzy .shadow_box .content .roll_box .s_title {
+  width: 100%;
+  height: 0.48rem;
+  line-height: 0.48rem;
+  font-size: 0.42rem;
+  color: #111;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0.22rem 0;
+}
+.current_special .fuzzy .shadow_box .content .roll_box .sent_detail {
+  width: 100%;
+  height: 0.62rem;
+  line-height: 0.62rem;
+  position: relative;
+  font-size: 0.32rem;
+  color: #999;
+  margin-bottom: 0.2rem;
+  border-bottom: 1px solid #f1f1f1;
+}
+.current_special .fuzzy .shadow_box .content .roll_box .sent_detail .time {
+  color: #ccc;
+  float: right;
+}
+.current_special .fuzzy .shadow_box .content .roll_box .sent_detail:before {
+  content: '';
+  position: absolute;
+  border-bottom: 1px solid #e5e5e5;
+  width: 200%;
+  height: 200%;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scale(0.5, 0.5);
+  transform: scale(0.5, 0.5);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  left: 0;
+  top: 0;
+}
+.current_special .fuzzy .shadow_box .content .roll_box .footer {
+  width: 100%;
+  height: 0.53rem;
+  line-height: 0.53rem;
+  font-size: 0.32rem;
+  color: #3dc353;
+}
+.current_special .fuzzy .shadow_box .content .roll_box .footer .scan,
+.current_special .fuzzy .shadow_box .content .roll_box .footer .talk {
+  display: inline-block;
+  height: 0.32rem;
+  line-height:  0.32rem;
+  padding: 0 0.13rem;
+  border-radius: 12px;
+  background: #f6f6f6;
+  margin-right: 0.13rem;
+  font-size: 0.32rem;
+}
+.current_special .fuzzy .shadow_box .content .roll_box .footer .scan img,
+.current_special .fuzzy .shadow_box .content .roll_box .footer .talk img {
+  width: 0.38rem;
+  margin-top: -0.05rem;
+  margin-right: 4px;
+}
+.current_special .fuzzy .shadow_box .content .roll_box .footer .join,
+.current_special .fuzzy .shadow_box .content .roll_box .footer .learn {
+  height: 24px;
+  line-height: 24px;
+  padding: 0 10px;
+  border-radius: 12px;
+  background: #3dc353;
+  color: #fff;
+  display: inline-block;
+}
+.current_special .fuzzy .shadow_box .content .roll_box .footer .learn {
+  background: #ff9800;
+}
+.current_special .fuzzy .change {
+  width: 100%;
+  height: 0.53rem;
+  line-height: 0.53rem;
+  text-align: center;
+  font-size: 0.38rem;
+  color: #3dc353;
+  margin-top: 0.3rem;
+}
+.current_special .fuzzy .change img {
+  width: 0.42rem;
+  margin-right:0.1rem;
+  margin-top: 0.05rem;
+}
+.current_special .c_s_title {
+  width: 100%;
+  padding: 0 10px;
+  background: #fff;
+}
+.current_special .c_s_title .title {
+  width: 100%;
+  font-size: 16px;
+  color: #111111;
+  padding-top: 20px;
+}
+.current_special .c_s_title .title .tag {
+  width: 40px;
+  height: 18px;
+  border-radius: 4px;
+  font-size: 10px;
+  color: #ffffff;
+  background: #ff7043;
+  display: inline-block;
+  line-height: 18px;
+  text-align: center;
+  float: left;
+  margin-top: 3px;
+}
+.current_special .c_s_title .describe {
+  width: 100%;
+  font-size: 14px;
+  color: #999999;
+  position: relative;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-top: 10px;
+}
+.current_special .c_s_title .hurdle {
+  width: 100%;
+  height: 1px;
+  background: #e5e5e5;
+  transform: scaleY(0.3);
+  -webkit-transform: scaleY(0.3);
+  margin-top: 20px;
+}
+a:link,
+a:visited,
+a:hover {
+  text-decoration: none;
+}
+@keyframes niceIn {
+  0% {
+    -webkit-transform: scale(1) rotate(0deg);
+    -ms-transform: scale(1) rotate(0deg);
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: scale(0) rotate(720deg);
+    -ms-transform: scale(0) rotate(720deg);
+    transform: scale(0) rotate(720deg);
+  }
+}
+@-webkit-keyframes niceIn {
+  0% {
+    -webkit-transform: scale(1) rotate(0deg);
+    -ms-transform: scale(1) rotate(0deg);
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: scale(0) rotate(720deg);
+    -ms-transform: scale(0) rotate(720deg);
+    transform: scale(0) rotate(720deg);
+  }
+}
+.niceIn {
+  -webkit-animation: niceIn 1.3s infinite;
+  -moz-animation: niceIn 1.3s infinite;
+  -o-animation: niceIn 1.3s infinite;
+  animation: niceIn 1.3s infinite;
+}
+
+.active .ac_img{
+  height: 130px!important;
+  /*width:355px!important;*/
+}
+.imgcon{
+  height: 130px;
+}
+.tip{
+  text-align: center;
+  color: #cccccc;
+  line-height: 30px;
+  font-size: 14px;height:30px;
+}
+.titlecon{
+  overflow: hidden;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  padding-left: 5px;
+}

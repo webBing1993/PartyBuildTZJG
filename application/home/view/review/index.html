@@ -1,0 +1,359 @@
+{extend name="public/common"}
+
+{block name="style"}
+<title>消息审核</title>
+<style>
+    .list{overflow:hidden;margin-top:.2rem;padding-left:.3rem;}
+    .list li{overflow:hidden;width:145%;border-bottom:1px solid #ddd;}
+    .list li a{display:block;-webkit-transition:all 0.3s linear;transition:all 0.3s linear;overflow: hidden;position: relative;height: 2.2rem}
+    .list li i{float:right;width:15%;text-align:center;background:#f00;color:#fff;height: 2.2rem;line-height: 2.2rem;font-style: normal;font-size: 0.38rem;    position: absolute;
+        right: 0;
+        top: 0;}
+    .list li i:last-child{float:right;width:15%;text-align:center;background:#090;color:#fff;
+        right:15%;}
+    .swipeleft{transform:translateX(-30%);-webkit-transform:translateX(-30%);}
+    .list ul a span:nth-child(4){
+       float: inherit;
+    }
+    #tab{
+        height:1.2rem;
+        position: fixed;
+        z-index: 9;
+    }
+    #tab a{
+        font-size: 0.4rem;
+        line-height: 1.2rem;
+    }
+    .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active span{
+        border-bottom: 0.08rem solid #e51c23;
+        padding-bottom: 0.3rem;
+    }
+    .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+        color: #e51c23;
+    }
+    #refreshContainer{
+        top:1.2rem;
+    }
+
+    /*审核列表*/
+    ul li a img{
+        width:2.4rem;
+        height:1.6rem;
+        float: left;
+        margin-top: 0.3rem;
+    }
+    ul li a span:nth-child(2){
+        color: #333;
+        font-size: 0.36rem;
+        margin-left: 2.6rem;
+        display: inline-block;
+        margin-top: 0.3rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        width: calc(100% - 2rem - 50%);
+
+    }
+    ul li a span:nth-child(3){
+        position: absolute;
+        bottom: 0.2rem;
+        left: 2.6rem;
+        color: #999;
+        font-size: 0.32rem;
+    }
+    ul li a span:nth-child(4){
+        position: absolute;
+        bottom: 0.2rem;
+        right: 35%;
+        color: #999;
+        font-size: 0.32rem;
+    }
+    .mui-icon-forward{
+        position: absolute;
+        right: 35%;
+        top: 0.3rem;
+        color: #999;
+        width: 0.66rem;
+        height: 0.66rem;
+    }
+</style>
+
+{/block}
+
+{block name="body"}
+<div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+    <a class="mui-control-item" href="#item1mobile" data-index="0">
+        <span>发布审核</span>
+    </a>
+    <a class="mui-control-item" href="#item2mobile" data-index="1">
+        <span>推送审核</span>
+    </a>
+    <a class="mui-control-item" href="#item2mobile" data-index="2">
+        <span>已审核</span>
+    </a>
+</div>
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+
+        <div class="mui-slider-group">
+            <div id="item1mobile" class="mui-slider-item mui-control-content">
+                <!--发布审核-->
+                <div class="list publish">
+                    <ul>
+                        <li><a href="#">
+                        <img src="/home/images/pioneer/banner.png">
+                        <span>电动汽车可以有，在浙江哪都能充电</span>
+                        <span>[第一聚焦] 发布人：admin</span>
+                        <span>2017.8.21</span>
+                        <img src="/home/images/common/rightArrow.png" alt="" class="mui-icon-forward">
+                        <i class="fail">不通过</i><i class="pass">通&nbsp;过</i>
+                    </a>
+                    </li>
+                        <li><a href="#">
+                            <img src="/home/images/pioneer/banner.png">
+                            <span>电动汽车可以有，在浙江哪都能充电</span>
+                            <span>[第一聚焦] 发布人：admin</span>
+                            <span>2017.8.21</span>
+                            <img src="/home/images/common/rightArrow.png" alt="" class="mui-icon-forward">
+                            <i class="fail">不通过</i><i class="pass">通&nbsp;过</i>
+                        </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="item2mobile" class="mui-slider-item mui-control-content">
+            <!--推送审核-->
+            <div class="list push">
+                <ul>
+                    <li><a href="#">
+                        <img src="/home/images/pioneer/banner.png">
+                        <span>电动汽车可以有，在浙江哪都能充电</span>
+                        <span>[第一聚焦] 发布人：admin</span>
+                        <span>2017.8.21</span>
+                        <img src="/home/images/common/rightArrow.png" alt="" class="mui-icon-forward">
+                        <i class="fail">不通过</i><i class="pass">通&nbsp;过</i>
+                    </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+            <div id="item3mobile" class="mui-slider-item mui-control-content">
+                <!--已审核-->
+                <div class="list Audited">
+                    <ul>
+                        <li>
+                            <a href="#">
+                            <img src="/home/images/pioneer/banner.png">
+                            <span>电动汽车可以有，在浙江哪都能充电</span>
+                            <span>[第一聚焦] 发布人：admin</span>
+                            <span>2017.8.21</span>
+                            <img src="/home/images/common/rightArrow.png" alt="" class="mui-icon-forward">
+                            <i>不通过</i><i>通&nbsp;过</i>
+                        </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script>
+    var c =  parseInt(window.location.href.split("index/c/")[1]);
+    $(function(){
+        //tab初始化和数据存储
+        var co = getCookie("type");
+        if(co == 0 || co == 1 || co== 2 ){
+            c = co;
+        }else{
+            c =  parseInt(window.location.href.split("index/c/")[1]);
+        }
+        $("#tab a").eq(c).addClass('mui-active');
+        $(".mui-slider-group>div").eq(c).addClass('mui-active');
+    })
+    window.onload = function() {
+        if(c==0){
+            if ($(".publish ul li").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==1){
+            if ($(".push ul li").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==2){
+            if ($(".Audited ul li").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }
+    }
+
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
+        }
+    });
+
+    //上拉加载更多
+    function loadScroll(){
+        if(c==0){
+            var len = $(".publish ul li").length;
+        }else if(c==1){
+            var len = $(".push ul li").length;
+        }else if(c==2){
+            var len = $(".Audited ul li").length;
+        }
+        $.ajax({
+            type:"post",
+            url: "{:Url('News/listmore')}",
+            data:{
+
+                length:len,
+                type:c
+            },
+            beforeSend: function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                if(data.code == 1){
+                    addLists(data,c);
+                    var dataLen =data.data.length;
+                    if(data.data.length == 5){
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                    }else{
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                    }
+                }else{
+                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                }
+            }
+        })
+    }
+
+    function addLists(data,type){
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++){
+            var list = lists[i];
+            html +=
+                    '<li><a href="#">'+
+                    '<img src="/home/images/pioneer/banner.png">'+
+                    '<span>电动汽车可以有，在浙江哪都能充电</span>'+
+                    '<span>[第一聚焦] 发布人：admin</span>'+
+                    '<span>2017.8.21</span>'+
+                    '<img src="/home/images/common/rightArrow.png" alt="" class="mui-icon-forward">'+
+                    '<i class="fail">不通过</i><i class="pass">通&nbsp;过</i>'+
+                    '</a>'+
+                    '</li>'
+        }
+        if(type==0){
+            $('.publish ul').append(html);
+        }else if(type==1){
+            $('.push ul').append(html);
+        }else if(type==2){
+            $('.Audited ul').append(html);
+        }
+    }
+
+    //tab点击事件
+    mui('#tab').on('tap', 'a', function(e) {
+        $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
+        c = this.getAttribute("data-index");
+        mui('#refreshContainer').pullRefresh().refresh(true);
+        if(c==0){
+            if($(".publish ul li").length<10){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==1){
+            if($(".push ul li").length<10){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }
+        setCookie('type',c);
+    });
+
+    mui('.mui-slider-group').on('tap', '.pass', function(e) {
+        event.stopPropagation();
+        event.preventDefault();
+        swal({
+            title: "",
+            text: "确定通过审核",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            confirmButtonText: "确认",
+            cancelButtonText: "取消",
+            confirmButtonColor: "#ec6c62"
+        }, function() {
+
+        });
+    })
+
+
+    mui('#refreshContainer').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    });
+
+
+    //侧滑显示删除按钮
+    var expansion = null; //是否存在展开的list
+    var container = document.querySelectorAll('.list li a');
+    for(var i = 0; i < container.length; i++){
+        var x, y, X, Y, swipeX, swipeY;
+        container[i].addEventListener('touchstart', function(event) {
+            x = event.changedTouches[0].pageX;
+            y = event.changedTouches[0].pageY;
+            swipeX = true;
+            swipeY = true ;
+        });
+        container[i].addEventListener('touchmove', function(event){
+
+            X = event.changedTouches[0].pageX;
+            Y = event.changedTouches[0].pageY;
+            if(expansion){   //判断是否展开，如果展开则收起
+                expansion.className = "";
+            }
+            // 左右滑动
+            if(swipeX && Math.abs(X - x) - Math.abs(Y - y) > 0){
+                // 阻止事件冒泡
+                event.stopPropagation();
+                if(X - x > 50){   //右滑
+                    event.preventDefault();
+                    this.className = "";    //右滑收起
+                }
+                if(x - X > 50){   //左滑
+                    event.preventDefault();
+                    this.className = "swipeleft";   //左滑展开
+                    expansion = this;
+                }
+                swipeY = false;
+            }
+            // 上下滑动
+            if(swipeY && Math.abs(X - x) - Math.abs(Y - y) < 0) {
+                swipeX = false;
+            }
+        });
+    }
+
+</script>
+{/block}
