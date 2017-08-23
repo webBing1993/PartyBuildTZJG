@@ -10,6 +10,7 @@ use app\home\model\WechatTest;
 use app\home\model\WechatUser;
 
 class Organization extends Base{
+
     /* 规范化建设 */
     public function standard(){
         return $this->fetch();

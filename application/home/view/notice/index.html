@@ -13,7 +13,6 @@
     <a class="mui-control-item" href="#item2mobile" data-index="1">
         <span>党建动态</span>
     </a>
-    <img src="/home/images/common/note.png">
 </div>
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
@@ -38,6 +37,10 @@
                                         <div class="footer">
                                             <div class="scan">
                                                 <img src="/home/images/notice/scan2.png">
+                                                <span>{$ba.views}</span>
+                                            </div>
+                                            <div class="talk">
+                                                <img src="/home/images/notice/talk2.png">
                                                 <span>{$ba.views}</span>
                                             </div>
                                         </div>
@@ -69,6 +72,10 @@
                                 <img src="/home/images/notice/scan2.png">
                                 <span>{$lo.views}</span>
                             </div>
+                            <div class="talk">
+                                <img src="/home/images/notice/talk2.png">
+                                <span>{$ba.views}</span>
+                            </div>
                         </div>
                     </a>
                     {/volist}
@@ -95,6 +102,10 @@
                                             <div class="scan">
                                                 <img src="/home/images/notice/scan2.png">
                                                 <span>{$bn.views}</span>
+                                            </div>
+                                            <div class="talk">
+                                                <img src="/home/images/notice/talk2.png">
+                                                <span>{$ba.views}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -125,6 +136,10 @@
                                 <img src="/home/images/notice/scan2.png">
                                 <span>{$li.views}</span>
                             </div>
+                            <div class="talk">
+                                <img src="/home/images/notice/talk2.png">
+                                <span>{$ba.views}</span>
+                            </div>
                         </div>
                     </a>
                     {/volist}
@@ -139,6 +154,7 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+    var win_w = $(window).width();
     var c =  parseInt(window.location.href.split("index/c/")[1]);
     $(function(){
         //tab初始化和数据存储
@@ -277,5 +293,60 @@
         setCookie('type',c);
     })
 
+
+
+    mui('#refreshContainer').on('tap', '.change', function(e) {
+        event.preventDefault();
+        event.stopPropagation();
+            var content = $('.shadow_box').find('.content');
+            var bac_img = $('.current_special').find('.bac_img');
+            var len = content.length;
+            if(len > 1) {
+                content.each(function(){
+                    var tIndex = $(this).css('z-index');
+                    if(tIndex == len){
+                        var tCon = $(this);
+                        var back = setTimeout(function(){
+                            tCon.insertAfter(content.eq(len-1));
+                            tCon.removeClass('niceIn');
+                            tCon.animate({"left":0},0);
+                            listIndex();
+                        },1200);
+                        tCon.addClass('niceIn');
+                        tCon.animate({"left":-win_w},1000);
+                        back;
+                    }
+                });
+                bac_img.each(function(){
+                    var tIndex = $(this).css('z-index');
+                    if(tIndex == len){
+                        var tImg = $(this);
+                        var back = setTimeout(function(){
+                            tImg.insertAfter(bac_img.eq(len-1));
+                            tImg.fadeIn(0);
+                            listIndex();
+                        },1010);
+                        tImg.fadeOut(1000);
+                    }
+                });
+                listIndex();
+            }
+        })
+
+    function listIndex(){
+        var bac_img = $('.current_special').find('.bac_img');
+        var content = $('.shadow_box').find('.content');
+        var len = bac_img.length;
+        var zIndex = len;
+        var zIndex2 = len;
+        bac_img.each(function(){
+            $(this).css('z-index',zIndex);
+            zIndex--;
+        });
+        content.each(function(){
+            $(this).css('z-index',zIndex2);
+            zIndex2--;
+        });
+    }
 </script>
 {/block}

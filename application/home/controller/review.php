@@ -13,5 +13,6 @@ class Review extends Base{
     /* 消息审核 */
     public function index(){
         return $this->fetch();
+
     }
 }

@@ -169,13 +169,6 @@ body {
   color: #fff;
   border-radius: 5px;
 }
-#tab img{
-  position: absolute;
-  right: 0;
-  height: 8vw;
-  top: 4vw;
-  right: 3vw;
-}
 .mui-segmented-control .mui-control-item{
   display: inline-block;
   width:30%;
@@ -218,7 +211,7 @@ body {
   color: #3dc353;
   text-align: left;
 }
-.dynamic .footer .scan,.notice .footer .scan {
+.dynamic .footer .scan,.notice .footer .scan,.dynamic .footer .talk,.notice .footer .talk {
   display: inline-block;
   height: 0.32rem;
   line-height: 0.32rem;
@@ -228,7 +221,7 @@ body {
   margin-right: 0.13rem;
   font-size: 0.32rem;
 }
-.dynamic .footer .scan img,.notice .footer .scan img{
+.dynamic .footer .scan img,.notice .footer .scan img,.dynamic .footer .talk img,.notice .footer .talk img{
   width: 0.38rem;
   margin-top: -0.05rem;
   margin-right: 4px;
@@ -263,7 +256,7 @@ body {
 }
 .lists .list .img {
   width: 100%;
-  height: 2.4rem;
+  height: 4rem;
   -webkit-border-radius: 8px;
   border-radius: 8px;
 }

@@ -33,7 +33,7 @@
 .tabs .active {
     color: #fd6743;
 }
-.list {
+.list,.Audited  {
     overflow: hidden;
     margin-top: .2rem;
     padding-left: .3rem;
@@ -44,8 +44,11 @@
     width: 145%;
     border-bottom: 1px solid #ddd;
 }
+.Audited li{
+    width:100%;
+}
 
-.list li a {
+.list li a,.Audited li a {
     display: block;
     -webkit-transition: all 0.3s linear;
     transition: all 0.3s linear;
@@ -54,7 +57,7 @@
     height: 2.2rem
 }
 
-.list li i {
+.list li i,.Audited li i {
     float: right;
     width: 15%;
     text-align: center;
@@ -69,7 +72,7 @@
     top: 0;
 }
 
-.list li i:last-child {
+.list li i:last-child{
     float: right;
     width: 15%;
     text-align: center;
@@ -77,13 +80,37 @@
     color: #fff;
     right: 15%;
 }
+.Audited .refuse{
+    right: 0%;
+    width: 0.8rem;
+    background: #f00;
+}
+.Audited .pass{
+    right: 0%;
+    width: 0.8rem;
+    background: #090;
+}
+.Audited .refuse:after,.Audited .pass:after{
+    display: block;
+    content: '';
+    background: url("/home/images/review/refuse.png");
+    background-size: 0.5rem 0.5rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-top: 0.85rem;
+    margin-left: 0.15rem;
+}
+.Audited .pass:after{
+    background: url("/home/images/review/pass.png");
+    background-size: 0.5rem 0.5rem;
+}
 
 .swipeleft {
     transform: translateX(-30%);
     -webkit-transform: translateX(-30%);
 }
 
-.list ul a span:nth-child(4) {
+.list ul a span:nth-child(4),.Audited ul a span:nth-child(4)  {
     float: inherit;
 }
 
@@ -147,6 +174,9 @@ ul li a span:nth-child(4) {
     right: 35%;
     color: #999;
     font-size: 0.32rem;
+}
+.Audited li a span:nth-child(4) {
+    right: 15%;
 }
 
 .mui-icon-forward {
