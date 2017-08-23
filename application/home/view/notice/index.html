@@ -19,12 +19,13 @@
         <div class="mui-slider-group">
             <div id="item1mobile" class="mui-slider-item mui-control-content">
                 <div class="current_special">
-                    <img src="" class="bac_img">
+                    {volist name="banner1" id="ba"}
+                    <img src="{$ba.front_cover}" class="bac_img">
                     <div class="fuzzy">
                         <div class="spe_title"></div>
                         <div class="shadow_box">
                             <div class="content">
-                                {volist name="banner1" id="ba"}
+
                                 <a href="">
                                     <div class="roll_box">
                                         <div class="s_tag">通知公告</div>
@@ -294,43 +295,53 @@
     })
 
 
-
+    var isActice;
     mui('#refreshContainer').on('tap', '.change', function(e) {
         event.preventDefault();
         event.stopPropagation();
-            var content = $('.shadow_box').find('.content');
-            var bac_img = $('.current_special').find('.bac_img');
-            var len = content.length;
-            if(len > 1) {
-                content.each(function(){
-                    var tIndex = $(this).css('z-index');
-                    if(tIndex == len){
-                        var tCon = $(this);
-                        var back = setTimeout(function(){
-                            tCon.insertAfter(content.eq(len-1));
-                            tCon.removeClass('niceIn');
-                            tCon.animate({"left":0},0);
-                            listIndex();
-                        },1200);
-                        tCon.addClass('niceIn');
-                        tCon.animate({"left":-win_w},1000);
-                        back;
-                    }
-                });
-                bac_img.each(function(){
-                    var tIndex = $(this).css('z-index');
-                    if(tIndex == len){
-                        var tImg = $(this);
-                        var back = setTimeout(function(){
-                            tImg.insertAfter(bac_img.eq(len-1));
-                            tImg.fadeIn(0);
-                            listIndex();
-                        },1010);
-                        tImg.fadeOut(1000);
-                    }
-                });
-                listIndex();
-            }
+       if(!isActice) {
+           isActice = true;
+           if(c==0){
+               var content = $("#item1mobile").find('.shadow_box').find('.content');
+               var bac_img = $("#item1mobile").find('.current_special').find('.bac_img');
+           }else if(c==1){
+               var content = $("#item2mobile").find('.shadow_box').find('.content');
+               var bac_img = $("#item2mobile").find('.current_special').find('.bac_img');
+           }
+           var len = content.length;
+           if (len >=1) {
+               content.each(function (i,n) {
+                  $(this).css('z-index',len-i);
+                   var tIndex =  $(this).css('z-index');
+                   if (tIndex == len) {
+                       var tCon = $(this);
+                       var back = setTimeout(function () {
+                           tCon.insertAfter(content.eq(len - 1));
+                           tCon.removeClass('niceIn');
+                           tCon.animate({"left": 0}, 0);
+                           listIndex();
+                           isActice = false;
+                       }, 600);
+                       tCon.addClass('niceIn');
+                       tCon.animate({"left": -win_w}, 600);
+                       back;
+                   }
+               });
+               bac_img.each(function () {
+                   var tIndex = $(this).css('z-index');
+                   if (tIndex == len) {
+                       var tImg = $(this);
+                       var back = setTimeout(function () {
+                           tImg.insertAfter(bac_img.eq(len - 1));
+                           tImg.fadeIn(0);
+                           listIndex();
+                       }, 1010);
+                       tImg.fadeOut(1000);
+                   }
+               });
+               listIndex();
+           }
+       }
         })
 
     function listIndex(){
