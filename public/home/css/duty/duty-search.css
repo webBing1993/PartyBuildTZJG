@@ -1,0 +1,50 @@
+
+/*search*/
+.search{
+    width:100vw;
+    height:1.2rem;
+    background: #e4e4e4;
+    position: fixed;
+    top:0;
+    z-index: 9;
+}
+.search input{
+    height:0.93rem;
+    width:90%;
+    margin-left: 5%;
+    margin-top: 0.13rem;
+    border-radius: 10px;
+    border: none;
+    font-size: 0.38rem;
+    padding-left: 8%;
+    line-height: 0.93rem;
+}
+input::-webkit-input-placeholder{
+    font-size: 0.38rem;
+    line-height: 0.93rem;
+}
+.search .mui-icon-search{
+    position: absolute;
+    left: 7%;
+    font-size: 0.56rem;
+    top: 0.3rem;
+}
+#refreshContainer{
+    margin-top: 1.2rem;
+}
+
+/*suspension button*/
+.manager.after {
+    position: absolute;
+    bottom:68px;
+    right:10px;
+    content: '';
+    width: 1.33rem;
+    height: 1.33rem;
+    background: url("/home/images/common/note_.png") no-repeat;
+    background-size: 100% 100%;
+    opacity: 1;
+    -webkit-animation: cir2 0.5s ease-in;
+    animation: cir2 0.5s ease-in;
+    z-index: 99;
+}

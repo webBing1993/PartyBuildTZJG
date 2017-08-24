@@ -1,0 +1,132 @@
+html,body{
+    background: #fcfcfc;
+}
+.images{
+    display: inline-block;
+}
+.content{
+    height: 100vh;
+    padding: 0.5rem 0;
+    overflow: hidden;
+}
+.title:nth-child(even) img{
+    right: 0;
+}
+.title:nth-child(even) .title_box:after{
+    content: '';
+    display: block;
+    height: 25.3vw;
+    width: 2vw;
+    background: #fff;
+    position: absolute;
+    margin-left: 59vw;
+    z-index: 99;
+}
+.title:nth-child(odd) .title_box:after{
+    content: '';
+    display: block;
+    height: 25.3vw;
+    width: 2vw;
+    background: #fff;
+    position: absolute;
+    left: 39vw;
+    z-index: 102;
+}
+.title:nth-child(odd) img{
+    clear: both;
+}
+.title{
+    height:calc((100vh - 100px) / 4);
+    position: relative;
+    width:100%;
+    display: block;
+}
+.title img{
+    width: 45.9vw;
+    /*height: 31.2vw;*/
+    z-index:99;
+    position: absolute;
+}
+
+/*序号*/
+.title span{
+    font-size: 10vw;
+    position: absolute;
+    color: #fff;
+    z-index: 100;
+    height: 21.3vw;
+    line-height: 25.3vw;
+    height: 25.3vw;
+}
+.title:nth-child(odd) span{
+    left: 13vw;
+
+}
+.title:nth-child(even) span{
+    right: 14vw;
+}
+
+/*文字背景*/
+.title .writing{
+    width: calc(100% - 45vw);
+    height: 25.3vw;
+    background: #fff;
+    position: absolute;
+    border-radius: 0.1rem;
+    z-index: 98;
+    -moz-box-shadow: 0px 10px 8px #f1f1f1;
+    -webkit-box-shadow: 0px 10px 8px #f1f1f1;
+    box-shadow: 0px 10px 8px #f1f1f1;
+}
+.title:nth-child(even) .writing{
+    left: 4vw;
+}
+.title:nth-child(odd) .writing{
+    left: 41vw;
+}
+
+/*文字内容*/
+.title p{
+    position: absolute;
+    z-index: 999;
+    font-size: 7vw;
+}
+.title:nth-child(even) p{
+    height: 25.3vw;
+    right: 52vw;
+    line-height: 25.3vw;
+}
+.title:nth-child(odd) p{
+    height: 25.3vw;
+    line-height: 25.3vw;
+    left: 52vw;
+}
+.title:nth-child(1) p{
+    color: #ffb549;
+    font-size: 7vw;
+}
+.title:nth-child(2) p{
+    color: #ff6472;
+    font-size: 0.56rem;
+    font-size: 7vw;
+}
+.title:nth-child(3) p{
+    color: #4997fc;
+    font-size: 7vw;
+}
+.title:nth-child(4) p{
+    color: #c95fff;
+    font-size: 7vw;
+}
+@media screen and (device-width: 320px){
+    html{
+        font-size: 80px!important;
+    }
+}
+.content p{
+    width:auto;
+}
+.title_box{
+    height: 100%;
+    padding-top: 0.3rem;
+}

@@ -97,25 +97,13 @@ class News extends Admin
             return $this->success($infoes);
         }else{
             //新闻消息列表
-            $map = array(
-                'class' => 1,  // 党建动态
-                'status' => array('egt',-1)
-            );
-            $list=$this->lists('Push',$map);
+            $list=$this->lists('News',['status' =>1]);
             int_to_string($list,array(
-                'status' => array(-1 => '不通过', 0 => '未审核', 1=> '已发送')
+                'status' => array(1=> '已推送')
             ));
-            //数据重组
-            foreach($list as $value){
-                $msg = NewsModel::where('id',$value['focus_main'])->find();
-                $value['title'] = $msg['title'];
-            }
             $this->assign('list',$list);
             //主图文本周内的新闻消息
-            $info = array(
-                'status' => 0
-            );
-            $infoes = NewsModel::where($info)->whereTime('create_time','w')->select();
+            $infoes = NewsModel::where(['status' => 0])->whereTime('create_time','w')->select();
             $this->assign('info',$infoes);
             return $this->fetch();
         }
@@ -198,17 +186,7 @@ class News extends Admin
         );
         $msg = $Wechat->sendMessage($message);  // 推送至审核
         if($msg['errcode'] == 0){
-            $data['focus_vice'] ? $data['focus_vice'] = json_encode($data['focus_vice']) : $data['focus_vice'] = null;
-            $data['create_user'] = session('user_auth.username');
-            $data['class'] = 1;  // 党建动态
-            $data['status'] = 1;
-            //保存到推送列表
-            $result = Push::create($data);
-            if($result){
-                return $this->success('发送成功');
-            }else{
-                $this->error('发送失败');
-            }
+            return $this->success('发送成功');
         }else{
             $this->error('发送失败');
         }

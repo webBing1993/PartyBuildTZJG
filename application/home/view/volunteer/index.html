@@ -1,0 +1,209 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/list/graphic-list.css">
+<title>志愿服务</title>
+<style>
+    .banner{
+        height:50vw;
+    }
+    .banner img{
+        position: relative;
+        z-index: 99;
+        width: 100%;
+        height:50vw;
+    }
+    #tab{
+        height:1.2rem;
+        position: fixed;
+        top:50vw;
+        z-index: 9;
+    }
+    #tab a{
+        font-size: 0.4rem;
+        line-height: 1.2rem;
+    }
+    .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active span{
+        border-bottom: 0.08rem solid #e51c23;
+        padding-bottom: 0.3rem;
+    }
+    .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+        color: #e51c23;
+    }
+    #refreshContainer{
+        top:calc(50vw + 1.2rem);
+    }
+</style>
+
+{/block}
+
+{block name="body"}
+<div class="banner">
+    <img src="/home/images/structure/vr.jpg">
+</div>
+<div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+    <a class="mui-control-item" href="#item1mobile" data-index="0">
+        <span>四跑志愿活动</span>
+    </a>
+    <a class="mui-control-item" href="#item2mobile" data-index="1">
+        <span>一条街三走进</span>
+    </a>
+</div>
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+
+        <div class="mui-slider-group">
+            <div id="item1mobile" class="mui-slider-item mui-control-content">
+                <!--培训计划-->
+                <div class="list training">
+                    <ul>
+                        <a href="">
+                            <img src="/home/images/pioneer/banner.png">
+                            <p>电动汽车可以有，在浙江哪都能充电</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div id="item2mobile" class="mui-slider-item mui-control-content">
+                <!--理论研究-->
+                <div class="list theory">
+                    <ul>
+                        <a href="">
+                            <img src="/home/images/pioneer/banner.png">
+                            <p>电动汽车可以有，在浙江哪都能充电</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script>
+    var c =  parseInt(window.location.href.split("index/c/")[1]);
+    $(function(){
+        //tab初始化和数据存储
+        var co = getCookie("type");
+        if(co == 0 || co == 1){
+            c = co;
+        }else{
+            c =  parseInt(window.location.href.split("index/c/")[1]);
+        }
+        $("#tab a").eq(c).addClass('mui-active');
+        $(".mui-slider-group>div").eq(c).addClass('mui-active');
+    })
+    window.onload = function() {
+        if(c==0){
+            if ($(".training ul a").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==1){
+            if ($(".theory ul a").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }
+    }
+
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
+        }
+    });
+
+    //上拉加载更多
+    function loadScroll(){
+        if(c==0){
+            var len = $(".training ul a").length .length;
+        }else if(c==1){
+            var len = $(".theory ul a").length .length;
+        }
+        $.ajax({
+            type:"post",
+            url: "{:Url('News/listmore')}",
+            data:{
+
+                length:len,
+                type:c
+            },
+            beforeSend: function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                if(data.code == 1){
+                    addLists(data,c);
+                    var dataLen =data.data.length;
+                    if(data.data.length == 5){
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                    }else{
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                    }
+                }else{
+                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                }
+            }
+        })
+    }
+
+    function addLists(data,type){
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++){
+            var list = lists[i];
+            html +=
+                    '<a>'+
+                    '<img src="/home/images/pioneer/banner.png">'+
+                    '<p>主题党日</p>'+
+                    '<span>之图党支部</span>'+
+                    '<span>2017-8-21</span>'+
+                    '</a>'
+        }
+        if(type==0){
+            $('.training ul').append(html);
+        }else if(type==1){
+            $('.theory ul').append(html);
+        }
+    }
+
+    //tab点击事件
+    mui('#tab').on('tap', 'a', function(e) {
+        $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
+        c = this.getAttribute("data-index");
+        mui('#refreshContainer').pullRefresh().refresh(true);
+        if(c==0){
+            if($(".training ul a").length<10){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==1){
+            if($(".theory ul a").length<10){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }
+        setCookie('type',c);
+    });
+
+    mui('#refreshContainer').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    });
+</script>
+{/block}

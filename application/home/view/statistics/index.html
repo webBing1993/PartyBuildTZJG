@@ -1,0 +1,285 @@
+{extend name="public/common"}
+
+{block name="style"}
+<title>组织架构</title>
+<link rel="stylesheet" href="/home/css/structure/structure.css">
+<link rel="stylesheet" href="/home/css/structure/chart.css">
+<style>
+    .tabs .tab{
+        width: 32.3vw;
+    }
+    .service{
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+</style>
+{/block}
+
+{block name="body"}
+<div class="listbox">
+    <!--第二层-->
+    <div class="service box pd">
+        <!--数据统计-->
+        <div class="list1 clear">
+            <div class="title">党组织分布</div>
+            <div class="pie" id="pie1"></div>
+            <span class="pie2"></span>
+            <div class="pie fr" id="pie2"></div>
+        </div>
+        <div class="list1">
+            <div class="title">党员关注比例</div>
+            <div class="pie" id="pie3" ></div>
+        </div>
+</div>
+
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script src="/static/flot/jquery.flot.js"></script>
+<script src="/static/flot/jquery.flot.tooltip.min.js"></script>
+<script src="/static/flot/jquery.flot.pie.js"></script>
+<script src="/static/flot/Chart.min.js"></script>
+<script src="/static/flot/radialIndicator.js"></script>
+<script>
+    showChart();
+    function showChart() {
+        //大饼图数据：data1、data2、data3，条形图数据：data4、data5，环形图数据：data6
+        //党组织总数量表
+        var data1 = [{
+            label: "移动",
+            data: 10,
+            color: "#e8e8e8"
+        }, {
+            label: "村（社区）数量",
+            data: 10,
+            color: "#d3d3d3"
+        }, {
+            label: "非公企业数量",
+            data: 10,
+            color: "rgba(98, 197, 210, 0.68)"
+        }, {
+            label: "社会组织数量",
+            data: 10,
+            color: "#5FB8C5"
+        }];
+
+        //	党员总人数表
+        var data3 = [{
+            label: "关注人数",
+            data: "{$msg.concernnum}",
+            color: "#5FB8C5"
+        },{
+            label: "未关注人数",
+            data: "{$msg.nonnum}",
+            color: "#d3d3d3"
+        }];
+        // 平均年龄表
+        var data4 = {
+            labels: ["10岁以下", "10-20岁", "20-30岁", "30-40岁", "40岁以上"],
+            datasets: [
+                {
+                    label: "平均年龄",
+                    fillColor: "rgba(26,179,148,0.5)",
+                    strokeColor: "rgba(26,179,148,0.8)",
+                    highlightFill: "rgba(26,179,148,0.75)",
+                    highlightStroke: "rgba(26,179,148,1)",
+                    data: ["{$msg.agepercent1}","{$msg.agepercent2}", "{$msg.agepercent3}", "{$msg.agepercent4}", "{$msg.agepercent5}"]
+                }
+            ]
+        };
+        // 学历表
+        var data5 = {
+            labels: [ "中专", "大专","本科","硕士"],
+            datasets: [
+                {
+                    label: "平均年龄",
+                    fillColor: "rgba(26,179,148,0.5)",
+                    strokeColor: "rgba(26,179,148,0.8)",
+                    highlightFill: "rgba(26,179,148,0.75)",
+                    highlightStroke: "rgba(26,179,148,1)",
+                    data: ["{$msg.edu4}","{$msg.edu5}","{$msg.edu6}","{$msg.edu7}"]
+                }
+            ]
+
+        };
+        //男女比例
+        var data6 = {
+            male:"{$msg.male}",
+            female:"{$msg.female}"
+        };
+        //大饼图
+//		var plotObj1 = $.plot($("#pie1"), data1, {
+//			series: {
+//				pie: {
+//					show: true
+//				}
+//			},
+//			grid: {
+//				hoverable: true
+//			},
+//			tooltip: true,
+//			tooltipOpts: {
+//				content: "<span class='tit'>%s</span>：<span class='num'></span>人 , <span style='color:#5FB8C5'>%p.0%</span>",
+//				shifts: {
+//					x: 20,
+//					y: 0
+//				},
+//				defaultTheme: false
+//			}
+//		});
+//		var plotObj2 = $.plot($("#pie2"), data2, {
+//			series: {
+//				pie: {
+//					show: true
+//				}
+//			},
+//			grid: {
+//				hoverable: true
+//			},
+//			tooltip: true,
+//			tooltipOpts: {
+//				content: "<span class='tit'>%s</span>: <span class='num'>%s</span>人, <span style='color:rgb(148, 204, 163)'>%p.0%</span>",
+//				shifts: {
+//					x: 20,
+//					y: 0
+//				},
+//				defaultTheme: false
+//			}
+//		});
+        var plotObj3 = $.plot($("#pie3"), data3, {
+            series: {
+                pie: {
+                    show: true
+                }
+            },
+            grid: {
+                hoverable: true
+            },
+            tooltip: true,
+            tooltipOpts: {
+                content: "<span class='tit'>%s</span>: <span class='num'></span>人, <span style='color:#5FB8C5'>%p.0%</span>",
+                shifts: {
+                    x: 20,
+                    y: 0
+                },
+                defaultTheme: false
+            }
+        });
+        //条形图
+        var bar1 = {
+            scaleBeginAtZero: true,
+            scaleShowGridLines: true,
+            scaleGridLineColor: "rgba(0,0,0,.05)",
+            scaleGridLineWidth: 1,
+            barShowStroke: true,
+            barStrokeWidth: 2,
+            barValueSpacing: 5,
+            barDatasetSpacing: 1,
+            responsive: true
+        };
+        var ctx1 = document.getElementById("bar1").getContext("2d");
+        var myNewChart1 = new Chart(ctx1).Bar(data4, bar1);
+        var ctx2 = document.getElementById("bar2").getContext("2d");
+        var myNewChart2 = new Chart(ctx2).Bar(data5, bar1);
+        //	环形图
+        $('#cir1').radialIndicator({
+            barColor: '#A2DBB3',
+            barWidth: 10,
+            initValue: data6.male,//男百分比
+            roundCorner : true,
+            percentage: true
+        });
+        $('#cir2').radialIndicator({
+            barColor: '#5EB8C5',
+            barWidth: 10,
+            initValue: data6.female,//女百分比
+            roundCorner : true,
+            percentage: true
+        });
+        //修改提示信息
+        $('.pie').on('plothover',function(){
+            var datas=[{
+                label: "机关单位数量",
+                data: 10
+            }, {
+                label: "村（社区）数量",
+                data: 10
+            }, {
+                label: "非公企业数量",
+                data: 10
+            }, {
+                label: "社会组织数量",
+                data: 10
+            },{
+                label: "机关单位人数",
+                data: 10
+            }, {
+                label: "村（社区）人数",
+                data: 10
+            }, {
+                label: "非公企业人数",
+                data: 10
+            }, {
+                label: "社会组织人数",
+                data: 10
+            },{
+                label: "关注人数",
+                data: "{$msg.concernnum}"
+            },{
+                label: "未关注人数",
+                data: "{$msg.nonnum}"
+            }];
+            var len = datas.length;
+            var tip = $('#flotTip');
+            var tit = tip.find('.tit' ).text();
+            for(var i = 0 ;i< len ; i++){
+                if( tit == datas[i].label ){
+                    tip.find('.num' ).text(datas[i].data);
+                    return;
+                }
+            }
+        })
+    }
+
+    $(function(){
+        $(".service").addClass("hidden");
+        //tab值记录
+        tabRecord('.tab' ,'.box');
+        //组织架构切换
+        slide();
+        //tab切换
+        tabSwitch('.tab' ,'.box');
+        $('.name2' ).each(function(){
+            var t = $(this ).text();
+            var href = '/home/structure/detail?party='+t+'';
+            $(this ).attr('href', href);
+        })
+
+    });
+    function slide(){
+        $('.lists .party1' ).on('click',function(){
+            var it = $(this);
+            var detail = it.next('.detail1' );
+            if(detail.hasClass('down')){
+                detail.slideDown();
+                it.find('.tri').removeClass('toup').addClass('todown');
+            }else{
+                detail.slideUp();
+                it.find('.tri').removeClass('todown').addClass('toup');
+            }
+            detail.toggleClass('down');
+        });
+    }
+
+    function isOut(){
+        pushHistory();
+        setTimeout(function(){
+            window.addEventListener("popstate", function(e) {
+                delCookie("type");
+                window.history.go(-1);
+            }, false);
+        },200)
+    }
+</script>
+{/block}

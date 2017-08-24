@@ -19,14 +19,14 @@ body.stop-scrolling {
 .sweet-alert {
   background-color: white;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  width: 478px;
+  width: 8rem;
   padding: 17px;
   border-radius: 5px;
   text-align: center;
   position: fixed;
   left: 50%;
   top: 50%;
-  margin-left: -256px;
+  margin-left: -4rem;
   margin-top: -200px;
   overflow: hidden;
   display: none;
@@ -51,7 +51,7 @@ body.stop-scrolling {
     display: block; }
   .sweet-alert p {
     color: #797979;
-    font-size: 16px;
+    font-size: 0.42rem;
     text-align: center;
     font-weight: 300;
     position: relative;
@@ -120,6 +120,7 @@ body.stop-scrolling {
       -webkit-transform: rotate(45deg);
       transform: rotate(45deg); }
     .sweet-alert .sa-input-error.show {
+      display: none!important;
       opacity: 1;
       -webkit-transform: scale(1);
       transform: scale(1); }
@@ -128,12 +129,13 @@ body.stop-scrolling {
     box-sizing: border-box;
     border-radius: 3px;
     border: 1px solid #d7d7d7;
-    height: 43px;
-    margin-top: 10px;
-    margin-bottom: 17px;
-    font-size: 18px;
+    height: 1rem;
+    line-height: 1rem;
+    margin-top: 0.26rem;
+    margin-bottom: 0.45rem;
+    font-size: 0.42rem;
     box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.06);
-    padding: 0 12px;
+    padding: 0 0.32rem;
     display: none;
     -webkit-transition: all 0.3s;
     transition: all 0.3s; }
@@ -174,12 +176,12 @@ body.stop-scrolling {
     color: white;
     border: none;
     box-shadow: none;
-    font-size: 17px;
+    font-size: 0.44rem;
     font-weight: 500;
     -webkit-border-radius: 4px;
-    border-radius: 5px;
-    padding: 10px 32px;
-    margin: 26px 5px 0 5px;
+    border-radius: 0.13rem;
+    padding: 0.26rem 0.84rem;
+    margin: 0.68rem 0.12rem 0 0.12rem;
     cursor: pointer; }
     .sweet-alert button:focus {
       outline: none;
@@ -212,13 +214,13 @@ body.stop-scrolling {
   .sweet-alert[data-has-confirm-button=false][data-has-cancel-button=false] {
     padding-bottom: 40px; }
   .sweet-alert .sa-icon {
-    width: 80px;
-    height: 80px;
+    width: 2.12rem;
+    height: 2.12rem;
     border: 4px solid gray;
     -webkit-border-radius: 40px;
     border-radius: 40px;
     border-radius: 50%;
-    margin: 20px auto;
+    margin: 0.52rem auto;
     padding: 0;
     position: relative;
     box-sizing: content-box; }
@@ -247,23 +249,23 @@ body.stop-scrolling {
       border-color: #F8BB86; }
       .sweet-alert .sa-icon.sa-warning .sa-body {
         position: absolute;
-        width: 5px;
-        height: 47px;
+        width: 0.12rem;
+        height: 1.24rem;
         left: 50%;
-        top: 10px;
+        top: 0.26rem;
         -webkit-border-radius: 2px;
         border-radius: 2px;
-        margin-left: -2px;
+        margin-left: -0.04rem;
         background-color: #F8BB86; }
       .sweet-alert .sa-icon.sa-warning .sa-dot {
         position: absolute;
-        width: 7px;
-        height: 7px;
+        width: 0.18rem;
+        height: 0.18rem;
         -webkit-border-radius: 50%;
         border-radius: 50%;
-        margin-left: -3px;
+        margin-left: -0.08rem;
         left: 50%;
-        bottom: 10px;
+        bottom: 0.26rem;
         background-color: #F8BB86; }
     .sweet-alert .sa-icon.sa-info {
       border-color: #C9DAE1; }
@@ -294,8 +296,8 @@ body.stop-scrolling {
         border-radius: 40px;
         border-radius: 50%;
         position: absolute;
-        width: 60px;
-        height: 120px;
+        width: 1.6rem;
+        height: 3.2rem;
         background: white;
         -webkit-transform: rotate(45deg);
         transform: rotate(45deg); }
@@ -311,51 +313,51 @@ body.stop-scrolling {
       .sweet-alert .sa-icon.sa-success::after {
         -webkit-border-radius: 0 120px 120px 0;
         border-radius: 0 120px 120px 0;
-        top: -11px;
-        left: 30px;
+        top: 0.3rem;
+        left: 0.8rem;
         -webkit-transform: rotate(-45deg);
         transform: rotate(-45deg);
         -webkit-transform-origin: 0px 60px;
-        transform-origin: 0px 60px; }
+        transform-origin: 0px 1.6rem; }
       .sweet-alert .sa-icon.sa-success .sa-placeholder {
-        width: 80px;
-        height: 80px;
+        width: 2.13rem;
+        height: 2.13rem;
         border: 4px solid rgba(165, 220, 134, 0.2);
         -webkit-border-radius: 40px;
         border-radius: 40px;
         border-radius: 50%;
         box-sizing: content-box;
         position: absolute;
-        left: -4px;
-        top: -4px;
+        left: -0.1rem;
+        top: -0.1rem;
         z-index: 2; }
       .sweet-alert .sa-icon.sa-success .sa-fix {
-        width: 5px;
-        height: 90px;
+        width: 0.13rem;
+        height: 2.4rem;
         background-color: white;
         position: absolute;
-        left: 28px;
-        top: 8px;
+        left: 0.75rem;
+        top: 0.21rem;
         z-index: 1;
         -webkit-transform: rotate(-45deg);
         transform: rotate(-45deg); }
       .sweet-alert .sa-icon.sa-success .sa-line {
-        height: 5px;
+        height: 0.13rem;
         background-color: #A5DC86;
         display: block;
         border-radius: 2px;
         position: absolute;
         z-index: 2; }
         .sweet-alert .sa-icon.sa-success .sa-line.sa-tip {
-          width: 25px;
-          left: 14px;
-          top: 46px;
+          width: 0.66rem;
+          left: 0.38rem;
+          top: 1.22rem;
           -webkit-transform: rotate(45deg);
           transform: rotate(45deg); }
         .sweet-alert .sa-icon.sa-success .sa-line.sa-long {
-          width: 47px;
-          right: 8px;
-          top: 38px;
+          width: 1.25rem;
+          right: 0.13rem;
+          top: 1rem;
           -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg); }
     .sweet-alert .sa-icon.sa-custom {

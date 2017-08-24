@@ -1,0 +1,101 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/duty/duty-search.css">
+<link rel="stylesheet" href="/home/css/list/title-pos-time.css">
+{/block}
+
+{block name="body"}
+<div class="search">
+    <input type="text" placeholder="请输入支部名称">
+    <span class="mui-icon mui-icon-search"></span>
+</div>
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+        <div class="list">
+            <ul>
+                <a href="">
+                    <p>主题研究党建工作2015</p>
+                    <span>之图党支部</span>
+                    <span>2017-8-21</span>
+                </a>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--[悬浮按钮]-->
+<a href="{:Url('duty/publish')}" class="after manager" id="publish"></a>
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script>
+    window.onload = function() {
+        moveanyway("publish");
+        if ($(".list ul a").length < 10) {
+            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+        } else {
+            mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+        }
+    }
+
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
+        }
+    });
+
+    //上拉加载更多
+    function loadScroll(){
+        var len  = $(".list ul a").length;
+        $.ajax({
+            type:"post",
+            url: "{:Url('News/listmore')}",
+            data:{
+                length:len
+            },
+            beforeSend: function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                if(data.code == 1){
+                    addLists(data);
+                    var dataLen =data.data.length;
+                    if(data.data.length == 5){
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                    }else{
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                    }
+                }else{
+                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                }
+            }
+        })
+    }
+
+    function addLists(data){
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++){
+            var list = lists[i];
+            html +=
+                    '<a>'+
+                    '<p>"两学一做"方案</p>'+
+                    '<span>之图党支部</span>'+
+                    '<span>2017-8-21</span>'+
+                    '</a>'
+        }
+        $('.list ul').append(html);
+    }
+
+    mui('#refreshContainer').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    });
+</script>
+{/block}

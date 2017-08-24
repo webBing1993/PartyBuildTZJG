@@ -15,6 +15,7 @@ use app\user\model\WechatUser;
 use think\Config;
 use think\Controller;
 use com\wechat\TPQYWechat;
+use app\home\model\Picture;
 use think\Db;
 
 class Base extends Controller {
@@ -105,13 +106,13 @@ class Base extends Controller {
      * 点赞，$type,$aid
      * type值：
      * 0 评论点赞
-     * 1 learn
-     * 2 redfilm
-     * 3 redmusic
-     * 4 redbook
-     * 5 news
-     * 6 notice
-     * 7 special
+     * 1 notice
+     * 2 news
+     * 3
+     * 4
+     * 5
+     * 6
+     * 7
      */
     public function like(){
         $uid = session('userId'); //点赞人
@@ -122,19 +123,19 @@ class Base extends Controller {
                 $table = "comment";
                 break;
             case 1:
-                $table = "work";
+                $table = "notice";
                 break;
             case 2:
-                $table = "centraltask";
+                $table = "news";
                 break;
             case 3:
-                $table = "policy";
+                $table = "";
                 break;
             case 4:
-                $table = "learn";
+                $table = "";
                 break;
             case 5:
-                $table = "news";
+                $table = "";
                 break;
             default:
                 return $this->error("无该数据表");
@@ -149,100 +150,38 @@ class Base extends Controller {
         $likeModel = new Like();
         $like = $likeModel->where($data)->find();
         if(empty($like)) {  //点赞
-            if ($this->score_up()){
-                // 未满 15 分
-                $res = $likeModel->create($data);
-                if($res) {
-                    //点赞成功积分+1
-                    WechatUser::where('userid',$uid)->setInc('score',1);
-                    //更新数据
-                    Db::name($table)->where('id',$aid)->setInc('likes');
-                    return $this->success("点赞成功");
-                }else {
-                    return $this->error("点赞失败");
-                }
-            }else{
-                // 已满 15分
-                $dataa = array(
-                    'type' => $type,
-                    'table' => $table,
-                    'aid' => $aid,
-                    'uid' => $uid,
-                    'score' => 0
-                );
-                $ress = $likeModel->create($dataa);
-                if ($ress){
-                    //更新数据
-                    Db::name($table)->where('id',$aid)->setInc('likes');
-                    return $this->success("点赞成功");
-                }else{
-                    return $this->error("点赞失败");
-                }
+            $res = $likeModel->create($data);
+            if($res) {
+                //点赞成功积分+1
+                WechatUser::where('userid',$uid)->setInc('score',1);
+                //更新数据
+                Db::name($table)->where('id',$aid)->setInc('likes');
+                return $this->success("点赞成功");
+            }else {
+                return $this->error("点赞失败");
             }
         }else { //取消
-            if ($this->score_up()){
-                //  未满 15分
-                $result = $likeModel::where($data)->delete();
-                if($result) {
-                    //取消成功积分-1
-                    WechatUser::where('userid',$uid)->setDec('score',1);
-                    Db::name($table)->where('id',$aid)->setDec('likes');
-                    return $this->success("取消成功");
-                }else {
-                    return $this->error("取消失败");
-                }
-            }else{
-                // 已满 15 分
-                $Tem = Like::where($data)->find();
-                if ($Tem['score'] == 0){
-                    // 取消的点赞是溢出的
-                    $results = $likeModel::where($data)->delete();
-                    if ($results){
-                        Db::name($table)->where('id',$aid)->setDec('likes');
-                    }else{
-                        return $this->error("取消失败");
-                    }
-                }else{
-                    // 取消的点赞不是溢出的
-                    $dataas = array(
-                        'uid' => $uid,
-                        'score' => 0
-                    );
-                    $results = $likeModel::where($data)->delete();
-                    if ($results){   // 补位 分数
-                        $Res = Like::where($dataas)->find();
-                        if ($Res){  //点赞有溢出  补位 点赞
-                            Like::where('id',$Res['id'])->update(['score' => 1]);
-                        }else{
-                            // 点赞无溢出  找评论溢出
-                            $Com = Comment::where(['uid' => $uid , 'score' => 0 ,'status' => 0])->find();
-                            if ($Com){
-                                Comment::where('id',$Com['id'])->update(['score' => 1]);
-                            }else{ // 评论无溢出   则减去 总积分
-                                WechatUser::where('userid',$uid)->setDec('score',1);
-                            }
-                        }
-                        Db::name($table)->where('id',$aid)->setDec('likes');
-                    }else{
-                        return $this->error("取消失败");
-                    }
-                }
+            $result = $likeModel::where($data)->delete();
+            if($result) {
+                //取消成功积分-1
+                WechatUser::where('userid',$uid)->setDec('score',1);
+                Db::name($table)->where('id',$aid)->setDec('likes');
+                return $this->success("取消成功");
+            }else {
+                return $this->error("取消失败");
             }
-
         }
-
     }
 
     /**
      * 评论，$type,$aid,$content
      * type值：
-     * 1 learn
-     * 2 redfilm
-     * 3 redmusic
-     * 4 redbook
-     * 5 news
-     * 6 notice
-     * 7 special
+     * 1 notice
+     * 2 news
+     * 3
+     * 4
+     * 5
+     * 6
      */
     public function comment(){
         if(IS_POST){
@@ -251,19 +190,19 @@ class Base extends Controller {
             $aid = input('aid');
             switch ($type) {    //根据类别获取表明
                 case 1:
-                    $table = "work";
+                    $table = "notice";
                     break;
                 case 2:
-                    $table = "centraltask";
+                    $table = "news";
                     break;
                 case 3:
-                    $table = "policy";
+                    $table = "";
                     break;
                 case 4:
-                    $table = "learn";
+                    $table = "";
                     break;
                 case 5:
-                    $table = "news";
+                    $table = "";
                     break;
                 default:
                     return $this->error("无该数据表");
@@ -277,76 +216,35 @@ class Base extends Controller {
                 'uid' => $uid,
                 'table' => $table,
             );
-            if ($this->score_up()){
-                // 未满 15分
-                $res = $commentModel->create($data);
-                if($res) {  //返回comment数组
-                    //评论成功增加1分
-                    WechatUser::where('userid',$uid)->setInc('score',1);
-                    //更新主表数据
-                    $map['id'] = $res['aid'];   //文章id
-                    $model = Db::name($table)->where($map)->setInc('comments');
-                    if($model) {
-                        $user = WechatUser::where('userid',$uid)->find();    //获取用户头像和昵称
-                        $nickname = ($user['nickname']) ? $user['nickname'] : $user['name'];
-                        $header =  ($user['header']) ? $user['header'] : $user['avatar'];
-                        //返回用户数据
-                        $jsonData = array(
-                            'id' => $res['id'],
-                            'time' => date("Y-m-d",time()),
-                            'content' => input('content'),
-                            'nickname' => $nickname,
-                            'header' => $header,
-                            'type' => $type,
-                            'create_time' => time(),
-                            'likes' => 0,
-                            'status' => 1,
-                        );
-                        return $this->success("评论成功","",$jsonData);
-                    }else {
-                        return $this->error("评论失败");
-                    }
+            $res = $commentModel->create($data);
+            if($res) {  //返回comment数组
+                //评论成功增加1分
+                WechatUser::where('userid',$uid)->setInc('score',1);
+                //更新主表数据
+                $map['id'] = $res['aid'];   //文章id
+                $model = Db::name($table)->where($map)->setInc('comments');
+                if($model) {
+                    $user = WechatUser::where('userid',$uid)->find();    //获取用户头像和昵称
+                    $nickname = ($user['nickname']) ? $user['nickname'] : $user['name'];
+                    $header =  ($user['header']) ? $user['header'] : $user['avatar'];
+                    //返回用户数据
+                    $jsonData = array(
+                        'id' => $res['id'],
+                        'time' => date("Y-m-d",time()),
+                        'content' => input('content'),
+                        'nickname' => $nickname,
+                        'header' => $header,
+                        'type' => $type,
+                        'create_time' => time(),
+                        'likes' => 0,
+                        'status' => 1,
+                    );
+                    return $this->success("评论成功","",$jsonData);
                 }else {
-                    return $this->error($commentModel->getError());
+                    return $this->error("评论失败");
                 }
-            }else{
-                // 已满 15分
-                $dataa = array(
-                    'content' => input('content'),
-                    'type' => $type,
-                    'aid' => $aid,
-                    'uid' => $uid,
-                    'table' => $table,
-                    'score' => 0
-                );
-                $ress = $commentModel->create($dataa);
-                if ($ress){
-                    //更新主表数据
-                    $map['id'] = $ress['aid'];   //文章id
-                    $model = Db::name($table)->where($map)->setInc('comments');
-                    if($model) {
-                        $user = WechatUser::where('userid',$uid)->find();    //获取用户头像和昵称
-                        $nickname = ($user['nickname']) ? $user['nickname'] : $user['name'];
-                        $header =  ($user['header']) ? $user['header'] : $user['avatar'];
-                        //返回用户数据
-                        $jsonData = array(
-                            'id' => $ress['id'],
-                            'time' => date("Y-m-d",time()),
-                            'content' => input('content'),
-                            'nickname' => $nickname,
-                            'header' => $header,
-                            'type' => $type,
-                            'create_time' => time(),
-                            'likes' => 0,
-                            'status' => 1,
-                        );
-                        return $this->success("评论成功","",$jsonData);
-                    }else {
-                        return $this->error("评论失败");
-                    }
-                }else{
-                    return $this->error($commentModel->getError());
-                }
+            }else {
+                return $this->error($commentModel->getError());
             }
         }
     }
@@ -396,19 +294,19 @@ class Base extends Controller {
     public function browser($type,$uid,$aid) {
         switch ($type) {    //根据类别获取表明
             case 1:
-                $table = "work";
+                $table = "notice";
                 break;
             case 2:
-                $table = "centraltask";
+                $table = "news";
                 break;
             case 3:
-                $table = "policy";
+                $table = "";
                 break;
             case 4:
-                $table = "learn";
+                $table = "";
                 break;
             case 5:
-                $table = "news";
+                $table = "";
                 break;
             default:
                 return $this->error("无该数据表");
@@ -416,7 +314,7 @@ class Base extends Controller {
         }
         $data = array(
             'type' => $type,
-            'user_id' => $uid,
+            'uid' => $uid,
             'aid' => $aid,
             'table' => $table
         );
@@ -425,42 +323,83 @@ class Base extends Controller {
 
         if(!$history && $aid != 0){
             $s['score'] = array('exp','`score`+1');
-            if ($this->score_up()){
-                // 未满 15 分
-                $browserModel->create($data);
-                WechatUser::where('userid',$uid)->update($s);
-            }
+            $browserModel->create($data);
+            WechatUser::where('userid',$uid)->update($s);
         }
     }
-    /*
-     * 判断当天积分是否达到上限
+    /**
+     * 获取数据详情 ，$type,$id
+     * type值：
+     * 1 notice 通知公告
+     * 2 news   党建动态
+     * 3
+     * 4
      */
-    public function score_up(){
-        $con = strtotime(date("Y-m-d",time()));  //  获取当天年月日时间戳
-        $userid = session('userId');
-        $map = array(
-            'create_time' => ['egt',$con],
-            'user_id' => $userid,
-        );
-        $map1 = array(
-            'create_time' => ['egt',$con],
-            'uid' => $userid,
-            'score' => 1
-        );
-//        $map2 = array(
-//            'create_time' => ['egt',$con],
-//            'userid' => $userid
-//        );
-        $browse = Browse::where($map)->count(); //  浏览得分
-        $like = Like::where($map1)->count();  // 点赞得分
-        $comment = Comment::where($map1)->count();  // 评论得分
-//        $Answer = Answers::where($map2)->find();
-//        $answer = $Answer['score'];  // 答题得分
-        $num = $browse + $like + $comment;
-        if ($num < 15){
-            return true;
-        }else{
-            return false;
+    public function content($type,$id){
+        $userId = session('userId');
+        switch ($type) {    //根据类别获取表明
+            case 1:
+                $table = "notice";
+                break;
+            case 2:
+                $table = "news";
+                break;
+            case 3:
+                $table = "";
+                break;
+            case 4:
+                $table = "";
+                break;
+            case 5:
+                $table = "";
+                break;
+            case 6:
+                $table = "";
+                break;
+            default:
+                return $this->error("无该数据表");
+                break;
         }
+        //活动基本信息
+        $list = Db::name($table)->find(['id' => $id]);
+        if (empty($list)){
+            $this ->error('该内容不存在或已删除!');
+        }
+        //浏览加一
+        Db::name($table)->where('id',$id)->setInc('views');
+        if($userId != "visitor"){
+            $this->browser($type,$userId,$id);
+        }
+        $list['user'] = $userId;
+        //分享图片及链接及描述
+        if (isset($list['front_cover'])){ // 封面图
+            if (empty($list['front_cover'])){
+                $list['share_image'] = '/home/images/test/test1.jpg';  // 默认
+            }else{
+                $image = Picture::where('id',$list['front_cover'])->find();
+                $list['share_image'] = "http://".$_SERVER['SERVER_NAME'].$image['path'];
+            }
+        }else{
+            $list['share_image'] = '/home/images/test/test1.jpg';  // 默认
+        }
+        if (isset($list['description'])){
+            if (empty($list['description'])){
+                $list['desc'] = str_replace('&nbsp;','',strip_tags($list['content']));
+            }else{
+                $list['desc'] = $list['description'];
+            }
+        }else{
+            $list['desc'] = str_replace('&nbsp;','',strip_tags($list['content']));
+        }
+        $list['link'] = Config::get('host_url').$_SERVER['REDIRECT_URL'];
+        //获取 文章点赞
+        $likeModel = new Like;
+        $like = $likeModel->getLike($type,$id,$userId);
+        $list['is_like'] = $like;
+        //获取 评论
+        $commentModel = new Comment();
+        $comment = $commentModel->getComment($type,$id,$userId);
+        $list['comment'] = $comment;
+        return $list;
     }
 }

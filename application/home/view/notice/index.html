@@ -1,0 +1,342 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/notice/index.css">
+<link rel="stylesheet" href="/home/css/notice/navbar.css">
+{/block}
+
+{block name="body"}
+<div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+    <a class="mui-control-item" href="#item1mobile" data-index="0">
+        <span>通知公告</span>
+    </a>
+    <a class="mui-control-item" href="#item2mobile" data-index="1">
+        <span>党建动态</span>
+    </a>
+</div>
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+        <div class="mui-slider-group">
+            <div id="item1mobile" class="mui-slider-item mui-control-content">
+                <div class="current_special">
+                    {volist name="banner1" id="ba"}
+                    <img src="{$ba.front_cover}" class="bac_img">
+                    <div class="fuzzy">
+                        <div class="spe_title"></div>
+                        <div class="shadow_box">
+                            <div class="content">
+                                <a href="{:Url('detail','id='.$ba['id'])}">
+                                    <div class="roll_box">
+                                        <div class="s_tag">通知公告</div>
+                                        <img class="s_img" src="{$ba.front_cover}">
+                                        <div class="s_title">{$ba.title}</div>
+                                        <div class="sent_detail">
+                                            <span class="tissue">{$ba.publisher}{$ba.views}</span>
+                                            <span class="time">{$ba.create_time}</span>
+                                        </div>
+                                        <div class="footer">
+                                            <div class="scan">
+                                                <img src="/home/images/notice/scan2.png">
+                                                <span>{$ba.views}</span>
+                                            </div>
+                                            <div class="talk">
+                                                <img src="/home/images/notice/talk2.png">
+                                                <span>{$ba.views}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                {/volist}
+                            </div>
+
+                        </div>
+                        <div class="change">
+                            <img src="/home/images/notice/change.png">换一个
+                        </div>
+                    </div>
+                </div>
+
+                <!--通知列表-->
+                <div class="lists notice">
+                    <div class="tag"> —— 精彩活动.寓教于乐 —— </div>
+                    {volist name="list1" id="lo"}
+                    <a href="{:Url('Notice/detail?id='.$lo['id'])}" class="list">
+                        <img src="{$lo.front_cover}" alt="图片" class="img">
+                        <div class="s_title">{$lo.title}</div>
+                        <div class="sent_detail">
+                            <span class="tissue">{$lo.publisher}</span>
+                            <span class="time">{$lo.create_time}</span>
+                        </div>
+                        <div class="footer">
+                            <div class="scan">
+                                <img src="/home/images/notice/scan2.png">
+                                <span>{$lo.views}</span>
+                            </div>
+                            <div class="talk">
+                                <img src="/home/images/notice/talk2.png">
+                                <span>{$ba.views}</span>
+                            </div>
+                        </div>
+                    </a>
+                    {/volist}
+                </div>
+            </div>
+            <div id="item2mobile" class="mui-slider-item mui-control-content">
+                <div class="current_special">
+                    {volist name="banner2" id="bn"}
+                    <img src="{$bn.front_cover}" class="bac_img">
+                    <div class="fuzzy">
+                        <div class="spe_title"></div>
+                        <div class="shadow_box">
+                            <div class="content">
+                                <a href="{:Url('dynamicdetail','id='.$bn['id'])}">
+                                    <div class="roll_box">
+                                        <div class="s_tag">党建动态</div>
+                                        <img class="s_img" src="{$bn.front_cover}">
+                                        <div class="s_title">{$bn.title}</div>
+                                        <div class="sent_detail">
+                                            <span class="tissue">{$bn.publisher}</span>
+                                            <span class="time">{$bn.create_time}</span>
+                                        </div>
+                                        <div class="footer">
+                                            <div class="scan">
+                                                <img src="/home/images/notice/scan2.png">
+                                                <span>{$bn.views}</span>
+                                            </div>
+                                            <div class="talk">
+                                                <img src="/home/images/notice/talk2.png">
+                                                <span>{$ba.views}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {/volist}
+                        <div class="change">
+                            <img src="/home/images/notice/change.png">换一个
+                        </div>
+                    </div>
+                </div>
+
+                <!--党建动态-->
+                <div class="lists dynamic">
+                    <div class="tag"> —— 精彩活动.寓教于乐 —— </div>
+                    {volist name="list2" id="li"}
+                    <a href="{:Url('dynamicdetail','id='.$li['id'])}" class="list">
+                        <img src="{$li.front_cover}" alt="图片" class="img">
+                        <div class="s_title">{$li.title}</div>
+                        <div class="sent_detail">
+                            <span class="tissue">{$li.publisher}</span>
+                            <span class="time">{$li.create_time}</span>
+                        </div>
+                        <div class="footer">
+                            <div class="scan">
+                                <img src="/home/images/notice/scan2.png">
+                                <span>{$li.views}</span>
+                            </div>
+                            <div class="talk">
+                                <img src="/home/images/notice/talk2.png">
+                                <span>{$ba.views}</span>
+                            </div>
+                        </div>
+                    </a>
+                    {/volist}
+                </div>
+            </div>
+        </div>
+  </div>
+    </div>
+
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script>
+    var win_w = $(window).width();
+    var c =  parseInt(window.location.href.split("index/c/")[1]);
+    $(function(){
+        //tab初始化和数据存储
+        var co = getCookie("type");
+        if(co == 0 || co == 1 ){
+            c = co;
+        }else{
+            c =  parseInt(window.location.href.split("index/c/")[1]);
+        }
+        $("#tab a").eq(c).addClass('mui-active');
+        $(".mui-slider-group>div").eq(c).addClass('mui-active');
+    })
+
+    window.onload = function() {
+        if(c==0){
+            if ($(".notice a").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==1){
+            if ($(".dynamic a").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }
+    }
+
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
+        }
+    });
+
+    function loadScroll(){
+        if(c==0){
+            var len = $(".notice a").length;
+        }else if(c==1){
+            var len = $(".dynamic a").length;
+        }
+                $.ajax({
+                    type:"post",
+                    url:"{:Url('Notice/more')}",
+                    data:{
+                        length:len,
+                        type:c
+                    },
+                    beforeSend: function(XMLHttpRequest){
+                    },
+                    success:function(data){
+                        if(data.code == 1){
+                            addCourse(data,c);
+                            var dataLen =data.data.length;
+                            if(data.data.length == 5){
+                                mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                            }else{
+                                mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                            }
+                        }else{
+                            mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                        }
+                    }
+                })
+    }
+    function addCourse(data,type) {
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for (var i = 0; i < len; i++) {
+            var list = lists[i];
+            if (list.type == 1) {
+                html +=
+                        '<a>' +
+                        '<img src="' + list.path + '" alt="图片" class="img">' +
+                        '<div class="title limit">' + list.title + '</div>' +
+                        '<span class="study">' + list.views + '人学习过</span>' +
+                        '</a>'
+            }
+            if (type == 0) {
+                $(".notice").append(html);
+            } else if (type == 1) {
+                $(".dynamic").append(html);
+            }
+        }
+    }
+
+
+    //tab点击事件
+    mui('#tab').on('tap', 'a', function(e) {
+        $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
+        c = this.getAttribute("data-index");
+        mui('#refreshContainer').pullRefresh().refresh(true);
+        if(c==0){
+            if($(".notice ul li").length<10){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==1){
+            if($(".dynamic ul li").length<10){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }
+        setCookie('type',c);
+    })
+
+
+
+    mui("#refreshContainer").on("tap","a",function(){
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    })
+
+    var isActice;
+    mui('#refreshContainer').on('tap', '.change', function(e) {
+        event.preventDefault();
+        event.stopPropagation();
+       if(!isActice) {
+           isActice = true;
+           if(c==0){
+               var content = $("#item1mobile").find('.shadow_box').find('.content');
+               var bac_img = $("#item1mobile").find('.current_special').find('.bac_img');
+           }else if(c==1){
+               var content = $("#item2mobile").find('.shadow_box').find('.content');
+               var bac_img = $("#item2mobile").find('.current_special').find('.bac_img');
+           }
+           var len = content.length;
+           if (len >=1) {
+               content.each(function (i,n) {
+                  $(this).css('z-index',len-i);
+                   var tIndex =  $(this).css('z-index');
+                   if (tIndex == len) {
+                       var tCon = $(this);
+                       var back = setTimeout(function () {
+                           tCon.insertAfter(content.eq(len - 1));
+                           tCon.removeClass('niceIn');
+                           tCon.animate({"left": 0}, 0);
+                           listIndex();
+                           isActice = false;
+                       }, 600);
+                       tCon.addClass('niceIn');
+                       tCon.animate({"left": -win_w}, 600);
+                       back;
+                   }
+               });
+               bac_img.each(function () {
+                   var tIndex = $(this).css('z-index');
+                   if (tIndex == len) {
+                       var tImg = $(this);
+                       var back = setTimeout(function () {
+                           tImg.insertAfter(bac_img.eq(len - 1));
+                           tImg.fadeIn(0);
+                           listIndex();
+                       }, 1010);
+                       tImg.fadeOut(1000);
+                   }
+               });
+               listIndex();
+           }
+       }
+        })
+
+    function listIndex(){
+        var bac_img = $('.current_special').find('.bac_img');
+        var content = $('.shadow_box').find('.content');
+        var len = bac_img.length;
+        var zIndex = len;
+        var zIndex2 = len;
+        bac_img.each(function(){
+            $(this).css('z-index',zIndex);
+            zIndex--;
+        });
+        content.each(function(){
+            $(this).css('z-index',zIndex2);
+            zIndex2--;
+        });
+    }
+</script>
+{/block}

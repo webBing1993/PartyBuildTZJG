@@ -1,0 +1,39 @@
+.banner img{
+    width:100%;
+}
+.list ul a {
+    display: block;
+    overflow: hidden;
+    padding: 2vw 3vw;
+    border-bottom: 1px solid #f1f1f1;
+}
+.list ul a img{
+    width:2.4rem;
+    height:1.6rem;
+    float: left;
+    margin-right: 2vw;
+}
+.list ul a p{
+    font-size: 0.38rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.list ul a span{
+    font-size: 0.32rem;
+    color: #999;
+}
+.list ul a span:nth-child(3){
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space:nowrap;
+    width: 50%;
+}
+.list ul a span:nth-child(4){
+    float: right;
+}

@@ -1,0 +1,30 @@
+.list ul a{
+    display: block;
+    border-bottom: 1px solid #f1f1f1;
+    padding: 0.26rem 0.4rem;
+
+}
+.list ul a p{
+    font-size: 0.38rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.list ul a span{
+    font-size: 0.32rem;
+    color: #999;
+}
+.list ul a span:nth-child(2){
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space:nowrap;
+    width:70%;
+}
+.list ul a span:nth-child(3){
+    float: right;
+}
