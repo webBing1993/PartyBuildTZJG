@@ -44,7 +44,7 @@ class Notice extends Base{
      * 通知公告 详情
      */
     public function detail(){
-
+        return $this->fetch();
     }
     /**
      * 党建动态 详情页

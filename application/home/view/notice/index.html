@@ -90,7 +90,7 @@
                         <div class="shadow_box">
                             <div class="content">
                                 {volist name="banner2" id="bn"}
-                                <a href="">
+                                <a href="{:Url('notice/detail')}">
                                     <div class="roll_box">
                                         <div class="s_tag">党建动态</div>
                                         <img class="s_img" src="{$bn.front_cover}">
@@ -125,7 +125,7 @@
                 <div class="lists dynamic">
                     <div class="tag"> —— 精彩活动.寓教于乐 —— </div>
                     {volist name="list2" id="li"}
-                    <a href="" class="list">
+                    <a href="{:Url('notice/detail')}" class="list">
                         <img src="{$li.front_cover}" alt="图片" class="img">
                         <div class="s_title">{$li.title}</div>
                         <div class="sent_detail">
@@ -184,31 +184,6 @@
             }
         }
     }
-
-    //初始化下拉加载
-    mui.init({
-        pullRefresh: {
-            container: '#refreshContainer',
-            up: {
-                callback: loadScroll
-            }
-        }
-    });
-
-    /**
-     * 切换精彩专题
-     * @param e
-     */
-    var tonext = function(e){
-        var box =$('.box');
-        var len = box.length;
-        var this_ = $(e ).parents('.box');
-        var index = this_.index();
-        index = index == len ? 0:index;
-        $('.box_up').find('img' ).hide();
-        box.eq(index).show().siblings('.box' ).hide();
-        box.eq(index).find('img' ).fadeIn();
-    };
 
     //初始化下拉加载
     mui.init({
@@ -294,6 +269,12 @@
         setCookie('type',c);
     })
 
+
+
+    mui("#refreshContainer").on("tap","a",function(){
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    })
 
     var isActice;
     mui('#refreshContainer').on('tap', '.change', function(e) {

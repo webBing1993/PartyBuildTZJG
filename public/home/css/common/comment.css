@@ -1,0 +1,73 @@
+/*评论*/
+.comment {
+    padding-bottom: 1rem;
+}
+.comment .sum {
+    height: 0.6rem;
+    padding-left: 3.4vw;
+    background: #fcfcfc;
+    border-top: 1px solid #f1f1f1;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 0.24rem;
+    line-height: 0.6rem;
+}
+.comment .lists .list {
+    width: 100%;
+    padding-left: 3.4vw;
+    padding-right: 3.4vw;
+    min-height: 100px;
+    border-bottom: 1px solid #f1f1f1;
+}
+.comment .lists .list .fl img {
+    width: 8vw;
+    height: 8vw;
+    margin-top: 3.4vw;
+    margin-right: 3vw;
+    overflow: hidden;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.comment .lists .list .mid {
+    width: 73%;
+    margin-top: 3.4vw;
+}
+.comment .lists .list .mid .name {
+    width: 100%;
+    color: #999999;
+    font-size: 0.28rem;
+}
+.comment .lists .list .mid .content {
+    width: 100%;
+    word-break: break-all;
+    font-size: 0.28rem;
+}
+.comment .lists .list .mid .time {
+    font-size: 0.24rem;
+    line-height: 0.8rem;
+    color: #999;
+}
+.comment .lists .list .fr {
+    margin-top: 0.12rem;
+    color: #999;
+    line-height:0.44rem;
+    font-size: 0.24rem;
+}
+.comment .lists .list .good {
+    background: url('/home/images/detail/good.png') 0 center no-repeat;
+}
+.comment .lists .list .good_ {
+    animation: shake 300ms ease;
+    -webkit-animation: shake 300ms ease;
+    background: url('/home/images/detail/good_.png') 0 center no-repeat;
+}
+.comment .lists .list .isgood {
+    background-size: 0.26rem 0.26rem;
+    padding-left: 0.36rem;
+}
+.comment .tip {
+    height: 10.6vw;
+    text-align: center;
+    line-height: 10.6vw;
+    color: #c1c1c1;
+    font-size: 1.5rem;
+}
