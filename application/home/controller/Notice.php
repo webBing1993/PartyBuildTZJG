@@ -6,9 +6,14 @@
  * Time: 13:21
  */
 namespace app\home\controller;
+use app\home\model\Browse;
 use app\home\model\News;
 use app\home\model\Notice as NoticeModel;
-
+use app\home\model\WechatUser;
+use app\home\model\WechatUserTag;
+use com\wechat\TPQYWechat;
+use app\home\model\Picture;
+use think\Config;
 /**
  * Class Notice
  * @package 通知公告
@@ -48,9 +53,74 @@ class Notice extends Base{
         $this ->anonymous();
         //获取jssdk
         $this ->jssdk();
+        $userId = session('userId');
         $id = input('id');
-        $this->assign('info',$this->content(1,$id));
+        $info = $this->content(1,$id);
+        // 是否 超级管理员
+        $limit = WechatUserTag::where(['tagid' => '', 'userid' => $userId])->find();
+        if ($limit){// 超级管理员
+             // 判断 是否  到  截止时间
+            if ($info['end_time'] > time()){
+                // 未截止
+                $info['limit'] = 2;
+            }else{
+                // 已经截止
+                $info['limit'] = 1;
+            }
+        }else{
+            $info['limit'] = 0; // 普通
+        }
+        // 获取  需要考核的人员
+        $People = WechatUserTag::where(['tagid' => ''])->select();
+        $people = array();
+        // 未读人员  名单
+        foreach($People as $value){
+            $read = Browse::where(['type' =>1,'aid' => $id,'uid' => $value['userid']])->find();
+            if (!$read){
+                // 未读
+                $name = WechatUser::where(['userid' => $value['userid']])->value('name');
+                array_push($people,$name);
+            }
+        }
+        $info['people'] = implode('，',$people);
+        $this->assign('info',$info);
         return $this->fetch();
+    }
+    /**
+     * 一键提醒  功能
+     */
+    public function remind(){
+        $id = input('id');
+        // 获取  需要考核的人员
+        $People = WechatUserTag::where(['tagid' => ''])->select();
+        $people = array();
+        // 未读人员  名单
+        foreach($People as $value){
+            $read = Browse::where(['type' =>1,'aid' => $id,'uid' => $value['userid']])->find();
+            if (!$read){
+                // 未读
+                $name = WechatUser::where(['userid' => $value['userid']])->value('name');
+                array_push($people,$name);
+            }
+        }
+        $Notice = NoticeModel::where(['id' => $id])->field('title,end_time')->find();
+        $content = '标题为【'.$Notice['title'].'】的通知公告您还未阅读，请在'.date('m-d H:i',$Notice['create_time']).'前查看哦';
+        $Wechat = new TPQYWechat(Config::get('user'));
+        $message = array(
+            'touser' => implode('|',$people),
+            "msgtype" => 'text',
+            "agentid" => '', // 个人中心
+            "text" => array(
+                "content" => $content
+            ),
+            "safe" => "0"
+        );
+        $res = $Wechat->sendMessage($message);  //审核通过，向用户推送提示
+        if ($res['errcode'] == 0){
+            return $this->success('提醒成功');
+        }else{
+            return $this->error($Wechat->errMsg);
+        }
     }
     /**
      * 党建动态 详情页

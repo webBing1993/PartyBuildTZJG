@@ -1,10 +1,10 @@
 {extend name="public/common"}
 
 {block name="style"}
-<title>信息驿站</title>
+<title>通知公告</title>
 <link rel="stylesheet" href="/home/css/details-template/detail.css">
 <style>
-    #remind{
+    #publish{
         position: absolute;
         z-index:99;
         right: 0;
@@ -107,7 +107,9 @@
 
     </div>
 </div>
-<img src="/home/images/detail/love.png" id="remind">
+{eq name="info.limit" value="1"}
+<img src="/home/images/detail/love.png" id="publish">
+{/eq}
 {eq name="visit" value="0"}
 <div class="bottom clear">
     <div class="myword fl">
@@ -125,15 +127,21 @@
         <div class="mui-scroll-wrapper" style="margin-top: 1rem">
             <div class="mui-scroll">
         <li class="mui-table-view-cell" style="overflow: scroll">
-            我的是，我的湿的，带我飞
+            {$info.people}
         </li>
                 </div>
             </div>
     </ul>
     <ul class="mui-table-view">
+        {eq name="info.limit" value="2"}
         <li class="mui-table-view-cell">
            <span onclick="">一键提醒</span>
         </li>
+        {else/}
+        <li class="mui-table-view-cell">
+            <span>已截止</span>
+        </li>
+        {/eq}
     </ul>
 </div>
 {/block}
@@ -156,7 +164,7 @@
         deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
     });
     window.onload=function(){
-        moveanyway("remind");
+        moveanyway();
         if($(".message").children().length==0){
             $(".message").css("border-top","none");
         }
@@ -166,7 +174,7 @@
             mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
         }
     }
-    mui('body').on('tap', '#remind', function() {
+    mui('body').on('tap', '#publish', function() {
         mui('#sheet1').popover('toggle');
     })
 
