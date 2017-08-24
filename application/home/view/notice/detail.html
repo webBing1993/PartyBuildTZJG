@@ -2,8 +2,7 @@
 
 {block name="style"}
 <title>信息驿站</title>
-<link rel="stylesheet" href="/home/css/notice/relevant.css">
-<link rel="stylesheet" href="/home/css/common/comment.css">
+<link rel="stylesheet" href="/home/css/details-template/detail.css">
 <style>
     .mui-pull-caption {
         margin-bottom: 32px;
@@ -24,14 +23,12 @@
         <div class="banner">
             <img src="{$info.front_cover|get_cover='path'}" alt="支部活动banner" class="banner-img">
         </div>
-        <div class="content">
-            <div class="top">
-                <div class="title" style="text-align: center"><span>{$info.title}</span></div>
-                <div class="note">
-                    <span class="fl">{$info.publisher}</span>
-                    {$info.create_time|time_format='Y-m-d'}
+        <div class="article">
+                <div class="title"><p>{$info.title}</p></div>
+                <div class="note clear">
+                    <span class="publish">{$info.publisher}</span>
+                    <span class="time">   {$info.create_time|time_format='Y-m-d'}</span>
                 </div>
-            </div>
             <div class="message">
                 {notempty name="info.start_time"}
                 <div class="name limit">{$info.start_time|time_format='Y/m/d H:i'}--{$info.end_time|time_format='Y/m/d H:i'}</div>
@@ -40,9 +37,10 @@
                 <div class="content" >{$info.address}</div>
                 {/notempty}
             </div>
-            <div class="article article-content">{$info.content}</div>
-            <div class="article">
-                <div class="note">
+            <div class="content">
+            <div class=" article-content"><p>{$info.content}</p></div>
+                <div class="like">
+                    <span class="read">{$info.views}</span>
                     {eq name="visit" value="0"}
                     {eq name="info.is_like" value="1"}
                     <span class="isgood good_ notvisitor" data-type="1" data-id="{$info.id}">{$info.likes}</span>
@@ -52,9 +50,9 @@
                     {else/}
                     <span class="isgood good">{$info.likes}</span>
                     {/eq}
-                    <span class="read">{$info.views}</span>
                 </div>
             </div>
+        </div>
             <div class="comment">
                 <div class="sum">共<span>{$info.comments}</span>条评论</div>
                 <div class="lists">
@@ -81,7 +79,7 @@
                     {/volist}
                 </div>
             </div>
-        </div>
+
     </div>
 </div>
 {eq name="visit" value="0"}
@@ -102,8 +100,6 @@
         if($(".message").children().length==0){
             $(".message").css("border-top","none");
         }
-        //reset
-        var len = $(".list" ).length;
         if($(".lists .list").length<7){
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
         }else{
@@ -223,7 +219,7 @@
                                     text: '评论成功',
                                     type: 'success',
                                     confirmButtonText:'确定',
-                                    timer:3000
+//                                    timer:3000
                                 });
                             }
                         });
@@ -337,7 +333,7 @@
         var id = this.getAttribute('data-id');
         isGood(this,type,id)
     });
-    mui('.note').on('tap', '.notvisitor', function() {
+    mui('.like').on('tap', '.notvisitor', function() {
         var type = this.getAttribute('data-type');
         var id = this.getAttribute('data-id');
         isGood(this,type,id)
