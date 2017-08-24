@@ -61,7 +61,7 @@ class Notice extends Base{
         //获取jssdk
         $this ->jssdk();
         $id = input('id');
-        $this->assign('info',$this->content(2,$id));
+        $this->assign('new',$this->content(2,$id));
         return $this->fetch();
     }
     /**

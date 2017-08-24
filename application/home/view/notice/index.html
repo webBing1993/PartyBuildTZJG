@@ -83,12 +83,12 @@
             </div>
             <div id="item2mobile" class="mui-slider-item mui-control-content">
                 <div class="current_special">
-                    <img src="" class="bac_img">
+                    {volist name="banner2" id="bn"}
+                    <img src="{$bn.front_cover}" class="bac_img">
                     <div class="fuzzy">
                         <div class="spe_title"></div>
                         <div class="shadow_box">
                             <div class="content">
-                                {volist name="banner2" id="bn"}
                                 <a href="{:Url('dynamicdetail','id='.$bn['id'])}">
                                     <div class="roll_box">
                                         <div class="s_tag">党建动态</div>
@@ -110,10 +110,9 @@
                                         </div>
                                     </div>
                                 </a>
-                                {/volist}
                             </div>
-
                         </div>
+                        {/volist}
                         <div class="change">
                             <img src="/home/images/notice/change.png">换一个
                         </div>

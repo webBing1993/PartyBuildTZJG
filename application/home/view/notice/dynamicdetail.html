@@ -32,9 +32,9 @@
                     <span class="read">{$new.views}</span>
                     {eq name="visit" value="0"}
                     {eq name="new.is_like" value="1"}
-                    <span class="isgood good_ notvisitor"  data-type="1" data-id="{$new.id}">{$new.likes}</span>
+                    <span class="isgood good_ notvisitor"  data-type="2" data-id="{$new.id}">{$new.likes}</span>
                     {else/}
-                    <span class="isgood good notvisitor"  data-type="1" data-id="{$new.id}">{$new.likes}</span>
+                    <span class="isgood good notvisitor"  data-type="2" data-id="{$new.id}">{$new.likes}</span>
                     {/eq}
                     {else/}
                     <span class="isgood good">{$new.likes}</span>
@@ -73,7 +73,7 @@
 {eq name="visit" value="0"}
 <div class="bottom clear">
     <div class="myword fl">
-        <input type="text" placeholder="说说你的感想！"  onclick="send(this,1,{$new['id']})" id="send">
+        <input type="text" placeholder="说说你的感想！"  onclick="send(this,2,{$new['id']})" id="send">
     </div>
 </div>
 {/eq}
@@ -84,7 +84,7 @@
 <script src="/home/js/reset.js"></script>
 <script>
     window.onload = function(){
-        if($(".list").length<7){
+        if($(".list").length<10){
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
         }else{
             mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -219,7 +219,7 @@
             type:"post",
             url:"{:Url('Base/morecomment')}",
             data:{
-                type:1,
+                type:2,
                 aid:id,
                 length:len
             },
@@ -229,7 +229,7 @@
                 if(data.code == 1){
                     addComment(data);
                     var dataLen =data.data.length;
-                    if(data.data.length == 5){
+                    if(data.data.length == 10){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                     }else{
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
