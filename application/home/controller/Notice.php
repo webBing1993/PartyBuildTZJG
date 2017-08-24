@@ -55,8 +55,14 @@ class Notice extends Base{
     /**
      * 党建动态 详情页
      */
-    public function details(){
-        
+    public function dynamicdetail(){
+        //判断是否是游客
+        $this ->anonymous();
+        //获取jssdk
+        $this ->jssdk();
+        $id = input('id');
+        $this->assign('info',$this->content(2,$id));
+        return $this->fetch();
     }
     /**
      * 加载更多

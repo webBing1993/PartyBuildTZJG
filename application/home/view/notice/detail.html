@@ -21,11 +21,9 @@
 {block name="body"}
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
-        {eq name="$info.type" value="2"}
         <div class="banner">
             <img src="{$info.front_cover|get_cover='path'}" alt="支部活动banner" class="banner-img">
         </div>
-        {/eq}
         <div class="content">
             <div class="top">
                 <div class="title" style="text-align: center"><span>{$info.title}</span></div>
@@ -41,18 +39,15 @@
                 {notempty name="info.address"}
                 <div class="content" >{$info.address}</div>
                 {/notempty}
-                {notempty name="info.telephone"}
-                <div class="time"><a href="tel:{$info.telephone}">{$info.telephone}</a></div>
-                {/notempty}
             </div>
             <div class="article article-content">{$info.content}</div>
             <div class="article">
                 <div class="note">
                     {eq name="visit" value="0"}
                     {eq name="info.is_like" value="1"}
-                    <span class="isgood good_ notvisitor" onclick="isGood(this,4,{$info.id})" data-type="4" data-id="{$info.id}">{$info.likes}</span>
+                    <span class="isgood good_ notvisitor" data-type="1" data-id="{$info.id}">{$info.likes}</span>
                     {else/}
-                    <span class="isgood good notvisitor" onclick="isGood(this,4,{$info.id})" data-type="4" data-id="{$info.id}">{$info.likes}</span>
+                    <span class="isgood good notvisitor" data-type="1" data-id="{$info.id}">{$info.likes}</span>
                     {/eq}
                     {else/}
                     <span class="isgood good">{$info.likes}</span>
@@ -75,9 +70,9 @@
                         </div>
                         {eq name="visit" value="0"}
                         {eq name="co.is_like" value="1"}
-                        <div class="fr isgood good_ notvisitor" onclick="isGood(this,0,{$co.id})" data-type="0" data-id="{$co.id}">{$co.likes}</div>
+                        <div class="fr isgood good_ notvisitor"  data-type="0" data-id="{$co.id}">{$co.likes}</div>
                         {else/}
-                        <div class="fr isgood good notvisitor" onclick="isGood(this,0,{$co.id})" data-type="0" data-id="{$co.id}">{$co.likes}</div>
+                        <div class="fr isgood good notvisitor"  data-type="0" data-id="{$co.id}">{$co.likes}</div>
                         {/eq}
                         {else/}
                         <div class="fr isgood good">{$co.likes}</div>
@@ -92,7 +87,7 @@
 {eq name="visit" value="0"}
 <div class="bottom clear">
     <div class="myword fl">
-        <input type="text" placeholder="说说你的感想！" onclick="send(this,4,{$info['id']})">
+        <input type="text" placeholder="说说你的感想！" onclick="send(this,1,{$info['id']})">
     </div>
 </div>
 {/eq}
@@ -278,7 +273,7 @@
             type:"post",
             url:"{:Url('Base/morecomment')}",
             data:{
-                type:4,
+                type:1,
                 aid:id,
                 length:len
             },
@@ -289,7 +284,7 @@
                 if(data.code == 1){
                     addComment(data);
                     var dataLen =data.data.length;
-                    if(data.data.length == 5){
+                    if(data.data.length == 10){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                     }else{
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
@@ -319,9 +314,9 @@
                     '</div>';
             if ({$visit} == 0){
                 if(list.is_like == 0){
-                    html+='<div class="fr isgood good new" onclick="isGood(this,0,'+list.id+')" data-type="0" data-id='+list.id+'>'+list.likes+'</div>'
+                    html+='<div class="fr isgood good new"  data-type="0" data-id='+list.id+'>'+list.likes+'</div>'
                 }else{
-                    html+='<div class="fr isgood good_ new" onclick="isGood(this,0,'+list.id+')" data-type="0" data-id='+list.id+'>'+list.likes+'</div>'
+                    html+='<div class="fr isgood good_ new"  data-type="0" data-id='+list.id+'>'+list.likes+'</div>'
                 }
             }else {
                 html+='<div class="fr isgood good">'+list.likes+'</div>'

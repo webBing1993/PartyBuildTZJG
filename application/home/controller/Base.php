@@ -120,13 +120,13 @@ class Base extends Controller {
         $aid = input('aid');
         switch ($type) {    //根据类别获取表明
             case 0:
-                $table = "notice";
+                $table = "comment";
                 break;
             case 1:
-                $table = "news";
+                $table = "notice";
                 break;
             case 2:
-                $table = "";
+                $table = "news";
                 break;
             case 3:
                 $table = "";

@@ -89,7 +89,7 @@
                         <div class="shadow_box">
                             <div class="content">
                                 {volist name="banner2" id="bn"}
-                                <a href="{:Url('Notice/details')}">
+                                <a href="{:Url('dynamicdetail','id='.$bn['id'])}">
                                     <div class="roll_box">
                                         <div class="s_tag">党建动态</div>
                                         <img class="s_img" src="{$bn.front_cover}">
@@ -124,7 +124,7 @@
                 <div class="lists dynamic">
                     <div class="tag"> —— 精彩活动.寓教于乐 —— </div>
                     {volist name="list2" id="li"}
-                    <a href="{:Url('Notice/details')}" class="list">
+                    <a href="{:Url('dynamicdetail','id='.$li['id'])}" class="list">
                         <img src="{$li.front_cover}" alt="图片" class="img">
                         <div class="s_title">{$li.title}</div>
                         <div class="sent_detail">

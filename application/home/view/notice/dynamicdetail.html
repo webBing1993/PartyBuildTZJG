@@ -17,16 +17,16 @@
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
         <div class="article">
-            <div class="title"><p>的点点滴滴多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多</p></div>
+            <div class="title"><p>{$info.title}</p></div>
             <div class="note clear">
-                <span class="publish">的点点滴滴</span>
-                <span class="time">2017.8.23</span>
+                <span class="publish">{$info.publisher}</span>
+                <span class="time">{$info.create_time|time_format='Y-m-d'}</span>
             </div>
             <div class="content">
-                <div class="article-content">还哦好好好哦啊发红ID覅哦啊发</div>
+                <div class="article-content">{$info.content}</div>
                 <div class="like">
-                    <span class="read">43</span>
-                    <span class="isgood good_ notvisitor"  data-type="1" data-id="">33</span>
+                    <span class="read">{$info.views}</span>
+                    <span class="isgood good_ notvisitor"  data-type="1" data-id="">{$info.likes}</span>
                 </div>
             </div>
         </div>
