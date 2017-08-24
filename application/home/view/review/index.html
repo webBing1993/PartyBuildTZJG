@@ -24,67 +24,68 @@
             <div id="item1mobile" class="mui-slider-item mui-control-content">
                 <!--发布审核-->
                 <div class="list publish">
+                    {empty name="list1"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <ul>
-                        <li><a href="#">
-                        <img src="/home/images/pioneer/banner.png">
-                        <span>电动汽车可以有，在浙江哪都能充电</span>
-                        <span>[第一聚焦] 发布人：admin</span>
-                        <span>2017.8.21</span>
-                        <img src="/home/images/common/rightArrow.png" alt="" class="mui-icon-forward">
-                        <i class="fail">不通过</i><i class="pass">通&nbsp;过</i>
-                    </a>
-                    </li>
-                        <li><a href="#">
-                            <img src="/home/images/pioneer/banner.png">
-                            <span>电动汽车可以有，在浙江哪都能充电</span>
-                            <span>[第一聚焦] 发布人：admin</span>
-                            <span>2017.8.21</span>
-                            <img src="/home/images/common/rightArrow.png" alt="" class="mui-icon-forward">
-                            <i class="fail">不通过</i><i class="pass">通&nbsp;过</i>
-                        </a>
+                        {volist name="list1" id="li"}
+                        <li>
+                            <a href="{:Url('Review/detail?id='.$li['id'])}">
+                                <img src="{$li.front_cover}">
+                                <span>{$li.title}</span>
+                                <span>{$li.pre} 发布人：admin</span>
+                                <span>{$li.create_time}</span>
+                                <img src="/home/images/common/rightArrow.png" alt="" class="mui-icon-forward">
+                                <i class="fail">不通过</i><i class="pass">通&nbsp;过</i>
+                            </a>
                         </li>
+                        {/volist}
                     </ul>
+                    {/empty}
                 </div>
             </div>
             <div id="item2mobile" class="mui-slider-item mui-control-content">
             <!--推送审核-->
             <div class="list push">
+                {empty name="list2"}
+                <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                {else/}
                 <ul>
-                    <li><a href="#">
-                        <img src="/home/images/pioneer/banner.png">
-                        <span>电动汽车可以有，在浙江哪都能充电</span>
-                        <span>[第一聚焦] 发布人：admin</span>
-                        <span>2017.8.21</span>
+                    {volist name="list2" id="lo"}
+                    <li><a href="{:Url('Review/detail?id='.$lo['id'])}">
+                        <img src="{$lo.front_cover}">
+                        <span>{$lo.title}</span>
+                        <span>{$lo.pre} 发布人：admin</span>
+                        <span>{$lo.create_time}</span>
                         <img src="/home/images/common/rightArrow.png" alt="" class="mui-icon-forward">
                         <i class="fail">不通过</i><i class="pass">通&nbsp;过</i>
                     </a>
                     </li>
+                    {/volist}
                 </ul>
+                {/empty}
             </div>
         </div>
             <div id="item3mobile" class="mui-slider-item mui-control-content">
                 <!--已审核-->
                 <div class="Audited">
+                    {empty name="list3"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <ul>
+                        {volist name="list3" id="ll"}
                         <li>
                         <a href="#">
-                            <img src="/home/images/pioneer/banner.png">
-                            <span>电动汽车可以有，在浙江哪都能充电</span>
-                            <span>[第一聚焦] 发布人：admin</span>
-                            <span>2017.8.21</span>
+                            <img src="{$ll.front_cover}">
+                            <span>{$ll.title}</span>
+                            <span>{$ll.pre} 发布人：admin</span>
+                            <span>{$ll.create_time}</span>
                             <i class="refuse"></i>
                         </a>
-                    </li>
-                        <li>
-                            <a href="#">
-                                <img src="/home/images/pioneer/banner.png">
-                                <span>电动汽车可以有，在浙江哪都能充电</span>
-                                <span>[第一聚焦] 发布人：admin</span>
-                                <span>2017.8.21</span>
-                                <i class="pass"></i>
-                            </a>
                         </li>
+                        {/volist}
                     </ul>
+                    {/empty}
                 </div>
             </div>
         </div>

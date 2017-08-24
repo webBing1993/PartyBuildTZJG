@@ -20,18 +20,21 @@ class Push extends Model {
             return null;
         }
         foreach($list as $value){
+            $value['create_time'] = date('Y-m-d',$value['create_time']);
+            $Pic = Picture::where(['id' => $value['front_cover']])->find();
+            $value['front_cover'] = $Pic['name'];
             switch($value['class']){  // 根据 class 值找对应表
                 case 1:
                     // 获取 主图文 详情
-                    
+                    $value['pre'] = '【】';
                     break;
                 case 2:
                     // 获取 主图文 详情
-                    
+                    $value['pre'] = '【】';
                     break;
                 case 3;
                     // 获取 主图文 详情
-                    
+                    $value['pre'] = '【】';
                     break;
 
             }
