@@ -166,14 +166,17 @@ body {
 #tab a{
   margin-top: 2vw;
   line-height:10vw;
-  color: #fff;
+  color: #ddd;
   border-radius: 5px;
+}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+  color: #fff!important;
+  font-size: 0.42rem!important;
 }
 .mui-segmented-control .mui-control-item{
   display: inline-block;
   width:30%;
   font-size: 0.36rem;
-  background: #f00;
   height:10vw;
 }
 #refreshContainer{
