@@ -91,6 +91,7 @@
 /*article content */
 .article-content p,.article-content p span,.article-content{
     font-size: 0.38rem!important;
+    color: #333;
 }
 .article .content * {
     max-width: 100%!important;

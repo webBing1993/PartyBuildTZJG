@@ -3,20 +3,7 @@
 {block name="style"}
 <title>信息驿站</title>
 <link rel="stylesheet" href="/home/css/details-template/detail.css">
-<style>
-    .mui-pull-caption {
-        margin-bottom: 32px;
-    }
-    .title span{
-        display: inline-block;text-align: left;
-    }
-    .article-content p,.article-content p span{
-        font-size: 0.3rem!important;
-        line-height: 0.5rem!important;
-    }
-</style>
 {/block}
-
 {block name="body"}
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
@@ -277,6 +264,7 @@
 
             },
             success:function(data){
+                console.log(data)
                 if(data.code == 1){
                     addComment(data);
                     var dataLen =data.data.length;

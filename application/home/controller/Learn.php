@@ -15,6 +15,11 @@ class Learn extends Base{
         return $this->fetch();
     }
 
+    /* 三会一课 */
+    public function lesson(){
+        return $this->fetch();
+    }
+
     /* 年度计划 */
     public function plan(){
         return $this->fetch();

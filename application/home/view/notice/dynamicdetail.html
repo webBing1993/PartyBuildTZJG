@@ -1,8 +1,8 @@
 {extend name="public/common"}
 
 {block name="style"}
-<title>红色足迹</title>
-<link rel="stylesheet" href="/home/css/common/detail.css">
+<title>党建动态</title>
+<link rel="stylesheet" href="/home/css/details-template/detail.css">
 <style>
     .mui-pull-bottom-pocket {
         height: 0.8rem;
@@ -10,10 +10,6 @@
     }
     .comment{
         padding-bottom: 1rem;
-    }
-    .article-content p,.article-content p span{
-        font-size: 0.3rem!important;
-        line-height: 0.5rem!important;
     }
 </style>
 {/block}
@@ -23,8 +19,8 @@
         <div class="article">
             <div class="title"><p>{$new.title}</p></div>
             <div class="note clear">
-                <span class="fl">{$new.publisher}</span>
-                <span class="fr">{$new.create_time|time_format="Y-m-d"}</span>
+                <span class="publish">{$new.publisher}</span>
+                <span class="time">{$new.create_time|time_format="Y-m-d"}</span>
             </div>
             <div class="content">
                 <div class="article-content">{$new.content}</div>
