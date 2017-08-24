@@ -44,13 +44,19 @@ class Notice extends Base{
      * 通知公告 详情
      */
     public function detail(){
+        //判断是否是游客
+        $this ->anonymous();
+        //获取jssdk
+        $this ->jssdk();
+        $id = input('id');
+        $this->assign('info',$this->content(1,$id));
         return $this->fetch();
     }
     /**
      * 党建动态 详情页
      */
     public function details(){
-
+        
     }
     /**
      * 加载更多
