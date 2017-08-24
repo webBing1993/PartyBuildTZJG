@@ -227,7 +227,7 @@
     border-top: 1px solid #f1f1f1;
     background: #fff;
     font-family: "Microsoft YaHei", sans-serif;
-    z-index: 999;
+    z-index: 9;
 }
 .bottom .star {
     background: url('/home/images/detail/star-border.png') 20px 12px no-repeat;

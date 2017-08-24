@@ -110,9 +110,9 @@ function delCookie( name ){
 	if( cval != null )
 		document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
 }
-function moveanyway(){
+function moveanyway(id){
 	var oW,oH,touch_start,touch_end;
-	var block = document.getElementById("publish");
+	var block = document.getElementById(id);
 	block.addEventListener("touchstart", function(e) {
 		var touches = e.touches[0];
 		touch_start = touches.clientX;
