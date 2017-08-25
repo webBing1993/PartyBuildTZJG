@@ -233,12 +233,12 @@
         var len = lists.length;
         for (var i = 0; i < len; i++) {
             var list = lists[i];
-            if (type == 1) {
+            if (type == 0 ){
                 html +=
-                        '<a href="" class="list">'
-            }else if(type==2){
+                        '<a href="/home/Notice/detail/id/'+list.id+'" class="list">'
+            }else if(type==1){
                 html +=
-                        '<a href="" class="list">'
+                        '<a href="/home/Notice/dynamicdetail/id/'+list.id+'" class="list">'
             }
            html+=
                         '<img src="'+list.front_cover+'" alt="图片" class="img">'+
