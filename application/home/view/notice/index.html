@@ -26,7 +26,7 @@
                         <div class="spe_title"></div>
                         <div class="shadow_box">
                             {volist name="banner1" id="ba"}
-                            <div class="content">
+                            <div class="content notice">
                                 <a href="{:Url('detail','id='.$ba['id'])}">
                                     <div class="roll_box">
                                         <div class="s_tag">通知公告</div>
@@ -92,7 +92,7 @@
                         <div class="spe_title"></div>
                         <div class="shadow_box">
                             {volist name="banner2" id="bn"}
-                            <div class="content">
+                            <div class="content dynamic">
                                 <a href="{:Url('dynamicdetail','id='.$bn['id'])}">
                                     <div class="roll_box">
                                         <div class="s_tag">党建动态</div>
@@ -213,7 +213,7 @@
                     beforeSend: function(XMLHttpRequest){
                     },
                     success:function(data){
-                        console.log(data)
+                        addCourse(data,c);
                         if(data.code == 1){
                             var dataLen =data.data.length;
                             if(data.data.length == 10){
@@ -233,19 +233,36 @@
         var len = lists.length;
         for (var i = 0; i < len; i++) {
             var list = lists[i];
-            if (list.type == 1) {
+            if (type == 1) {
                 html +=
-                        '<a>' +
-                        '<img src="' + list.path + '" alt="图片" class="img">' +
-                        '<div class="title limit">' + list.title + '</div>' +
-                        '<span class="study">' + list.views + '人学习过</span>' +
-                        '</a>'
+                        '<a href="" class="list">'
+            }else if(type==2){
+                html +=
+                        '<a href="" class="list">'
             }
-            if (type == 0) {
-                $(".notice").append(html);
-            } else if (type == 1) {
-                $(".dynamic").append(html);
+           html+=
+                        '<img src="" alt="图片" class="img">'+
+                        '<div class="s_title">看看了</div>'+
+                        '<div class="sent_detail">'+
+                        '<span class="tissue">订单</span>'+
+                        '<span class="time">订单</span>'+
+                        '</div>'+
+                        '<div class="footer">'+
+                        '<div class="scan">'+
+                        '<img src="/home/images/notice/scan2.png">'+
+                        '<span>444</span>'+
+                        '</div>'+
+                        '<div class="talk">'+
+                        '<img src="/home/images/notice/talk2.png">'+
+                        '<span>3333</span>'+
+                        '</div>'+
+                        '</div>'+
+                        '</a>';
             }
+        if (type == 0) {
+            $(".notice").append(html);
+        } else if (type == 1) {
+            $(".dynamic").append(html);
         }
     }
 
