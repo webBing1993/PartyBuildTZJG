@@ -21,9 +21,11 @@
                 <div class="current_special">
                     {volist name="banner1" id="ba"}
                     <img src="{$ba.front_cover}" class="bac_img">
+                    {/volist}
                     <div class="fuzzy">
                         <div class="spe_title"></div>
                         <div class="shadow_box">
+                            {volist name="banner1" id="ba"}
                             <div class="content">
                                 <a href="{:Url('detail','id='.$ba['id'])}">
                                     <div class="roll_box">
@@ -46,14 +48,14 @@
                                         </div>
                                     </div>
                                 </a>
-                                {/volist}
                             </div>
-
+                            {/volist}
                         </div>
                         <div class="change">
                             <img src="/home/images/notice/change.png">换一个
                         </div>
                     </div>
+
                 </div>
 
                 <!--通知列表-->
@@ -85,9 +87,11 @@
                 <div class="current_special">
                     {volist name="banner2" id="bn"}
                     <img src="{$bn.front_cover}" class="bac_img">
+                    {/volist}
                     <div class="fuzzy">
                         <div class="spe_title"></div>
                         <div class="shadow_box">
+                            {volist name="banner2" id="bn"}
                             <div class="content">
                                 <a href="{:Url('dynamicdetail','id='.$bn['id'])}">
                                     <div class="roll_box">
@@ -111,8 +115,8 @@
                                     </div>
                                 </a>
                             </div>
+                            {/volist}
                         </div>
-                        {/volist}
                         <div class="change">
                             <img src="/home/images/notice/change.png">换一个
                         </div>
@@ -306,8 +310,9 @@
                        back;
                    }
                });
-               bac_img.each(function () {
-                   var tIndex = $(this).css('z-index');
+               bac_img.each(function (i,n) {
+                   $(this).css('z-index',len-i);
+                   var tIndex =  $(this).css('z-index');
                    if (tIndex == len) {
                        var tImg = $(this);
                        var back = setTimeout(function () {
