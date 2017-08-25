@@ -273,13 +273,13 @@
         c = this.getAttribute("data-index");
         mui('#refreshContainer').pullRefresh().refresh(true);
         if(c==0){
-            if($(".notice ul li").length<10){
+            if($(".notice li").length<10){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(c==1){
-            if($(".dynamic ul li").length<10){
+            if($(".dynamic li").length<10){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
