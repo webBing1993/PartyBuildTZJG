@@ -26,7 +26,7 @@
                         <div class="spe_title"></div>
                         <div class="shadow_box">
                             {volist name="banner1" id="ba"}
-                            <div class="content notice">
+                            <div class="content">
                                 <a href="{:Url('detail','id='.$ba['id'])}">
                                     <div class="roll_box">
                                         <div class="s_tag">通知公告</div>
@@ -92,7 +92,7 @@
                         <div class="spe_title"></div>
                         <div class="shadow_box">
                             {volist name="banner2" id="bn"}
-                            <div class="content dynamic">
+                            <div class="content">
                                 <a href="{:Url('dynamicdetail','id='.$bn['id'])}">
                                     <div class="roll_box">
                                         <div class="s_tag">党建动态</div>
@@ -213,7 +213,6 @@
                     beforeSend: function(XMLHttpRequest){
                     },
                     success:function(data){
-                        console.log(data)
                         addCourse(data,c);
                         if(data.code == 1){
                             var dataLen =data.data.length;
