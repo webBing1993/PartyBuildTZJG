@@ -213,10 +213,10 @@
                     beforeSend: function(XMLHttpRequest){
                     },
                     success:function(data){
+                        console.log(data)
                         if(data.code == 1){
-                            addCourse(data,c);
                             var dataLen =data.data.length;
-                            if(data.data.length == 5){
+                            if(data.data.length == 10){
                                 mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                             }else{
                                 mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
@@ -236,7 +236,7 @@
             if (list.type == 1) {
                 html +=
                         '<a>' +
-                        '<img src="' + list.path + '" alt="图片" class="img">' +
+                        '<img src="' + list.front_cover + '" alt="图片" class="img">' +
                         '<div class="title limit">' + list.title + '</div>' +
                         '<span class="study">' + list.views + '人学习过</span>' +
                         '</a>'
