@@ -213,6 +213,7 @@
                     beforeSend: function(XMLHttpRequest){
                     },
                     success:function(data){
+                        console.log(data)
                         addCourse(data,c);
                         if(data.code == 1){
                             var dataLen =data.data.length;
@@ -241,20 +242,20 @@
                         '<a href="" class="list">'
             }
            html+=
-                        '<img src="" alt="图片" class="img">'+
-                        '<div class="s_title">看看了</div>'+
+                        '<img src="'+list.front_cover+'" alt="图片" class="img">'+
+                        '<div class="s_title">'+list.title+'</div>'+
                         '<div class="sent_detail">'+
-                        '<span class="tissue">订单</span>'+
-                        '<span class="time">订单</span>'+
+                        '<span class="tissue">'+list.publisher+'</span>'+
+                        '<span class="time">'+list.create_time+'</span>'+
                         '</div>'+
                         '<div class="footer">'+
                         '<div class="scan">'+
                         '<img src="/home/images/notice/scan2.png">'+
-                        '<span>444</span>'+
+                        '<span>'+list.views+'</span>'+
                         '</div>'+
                         '<div class="talk">'+
                         '<img src="/home/images/notice/talk2.png">'+
-                        '<span>3333</span>'+
+                        '<span>'+list.comments+'</span>'+
                         '</div>'+
                         '</div>'+
                         '</a>';

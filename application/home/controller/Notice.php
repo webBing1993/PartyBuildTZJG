@@ -142,6 +142,7 @@ class Notice extends Base{
         $Notice = new NoticeModel();
         $len = input('length');
         $type = input('type'); // 0 通知公告  1 党建动态
+        return $len.$type;
         if ($type == 0){
             return $this->success('加载成功','',$Notice->get_list(['status' => ['egt',0]],$len));
         }else{
