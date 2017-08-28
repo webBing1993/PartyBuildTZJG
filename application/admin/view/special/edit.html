@@ -26,10 +26,10 @@
 {block name="page-header"}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>党建责任</h2>
+        <h2>特色创新</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="{:Url('Organization/index')}">管理主页</a>
+                <a href="{:Url('Special/index')}">管理主页</a>
             </li>
             <li class="active">
                 <strong>{empty name="msg"}新增{else/}修改{/empty}</strong>
@@ -72,26 +72,6 @@
                                 <b>推荐尺寸：500*400px</b>
                             </div>
                             <div class="clear"></div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>类型:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                {empty name="msg"}
-                                <select class="form-control" name="type">
-                                    <option value="1" >规范化建设</option>
-                                    <option value="2" >信息录用</option>
-                                </select>
-                                {else/}
-                                <select class="form-control" name="type">
-                                    {switch name="$msg.type"}
-                                    {case value="1"}<option value="1" >规范化建设</option>{/case}
-                                    {case value="2"}<option value="2" >信息录用</option>{/case}
-                                    {/switch}
-                                </select>
-                                {/empty}
-                            </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
@@ -147,7 +127,7 @@
 
 <script>
     $(function(){
-        highlight_subnav("{:Url('Organization/index')}");
+        highlight_subnav("{:Url('Special/index')}");
 
         //上传图片
         var plus = $('.plus');
@@ -204,7 +184,6 @@
             var it=$(this);
             var data = {
                 id:$("input[name='id']").val(),
-                type:$("select[name='type']").val(),
                 front_cover:$("input[name='front_cover']").val(),
                 title:$("input[name='title']").val(),
                 content:ue.getContent(),
