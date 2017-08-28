@@ -110,50 +110,52 @@ function delCookie( name ){
 	if( cval != null )
 		document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
 }
-function moveanyway(id){
+function moveanyway(){
 	var oW,oH,touch_start,touch_end;
-	var block = document.getElementById(id);
-	block.addEventListener("touchstart", function(e) {
-		var touches = e.touches[0];
-		touch_start = touches.clientX;
-		oW = touches.clientX - block.offsetLeft;
-		oH = touches.clientY - block.offsetTop;
-		//阻止页面的滑动默认事件
-		document.addEventListener("touchmove",defaultEvent,false);
-	},false);
-	block.addEventListener("touchmove", function(e) {
-		var touches = e.touches[0];
-		var oLeft = touches.clientX - oW;
-		var oTop = touches.clientY - oH;
-		touch_end = touches.clientX;
-		if(oLeft < 0) {
-			oLeft = 0;
-		}else if(oLeft > document.documentElement.clientWidth - block.offsetWidth) {
-			oLeft = (document.documentElement.clientWidth - block.offsetWidth);
-		}
-		if(oTop < 0) {
-			oTop = 0;
-		}else if(oTop > document.documentElement.clientHeight - block.offsetHeight) {
-			oTop = (document.documentElement.clientHeight - block.offsetHeight);
-		}
-		block.style.left = oLeft+ "px";
-		block.style.top = oTop + "px";
-		e.preventDefault();
-	},false);
-	block.addEventListener("touchend",function() {
-		document.removeEventListener("touchmove",defaultEvent,false);
-		if(touch_start != touch_end && touch_end){
-			var d = document.documentElement.clientWidth - block.offsetWidth;
-			if(block.offsetLeft<(document.documentElement.clientWidth - block.offsetWidth)/2) {
-				d = 0 ;
+	var block = document.getElementById("publish");
+	if(block) {
+		block.addEventListener("touchstart", function (e) {
+			var touches = e.touches[0];
+			touch_start = touches.clientX;
+			oW = touches.clientX - block.offsetLeft;
+			oH = touches.clientY - block.offsetTop;
+			//阻止页面的滑动默认事件
+			document.addEventListener("touchmove", defaultEvent, false);
+		}, false);
+		block.addEventListener("touchmove", function (e) {
+			var touches = e.touches[0];
+			var oLeft = touches.clientX - oW;
+			var oTop = touches.clientY - oH;
+			touch_end = touches.clientX;
+			if (oLeft < 0) {
+				oLeft = 0;
+			} else if (oLeft > document.documentElement.clientWidth - block.offsetWidth) {
+				oLeft = (document.documentElement.clientWidth - block.offsetWidth);
 			}
-			$(block).animate({
-				left:d+'px'
-			},300)
+			if (oTop < 0) {
+				oTop = 0;
+			} else if (oTop > document.documentElement.clientHeight - block.offsetHeight) {
+				oTop = (document.documentElement.clientHeight - block.offsetHeight);
+			}
+			block.style.left = oLeft + "px";
+			block.style.top = oTop + "px";
+			e.preventDefault();
+		}, false);
+		block.addEventListener("touchend", function () {
+			document.removeEventListener("touchmove", defaultEvent, false);
+			if (touch_start != touch_end && touch_end) {
+				var d = document.documentElement.clientWidth - block.offsetWidth;
+				if (block.offsetLeft < (document.documentElement.clientWidth - block.offsetWidth) / 2) {
+					d = 0;
+				}
+				$(block).animate({
+					left: d + 'px'
+				}, 300)
+			}
+		}, false);
+		function defaultEvent(e) {
+			e.preventDefault();
 		}
-	},false);
-	function defaultEvent(e) {
-		e.preventDefault();
 	}
 }
 function imgresize(){

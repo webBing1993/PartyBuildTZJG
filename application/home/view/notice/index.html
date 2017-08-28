@@ -21,9 +21,11 @@
                 <div class="current_special">
                     {volist name="banner1" id="ba"}
                     <img src="{$ba.front_cover}" class="bac_img">
+                    {/volist}
                     <div class="fuzzy">
                         <div class="spe_title"></div>
                         <div class="shadow_box">
+                            {volist name="banner1" id="ba"}
                             <div class="content">
                                 <a href="{:Url('detail','id='.$ba['id'])}">
                                     <div class="roll_box">
@@ -41,19 +43,19 @@
                                             </div>
                                             <div class="talk">
                                                 <img src="/home/images/notice/talk2.png">
-                                                <span>{$ba.views}</span>
+                                                <span>{$ba.comments}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </a>
-                                {/volist}
                             </div>
-
+                            {/volist}
                         </div>
                         <div class="change">
                             <img src="/home/images/notice/change.png">换一个
                         </div>
                     </div>
+
                 </div>
 
                 <!--通知列表-->
@@ -74,7 +76,7 @@
                             </div>
                             <div class="talk">
                                 <img src="/home/images/notice/talk2.png">
-                                <span>{$ba.views}</span>
+                                <span>{$lo.comments}</span>
                             </div>
                         </div>
                     </a>
@@ -85,9 +87,11 @@
                 <div class="current_special">
                     {volist name="banner2" id="bn"}
                     <img src="{$bn.front_cover}" class="bac_img">
+                    {/volist}
                     <div class="fuzzy">
                         <div class="spe_title"></div>
                         <div class="shadow_box">
+                            {volist name="banner2" id="bn"}
                             <div class="content">
                                 <a href="{:Url('dynamicdetail','id='.$bn['id'])}">
                                     <div class="roll_box">
@@ -105,14 +109,14 @@
                                             </div>
                                             <div class="talk">
                                                 <img src="/home/images/notice/talk2.png">
-                                                <span>{$ba.views}</span>
+                                                <span>{$bn.comments}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </a>
                             </div>
+                            {/volist}
                         </div>
-                        {/volist}
                         <div class="change">
                             <img src="/home/images/notice/change.png">换一个
                         </div>
@@ -137,7 +141,7 @@
                             </div>
                             <div class="talk">
                                 <img src="/home/images/notice/talk2.png">
-                                <span>{$ba.views}</span>
+                                <span>{$li.comments}</span>
                             </div>
                         </div>
                     </a>
@@ -209,10 +213,10 @@
                     beforeSend: function(XMLHttpRequest){
                     },
                     success:function(data){
+                        addCourse(data,c);
                         if(data.code == 1){
-                            addCourse(data,c);
                             var dataLen =data.data.length;
-                            if(data.data.length == 5){
+                            if(data.data.length == 10){
                                 mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                             }else{
                                 mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
@@ -229,36 +233,55 @@
         var len = lists.length;
         for (var i = 0; i < len; i++) {
             var list = lists[i];
-            if (list.type == 1) {
+            if (type == 0 ){
                 html +=
-                        '<a>' +
-                        '<img src="' + list.path + '" alt="图片" class="img">' +
-                        '<div class="title limit">' + list.title + '</div>' +
-                        '<span class="study">' + list.views + '人学习过</span>' +
-                        '</a>'
+                        '<a href="/home/Notice/detail/id/'+list.id+'" class="list">'
+            }else if(type==1){
+                html +=
+                        '<a href="/home/Notice/dynamicdetail/id/'+list.id+'" class="list">'
             }
-            if (type == 0) {
-                $(".notice").append(html);
-            } else if (type == 1) {
-                $(".dynamic").append(html);
+           html+=
+                        '<img src="'+list.front_cover+'" alt="图片" class="img">'+
+                        '<div class="s_title">'+list.title+'</div>'+
+                        '<div class="sent_detail">'+
+                        '<span class="tissue">'+list.publisher+'</span>'+
+                        '<span class="time">'+list.create_time+'</span>'+
+                        '</div>'+
+                        '<div class="footer">'+
+                        '<div class="scan">'+
+                        '<img src="/home/images/notice/scan2.png">'+
+                        '<span>'+list.views+'</span>'+
+                        '</div>'+
+                        '<div class="talk">'+
+                        '<img src="/home/images/notice/talk2.png">'+
+                        '<span>'+list.comments+'</span>'+
+                        '</div>'+
+                        '</div>'+
+                        '</a>';
             }
+        if (type == 0) {
+            $(".notice").append(html);
+        } else if (type == 1) {
+            $(".dynamic").append(html);
         }
     }
 
 
     //tab点击事件
     mui('#tab').on('tap', 'a', function(e) {
-        $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
-        c = this.getAttribute("data-index");
         mui('#refreshContainer').pullRefresh().refresh(true);
+        var scrollApi = mui('.mui-scroll-wrapper').scroll();
+        scrollApi.refresh();//刷新
+        scrollApi.scrollTo(0,0);//滚动至顶部
+        c = this.getAttribute("data-index");
         if(c==0){
-            if($(".notice ul li").length<10){
+            if($(".notice a").length<10){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(c==1){
-            if($(".dynamic ul li").length<10){
+            if($(".dynamic a").length<10){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -306,16 +329,17 @@
                        back;
                    }
                });
-               bac_img.each(function () {
-                   var tIndex = $(this).css('z-index');
+               bac_img.each(function (i,n) {
+                   $(this).css('z-index',len-i);
+                   var tIndex =  $(this).css('z-index');
                    if (tIndex == len) {
                        var tImg = $(this);
                        var back = setTimeout(function () {
                            tImg.insertAfter(bac_img.eq(len - 1));
                            tImg.fadeIn(0);
                            listIndex();
-                       }, 1010);
-                       tImg.fadeOut(1000);
+                       }, 600);
+                       tImg.fadeOut(600);
                    }
                });
                listIndex();
