@@ -3,7 +3,6 @@
 {block name="style"}
 <link rel="stylesheet" href="/static/iCheck/custom.css">
 <link rel="stylesheet" href="/admin/css/chosen/chosen.css">
-<link rel="stylesheet" href="/static/datepicker/bootstrap-datetimepicker.min.css">
 <style>
     .imggroup{
         position: relative;
@@ -30,10 +29,10 @@
         <h2>党建责任</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="{:Url('Responsibility/index')}">管理主页</a>
+                <a href="{:Url('Organization/index')}">管理主页</a>
             </li>
             <li class="active">
-                <strong>{empty name="msg"}新增{else/}修改{/empty}</strong>
+                <strong>修改</strong>
             </li>
         </ol>
     </div>
@@ -81,114 +80,25 @@
                             <div class="col-lg-11">
                                 {empty name="msg"}
                                 <select class="form-control" name="type">
-                                    <option value="1" >方案部署</option>
-                                    <option value="2" >三会一课</option>
-                                    <option value="3" >年度计划</option>
-                                    <option value="4" >主题党日</option>
+                                    <option value="1" >规范化建设</option>
+                                    <option value="2" >信息录用</option>
                                 </select>
                                 {else/}
                                 <select class="form-control" name="type">
                                     {switch name="$msg.type"}
-                                    {case value="1"}<option value="1" >专题研究</option>{/case}
-                                    {case value="2"}<option value="2" >三会一课</option>{/case}
-                                    {case value="3"}<option value="3" >年度计划</option>{/case}
-                                    {case value="4"}<option value="4" >主题党日</option>{/case}
+                                    {case value="1"}<option value="1" >规范化建设</option>{/case}
+                                    {case value="2"}<option value="2" >信息录用</option>{/case}
                                     {/switch}
                                 </select>
                                 {/empty}
                             </div>
                         </div>
-                        <div class="form-group" id="one">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>三会一课:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                {empty name="msg"}
-                                <select class="form-control" name="class1">
-                                    <option value="0">--请选择类型--</option>
-                                    <option value="1" >支部委员大会</option>
-                                    <option value="2" >党支部委员会</option>
-                                    <option value="3" >党小组会</option>
-                                    <option value="4" >党课</option>
-                                </select>
-                                {else/}
-                                <select class="form-control" name="class1">
-                                    <option value="0" {eq name="$msg.class1" value="0"}selected{/eq}>--请选择类型--</option>
-                                    <option value="1" {eq name="$msg.class1" value="1"}selected{/eq}>支部委员大会</option>
-                                    <option value="2" {eq name="$msg.class1" value="2"}selected{/eq}>党支部委员会</option>
-                                    <option value="3" {eq name="$msg.class1" value="3"}selected{/eq}>党小组会</option>
-                                    <option value="4" {eq name="$msg.class1" value="4"}selected{/eq}>党课</option>
-                                </select>
-                                {/empty}
-                            </div>
-                        </div>
-                        <div class="form-group" id="two">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>年度计划:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                {empty name="msg"}
-                                <select class="form-control" name="class2">
-                                    <option value="0" >--请选择类型--</option>
-                                    <option value="1" >培训计划</option>
-                                    <option value="2" >理论研究</option>
-                                </select>
-                                {else/}
-                                <select class="form-control" name="class2">
-                                    <option value="0" {eq name="$msg.class2" value="0"}selected{/eq}>--请选择类型--</option>
-                                    <option value="1" {eq name="$msg.class2" value="1"}selected{/eq}>培训计划</option>
-                                    <option value="2" {eq name="$msg.class2" value="2"}selected{/eq}>理论研究</option>
-                                </select>
-                                {/empty}
-                            </div>
-                        </div>
-
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
                                 <label>标题:</label>
                             </div>
                             <div class="col-lg-11">
                                 <input type="text" placeholder="请输入标题" class="form-control form_title" name="title" value="{$msg.title || default=''}">
-                            </div>
-                        </div>
-                        <div id="three">
-                            <div class="form-group">
-                                <div class="col-lg-1 text-right control-label">
-                                    <label>时间:</label>
-                                </div>
-                                <div class="col-lg-11">
-                                    <div class="date">
-                                        {empty name="msg"}
-                                        <input type="text" placeholder="请输入时间" class="form-control datetimepicker" name="time"  value=""/>
-                                        {else/}
-                                        <input type="text" placeholder="请输入时间" class="form-control datetimepicker" name="time"  value="{$msg.time|time_format='Y-m-d H:i'}"/>
-                                        {/empty}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-1 text-right control-label">
-                                    <label>地点:</label>
-                                </div>
-                                <div class="col-lg-11">
-                                    <input type="text" placeholder="请输入地点" class="form-control form_title" name="address" value="{$msg.address || default=''}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-1 text-right control-label">
-                                    <label>参会人数:</label>
-                                </div>
-                                <div class="col-lg-11">
-                                    <input type="text" placeholder="请输入参会人数" class="form-control form_title" name="people" value="{$msg.people || default=''}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-1 text-right control-label">
-                                    <label>主持人:</label>
-                                </div>
-                                <div class="col-lg-11">
-                                    <input type="text" placeholder="请输入主持人" class="form-control form_title" name="compere" value="{$msg.compere || default=''}">
-                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -234,63 +144,24 @@
 <script src="/static/ueditor/ueditor.config.js"></script>
 <script src="/static/ueditor/ueditor.all.min.js"></script>
 <script src="/static/iCheck/icheck.min.js"></script>
-<!--时间日历-->
-<script src="/static/datepicker/bootstrap-datetimepicker.js"></script>
+
 <script>
     $(function(){
-        highlight_subnav("{:Url('Learn/index')}");
+        highlight_subnav("{:Url('Organization/index')}");
 
-        //    时间日历
-        $( ".datetimepicker" ).datetimepicker( {
-            language:  'cn',
-            format: 'yyyy-mm-dd hh:ii',
-            minView: "hour",
-            forceParse: false,
-            todayBtn: true,
-            autoclose: true,
-            todayHighlight: 1,
-            minuteStep: 5
-
-        });
-
-        //cl1为type=2三会一课值，cl2为type=3年度计划值
-        var type = $("select[name='type']").val();
-        if(type == 1){
-            $("#one").hide();
-            $("#two").hide();
-            $("#three").show();
-        }else if(type == 2){
+        var cl = $("select[name = 'type']").val();
+        if(cl == 3){
             $("#one").show();
-            $("#two").hide();
-            $("#three").show();
-        }else if(type == 3){
+        }else{
             $("#one").hide();
-            $("#two").show();
-            $("#three").hide();
-        }else {
-            $("#one").hide();
-            $("#two").hide();
-            $("#three").hide();
         }
         //选择类别
-        $("select[name='type']").on("change",function(){
+        $("select[name = 'type']").on("change",function(){
             var val = $(this).val();
-            if(val == 1){
-                $("#one").hide();
-                $("#two").hide();
-                $("#three").show();
-            }else if(val == 2){
+            if(val == 3){
                 $("#one").show();
-                $("#two").hide();
-                $("#three").show();
-            }else if(val == 3){
+            }else{
                 $("#one").hide();
-                $("#two").show();
-                $("#three").hide();
-            }else {
-                $("#one").hide();
-                $("#two").hide();
-                $("#three").hide();
             }
         });
 
@@ -347,27 +218,12 @@
         //发布
         $(".post-put").on("click",function(){
             var it=$(this);
-            var cl;
-            var type = $("select[name='type']").val();
-            var cl1 = $("select[name='class1']").val();
-            var cl2 = $("select[name='class2']").val();
-            if(type == 2) {
-                 cl = cl1;
-            }else if(type == 3) {
-                 cl = cl2;
-            }else {
-                 cl = 0;
-            }
             var data = {
                 id:$("input[name='id']").val(),
-                type: type,
-                class: cl,
+                type:$("select[name='type']").val(),
+                class:$("select[name='class']").val(),
                 front_cover:$("input[name='front_cover']").val(),
                 title:$("input[name='title']").val(),
-                time:$("input[name='time']").val(),
-                address:$("input[name='address']").val(),
-                people:$("input[name='people']").val(),
-                compere:$("input[name='compere']").val(),
                 content:ue.getContent(),
                 publisher:$("input[name='publisher']").val(),
             };
