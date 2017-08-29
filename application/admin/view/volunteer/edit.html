@@ -26,10 +26,10 @@
 {block name="page-header"}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>党建责任</h2>
+        <h2>志愿服务</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="{:Url('Organization/index')}">管理主页</a>
+                <a href="{:Url('Volunteer/index')}">管理主页</a>
             </li>
             <li class="active">
                 <strong>{empty name="msg"}新增{else/}修改{/empty}</strong>
@@ -80,14 +80,14 @@
                             <div class="col-lg-11">
                                 {empty name="msg"}
                                 <select class="form-control" name="type">
-                                    <option value="1" >规范化建设</option>
-                                    <option value="2" >信息录用</option>
+                                    <option value="1" >四跑志愿活动</option>
+                                    <option value="2" >一条街三走进</option>
                                 </select>
                                 {else/}
                                 <select class="form-control" name="type">
                                     {switch name="$msg.type"}
-                                    {case value="1"}<option value="1" >规范化建设</option>{/case}
-                                    {case value="2"}<option value="2" >信息录用</option>{/case}
+                                    {case value="1"}<option value="1" >四跑志愿活动</option>{/case}
+                                    {case value="2"}<option value="2" >一条街三走进</option>{/case}
                                     {/switch}
                                 </select>
                                 {/empty}
@@ -147,7 +147,7 @@
 <script src="/admin/js/chosen.jquery.js"></script>
 <script>
     $(function(){
-        highlight_subnav("{:Url('Organization/index')}");
+        highlight_subnav("{:Url('Volunteer/index')}");
 
         //上传图片
         var plus = $('.plus');
