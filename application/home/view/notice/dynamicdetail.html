@@ -67,9 +67,9 @@
     </div>
 </div>
 {eq name="visit" value="0"}
-<div class="bottom clear">
+<div class="bottom clear" onclick="send(this,2,{$new['id']})">
     <div class="myword fl">
-        <input type="text" placeholder="说说你的感想！"  onclick="send(this,2,{$new['id']})" id="send">
+        <input type="text" placeholder="说说你的感想！" id="send" disabled>
     </div>
 </div>
 {/eq}
@@ -118,16 +118,13 @@
     //发送评论
     var send = function(e,type,id){
         $(".bottom").hide();
-        setTimeout(function(){
-            $("input").focus();
-        },0)
         swal({
                     title: "",
                     text: "请输入评论内容！",
                     type: "input",
                     showCancelButton: true,
                     animation: "slide-from-top",
-                    inputPlaceholder: "请在此输入评论内容（300字以内）",
+                    inputPlaceholder: "（300字以内）",
                     confirmButtonText: "确定",
                     cancelButtonText: "取消",
                     closeOnConfirm: false
@@ -139,9 +136,9 @@
                             $("input").blur();
                         },0)
                         return false
-                    }else if (inputValue === ""|| inputValue.length<5)
+                    }else if (inputValue === "")
                     {
-                        swal.showInputError("评论不少于5个字");
+                        swal.showInputError("请输入评论");
                         return false
                     }else if(inputValue.length>300){
                         swal.showInputError("评论不得多于300字");

@@ -259,7 +259,7 @@ body {
 }
 .lists .list .img {
   width: 100%;
-  height: 4rem;
+  height: 40vw;
   -webkit-border-radius: 8px;
   border-radius: 8px;
 }

@@ -9,20 +9,20 @@ namespace app\home\controller;
 use app\home\model\WechatTest;
 use app\home\model\WechatUser;
 
-class Style extends Base{
+class Incorrupt extends Base{
 
-    /* 作风建设 */
+    /* 党风廉政首页 */
     public function home(){
         return $this->fetch();
     }
 
-    /* 作风建设列表页*/
+    /* 廉政责任 & 纪检报告*/
     public function index(){
         return $this->fetch();
     }
 
-    /* 作风建设 详情页*/
-    public function detail(){
+    /* 廉政教育 */
+    public function education(){
         return $this->fetch();
     }
 }

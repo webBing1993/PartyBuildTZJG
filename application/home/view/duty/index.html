@@ -7,7 +7,7 @@
 
 {block name="body"}
 <div class="search">
-    <input type="text" placeholder="请输入支部名称">
+    <input type="search" placeholder="请输入支部名称" id="search">
     <span class="mui-icon mui-icon-search"></span>
 </div>
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
@@ -97,5 +97,21 @@
         var url = this.getAttribute("href");
         window.location.href = url;
     });
+
+
+    var sendAjax = function(obj) {
+        // 发送请求
+
+    };
+    var debounce = function() {
+        var wait = 2500;
+        var timeout;
+        return function () {
+            if (timeout) clearTimeout(timeout);
+            timeout = setTimeout(sendAjax, wait);
+        }
+    };
+
+    document.getElementById('search').addEventListener('keyup', debounce(), false);
 </script>
 {/block}

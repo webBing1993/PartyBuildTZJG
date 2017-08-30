@@ -7,7 +7,7 @@
 .list ul a p{
     font-size: 0.38rem;
     color: #333;
-    margin-bottom: 0.5rem;
+    margin-bottom: 5vw;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -27,4 +27,21 @@
 }
 .list ul a span:nth-child(3){
     float: right;
+}
+
+
+/*suspension button*/
+.manager.after {
+    position: absolute;
+    bottom:68px;
+    right:10px;
+    content: '';
+    width: 1.33rem;
+    height: 1.33rem;
+    background: url("/home/images/common/note_.png") no-repeat;
+    background-size: 100% 100%;
+    opacity: 1;
+    -webkit-animation: cir2 0.5s ease-in;
+    animation: cir2 0.5s ease-in;
+    z-index: 99;
 }

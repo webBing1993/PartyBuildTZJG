@@ -4,18 +4,6 @@
 <link rel="stylesheet" href="/home/css/list/title-pos-time.css">
 <title>主题党日</title>
 <style>
-    #tab{
-        height:1.2rem;
-        position: fixed;
-        top:50vw;
-        z-index: 99;
-        width:200vw;
-    }
-    #tab a{
-        font-size: 0.4rem;
-        line-height: 1.2rem;
-        display:inline-block;
-    }
     .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active span{
         border-bottom: 0.08rem solid #e51c23;
         padding-bottom: 0.3rem;
@@ -23,48 +11,209 @@
     .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
         color: #e51c23;
     }
+    .banner {
+        width: 100vw;
+        height: 50vw;
+    }
+    .banner .banner-img {
+        width: 100%;
+        height: 100%;
+    }
     #refreshContainer{
         top:calc(50vw + 1.2rem);
+    }
+    /*tab切换*/
+    .nav {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        overflow: hidden;
+    }
+    .nav .arr {
+        z-index: 9;
+        position: absolute;
+        bottom: 0;
+        width: 7.4vw;
+        height: 10vw;
+    }
+    .nav .arr.left {
+        left: -8vw;
+    }
+    .nav .arr.right {
+        right: 0;
+    }
+    #tab {
+        z-index: 8;
+        position: relative;
+        width: 155vw;
+        height: 10vw;
+        background: rgba(246, 246, 246, 0.99);
+    }
+    #tab a {
+        float:left;
+        display: inline-block;
+        height: 6vw;
+        padding: 0 5.4vw;
+        margin: 2vw 0;
+        border-right: 1px solid #e5e5e5;
+        color: #666666;
+        font-size: 0.38rem;
+        line-height: 6vw;
+        text-align: center;
+        width:auto;
+    }
+    .scrollDiy{
+        position: absolute;
+        top:0;
+        bottom:0;
+        overflow-y: scroll;
+        /* 增加该属性，可以增加弹性 */
+        -webkit-overflow-scrolling: touch;
+        width:100%;
     }
 </style>
 {/block}
 
 {block name="body"}
-<div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-    <a class="mui-control-item" href="#item1mobile" data-index="0">
-        <span>全部</span>
-    </a>
-    <a class="mui-control-item" href="#item2mobile" data-index="1">
-        <span>支部委员大会</span>
-    </a>
-    <a class="mui-control-item" href="#item3mobile" data-index="2">
-        <span>党支部委员会</span>
-    </a>
-    <a class="mui-control-item" href="#item4mobile" data-index="3">
-        <span>党小组会</span>
-    </a>
-    <a class="mui-control-item" href="#item5mobile" data-index="4">
-        <span>党课</span>
-    </a>
+<div class="scrollDiy">
+<div class="banner">
+    <img src="/home/images/banner/1.jpg" alt="固定banner" class="banner-img">
+</div>
+<div class="nav">
+    <img src="/home/images/learn/toleft.png" alt="toleft" class="left arr">
+    <img src="/home/images/learn/toright.png" alt="toright" class="right arr">
+        <div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted tabs">
+            <a class="mui-control-item active" href="#item1mobile" data-tab="0">
+                <span>全部</span>
+            </a>
+            <a class="mui-control-item" href="#item2mobile" data-tab="1">
+                <span>支部委员大会</span>
+            </a>
+            <a class="mui-control-item" href="#item3mobile" data-tab="2">
+                <span>党支部委员会</span>
+            </a>
+            <a class="mui-control-item" href="#item4mobile" data-tab="3">
+                <span>党小组会</span>
+            </a>
+            <a class="mui-control-item" href="#item5mobile" data-tab="4">
+                <span>党课</span>
+            </a>
+        </div>
 </div>
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
-        <div class="list">
-            <ul>
-                <a href="">
-                    <p>主题党日</p>
-                    <span>之图党支部</span>
-                    <span>2017-8-21</span>
-                </a>
-            </ul>
+        <div class="mui-slider-group">
+            <div id="item1mobile" class="mui-slider-item mui-control-content">
+                <!--全部-->
+                <div class="list">
+                    <ul>
+                        <a href="">
+                            <p>主题党日</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                        <a href="">
+                            <p>主题党日</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                        <a href="">
+                            <p>主题党日</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                        <a href="">
+                            <p>主题党日</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                        <a href="">
+                            <p>主题党日</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                        <a href="">
+                            <p>主题党日</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                        <a href="">
+                            <p>主题党日</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                        <a href="">
+                            <p>主题党日</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                        <a href="">
+                            <p>主题党日</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div id="item2mobile" class="mui-slider-item mui-control-content">
+                <!--支部委员大会-->
+                <div class="list">
+                    <ul>
+                        <a href="">
+                            <p>主题党日</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div id="item3mobile" class="mui-slider-item mui-control-content">
+                <!--支部委员大会-->
+                <div class="list">
+                    <ul>
+                        <a href="">
+                            <p>主题党日</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div id="item4mobile" class="mui-slider-item mui-control-content">
+                <!--支部委员大会-->
+                <div class="list">
+                    <ul>
+                        <a href="">
+                            <p>主题党日</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div id="item5mobile" class="mui-slider-item mui-control-content">
+                <!--支部委员大会-->
+                <div class="list">
+                    <ul>
+                        <a href="">
+                            <p>主题党日</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+    </div>
 {/block}
 
 {block name="script"}
 <script>
     window.onload = function() {
+        tabmove();
         if ($(".list ul a").length < 10) {
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
         } else {
@@ -82,6 +231,12 @@
         }
     });
 
+//    $("#refreshContainer").scroll(function(){
+//        console.log($('#tab').offset().top)
+//        if($('#tab').offset().top<=1){
+////         $(".nav").css({"position":"fixed","top":"0","z-index":"999"})
+//        }
+//    })
     //上拉加载更多
     function loadScroll(){
         var len  = $(".list ul a").length;
@@ -132,5 +287,68 @@
         var url = this.getAttribute("href");
         window.location.href = url;
     });
+
+
+    function tabmove(){
+        var tabs = $(".tabs");
+        var lastX;
+        var start; //按下的点
+        var oW;
+        //移动端滑动
+        tabs[0].addEventListener('touchstart', function(e){
+            lastX = e.changedTouches[0].pageX;
+            var touches = event.touches[0];
+            start = {
+                x: touches.pageX,
+                y: touches.pageY
+            };
+            oW = touches.clientX - tabs[0].offsetLeft;
+            //阻止页面的滑动默认事件
+//			document.addEventListener("touchmove",defaultEvent,false);
+        });
+        //阻止纵向滚动
+        tabs[0].addEventListener('touchmove',function(e){
+            var touches = event.touches[0];
+            var delta = {
+                x: touches.pageX - start.x,
+                y: touches.pageY - start.y
+            };
+            if (Math.abs(delta.x) > Math.abs(delta.y)) {
+                event.preventDefault();
+            }
+        });
+        tabs[0].addEventListener('touchend', function(e){
+            var diffX = e.changedTouches[0].pageX - lastX;
+            var ww = $('body').width();
+            if (diffX < -10) {
+                var tw = $('.tabs' ).width() - ww;
+                tabs.animate({left:-tw+'px'}, 300);
+                $('.right').animate({right: -0.8*ww + 'px'}, 300);
+                $('.left').animate({left: 0}, 300);
+            } else if (diffX > 10) {
+                // 右滑
+                tabs.animate({left: 0}, 300);
+                $('.right').animate({right: 0}, 300);
+                $('.left').animate({left: -0.8*ww + 'px'}, 300);
+            }
+
+        });
+        mui('.nav').on('tap', '.right', function(e) {
+            var ww = $('body').width();
+            var tw = $('.tabs' ).width() - ww;
+            tabs.animate({left:-tw+'px'}, 300);
+            $('.right').animate({right: -0.8*ww + 'px'}, 300);
+            $('.left').animate({left: 0}, 300);
+        });
+        mui('.nav').on('tap', '.left', function(e) {
+            var ww = $('body').width();
+            tabs.animate({left: 0}, 300);
+            $('.right').animate({right: 0}, 300);
+            $('.left').animate({left: -0.8*ww + 'px'}, 300);
+        });
+//        function defaultEvent(e) {
+//            e.preventDefault();
+//        }
+    }
 </script>
 {/block}

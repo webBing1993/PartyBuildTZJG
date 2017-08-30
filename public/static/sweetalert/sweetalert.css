@@ -123,7 +123,7 @@ body.stop-scrolling {
   border-radius: 3px;
   border: 1px solid #d7d7d7;
   height: 43px;
-  margin-top: 10px;
+  margin-top: 0.26rem;
   margin-bottom: 17px;
   font-size: 18px;
   box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.06);
@@ -168,12 +168,12 @@ body.stop-scrolling {
   color: white;
   border: none;
   box-shadow: none;
-  font-size: 0.34rem;
+  font-size: 0.42rem;
   font-weight: 500;
   -webkit-border-radius: 4px;
   border-radius: 5px;
-  padding: 0.2rem 0.64rem;
-  margin: 0.52rem 0.1rem 0 0.1rem;
+  padding: 0.2rem 0.68rem;
+  margin: 0.54rem 0.2rem 0 0.2rem;
   cursor: pointer;
 }
 .sweet-alert button:focus {
@@ -1041,4 +1041,22 @@ body.stop-scrolling {
 }
 .sweet-alert .sa-input-error.show{
   display: none!important;
+}
+.sweet-alert.show-input textarea {
+  display: block; }
+.sweet-alert textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 3px;
+  border: 1px solid #d7d7d7;
+  height: 16vw;
+  font-size: 0.36rem;
+  margin-top: 0.28rem;
+  margin-bottom: 0.26rem;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.06);
+  padding: 0.26rem 0.32rem;
+  -webkit-transition: all 0.3s;
+  display: none;
+  transition: all 0.3s;
+  line-height: 0.38rem;
 }

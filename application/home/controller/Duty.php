@@ -15,8 +15,13 @@ class Duty extends Base{
         return $this->fetch();
     }
 
-    /*党建责任列表*/
+    /*专题研究、责任清单、工作计划列表*/
     public function index(){
+        return $this->fetch();
+    }
+
+    /*述职报告列表*/
+    public function branchindex(){
         return $this->fetch();
     }
 

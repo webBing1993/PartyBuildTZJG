@@ -28,3 +28,9 @@ a:active{
 a:focus, a:hover{
     text-decoration:none!important;
 }
+input::-webkit-input-placeholder{
+    color: #000;
+}
+input:-ms-input-placeholder{
+    color: #000;
+}

@@ -1,0 +1,173 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/duty/duty-search.css">
+<link rel="stylesheet" href="/home/css/list/title-pos-time.css">
+{/block}
+
+{block name="body"}
+<div class="search">
+    <input placeholder="请输入支部名称" id="search" type="search">
+    <span class="mui-icon mui-icon-search"></span>
+</div>
+<div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+    <a class="mui-control-item" href="#item1mobile" data-index="0">
+        <span>书记述职</span>
+    </a>
+    <a class="mui-control-item" href="#item2mobile" data-index="1">
+        <span>支部书记述职</span>
+    </a>
+</div>
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+
+        <div class="mui-slider-group">
+            <div id="item1mobile" class="mui-slider-item mui-control-content">
+                <!--书记述职-->
+                <div class="list secretary">
+                    <ul>
+                        <a href="">
+                            <p>主题研究党建工作2015</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div id="item2mobile" class="mui-slider-item mui-control-content">
+                <!--支部书记述职-->
+                <div class="list branch-secretary">
+                    <ul>
+                        <a href="">
+                            <p>主题研究党嘟嘟嘟嘟建工作2015</p>
+                            <span>之图党支部</span>
+                            <span>2017-8-21</span>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--[悬浮按钮]-->
+<a href="{:Url('duty/publish')}" class="after manager" id="publish"></a>
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script>
+    var c =  parseInt(window.location.href.split("branchindex/c/")[1]);
+
+    $(function(){
+        //tab初始化和数据存储
+        var co = getCookie("type");
+        if(co == 0 || co == 1 ){
+            c = co;
+        }else{
+            c =  parseInt(window.location.href.split("index/c/")[1]);
+        }
+        $("#tab a").eq(c).addClass('mui-active');
+        $(".mui-slider-group>div").eq(c).addClass('mui-active');
+    })
+
+    window.onload = function() {
+        moveanyway("publish");
+        if(c==0){
+            if ($(".secretary ul a").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==1){
+            if ($(".branch-secretary ul a").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }
+    }
+
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
+        }
+    });
+
+    //上拉加载更多
+    function loadScroll(){
+        if(c==0){
+            var len  = $(".secretary ul a").length;
+        }else if(c==1){
+            var len  = $(".branch-secretary ul a").length;
+        }
+        $.ajax({
+            type:"post",
+            url: "{:Url('News/listmore')}",
+            data:{
+                length:len
+            },
+            beforeSend: function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                if(data.code == 1){
+                    addLists(data,c);
+                    var dataLen =data.data.length;
+                    if(data.data.length == 5){
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                    }else{
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                    }
+                }else{
+                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                }
+            }
+        })
+    }
+
+    function addLists(data,type){
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++){
+            var list = lists[i];
+            html +=
+                    '<a>'+
+                    '<p>"两学一做"方案</p>'+
+                    '<span>之图党支部</span>'+
+                    '<span>2017-8-21</span>'+
+                    '</a>'
+        }
+        if(type==0){
+            $('.secretary ul').append(html);
+        }else if(type==1){
+            $('.branch-secretary ul').append(html);
+        }
+    }
+
+    mui('#refreshContainer').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    });
+
+
+    var sendAjax = function(obj) {
+        // 发送请求
+
+    };
+    var debounce = function() {
+        var wait = 2500;
+        var timeout;
+        return function () {
+            if (timeout) clearTimeout(timeout);
+            timeout = setTimeout(sendAjax, wait);
+        }
+    };
+
+    document.getElementById('search').addEventListener('keyup', debounce(), false);
+</script>
+{/block}
