@@ -3,8 +3,8 @@
 {block name="style"}
 <link rel="stylesheet" href="/home/css/common/publish.css">
 <style>
-    .none{
-        display: none;
+    #popover,#popover .mui-table-view{
+        height:40vw;
     }
 </style>
 {/block}
@@ -12,19 +12,35 @@
 {block name="body"}
 <div class="list">
     <ul>
-        <li class="type2 none">
+        <li>
             模块
-            <a id="openPopover2" href="#popover2">书记述职</a>
+            <a id="openPopover" href="#popover">支部委员会</a>
             <span class="triangle-down"></span>
         </li>
-        <li>
-            栏目
-            <a id="openPopover" href="#popover">请选择模板</a>
+        <li class="type2">
+            模板
+            <a id="openPopover2" href="#popover2">请选择模板</a>
             <span class="triangle-down"></span>
         </li>
         <li>
             标题
-            <input style="text" placeholder="请输入标题">
+            <input type="text" placeholder="请输入标题">
+        </li>
+        <li class="type1">
+            时间
+            <input type="date" placeholder="请选择时间" onfocus="this.removeAttribute('placeholder')">
+        </li>
+        <li class="type1">
+            地点
+            <input type="text" placeholder="请输入地点">
+        </li>
+        <li class="type1">
+            参会人数
+            <input type="text" placeholder="请输入参会人数">
+        </li>
+        <li class="type1">
+            主持人
+            <input type="text" placeholder="请输入主持人">
         </li>
         <div class="content">
             <textarea placeholder="请输入内容，不少于500字..."></textarea>
@@ -47,15 +63,21 @@
 
 <div id="popover" class="mui-popover" >
     <ul class="mui-table-view">
-        <li class="mui-table-view-cell"><a>新闻模板1</a></li>
-        <li class="mui-table-view-cell"><a>新闻模板2</a></li>
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <li class="mui-table-view-cell"><a>支部委员会</a></li>
+                <li class="mui-table-view-cell"><a>党支部委员会</a></li>
+                <li class="mui-table-view-cell"><a>党小组会</a></li>
+                <li class="mui-table-view-cell"><a>党课</a></li>
+            </div>
+        </div>
     </ul>
 </div>
 
 <div id="popover2" class="mui-popover" >
     <ul class="mui-table-view">
-        <li class="mui-table-view-cell"><a>书记述职</a></li>
-        <li class="mui-table-view-cell"><a>支部书记述职</a></li>
+        <li class="mui-table-view-cell"><a>新闻列表1</a></li>
+        <li class="mui-table-view-cell"><a>新闻列表2</a></li>
     </ul>
 </div>
 {/block}
@@ -64,9 +86,22 @@
 <script>
     var type =  parseInt(window.location.href.split("publish/type/")[1]);
     $(function(){
-        if(type==2){
-            $(".type2").show();
+        //判断type值，对页面进行对应处理
+        switch (type){
+            case 1:
+                $(".type2").hide();
+                break;
+            case 2:
+                $(".type1").hide();
+                break;
+            case 3:
+                $(".type1").hide();
+                break;
         }
+
+
+
+
         //图片预览
         $('.add' ).on('click',function(){
             var imglen = $('.img img' ).length;
@@ -130,12 +165,25 @@
         $("#openPopover").html(select_it);
         mui('#popover').popover("hide");
     })
-
     $("#popover2 ul li").click(function(){
         var select_it = $(this).text();
         $("#openPopover2").html(select_it);
         mui('#popover2').popover("hide");
     })
+
+    options = {
+        scrollY: true, //是否竖向滚动
+        scrollX: false, //是否横向滚动
+        startX: 0, //初始化时滚动至x
+        startY: 0, //初始化时滚动至y
+        indicators: false, //是否显示滚动条
+        deceleration:0.0006, //阻尼系数,系数越小滑动越灵敏
+        bounce: true //是否启用回弹
+    }
+
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
 </script>
 
 {/block}

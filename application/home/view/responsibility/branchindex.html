@@ -3,6 +3,11 @@
 {block name="style"}
 <link rel="stylesheet" href="/home/css/duty/duty-search.css">
 <link rel="stylesheet" href="/home/css/list/title-pos-time.css">
+<style>
+    .list{
+        margin-top: 2.2rem;
+    }
+</style>
 {/block}
 
 {block name="body"}
@@ -20,7 +25,6 @@
 </div>
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
-
         <div class="mui-slider-group">
             <div id="item1mobile" class="mui-slider-item mui-control-content">
                 <!--书记述职-->
@@ -54,21 +58,19 @@
     </div>
 </div>
 <!--[悬浮按钮]-->
-<a href="{:Url('duty/publish')}" class="after manager" id="publish"></a>
+<a href="{:Url('responsibility/publish?type=2')}" class="after manager" id="publish"></a>
 {/block}
 
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
-    var c =  parseInt(window.location.href.split("branchindex/c/")[1]);
-
     $(function(){
         //tab初始化和数据存储
         var co = getCookie("type");
         if(co == 0 || co == 1 ){
             c = co;
         }else{
-            c =  parseInt(window.location.href.split("index/c/")[1]);
+            c=0;
         }
         $("#tab a").eq(c).addClass('mui-active');
         $(".mui-slider-group>div").eq(c).addClass('mui-active');
@@ -108,11 +110,13 @@
         }else if(c==1){
             var len  = $(".branch-secretary ul a").length;
         }
+        var type=parseInt(c)+1;
         $.ajax({
             type:"post",
             url: "{:Url('News/listmore')}",
             data:{
-                length:len
+                length:len,
+                class:type
             },
             beforeSend: function(XMLHttpRequest){
 
@@ -121,7 +125,7 @@
                 if(data.code == 1){
                     addLists(data,c);
                     var dataLen =data.data.length;
-                    if(data.data.length == 5){
+                    if(data.data.length == 10){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                     }else{
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
@@ -158,13 +162,58 @@
         window.location.href = url;
     });
 
+    //tab点击事件
+    mui('#tab').on('tap', 'a', function(e) {
+        mui('#refreshContainer').pullRefresh().scrollTo(0,0);
+        mui('#refreshContainer').scroll().scrollTo(0,0);
+        mui('#refreshContainer').pullRefresh().refresh(true);
+        c = this.getAttribute("data-index");
+        if(c==0){
+            if($(".notice a").length<10){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==1){
+            if($(".dynamic a").length<10){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }
+        setCookie('type',c);
+    })
+
 
     var sendAjax = function(obj) {
-        // 发送请求
+        var val= $("#search").val();
+        $.ajax({
+            type:"post",
+            url: "{:Url('Responsibility/search')}",
+            data:{
+                name:val
+            },
+            beforeSend: function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                if(data.code == 1){
+                    addLists(data,c);
+                    var dataLen =data.data.length;
+                    if(data.data.length == 10){
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                    }else{
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                    }
+                }else{
+                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                }
+            }
+        })
 
     };
     var debounce = function() {
-        var wait = 2500;
+        var wait = 1500;
         var timeout;
         return function () {
             if (timeout) clearTimeout(timeout);

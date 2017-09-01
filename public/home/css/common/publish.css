@@ -1,0 +1,140 @@
+body,html{
+    overflow-x: hidden;
+}
+.list ul li{
+    height:1.2rem;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 0.42rem;
+    padding: 0.1rem 0;
+    padding-bottom: 0.2rem;
+    line-height: 1.2rem;
+    padding-left: 0.3rem;
+}
+#openPopover,#openPopover2{
+    display: inline-block;
+    height:1rem;
+    line-height: 1.2rem;
+    width: 30%;
+    font-size: 0.38rem;
+    color: #999;
+    float: right;
+    text-align: right;
+    padding-right: 0.6rem;
+}
+.triangle-down {
+    width: 0;
+    height: 0;
+    border-left: 0.15rem solid transparent;
+    border-right: 0.15rem solid transparent;
+    border-top: 0.2rem solid #999;
+    position: absolute;
+    right: 0.2rem;
+    margin-top: 0.5rem;
+}
+.mui-table-view-cell>a:not(.mui-btn){
+    font-size: 0.36rem;
+    margin:0.1rem;
+    text-align: center;
+}
+.list ul li input{
+    border: none;
+    height:1rem;
+    line-height: 1rem;
+    width: 80%;
+    float: right;
+    text-align: right;
+    right:0;
+    padding: 0 0.6rem;
+    -webkit-user-select: text;
+    -user-select: text;
+}
+
+input[type="date"]{
+    width:40%!important;
+    margin-right:-0.6rem!important;
+}
+
+.list ul li input::-webkit-input-placeholder{
+    display: block;
+    color: #999;
+    text-align: right;
+    right: 10vw;
+    font-size: 0.38rem;
+}
+
+input[type="date"]:before{
+    content: attr(placeholder);
+    color:#999;
+    font-size: 0.38rem;
+    position: absolute;
+    right:0.5rem;
+}
+
+.list ul textarea{
+    border: none;
+    height: 45vw;
+    margin: 0.2rem 0;
+    padding-left: 0.3rem;
+}
+textarea::-webkit-input-placeholder{
+    font-size: 0.38rem;
+    color: #999;
+}
+textarea{
+    font-size: 0.38rem;
+}
+.content{
+    padding-bottom: 0.5rem;
+    border: 1px solid #f1f1f1;
+}
+.content .img {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    margin-left: 0.3rem;
+    margin-bottom: 0.3rem;
+    overflow: hidden;
+    background: #d9d9d9;
+    border: 2px solid #d9d9d9;
+    box-sizing: content-box;
+}
+.content .img img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.content .add {
+    width: 2rem;
+    height: 2rem;
+    margin-left: 0.2rem;
+    margin-bottom: 0.2rem;
+    border: 2px solid #d9d9d9;
+    font-size: 2rem;
+    color: #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.save,.goreview{
+    width:5.6rem;
+    height:1rem;
+    background: #fc6c62;
+    border-radius: 5px;
+    color: #fff;
+    margin: 0.5rem auto;
+    text-align: center;
+    font-size: 0.36rem;
+    line-height: 1rem;
+}
+.goreview{
+    background: #fff;
+    color: #fc6c62;
+    border: 1px solid #fc6c62;
+}
+.goreview+p{
+    font-size: 0.36rem;
+    color: #999;
+    padding: 0.1rem 0.3rem;
+}

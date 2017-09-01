@@ -28,6 +28,14 @@ class Review extends Base{
         $list1 = $this ->getDataList($len);  // 发布审核
         $list2 = $this ->getDataList($len,1);  // 推送审核
         $list3 = $this ->getDataList($len,2);  // 已审核
+        foreach($list3['data'] as $value){
+            //  获取审核人
+            $review = Db::name('review')->where(['class' => $value['class'],'aid' => $value['id']])->find();
+            if (!empty($review)){
+                $value['username'] = $review['username'];
+                $value['review_status'] = $review['status'];
+            }
+        }
         $this ->assign('list1',$list1['data']);
         $this ->assign('list2',$list2['data']);
         $this ->assign('list3',$list3['data']);
@@ -143,6 +151,44 @@ class Review extends Base{
         }
     }
     /**
+     * 获取  数据详情
+     * 1 responsibility  2 learn 3 organization 4 special 5 style 6 volunteer 7 incorrupt
+     */
+    public function get_detail($type,$id){
+        switch ($type) {    //根据类别获取表明
+            case 1:
+                $table = "responsibility";
+                break;
+            case 2:
+                $table = "learn";
+                break;
+            case 3:
+                $table = "organization";
+                break;
+            case 4:
+                $table = "special";
+                break;
+            case 5:
+                $table = "style";
+                break;
+            case 6:
+                $table = "volunteer";
+                break;
+            case 7:
+                $table = "incorrupt";
+                break;
+            default:
+                return $this->error("无该数据表");
+                break;
+        }
+        $map = array(
+            'id' => $id,
+            'status' => ['egt',0],
+        );
+        $info = Db::name($table)->where($map)->find();
+        return $info;
+    }
+    /**
      * 获取 每个表结构  数据
      * 1 responsibility  2 learn 3 organization 4 special 5 style 6 volunteer 7 incorrupt
      */
@@ -215,110 +261,50 @@ class Review extends Base{
      * @return array
      */
     public function moreDataList(){
-        $len = input('get.');
-        $list = $this ->getDataList($len);
-        //转化图片路径 时间戳
-        foreach ($list['data'] as $k => $v)
-        {
-            $img_path = Picture::get($list['data'][$k]['front_cover']);
-            $list['data'][$k]['time'] = date('Y-m-d',$v['create_time']);
-            $list['data'][$k]['path'] = $img_path['path'];
-        }
+        $len = input('post.');
+        $type = $len['type'];  //  获取 类型   0  发布审核  1 推送审核  2  已审核
+        unset($len['type']);
+        $list = $this ->getDataList($len,$type);
         return $list;
     }
     /*
      * 审核 详细页
      */
     public function detail(){
-        $id = input('param.id');
-        $list = Push::where(['id' => $id])->find();
-        // 根据不同的值   获取相应的数据
-        switch ($list['class']){
-            case 1:
-                // 根据 主图文id  获取详情
-                break;
-            case 2:
-                // 根据 主图文id  获取详情
-                break;
-            case 3:
-                // 根据 主图文id  获取详情
-                break;
-            default:
-        }
-        $this->assign('list',$list);
-        return $this->fetch();
+        $class = input('get.class');
+        $id = input('get.id');
+        $info = $this->get_detail($class,$id);
+        $this->assign('info',$info);
+        return  $this->fetch();
     }
-    /*发布审核 */
+    /**
+     * 发布审核  去审核
+     */
     public function review(){
         $userId = session('userId');
         $user = WechatUser::where('userid', $userId)->find();
         $username = $user['name'];
         $msg = input('post.');
-        $push = Push::where('id',$msg['id'])->find();
-        //新建pushreview数据
+        //新建review数据
         $data = array(
-            'push_id' => $msg['id'],
-            'user_id' => $userId,
+            'class' => $msg['class'],
+            'aid' => $msg['id'],
+            'userid' => $userId,
             'username' => $username,
             'status' => $msg['status'],
+            'create_time' => time()
         );
-        $arr1 = $push['focus_main'];    //主图文id
-        !empty($push['focus_vice']) ? $arr2 = json_decode($push['focus_vice']) : $arr2 = "";    //副图文id
-        PushReview::create($data);
-        Push::where('id',$msg['id'])->update(['status' => $msg['status']]);  // 修改状态值
-        if ($msg['status'] == 1){  // 发布审核   通过
-            $content = "恭喜您提交的文章【".$msg['title']."】已成功通过审核！";
-            //主图文信息  副图文  根据 class 的值  改变状态
-            switch ($push['class']){
-                case 1:
-                    // 改变  主图文的 副图文 状态值
-                    $res = $this->change_status(1,$arr1,$arr2,1);
-                    break;
-                case 2:
-                    // 改变  主图文的 副图文 状态值
-                    $res = $this->change_status(2,$arr1,$arr2,1);
-                    break;
-                case  3:
-                    // 改变  主图文的 副图文 状态值
-                    $res = $this->change_status(3,$arr1,$arr2,1);
-                    break;
-                default :
-            }
-        }else{
-            // 发布审核  不通过
-            $content = "很抱歉，您提交的文章【".$msg['title']."】未能通过审核！";
-            //主图文信息  副图文  根据 class 的值  改变状态
-            switch ($push['class']){
-                case 1:
-                    // 改变  主图文的 副图文 状态值
-                    $res = $this->change_status(1,$arr1,$arr2,0);
-                    break;
-                case 2:
-                    // 改变  主图文的 副图文 状态值
-                    $res = $this->change_status(2,$arr1,$arr2,0);
-                    break;
-                case  3:
-                    // 改变  主图文的 副图文 状态值
-                    $res = $this->change_status(3,$arr1,$arr2,0);
-                    break;
-                default :
-            }
-        }
+        Db::name('review')->insert($data);
+        $res = $this->change_status($msg['class'],$msg['id'],$msg['status']);
         if ($res){
-            $Wechat = new TPQYWechat(Config::get('user'));
-            $message = array(
-                'touser' => $push['create_user'],
-                "msgtype" => 'text',
-                "agentid" => '', // 个人中心
-                "text" => array(
-                    "content" => $content
-                ),
-                "safe" => "0"
-            );
-            $Wechat->sendMessage($message);  //审核通过，向用户推送提示
+           return $this->success('审核成功');
+        }else{
+            return $this->error('审核失败');
         }
     }
-    /*推送 审核 */
+    /**
+     * 推送审核  去审核
+     */
     public function push(){
         $msg = input('post.');
         $push = Push::where('id',$msg['id'])->find();
@@ -351,43 +337,39 @@ class Review extends Base{
     /**
      *  改变状态值
      */
-    public function change_status($type,$main,$voice,$status){
+    public function change_status($type,$id,$status){
         switch ($type) {    //根据类别获取表明
             case 1:
-                $table = "work";
+                $table = "responsibility";
                 break;
             case 2:
-                $table = "centraltask";
-                break;
-            case 3:
-                $table = "policy";
-                break;
-            case 4:
                 $table = "learn";
                 break;
+            case 3:
+                $table = "organization";
+                break;
+            case 4:
+                $table = "special";
+                break;
             case 5:
-                $table = "news";
+                $table = "style";
+                break;
+            case 6:
+                $table = "volunteer";
+                break;
+            case 7:
+                $table = "incorrupt";
                 break;
             default:
                 return $this->error("无该数据表");
                 break;
         }
-        if (!empty($voice)){
-            foreach($voice as $value){
-                if ($status == 1){
-                    // 审核通过
-                    Db::name($table)->where(['id' => $value])->update(['status' => '']);
-                }else{
-                    Db::name($table)->where(['id' => $value])->update(['status' => '']);
-                }
-            }
+        if ($status == 1){  // 审核通过
+            $res = Db::name($table)->where(['id' => $id])->update(['status' => 1]);
+        }else{  // 审核不通过
+            $res = Db::name($table)->where(['id' => $id])->update(['status' => 2]);
         }
-        if ($status == 1){
-            Db::name($table)->where(['id' => $main])->update(['status' => '']);
-        }else{
-            Db::name($table)->where(['id' => $main])->update(['status' => '']);
-        }
-        return true;
+        return $res;
     }
     /**
      * 获取推送详情

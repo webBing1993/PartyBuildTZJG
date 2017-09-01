@@ -15,7 +15,7 @@
     }
     #tab{
         height:1.2rem;
-        position: fixed;
+        position: absolute;
         top:50vw;
         z-index: 9;
     }
@@ -25,7 +25,7 @@
     }
     .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active span{
         border-bottom: 0.08rem solid #e51c23;
-        padding-bottom: 0.3rem;
+        display: inline-block;
     }
     .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
         color: #e51c23;
@@ -82,6 +82,8 @@
         </div>
     </div>
 </div>
+<!--[悬浮按钮]-->
+<a href="{:Url('volunteer/publish')}" class="after manager" id="publish"></a>
 {/block}
 
 {block name="script"}
@@ -100,6 +102,7 @@
         $(".mui-slider-group>div").eq(c).addClass('mui-active');
     })
     window.onload = function() {
+        moveanyway("publish");
         if(c==0){
             if ($(".training ul a").length < 10) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
