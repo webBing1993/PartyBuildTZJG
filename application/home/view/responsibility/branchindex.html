@@ -186,11 +186,34 @@
 
 
     var sendAjax = function(obj) {
-        // 发送请求
+        var val= $("#search").val();
+        $.ajax({
+            type:"post",
+            url: "{:Url('Responsibility/search')}",
+            data:{
+                name:val
+            },
+            beforeSend: function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                if(data.code == 1){
+                    addLists(data,c);
+                    var dataLen =data.data.length;
+                    if(data.data.length == 10){
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                    }else{
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                    }
+                }else{
+                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                }
+            }
+        })
 
     };
     var debounce = function() {
-        var wait = 2500;
+        var wait = 1500;
         var timeout;
         return function () {
             if (timeout) clearTimeout(timeout);
