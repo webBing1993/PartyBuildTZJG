@@ -26,11 +26,13 @@
                 <!--书记述职-->
                 <div class="list secretary">
                     <ul>
-                        <a href="">
-                            <p>主题研究党建工作2015</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
+                        {volist name="$list.one" id="vo1"}
+                        <a href="{:Url('Responsibility/detail?id='.$vo1['id'])}">
+                            <p>{$vo1.title}</p>
+                            <span>{$vo1.publisher}</span>
+                            <span>{$vo1.create_time|time_format='Y-m-d'}</span>
                         </a>
+                        {/volist}
                     </ul>
                 </div>
             </div>
@@ -38,11 +40,13 @@
                 <!--支部书记述职-->
                 <div class="list branch-secretary">
                     <ul>
-                        <a href="">
-                            <p>主题研究党嘟嘟嘟嘟建工作2015</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
+                        {volist name="$list.two" id="vo2"}
+                        <a href="{:Url('Responsibility/detail?id='.$vo2['id'])}">
+                            <p>{$vo2.title}</p>
+                            <span>{$vo2.publisher}</span>
+                            <span>{$vo2.create_time|time_format='Y-m-d'}</span>
                         </a>
+                        {/volist}
                     </ul>
                 </div>
             </div>
