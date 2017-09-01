@@ -30,7 +30,7 @@
                     <ul>
                         {volist name="list1" id="li"}
                         <li>
-                            <a href="{:Url('Review/detail?class='.$li['class'].'&id='.$li['id'])}">
+                            <a href="{:Url('Review/detail?class='.$li['class'].'&id='.$li['id'])}"  class="list clear" data-type="{$li.class}">
                                 <img src="{$li.front_cover}">
                                 <span>{$li.title}</span>
                                 {switch name='$li.class'}
@@ -60,7 +60,7 @@
                 {else/}
                 <ul>
                     {volist name="list2" id="lo"}
-                    <li><a href="{:Url('Review/detail?class='.$lo['class'].'&id='.$lo['id'])}">
+                    <li><a href="{:Url('Review/detail?class='.$lo['class'].'&id='.$lo['id'])}" class="list clear" data-type="{$lo.class}">
                         <img src="{$lo.front_cover}">
                         <span>{$lo.title}</span>
                         {switch name='$lo.class'}
@@ -91,7 +91,7 @@
                     <ul>
                         {volist name="list3" id="ll"}
                         <li>
-                        <a href="#">
+                        <a href="#"  class="list clear" data-type="{$ll.class}">
                             <img src="{$ll.front_cover}">
                             <span>{$ll.title}</span>
                             {switch name='ll.class'}
@@ -105,6 +105,16 @@
                             {/switch}
                             <span>{$ll.create_time}</span>
                             <i class="refuse"></i>
+                            {eq name="vo.status" value="1"}
+                            <div class="arrow green">
+                                <img src="/home/images/review/yes.png" alt="" style="width:18px;height:18px;margin-top:36px;margin-left:4px;">
+                            </div>
+                            {/eq}
+                            {eq name="vo.status" value="-1"}
+                            <div class="arrow red">
+                                <img src="/home/images/review/tanhao.png" alt="" style="width:18px;height:18px;margin-top:36px;margin-left:4px;">
+                            </div>
+                            {/eq}
                         </a>
                         </li>
                         {/volist}
@@ -134,19 +144,19 @@
     })
     window.onload = function() {
         if(c==0){
-            if ($(".publish ul li").length < 10) {
+            if ($(".publish ul li").length < 7) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(c==1){
-            if ($(".push ul li").length < 10) {
+            if ($(".push ul li").length < 7) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(c==2){
-            if ($(".Audited ul li").length < 10) {
+            if ($(".Audited ul li").length < 7) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -167,17 +177,41 @@
     //上拉加载更多
     function loadScroll(){
         if(c==0){
-            var len = $(".publish ul li").length;
+            var responsibility_len = $('.publish ul .list[data-type=1]').length;
+            var learn_len = $('.publish ul .list[data-type=2]').length;
+            var organization_len = $('.publish ul .list[data-type=3]').length;
+            var special_len = $('.publish ul .list[data-type=4]').length;
+            var style_len = $('.publish ul .list[data-type=5]').length;
+            var volunteer_len = $('.publish ul .list[data-type=6]').length;
+            var incorrupt_len = $('.publish ul .list[data-type=7]').length;
         }else if(c==1){
-            var len = $(".push ul li").length;
+            var responsibility_len = $('.push ul .list[data-type=1]').length;
+            var learn_len = $('.push ul .list[data-type=2]').length;
+            var organization_len = $('.push ul .list[data-type=3]').length;
+            var special_len = $('.push ul .list[data-type=4]').length;
+            var style_len = $('.push ul .list[data-type=5]').length;
+            var volunteer_len = $('.push ul .list[data-type=6]').length;
+            var incorrupt_len = $('.push ul .list[data-type=7]').length;
         }else if(c==2){
-            var len = $(".Audited ul li").length;
+            var responsibility_len = $('.Audited ul .list[data-type=1]').length;
+            var learn_len = $('.Audited ul .list[data-type=2]').length;
+            var organization_len = $('.Audited ul .list[data-type=3]').length;
+            var special_len = $('.Audited ul .list[data-type=4]').length;
+            var style_len = $('.Audited ul .list[data-type=5]').length;
+            var volunteer_len = $('.Audited ul .list[data-type=6]').length;
+            var incorrupt_len = $('.Audited ul .list[data-type=7]').length;
         }
         $.ajax({
             type:"post",
-            url: "{:Url('Review/listmore')}",
+            url: "{:Url('Review/moreDataList')}",
             data:{
-                length:len,
+                responsibility: responsibility_len,
+                learn: learn_len,
+                organization: organization_len,
+                special: special_len,
+                style:style_len,
+                volunteer:volunteer_len,
+                incorrupt:incorrupt_len,
                 type:c
             },
             beforeSend: function(XMLHttpRequest){
@@ -187,7 +221,7 @@
                 if(data.code == 1){
                     addLists(data,c);
                     var dataLen =data.data.length;
-                    if(data.data.length == 5){
+                    if(data.data.length == 7){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                     }else{
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
@@ -205,16 +239,33 @@
         var len = lists.length;
         for(var i = 0; i< len;i++){
             var list = lists[i];
+            var link = '/home/review/detail/class/'+list.class+'/id/'+list.id;
+            if(list.class == 1){
+                class_name = '[党建责任]';
+            }else if(list.class == 2){
+                class_name = '[两学一做]';
+            }else if(list.class == 3){
+                class_name = '[组织建设]';
+            }else if(list.class == 4){
+                class_name = '[特色创新]';
+            }else if(list.class == 5){
+                class_name = '[作风建设]';
+            }else if(list.class == 6){
+                class_name = '[志愿服务]';
+            }else if(list.class == 7){
+                class_name = '[党风廉政]';
+            }
             html +=
-                    '<li><a href="#">'+
-                    '<img src="/home/images/pioneer/banner.png">'+
-                    '<span>电动汽车可以有，在浙江哪都能充电</span>'+
-                    '<span>[第一聚焦] 发布人：admin</span>'+
-                    '<span>2017.8.21</span>'+
+                    '<li>'+
+                    '<a href="'+link+'"  class="list clear" data-type="'+list.class+'">'+
+                    '<img src="'+list.front_cover+'">'+
+                   '<span>'+list.title+'</span>'+
+                    '<span>'+class_name+' 发布人：'+list.publisher+'</span>'+
+                    '<span>'+list.create_time+'</span>'+
                     '<img src="/home/images/common/rightArrow.png" alt="" class="mui-icon-forward">'+
                     '<i class="fail">不通过</i><i class="pass">通&nbsp;过</i>'+
-                    '</a>'+
-                    '</li>'
+                     '</a>'+
+                '</li>'
         }
         if(type==0){
             $('.publish ul').append(html);
