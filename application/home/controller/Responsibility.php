@@ -66,6 +66,32 @@ class Responsibility extends Base{
 
     /*党建责任发布*/
     public function publish(){
-        return $this->fetch();
+        if(IS_POST) {
+            
+        }else {
+            
+            return $this->fetch();
+        }
+    }
+
+    /**
+     * 搜索支部名称
+     */
+    public function search() {
+        $name = input('name');
+        $Model = new ResponsibilityModel();
+        $map = array(
+            'publisher' => array(['like',"%$name%"],['neq','']),
+            'status' => 1
+        );
+        $res = $Model->where($map)->field('id,title,publisher,create_time')->select();
+        foreach ($res as $val) {
+            $val['time'] = date("Y-m-d",$val['create_time']);
+        }
+        if($res) {
+            return $this->success("搜索成功","",$res);
+        }else{
+            return $this->error("搜索失败");
+        }
     }
 }
