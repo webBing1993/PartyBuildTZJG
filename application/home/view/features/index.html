@@ -22,11 +22,15 @@
         </div>
     </div>
 </div>
+<!--[悬浮按钮]-->
+<a href="{:Url('duty/publish')}" class="after manager" id="publish"></a>
 {/block}
 
 {block name="script"}
+<script src="/home/js/reset.js"></script>
 <script>
     window.onload = function() {
+        moveanyway("publish");
         if ($(".list ul a").length < 10) {
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
         } else {

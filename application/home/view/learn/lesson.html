@@ -6,7 +6,9 @@
 <style>
     .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active span{
         border-bottom: 0.08rem solid #e51c23;
-        padding-bottom: 0.3rem;
+        display: inline-block;
+        height: 1rem;
+        line-height: 1rem;
     }
     .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
         color: #e51c23;
@@ -47,19 +49,18 @@
         z-index: 8;
         position: relative;
         width: 155vw;
-        height: 10vw;
+        height: 1rem;
         background: rgba(246, 246, 246, 0.99);
     }
     #tab a {
         float:left;
         display: inline-block;
-        height: 6vw;
-        padding: 0 5.4vw;
-        margin: 2vw 0;
+        height: 1rem;
+        padding: 0 6.6vw;
         border-right: 1px solid #e5e5e5;
         color: #666666;
         font-size: 0.38rem;
-        line-height: 6vw;
+        line-height: 1rem;
         text-align: center;
         width:auto;
     }
@@ -106,48 +107,8 @@
         <div class="mui-slider-group">
             <div id="item1mobile" class="mui-slider-item mui-control-content">
                 <!--全部-->
-                <div class="list">
+                <div class="list all">
                     <ul>
-                        <a href="">
-                            <p>主题党日</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
-                        </a>
-                        <a href="">
-                            <p>主题党日</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
-                        </a>
-                        <a href="">
-                            <p>主题党日</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
-                        </a>
-                        <a href="">
-                            <p>主题党日</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
-                        </a>
-                        <a href="">
-                            <p>主题党日</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
-                        </a>
-                        <a href="">
-                            <p>主题党日</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
-                        </a>
-                        <a href="">
-                            <p>主题党日</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
-                        </a>
-                        <a href="">
-                            <p>主题党日</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
-                        </a>
                         <a href="">
                             <p>主题党日</p>
                             <span>之图党支部</span>
@@ -158,10 +119,10 @@
             </div>
             <div id="item2mobile" class="mui-slider-item mui-control-content">
                 <!--支部委员大会-->
-                <div class="list">
+                <div class="list list1">
                     <ul>
                         <a href="">
-                            <p>主题党日</p>
+                            <p>主题党日2222</p>
                             <span>之图党支部</span>
                             <span>2017-8-21</span>
                         </a>
@@ -169,11 +130,11 @@
                 </div>
             </div>
             <div id="item3mobile" class="mui-slider-item mui-control-content">
-                <!--支部委员大会-->
-                <div class="list">
+                <!--党支部委员会-->
+                <div class="list list2">
                     <ul>
                         <a href="">
-                            <p>主题党日</p>
+                            <p>主题党3333日</p>
                             <span>之图党支部</span>
                             <span>2017-8-21</span>
                         </a>
@@ -181,11 +142,11 @@
                 </div>
             </div>
             <div id="item4mobile" class="mui-slider-item mui-control-content">
-                <!--支部委员大会-->
-                <div class="list">
+                <!--党小组会-->
+                <div class="list list3">
                     <ul>
                         <a href="">
-                            <p>主题党日</p>
+                            <p>主题党dfdf df d日</p>
                             <span>之图党支部</span>
                             <span>2017-8-21</span>
                         </a>
@@ -193,11 +154,11 @@
                 </div>
             </div>
             <div id="item5mobile" class="mui-slider-item mui-control-content">
-                <!--支部委员大会-->
-                <div class="list">
+                <!--党课-->
+                <div class="list list4">
                     <ul>
                         <a href="">
-                            <p>主题党日</p>
+                            <p>的点点滴滴多多多多多多多多多多多多多多多多多</p>
                             <span>之图党支部</span>
                             <span>2017-8-21</span>
                         </a>
@@ -208,16 +169,57 @@
     </div>
 </div>
     </div>
+<!--[悬浮按钮]-->
+<a href="{:Url('learn/publish?type=1')}" class="after manager" id="publish"></a>
 {/block}
 
 {block name="script"}
+<script src="/home/js/reset.js"></script>
 <script>
+    var c=0;
+    $(function(){
+        //tab初始化和数据存储
+        var co = getCookie("type");
+        if(co == 0 || co == 1 || co == 2){
+            c = co;
+        }
+        $("#tab a").eq(c).addClass('mui-active');
+        $(".mui-slider-group>div").eq(c).addClass('mui-active');
+
+    })
     window.onload = function() {
+        moveanyway("publish");
         tabmove();
-        if ($(".list ul a").length < 10) {
-            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
-        } else {
-            mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+        if(c==0){
+            if ($(".all ul a").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==1){
+            if ($(".list1 ul a").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==2){
+            if ($(".list2 ul a").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==3){
+            if ($(".list3 ul a").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==4){
+            if ($(".list4 ul a").length < 10) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
         }
     }
 
@@ -239,21 +241,38 @@
 //    })
     //上拉加载更多
     function loadScroll(){
-        var len  = $(".list ul a").length;
+       switch (c){
+           case 0:
+               len = $(".all ul a").length;
+               break;
+           case 1:
+               len = $(".list1 ul a").length;
+               break;
+           case 2:
+               len = $(".list2 ul a").length;
+               break;
+           case 3:
+               len = $(".list3 ul a").length;
+               break;
+           case 4:
+               len = $(".list4 ul a").length;
+               break;
+       }
         $.ajax({
             type:"post",
             url: "{:Url('News/listmore')}",
             data:{
-                length:len
+                length:len,
+                type:c
             },
             beforeSend: function(XMLHttpRequest){
 
             },
             success:function(data){
                 if(data.code == 1){
-                    addLists(data);
+                    addLists(data,c);
                     var dataLen =data.data.length;
-                    if(data.data.length == 5){
+                    if(data.data.length == 10){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                     }else{
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
@@ -266,7 +285,7 @@
     }
 
     //加载更多列表
-    function addLists(data){
+    function addLists(data,type){
         var html = '';
         var lists = data.data;
         var len = lists.length;
@@ -279,13 +298,67 @@
                     '<span>2017-8-21</span>'+
                     '</a>'
         }
-        $('.list ul').append(html);
+       switch (type){
+           case 0:
+               $(".all ul").append(html);
+               break;
+           case 1:
+               $(".list1 ul").append(html);
+               break;
+           case 2:
+               $(".list2 ul").append(html);
+               break;
+           case 3:
+               $(".list3 ul").append(html);
+               break;
+           case 4:
+               $(".list4 ul").append(html);
+               break;
+       }
     }
 
     //触发点击事件
     mui('#refreshContainer').on('tap', 'a', function(e) {
         var url = this.getAttribute("href");
         window.location.href = url;
+    });
+
+    mui('#tab').on('tap', 'a', function(e) {
+        $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
+        mui('#refreshContainer').pullRefresh().refresh(true);
+        c = this.getAttribute("data-tab");
+       if(c==0){
+           if ($(".all ul a").length < 10) {
+               mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+           } else {
+               mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+           }
+       }else if(c==1){
+           if ($(".list1 ul a").length < 10) {
+               mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+           } else {
+               mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+           }
+       }else if(c==2){
+           if ($(".list2 ul a").length < 10) {
+               mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+           } else {
+               mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+           }
+       }else if(c==3){
+           if ($(".list3 ul a").length < 10) {
+               mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+           } else {
+               mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+           }
+       }else if(c==4){
+           if ($(".list4 ul a").length < 10) {
+               mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+           } else {
+               mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+           }
+       }
+        setCookie("type",c);
     });
 
 

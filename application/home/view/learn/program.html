@@ -19,11 +19,15 @@
 </div>
         </div>
     </div>
+<!--[悬浮按钮]-->
+<a href="{:Url('learn/publish?type=1')}" class="after manager" id="publish"></a>
 {/block}
 
 {block name="script"}
+<script src="/home/js/reset.js"></script>
 <script>
     window.onload = function() {
+        moveanyway("publish");
             if ($(".list ul a").length < 10) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
@@ -91,5 +95,6 @@
         var url = this.getAttribute("href");
         window.location.href = url;
     });
+
 </script>
 {/block}

@@ -15,7 +15,7 @@
     }
     #tab{
         height:1.2rem;
-        position: fixed;
+        position: absolute;
         top:50vw;
         z-index: 99;
     }
@@ -25,7 +25,7 @@
     }
     .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active span{
         border-bottom: 0.08rem solid #e51c23;
-        padding-bottom: 0.3rem;
+        display: inline-block;
     }
     .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
         color: #e51c23;
@@ -80,6 +80,8 @@
         </div>
     </div>
 </div>
+<!--[悬浮按钮]-->
+<a href="{:Url('learn/publish?type=2')}" class="after manager" id="publish"></a>
 {/block}
 
 {block name="script"}
@@ -98,6 +100,7 @@
         $(".mui-slider-group>div").eq(c).addClass('mui-active');
     })
     window.onload = function() {
+        moveanyway("publish");
         if(c==0){
             if ($(".training ul a").length < 10) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
@@ -179,7 +182,8 @@
 
     //tab点击事件
     mui('#tab').on('tap', 'a', function(e) {
-        $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
+        mui('#refreshContainer').pullRefresh().scrollTo(0,0);
+        mui('#refreshContainer').scroll().scrollTo(0,0);
         c = this.getAttribute("data-index");
         mui('#refreshContainer').pullRefresh().refresh(true);
         if(c==0){

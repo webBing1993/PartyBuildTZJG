@@ -269,10 +269,9 @@
 
     //tab点击事件
     mui('#tab').on('tap', 'a', function(e) {
+        mui('#refreshContainer').pullRefresh().scrollTo(0,0);
+        mui('#refreshContainer').scroll().scrollTo(0,0);
         mui('#refreshContainer').pullRefresh().refresh(true);
-        var scrollApi = mui('.mui-scroll-wrapper').scroll();
-        scrollApi.refresh();//刷新
-        scrollApi.scrollTo(0,0);//滚动至顶部
         c = this.getAttribute("data-index");
         if(c==0){
             if($(".notice a").length<10){
