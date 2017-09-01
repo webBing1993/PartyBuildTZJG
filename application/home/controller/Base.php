@@ -374,13 +374,13 @@ class Base extends Controller {
         //分享图片及链接及描述
         if (isset($list['front_cover'])){ // 封面图
             if (empty($list['front_cover'])){
-                $list['share_image'] = '/home/images/test/test1.jpg';  // 默认
+                $list['share_image'] = '/home/images/common/3.png';  // 默认
             }else{
                 $image = Picture::where('id',$list['front_cover'])->find();
                 $list['share_image'] = "http://".$_SERVER['SERVER_NAME'].$image['path'];
             }
         }else{
-            $list['share_image'] = '/home/images/test/test1.jpg';  // 默认
+            $list['share_image'] = '/home/images/common/3.png';  // 默认
         }
         if (isset($list['description'])){
             if (empty($list['description'])){
