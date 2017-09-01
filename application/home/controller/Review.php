@@ -6,6 +6,7 @@
  * Time: 13:21
  */
 namespace app\home\controller;
+use app\admin\model\Member;
 use app\home\model\WechatUser;
 use  app\home\model\Push;
 use app\home\model\PushReview;
@@ -18,41 +19,212 @@ use think\Db;
  * @package 消息审核
  */
 class Review extends Base{
-    /* 发布审核 列表 */
+    /**
+     *  发布审核 列表
+     */
     public function index(){
-        $Push = new  Push();
-        // 获取 发布审核 列表
-        $list1 = $Push->get_list();
-        // 获取 推送审核 列表
-        $list2 = $Push->get_list(1);
-        // 获取 已审核 列表
-        $list3 = $Push->get_list(-1,true);
-        $this->assign('list1',$list1);
-        $this->assign('list2',$list2);
-        $this->assign('list3',$list3);
+        $this ->anonymous();
+        $len = array('responsibility' => 0,'learn' => 0,'organization' => 0,'special' => 0,'style' => 0,'volunteer' => 0,'incorrupt' => 0);
+        $list1 = $this ->getDataList($len);  // 发布审核
+        $list2 = $this ->getDataList($len,1);  // 推送审核
+        $list3 = $this ->getDataList($len,2);  // 已审核
+        $this ->assign('list1',$list1['data']);
+        $this ->assign('list2',$list2['data']);
+        $this ->assign('list3',$list3['data']);
         return $this->fetch();
     }
-    /* 首页  加载更多*/
-    public function listmore(){
-        $Push = new  Push();
-        $type = input('type');
-        $len = input('length');
-        switch ($type){
-            case 0: // 发布审核
-                $list = $Push->get_list(0,$len);
+    /**
+     * 获取数据列表 党建责任 responsibility  两学一做 learn 组织建设 organization 特色创新 special 作风建设 style 志愿服务 volunteer 党风廉政 incorrupt
+     * @param $len
+     */
+    public function getDataList($len,$status=0)
+    {
+        //从第几条开始取数据
+        $count1 = $len['responsibility'];   // 党建责任
+        $count2 = $len['learn'];  // 两学一做
+        $count3 = $len['organization'];  // 组织建设
+        $count4 = $len['special']; // 特色创新
+        $count5 = $len['style'];  // 作风建设
+        $count6 = $len['volunteer'];  // 志愿服务
+        $count7 = $len['incorrupt'];  // 党风廉政
+
+        $responsibility_check = false; //新闻数据状态 true为取空
+        $learn_check = false;
+        $organization_check = false;
+        $special_check = false;
+        $style_check = false;
+        $volunteer_check = false;
+        $incorrupt_check = false;
+        $all_list = array();
+        //获取数据  取满14条 或者取不出数据退出循环
+        while(true)
+        {
+            // 党建责任
+            if (!$responsibility_check && count($all_list) < 7){
+                $res1 = $this->get_con(1,$count1,$status);
+                if (empty($res1)){
+                    $responsibility_check = true;
+                }else{
+                    $count1 ++ ;
+                    $all_list = $this->changeTpye($all_list,$res1,1);
+                }
+            }
+            // 两学一做
+            if(!$learn_check && count($all_list) < 7) {
+                $res2 = $this->get_con(2,$count2,$status);
+                if(empty($res2)) {
+                    $learn_check = true;
+                }else {
+                    $count2 ++;
+                    $all_list = $this ->changeTpye($all_list,$res2,2);
+                }
+            }
+            // 组织建设
+            if(!$organization_check && count($all_list) < 7)
+            {
+                $res3 = $this->get_con(3,$count3,$status);
+                if(empty($res3))
+                {
+                    $organization_check = true;
+                }else {
+                    $count3 ++;
+                    $all_list = $this ->changeTpye($all_list,$res3,3);
+                }
+            }
+             // 特色创新
+            if (!$special_check && count($all_list) < 7){
+                $res4 = $this->get_con(4,$count4,$status);
+                if (empty($res4)){
+                    $special_check = true;
+                }else{
+                    $count4 ++;
+                    $all_list = $this->changeTpye($all_list,$res4,4);
+                }
+            }
+             // 作风建设
+            if (!$style_check && count($all_list) < 7){
+                $res5 = $this->get_con(5,$count5,$status);
+                if (empty($res5)){
+                    $style_check = true;
+                }else{
+                    $count5++;
+                    $all_list = $this->changeTpye($all_list,$res5,5);
+                }
+            }
+             //  志愿服务
+            if (!$volunteer_check && count($all_list) < 7){
+                $res6 = $this->get_con(6,$count6,$status);
+                if (empty($res6)){
+                    $volunteer_check = true;
+                }else{
+                    $count6 ++;
+                    $all_list = $this->changeTpye($all_list,$res6,6);
+                }
+            }
+            //  党风廉政
+            if (!$incorrupt_check && count($all_list) < 7){
+                $res7 = $this->get_con(7,$count7,$status);
+                if (empty($res7)){
+                    $incorrupt_check = true;
+                }else{
+                    $count7 ++;
+                    $all_list = $this->changeTpye($all_list,$res7,7);
+                }
+            }
+            if(count($all_list) >= 7 || ($responsibility_check && $organization_check && $learn_check && $incorrupt_check && $volunteer_check && $style_check && $special_check)) {
                 break;
-            case 1:  // 推送审核
-                $list = $Push->get_list(1,$len);
-                break;
-            default : // 已审核
-                $list = $Push->get_list(-1,$len,true);
-                break;
+            }
         }
-        if ($list){
-            return $this->success('加载成功','',$list);
+        if (count($all_list) != 0)
+        {
+            return ['code' => 1,'msg' => '获取成功','data' => $all_list];
         }else{
-            $this->error('加载失败');
+            return ['code' => 0,'msg' => '获取失败','data' => $all_list];
         }
+    }
+    /**
+     * 获取 每个表结构  数据
+     * 1 responsibility  2 learn 3 organization 4 special 5 style 6 volunteer 7 incorrupt
+     */
+    public function get_con($type,$count=0,$status=0){
+        switch ($type) {    //根据类别获取表明
+            case 1:
+                $table = "responsibility";
+                break;
+            case 2:
+                $table = "learn";
+                break;
+            case 3:
+                $table = "organization";
+                break;
+            case 4:
+                $table = "special";
+                break;
+            case 5:
+                $table = "style";
+                break;
+            case 6:
+                $table = "volunteer";
+                break;
+            case 7:
+                $table = "incorrupt";
+                break;
+            default:
+                return $this->error("无该数据表");
+                break;
+        }
+        $map = array(
+            'status' => ['eq',$status],
+        );
+        $order = 'create_time desc';
+        $limit = "$count,1";
+        $list = Db::name($table)->where($map) ->order($order) ->limit($limit) ->select();
+        foreach($list as $key => $value){
+            $list[$key]['create_time'] = date('Y-m-d',$value['create_time']);  // 时间转换
+            if (empty($value['front_cover'])){  // 封面图
+                $list[$key]['front_cover'] = '/home/images/common/3.png';
+            }else{
+                $Pic = Picture::where('id',$value['front_cover'])->find();
+                $list[$key]['front_cover'] = $Pic['path'];
+            }
+            // 发布人 
+            if (empty($value['publisher'])){
+                $User = Member::where('uid',$value['create_user'])->find();
+                $list[$key]['publisher'] = $User['nickname'];
+            }
+        }
+        if(!empty($list))
+        {
+            return $list[0];
+        }else{
+            return $list;
+        }
+    }
+    /**
+     * 进行数据区分
+     * @param $list
+     * @param $type 1党建责任  2两学一做 3 组织建设 4 特色创新 5 作风建设 6 志愿服务 7 党风廉政
+     */
+    private function changeTpye($all,$list,$type){
+        $list['class'] = $type;
+        array_push($all,$list);
+        return $all;
+    }
+    /**
+     * 首页加载更多新闻列表
+     * @return array
+     */
+    public function moreDataList(){
+        $len = input('get.');
+        $list = $this ->getDataList($len);
+        //转化图片路径 时间戳
+        foreach ($list['data'] as $k => $v)
+        {
+            $img_path = Picture::get($list['data'][$k]['front_cover']);
+            $list['data'][$k]['time'] = date('Y-m-d',$v['create_time']);
+            $list['data'][$k]['path'] = $img_path['path'];
+        }
+        return $list;
     }
     /*
      * 审核 详细页
@@ -324,5 +496,46 @@ class Review extends Base{
         $suc = $Wechat->sendMessage($message);
         return $suc;
     }
+    /**
+     * 获取 待审核  列表
+     */
+    public function get_list($status=0,$len=0,$opt=false){
+        $map = [
+            'status' => ['eq',$status]
+        ];
+        $list = $this->where($map)->order('create_time desc')->limit($len,10)->select();
+        if (empty($list)){
+            return null;
+        }
+        foreach($list as $value){
+            $value['create_time'] = date('Y-m-d',$value['create_time']);
+            $Pic = Picture::where(['id' => $value['front_cover']])->find();
+            $value['front_cover'] = $Pic['name'];
+            switch($value['class']){  // 根据 class 值找对应表
+                case 1:
+                    // 获取 主图文 详情
+                    $value['pre'] = '【】';
+                    break;
+                case 2:
+                    // 获取 主图文 详情
+                    $value['pre'] = '【】';
+                    break;
+                case 3;
+                    // 获取 主图文 详情
+                    $value['pre'] = '【】';
+                    break;
 
+            }
+            // 是否 获取审核人信息
+            if ($opt){
+                // 是
+                $review = PushReview::where(['push_id' => $value['focus_main'] , 'status' => ['egt',-1]])->select();
+                foreach($review as $val){
+                    $val['create_time'] = date('Y-m-d',$val['create_time']);
+                }
+                $value['review'] = $review;
+            }
+        }
+        return $list;
+    }
 }
