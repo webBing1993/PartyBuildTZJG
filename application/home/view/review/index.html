@@ -60,7 +60,7 @@
                 {else/}
                 <ul>
                     {volist name="list2" id="lo"}
-                    <li><a href="{:Url('Review/detail?class='.$lo['class'].'&id='.$lo['id'])}" class="list clear" data-type="{$lo.class}">
+                    <li><a href="{:Url('Review/detail?class='.$lo['class'].'&id='.$lo['focus_main'])}" class="list clear" data-type="{$lo.class}">
                         <img src="{$lo.front_cover}">
                         <span>{$lo.title}</span>
                         <span>{$lo.pre} 发布人：{$lo.publisher}</span>
@@ -181,10 +181,12 @@
             data.volunteer=volunteer_len;
             data.incorrupt=incorrupt_len;
             data.type=c;
+            var url = "{:Url('Review/moreDataList')}";
         }else if(c==1){
             var len = $('.push ul a').length;
             data.len=len;
             data.type=c;
+            var url = "{:Url('Review/more')}";
         }else if(c==2){
             var responsibility_len = $('.Audited ul .list[data-type=1]').length;
             var learn_len = $('.Audited ul .list[data-type=2]').length;
@@ -201,10 +203,11 @@
             data.volunteer=volunteer_len;
             data.incorrupt=incorrupt_len;
             data.type=c;
+            var url = "{:Url('Review/moreDataList')}";
         }
         $.ajax({
             type:"post",
-            url: "{:Url('Review/moreDataList')}",
+            url: url,
             data:data,
             beforeSend: function(XMLHttpRequest){
 
@@ -247,7 +250,7 @@
             }else if(list.class == 7){
                 class_name = '[党风廉政]';
             }
-            if(type==0||type==1) {
+            if(type==0) {
                 html +=
                         '<li>' +
                         '<a href="' + link + '"  class="list clear" data-type="' + list.class + '">' +
@@ -259,7 +262,19 @@
                         '<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">不通过</i><i class="pass"  data-id="' + list.id + '" data-class="' + list.class + '">通&nbsp;过</i>' +
                         '</a>' +
                         '</li>'
-            }else if(type==2){
+            }else if(type==1){
+                html +=
+                        '<li>' +
+                        '<a href="' + link + '"  class="list clear" data-type="' + list.class + '">' +
+                        '<img src="' + list.front_cover + '">' +
+                        '<span>' + list.title + '</span>' +
+                        '<span>' + list.pre + ' 发布人：' + list.publisher + '</span>' +
+                        '<span>' + list.create_time + '</span>' +
+                        '<span class="mui-icon mui-icon-forward"></span>' +
+                        '<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">不通过</i><i class="pass"  data-id="' + list.id + '" data-class="' + list.class + '">通&nbsp;过</i>' +
+                        '</a>' +
+                        '</li>'
+            }else{
                 html +=
                         '<li>'+
                         '<a href="#" class="list clear" data-type="1">'+
@@ -377,7 +392,7 @@
             cancelButtonText: "取消",
             confirmButtonColor: "#ec6c62"
         }, function() {
-            pass(element,id,_class,3);
+            pass(element,id,_class,1);
         });
     });
 
@@ -397,7 +412,7 @@
             cancelButtonText: "取消",
             confirmButtonColor: "#ec6c62"
         }, function() {
-            pass(element,id,_class,4);
+            pass(element,id,_class,-1);
         });
     });
 
@@ -411,7 +426,7 @@
     var  pass = function(element,id,_class,status){
         if(status==1||status==2){
             var url = "{:Url('Review/review')}";
-        }else if(status==3||status==4){
+        }else if(status==1||status== -1){
             var url = "{:Url('Review/push')}";
         }
         $.ajax({

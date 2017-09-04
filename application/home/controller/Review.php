@@ -28,7 +28,7 @@ class Review extends Base{
         $list1 = $this ->getDataList($len);  // 发布审核
         // 获取 推送审核列表
         $Push = new Push();
-        $list2 = $Push->get_list(-1);
+        $list2 = $Push->get_list();
         $list3 = $this ->getDataList($len,2);  // 已审核
         foreach($list3['data'] as $key => $value){
             //  获取审核人
@@ -291,7 +291,14 @@ class Review extends Base{
      * @return 加载更多  推送审核
      */
     public function more(){
-        
+        $msg = input('post.');
+        $Push = new Push();
+        $list = $Push->get_list(0,$msg['len']);
+        if ($list){
+            return ['code' => 1,'msg' => '获取成功','data' => $list];
+        }else{
+            return ['code' => 0,'msg' => '获取失败','data' => null];
+        }
     }
     /*
      * 审核 详细页
@@ -337,11 +344,16 @@ class Review extends Base{
      */
     public function push(){
         $msg = input('post.');
-        if($msg['status'] == 3 ){  // 审核通过  推送消息
-            $this->push_detail($msg['class'],$msg['id']);
+        $userId = session('userId');
+        $user = WechatUser::where('userid', $userId)->find();
+        $username = $user['name'];
+        $info = Push::where('id',$msg['id'])->find();
+        if($msg['status'] == 1 ){  // 审核通过  推送消息
+            $this->push_detail($info['class'],$info['focus_main']);
         }
-        $res = $this->change_status($msg['class'],$msg['id'],$msg['status']);
+        $res = Push::where('id',$msg['id'])->update(['status' => $msg['status']]);
         if ($res){
+            PushReview::create(['push_id' => $msg['id'],'user_id' => $userId, 'username' => $username,'review_time' => time(),'status' => $msg['status']]);
             return $this->success('审核成功');
         }else{
             return $this->error('审核失败');
@@ -381,15 +393,8 @@ class Review extends Base{
             case 1:  // 发布审核  通过
                 $res = Db::name($table)->where(['id' => $id])->update(['status' => 1]);
                 break;
-            case 2:  // 发布审核  不通过
+            default:  // 发布审核  不通过
                 $res = Db::name($table)->where(['id' => $id])->update(['status' => 2]);
-                break;
-            case 3:  // 推送审核  通过
-                $res = Db::name($table)->where(['id' => $id])->update(['status' => 3]);
-                break;
-            default :  // 推送审核  不通过
-                $res = Db::name($table)->where(['id' => $id])->update(['status' => 4]);
-                break;
         }
         return $res;
     }

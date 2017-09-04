@@ -21,6 +21,9 @@
                 <span class="time">{$info.create_time|time_format="Y-m-d"}</span>
             </div>
             <div class="content">
+                {volist name="$info.list_images" id="img"}
+                <img src="{$img}" alt="笔记图片" class="img" style="width:100%">
+                {/volist}
                 <div class="article-content">{$info.content}</div>
             </div>
         </div>
