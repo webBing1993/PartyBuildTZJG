@@ -95,13 +95,13 @@
                             <img src="{$ll.front_cover}">
                             <span>{$ll.title}</span>
                             {switch name='ll.class'}
-                            {case value='1'}<span>[党建责任] 发布人：admin</span>{/case}
-                            {case value='2'}<span>[两学一做] 发布人：admin</span>{/case}
-                            {case value='3'}<span>[组织建设] 发布人：admin</span>{/case}
-                            {case value='4'}<span>[特色创新] 发布人：admin</span>{/case}
-                            {case value='5'}<span>[作风建设] 发布人：admin</span>{/case}
-                            {case value='6'}<span>[志愿服务] 发布人：admin</span>{/case}
-                            {default/}<span>[党风廉政] 发布人：admin</span>
+                            {case value='1'}<p>[党建责任]</p><p>审核人：admin</p>{/case}
+                            {case value='2'}<p>[两学一做]</p><p>审核人：admin</p>{/case}
+                            {case value='3'}<p>[组织建设]</p><p>审核人：admin</p>{/case}
+                            {case value='4'}<p>[特色创新]</p><p>审核人：admin</p>{/case}
+                            {case value='5'}<p>[作风建设]</p><p>审核人：admin</p>{/case}
+                            {case value='6'}<p>[志愿服务]</p><p>审核人：admin</p>{/case}
+                            {default/}<p>[党风廉政]</p><p>审核人：admin</p>
                             {/switch}
                             <span>{$ll.create_time}</span>
                             <i class="refuse"></i>
@@ -256,17 +256,35 @@
             }else if(list.class == 7){
                 class_name = '[党风廉政]';
             }
-            html +=
-                    '<li>'+
-                    '<a href="'+link+'"  class="list clear" data-type="'+list.class+'">'+
-                    '<img src="'+list.front_cover+'">'+
-                   '<span>'+list.title+'</span>'+
-                    '<span>'+class_name+' 发布人：'+list.publisher+'</span>'+
-                    '<span>'+list.create_time+'</span>'+
-                    '<span class="mui-icon mui-icon-forward"></span>'+
-                    '<i class="fail" data-id="'+list.id+'" data-class="'+list.class+'">不通过</i><i class="pass"  data-id="'+list.id+'" data-class="'+list.class+'">通&nbsp;过</i>'+
-                     '</a>'+
-                '</li>'
+            if(type==0||type==1) {
+                html +=
+                        '<li>' +
+                        '<a href="' + link + '"  class="list clear" data-type="' + list.class + '">' +
+                        '<img src="' + list.front_cover + '">' +
+                        '<span>' + list.title + '</span>' +
+                        '<span>' + class_name + ' 发布人：' + list.publisher + '</span>' +
+                        '<span>' + list.create_time + '</span>' +
+                        '<span class="mui-icon mui-icon-forward"></span>' +
+                        '<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">不通过</i><i class="pass"  data-id="' + list.id + '" data-class="' + list.class + '">通&nbsp;过</i>' +
+                        '</a>' +
+                        '</li>'
+            }else if(type==2){
+                html +=
+                        '<li>'+
+                        '<a href="#" class="list clear" data-type="1">'+
+                        '<img src="/uploads/download/2017-08-28/59a3bf3f4948e.jpg">'+
+                        '<span>'+ list.title + '</span>'+
+                        '<p>'+
+                        '	['+class_name+']'+
+                        '</p>'+
+                        '<p>'+
+                        '	审核人：admin'+
+                        '</p>'+
+                        '<span>2017-09-01</span>'+
+                        '<i class="refuse"></i>'+
+                        '</a>'+
+                        '</li>';
+            }
         }
         if(type==0){
             $('.publish ul').append(html);
@@ -415,7 +433,6 @@
 
             },
             success:function(data){
-                console.log(data)
                     if(data.code==1){
                         $(element).remove();
                         swal({
