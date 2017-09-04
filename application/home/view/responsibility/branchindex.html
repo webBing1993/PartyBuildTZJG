@@ -29,7 +29,9 @@
             <div id="item1mobile" class="mui-slider-item mui-control-content">
                 <!--书记述职-->
                 <div class="list secretary">
-                    <ul>
+                    <ul class="search-result-one">
+                    </ul>
+                    <ul class="secretary-all">
                         {volist name="$list.one" id="vo1"}
                         <a href="{:Url('Responsibility/detail?id='.$vo1['id'])}">
                             <p>{$vo1.title}</p>
@@ -43,7 +45,9 @@
             <div id="item2mobile" class="mui-slider-item mui-control-content">
                 <!--支部书记述职-->
                 <div class="list branch-secretary">
-                    <ul>
+                    <ul class="search-result-two">
+                    </ul>
+                    <ul class="branch-secretary-all">
                         {volist name="$list.two" id="vo2"}
                         <a href="{:Url('Responsibility/detail?id='.$vo2['id'])}">
                             <p>{$vo2.title}</p>
@@ -123,7 +127,7 @@
             },
             success:function(data){
                 if(data.code == 1){
-                    addLists(data,c);
+                    addLists(data,c,1);
                     var dataLen =data.data.length;
                     if(data.data.length == 10){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
@@ -137,7 +141,7 @@
         })
     }
 
-    function addLists(data,type){
+    function addLists(data,type,index){
         var html = '';
         var lists = data.data;
         var len = lists.length;
@@ -145,15 +149,27 @@
             var list = lists[i];
             html +=
                     '<a>'+
-                    '<p>"两学一做"方案</p>'+
-                    '<span>之图党支部</span>'+
-                    '<span>2017-8-21</span>'+
+                    '<p>'+list.title+'</p>'+
+                    '<span>'+list.publisher+'</span>'+
+                    '<span>'+list.time+'</span>'+
                     '</a>'
         }
         if(type==0){
-            $('.secretary ul').append(html);
+            if(index==1){
+                $('.secretary .secretary-all').append(html);
+            }else{
+                $('.secretary .search-result-one').html(html);
+                $('.branch-secretary .search-result-two').html(html);
+            }
+
         }else if(type==1){
-            $('.branch-secretary ul').append(html);
+            if(index==1){
+                $('.branch-secretary .branch-secretary-all').append(html);
+            }else{
+                $('.branch-secretary .search-result-two').html(html);
+                $('.branch-secretary .search-result-two').html(html);
+            }
+
         }
     }
 
@@ -192,18 +208,33 @@
 
     var sendAjax = function(obj) {
         var val= $("#search").val();
+        if(val==""){
+                $(".secretary-all").show();
+                $(".search-result-one").text("").hide();
+                $(".branch-secretary-all").show();
+                $(".search-result-two").text("").hide();
+            return;
+        }
         $.ajax({
             type:"post",
             url: "{:Url('Responsibility/search')}",
             data:{
-                name:val
+                name:val,
+                class:2
             },
             beforeSend: function(XMLHttpRequest){
 
             },
             success:function(data){
+                console.log(data)
                 if(data.code == 1){
-                    addLists(data,c);
+                        $(".secretary-all").hide();
+                        $(".noresult").hide();
+                        $(".search-result-one").show();
+                        $(".branch-secretary-all").hide();
+                        $(".noresult").hide();
+                        $(".search-result-two").show();
+                    addLists(data,c,2);
                     var dataLen =data.data.length;
                     if(data.data.length == 10){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
@@ -211,7 +242,11 @@
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
                     }
                 }else{
-                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                        $(".secretary-all").hide();
+                        $(".search-result-one").show().html("<p class='noresult'>无搜索结果</P>")
+                        $(".branch-secretary-all").hide();
+                        $(".search-result-two").show().html("<p class='noresult'>无搜索结果</P>")
+
                 }
             }
         })
