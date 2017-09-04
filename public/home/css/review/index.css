@@ -36,13 +36,13 @@
 .list,.Audited  {
     overflow: hidden;
     margin-top: .2rem;
-    padding-left: .3rem;
 }
 
 .list li {
     overflow: hidden;
     width: 145%;
     border-bottom: 1px solid #ddd;
+    padding-left: 0.3rem;
 }
 .Audited li{
     width:100%;
@@ -182,7 +182,7 @@ ul li a span:nth-child(4) {
 .mui-icon-forward {
     position: absolute;
     right: 35%;
-    top: 0.3rem;
+    top: 0.8rem;
     color: #999;
     width: 0.66rem;
     height: 0.66rem;
