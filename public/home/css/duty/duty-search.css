@@ -34,6 +34,13 @@ input::-webkit-input-placeholder{
     /*margin-top: 1.2rem;*/
 }
 
+.noresult{
+    font-size: 0.38rem;
+    text-align: center;
+    color: #666;
+    margin-top: 30%;
+}
+
 
 /*tab*/
 #tab{

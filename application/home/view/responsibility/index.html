@@ -13,7 +13,9 @@
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
         <div class="list">
-            <ul>
+            <ul class="search-result">
+            </ul>
+            <ul class="all">
                 {volist name="list" id="vo"}
                 <a href="{:Url('Responsibility/detail?id='.$vo['id'])}">
                     <p>{$vo.title}</p>
@@ -65,7 +67,7 @@
             },
             success:function(data){
                 if(data.code == 1){
-                    addLists(data);
+                    addLists(data,1);
                     var dataLen =data.data.length;
                     if(data.data.length == 10){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
@@ -79,7 +81,7 @@
         })
     }
 
-    function addLists(data){
+    function addLists(data,type){
         var html = '';
         var lists = data.data;
         var len = lists.length;
@@ -87,12 +89,16 @@
             var list = lists[i];
             html +=
                     '<a>'+
-                    '<p>"两学一做"方案</p>'+
-                    '<span>之图党支部</span>'+
-                    '<span>2017-8-21</span>'+
+                    '<p>'+list.title+'</p>'+
+                    '<span>'+list.publisher+'</span>'+
+                    '<span>'+list.create_time+'+</span>'+
                     '</a>'
         }
-        $('.list ul').append(html);
+       if(type==1){
+           $(".all").append(html)
+       }else if(type==2){
+           $(".search-result").html(html)
+       }
     }
 
     mui('#refreshContainer').on('tap', 'a', function(e) {
@@ -103,6 +109,11 @@
 
     var sendAjax = function(obj) {
         var val= $("#search").val();
+        if(val==""){
+            $(".all").show();
+            $(".search-result").text("").hide();
+            return;
+        }
         $.ajax({
             type:"post",
             url: "{:Url('Responsibility/search')}",
@@ -113,8 +124,12 @@
 
             },
             success:function(data){
+                console.log(data)
                 if(data.code == 1){
-                    addLists(data);
+                    $(".all").hide();
+                    $(".noresult").hide();
+                    $(".search-result").show();
+                    addLists(data,2);
                     var dataLen =data.data.length;
                     if(data.data.length == 10){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
@@ -122,14 +137,15 @@
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
                     }
                 }else{
-                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                    $(".all").hide();
+                   $(".search-result").show().html("<p class='noresult'>无搜索结果</P>")
                 }
             }
         })
 
     };
     var debounce = function() {
-        var wait = 2000;
+        var wait = 1000;
         var timeout;
         return function () {
             if (timeout) clearTimeout(timeout);

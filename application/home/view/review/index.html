@@ -164,6 +164,7 @@
 
     //上拉加载更多
     function loadScroll(){
+        var data={};
         if(c==0){
             var responsibility_len = $('.publish ul .list[data-type=1]').length;
             var learn_len = $('.publish ul .list[data-type=2]').length;
@@ -172,14 +173,18 @@
             var style_len = $('.publish ul .list[data-type=5]').length;
             var volunteer_len = $('.publish ul .list[data-type=6]').length;
             var incorrupt_len = $('.publish ul .list[data-type=7]').length;
+            data.responsibility=responsibility_len;
+            data.learn=learn_len;
+            data.organization=organization_len;
+            data.special=special_len;
+            data.style=style_len;
+            data.volunteer=volunteer_len;
+            data.incorrupt=incorrupt_len;
+            data.type=c;
         }else if(c==1){
-            var responsibility_len = $('.push ul .list[data-type=1]').length;
-            var learn_len = $('.push ul .list[data-type=2]').length;
-            var organization_len = $('.push ul .list[data-type=3]').length;
-            var special_len = $('.push ul .list[data-type=4]').length;
-            var style_len = $('.push ul .list[data-type=5]').length;
-            var volunteer_len = $('.push ul .list[data-type=6]').length;
-            var incorrupt_len = $('.push ul .list[data-type=7]').length;
+            var len = $('.push ul a').length;
+            data.len=len;
+            data.type=c;
         }else if(c==2){
             var responsibility_len = $('.Audited ul .list[data-type=1]').length;
             var learn_len = $('.Audited ul .list[data-type=2]').length;
@@ -188,20 +193,19 @@
             var style_len = $('.Audited ul .list[data-type=5]').length;
             var volunteer_len = $('.Audited ul .list[data-type=6]').length;
             var incorrupt_len = $('.Audited ul .list[data-type=7]').length;
+            data.responsibility=responsibility_len;
+            data.learn=learn_len;
+            data.organization=organization_len;
+            data.special=special_len;
+            data.style=style_len;
+            data.volunteer=volunteer_len;
+            data.incorrupt=incorrupt_len;
+            data.type=c;
         }
         $.ajax({
             type:"post",
             url: "{:Url('Review/moreDataList')}",
-            data:{
-                responsibility: responsibility_len,
-                learn: learn_len,
-                organization: organization_len,
-                special: special_len,
-                style:style_len,
-                volunteer:volunteer_len,
-                incorrupt:incorrupt_len,
-                type:c
-            },
+            data:data,
             beforeSend: function(XMLHttpRequest){
 
             },
