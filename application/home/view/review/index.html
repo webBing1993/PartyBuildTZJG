@@ -105,12 +105,12 @@
                             {/switch}
                             <span>{$ll.create_time}</span>
                             <i class="refuse"></i>
-                            {eq name="vo.status" value="1"}
+                            {eq name="ll.status" value="1"}
                             <div class="arrow green">
                                 <img src="/home/images/review/yes.png" alt="" style="width:18px;height:18px;margin-top:36px;margin-left:4px;">
                             </div>
                             {/eq}
-                            {eq name="vo.status" value="-1"}
+                            {eq name="li.status" value="-1"}
                             <div class="arrow red">
                                 <img src="/home/images/review/tanhao.png" alt="" style="width:18px;height:18px;margin-top:36px;margin-left:4px;">
                             </div>
@@ -264,7 +264,7 @@
                     '<span>'+class_name+' 发布人：'+list.publisher+'</span>'+
                     '<span>'+list.create_time+'</span>'+
                     '<span class="mui-icon mui-icon-forward"></span>'+
-                    '<i class="fail">不通过</i><i class="pass">通&nbsp;过</i>'+
+                    '<i class="fail" data-id="'+list.id+'" data-class="'+list.class+'">不通过</i><i class="pass"  data-id="'+list.id+'" data-class="'+list.class+'">通&nbsp;过</i>'+
                      '</a>'+
                 '</li>'
         }
@@ -306,12 +306,17 @@
         setCookie('type',c);
     });
 
+
+    //发布审核
     mui('#item1mobile').on('tap', '.pass', function(e) {
         event.stopPropagation();
         event.preventDefault();
+        var element = this.parentNode.parentNode;
+        var id = this.getAttribute("data-id");
+        var _class = this.getAttribute("data-class");
         swal({
             title: "",
-            text: "确定通过审核",
+            text: "确定通过审核？",
             type: "warning",
             showCancelButton: true,
             closeOnConfirm: false,
@@ -319,28 +324,111 @@
             cancelButtonText: "取消",
             confirmButtonColor: "#ec6c62"
         }, function() {
-            $.ajax({
-                type:"post",
-                url: "{:Url('Review/review')}",
-                data:{
-
-                },
-                beforeSend: function(XMLHttpRequest){
-
-                },
-                success:function(data){
-
-                }
-            })
+                pass(element,id,_class,1);
         });
     });
 
+    mui('#item1mobile').on('tap', '.fail', function(e) {
+        event.stopPropagation();
+        event.preventDefault();
+        var element = this.parentNode.parentNode;
+        var id = this.getAttribute("data-id");
+        var _class = this.getAttribute("data-class");
+        swal({
+            title: "",
+            text: "确定不通过审核？",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            confirmButtonText: "确认",
+            cancelButtonText: "取消",
+            confirmButtonColor: "#ec6c62"
+        }, function() {
+            pass(element,id,_class,2);
+        });
+    });
+
+
+    //推送审核
+    mui('#item2mobile').on('tap', '.pass', function(e) {
+        event.stopPropagation();
+        event.preventDefault();
+        var element = this.parentNode.parentNode;
+        var id = this.getAttribute("data-id");
+        var _class = this.getAttribute("data-class");
+        swal({
+            title: "",
+            text: "确定通过审核？",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            confirmButtonText: "确认",
+            cancelButtonText: "取消",
+            confirmButtonColor: "#ec6c62"
+        }, function() {
+            pass(element,id,_class,3);
+        });
+    });
+
+    mui('#item2mobile').on('tap', '.fail', function(e) {
+        event.stopPropagation();
+        event.preventDefault();
+        var element = this.parentNode.parentNode;
+        var id = this.getAttribute("data-id");
+        var _class = this.getAttribute("data-class");
+        swal({
+            title: "",
+            text: "确定不通过审核？",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            confirmButtonText: "确认",
+            cancelButtonText: "取消",
+            confirmButtonColor: "#ec6c62"
+        }, function() {
+            pass(element,id,_class,4);
+        });
+    });
 
     mui('#refreshContainer').on('tap', 'a', function(e) {
         var url = this.getAttribute("href");
         window.location.href = url;
     });
 
+
+    //审核ajax
+    var  pass = function(element,id,_class,status){
+        if(status==1||status==2){
+            var url = "{:Url('Review/review')}";
+        }else if(status==3||status==4){
+            var url = "{:Url('Review/push')}";
+        }
+        $.ajax({
+            type:"post",
+            url: url,
+            data:{
+                id:id,
+             class:_class,
+            status:status
+            },
+            beforeSend: function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                console.log(data)
+                    if(data.code==1){
+                        $(element).remove();
+                        swal({
+                            title: "",
+                            text: "审核成功",
+                            type: "success",
+                            confirmButtonText: "确认",
+                            timer:2000
+                        });
+                    }
+            }
+        })
+    }
 
 
     var skidding = function() {
