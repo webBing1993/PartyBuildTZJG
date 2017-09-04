@@ -300,10 +300,10 @@ class Review extends Base{
      */
     public function review(){
         $userId = session('userId');
-        return 111;
         $user = WechatUser::where('userid', $userId)->find();
         $username = $user['name'];
         $msg = input('post.');
+        return dump($msg);
         //新建review数据
         $data = array(
             'class' => $msg['class'],
