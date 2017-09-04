@@ -63,15 +63,7 @@
                     <li><a href="{:Url('Review/detail?class='.$lo['class'].'&id='.$lo['id'])}" class="list clear" data-type="{$lo.class}">
                         <img src="{$lo.front_cover}">
                         <span>{$lo.title}</span>
-                        {switch name='$lo.class'}
-                        {case value='1'}<span>[党建责任] 发布人：{$lo.publisher}</span>{/case}
-                        {case value='2'}<span>[两学一做] 发布人：{$lo.publisher}</span>{/case}
-                        {case value='3'}<span>[组织建设] 发布人：{$lo.publisher}</span>{/case}
-                        {case value='4'}<span>[特色创新] 发布人：{$lo.publisher}</span>{/case}
-                        {case value='5'}<span>[作风建设] 发布人：{$lo.publisher}</span>{/case}
-                        {case value='6'}<span>[志愿服务] 发布人：{$lo.publisher}</span>{/case}
-                        {default/}<span>[党风廉政] 发布人：{$lo.publisher}</span>
-                        {/switch}
+                        <span>{$lo.pre} 发布人：{$lo.publisher}</span>
                         <span>{$lo.create_time}</span>
                         <span class="mui-icon mui-icon-forward"></span>
                         <i class="fail" data-id="{$lo.id}" data-class="{$lo.class}">不通过</i><i class="pass" data-id="{$lo.id}" data-class="{$lo.class}">通&nbsp;过</i>
@@ -91,7 +83,7 @@
                     <ul>
                         {volist name="list3" id="ll"}
                         <li>
-                        <a href="#"" class="list clear" data-type="{$ll.class}">
+                        <a href="#" class="list clear" data-type="{$ll.class}">
                             <img src="{$ll.front_cover}">
                             <span>{$ll.title}</span>
                             {switch name='ll.class'}

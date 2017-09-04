@@ -26,7 +26,9 @@ class Review extends Base{
         $this ->anonymous();
         $len = array('responsibility' => 0,'learn' => 0,'organization' => 0,'special' => 0,'style' => 0,'volunteer' => 0,'incorrupt' => 0);
         $list1 = $this ->getDataList($len);  // 发布审核
-        $list2 = $this ->getDataList($len,1);  // 推送审核
+        // 获取 推送审核列表
+        $Push = new Push();
+        $list2 = $Push->get_list(-1);
         $list3 = $this ->getDataList($len,2);  // 已审核
         foreach($list3['data'] as $key => $value){
             //  获取审核人
@@ -38,7 +40,7 @@ class Review extends Base{
             }
         }
         $this ->assign('list1',$list1['data']);
-        $this ->assign('list2',$list2['data']);
+        $this ->assign('list2',$list2);
         $this ->assign('list3',$list3['data']);
         return $this->fetch();
     }
@@ -264,7 +266,7 @@ class Review extends Base{
         return $all;
     }
     /**
-     * 首页加载更多新闻列表
+     * 加载更多  发布审核  已审核  
      * @return array
      */
     public function moreDataList(){
@@ -285,6 +287,12 @@ class Review extends Base{
         }
         return $list;
     }
+    /**
+     * @return 加载更多  推送审核
+     */
+    public function more(){
+        
+    }
     /*
      * 审核 详细页
      */
@@ -303,7 +311,6 @@ class Review extends Base{
         $user = WechatUser::where('userid', $userId)->find();
         $username = $user['name'];
         $msg = input('post.');
-        return dump($msg);
         //新建review数据
         $data = array(
             'class' => $msg['class'],
@@ -314,6 +321,10 @@ class Review extends Base{
             'create_time' => time()
         );
         Db::name('review')->insert($data);
+        if ($msg['status'] == 1){
+            // 审核通过  存入 push表
+            Push::create(['class' => $msg['class'],'focus_main' => $msg['id'],'create_time' => time(),'create_user' => $userId,'status' =>0]);
+        }
         $res = $this->change_status($msg['class'],$msg['id'],$msg['status']);
         if ($res){
            return $this->success('审核成功');
@@ -326,7 +337,6 @@ class Review extends Base{
      */
     public function push(){
         $msg = input('post.');
-        return dump($msg);
         if($msg['status'] == 3 ){  // 审核通过  推送消息
             $this->push_detail($msg['class'],$msg['id']);
         }
@@ -367,10 +377,19 @@ class Review extends Base{
                 return $this->error("无该数据表");
                 break;
         }
-        if ($status == 1){  // 审核通过
-            $res = Db::name($table)->where(['id' => $id])->update(['status' => 1]);
-        }else{  // 审核不通过
-            $res = Db::name($table)->where(['id' => $id])->update(['status' => 2]);
+        switch ($status){
+            case 1:  // 发布审核  通过
+                $res = Db::name($table)->where(['id' => $id])->update(['status' => 1]);
+                break;
+            case 2:  // 发布审核  不通过
+                $res = Db::name($table)->where(['id' => $id])->update(['status' => 2]);
+                break;
+            case 3:  // 推送审核  通过
+                $res = Db::name($table)->where(['id' => $id])->update(['status' => 3]);
+                break;
+            default :  // 推送审核  不通过
+                $res = Db::name($table)->where(['id' => $id])->update(['status' => 4]);
+                break;
         }
         return $res;
     }
@@ -424,11 +443,10 @@ class Review extends Base{
                 break;
             default:
                 return $this->error("无该数据表");
-                break;
         }
         //活动基本信息  主图文
-        $focus = Db::name($table)->find(['id' => $main]);
-        if (empty($list)){
+        $focus = Db::name($table)->where('id',$main)->find();
+        if (empty($focus)){
             $this ->error('该内容不存在或已删除!');
         }
         $title = $focus['title'];
