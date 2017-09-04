@@ -91,7 +91,7 @@
                     <ul>
                         {volist name="list3" id="ll"}
                         <li>
-                        <a href=href="{:Url('Review/detail?class='.$ll['class'].'&id='.$ll['id'])}" class="list clear" data-type="{$ll.class}">
+                        <a href="#"" class="list clear" data-type="{$ll.class}">
                             <img src="{$ll.front_cover}">
                             <span>{$ll.title}</span>
                             {switch name='ll.class'}
@@ -266,7 +266,7 @@
             }else if(type==2){
                 html +=
                         '<li>'+
-                        '<a href="' + link + '" class="list clear" data-type="1">'+
+                        '<a href="#" class="list clear" data-type="1">'+
                         '<img src="'+list.front_cover+'">'+
                         '<span>'+ list.title + '</span>'+
                         '<p>'+ class_name+ '</p>'+
