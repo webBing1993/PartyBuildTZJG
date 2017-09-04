@@ -58,7 +58,7 @@
     </div>
 </div>
 <!--[悬浮按钮]-->
-<a href="{:Url('responsibility/publish?type=2')}" class="after manager" id="publish"></a>
+<span href="{:Url('responsibility/publish?type=2')}" class="after manager" id="publish"></span>
 {/block}
 
 {block name="script"}
@@ -182,7 +182,12 @@
             }
         }
         setCookie('type',c);
-    })
+    });
+
+    mui('body').on('tap', '#publish', function(e) {
+        var url = this.getAttribute("href")+"?"+c;
+        window.location.href = url;
+    });
 
 
     var sendAjax = function(obj) {

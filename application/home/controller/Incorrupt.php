@@ -25,4 +25,9 @@ class Incorrupt extends Base{
     public function education(){
         return $this->fetch();
     }
+
+    /* 发布 */
+    public function publish(){
+        return $this->fetch();
+    }
 }

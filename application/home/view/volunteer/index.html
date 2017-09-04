@@ -83,7 +83,7 @@
     </div>
 </div>
 <!--[悬浮按钮]-->
-<a href="{:Url('volunteer/publish')}" class="after manager" id="publish"></a>
+<span href="{:Url('volunteer/publish')}" class="after manager" id="publish"></span>
 {/block}
 
 {block name="script"}
@@ -206,6 +206,11 @@
 
     mui('#refreshContainer').on('tap', 'a', function(e) {
         var url = this.getAttribute("href");
+        window.location.href = url;
+    });
+
+    mui('body').on('tap', '#publish', function(e) {
+        var url = this.getAttribute("href")+"?"+c;
         window.location.href = url;
     });
 </script>

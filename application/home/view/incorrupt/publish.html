@@ -8,11 +8,6 @@
 <div class="list">
     <ul>
         <li>
-            模块
-            <a id="openPopover2" href="#popover2">四跑志愿活动</a>
-            <span class="triangle-down"></span>
-        </li>
-        <li>
             模板
             <a id="openPopover" href="#popover">请选择模板</a>
             <span class="triangle-down"></span>
@@ -22,7 +17,7 @@
             <input style="text" placeholder="请输入标题">
         </li>
         <div class="content">
-            <textarea placeholder="请输入内容，不少于500字..."></textarea>
+            <textarea placeholder="请输入内容，不少于200字..."></textarea>
             <div class="imgs clear">
                 <div class="img fl hide"></div>
                 <div class="img fl hide"></div>
@@ -46,24 +41,11 @@
         <li class="mui-table-view-cell"><a>新闻模板2</a></li>
     </ul>
 </div>
-
-<div id="popover2" class="mui-popover" >
-    <ul class="mui-table-view">
-        <li class="mui-table-view-cell"><a>四跑志愿活动</a></li>
-        <li class="mui-table-view-cell"><a>一条街三走进</a></li>
-    </ul>
-</div>
 {/block}
 
 {block name="script"}
 <script>
-    var c =  parseInt(window.location.href.split("?")[1]);
     $(function(){
-        if(c==0){
-            $("#openPopover2").html("四跑志愿活动");
-        }else if(c==1){
-            $("#openPopover2").html("一条街三走进");
-        }
         //图片预览
         $('.add' ).on('click',function(){
             var imglen = $('.img img' ).length;
@@ -128,11 +110,6 @@
         mui('#popover').popover("hide");
     })
 
-    $("#popover2 ul li").click(function(){
-        var select_it = $(this).text();
-        $("#openPopover2").html(select_it);
-        mui('#popover2').popover("hide");
-    })
 </script>
 
 {/block}

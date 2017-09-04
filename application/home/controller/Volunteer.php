@@ -15,4 +15,9 @@ class Volunteer extends Base{
         return $this->fetch();
     }
 
+    /* 发布 */
+    public function publish(){
+        return $this->fetch();
+    }
+
 }
