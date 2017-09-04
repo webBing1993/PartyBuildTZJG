@@ -319,9 +319,22 @@
             cancelButtonText: "取消",
             confirmButtonColor: "#ec6c62"
         }, function() {
+            alert(3)
+            $.ajax({
+                type:"post",
+                url: "{:Url('Review/moreDataList')}",
+                data:{
 
+                },
+                beforeSend: function(XMLHttpRequest){
+
+                },
+                success:function(data){
+
+                }
+            })
         });
-    })
+    });
 
 
     mui('#refreshContainer').on('tap', 'a', function(e) {
