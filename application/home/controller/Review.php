@@ -28,12 +28,13 @@ class Review extends Base{
         $list1 = $this ->getDataList($len);  // 发布审核
         $list2 = $this ->getDataList($len,1);  // 推送审核
         $list3 = $this ->getDataList($len,2);  // 已审核
-        foreach($list3['data'] as $value){
+        foreach($list3['data'] as $key => $value){
             //  获取审核人
             $review = Db::name('review')->where(['class' => $value['class'],'aid' => $value['id']])->find();
             if (!empty($review)){
-                $value['username'] = $review['username'];
-                $value['review_status'] = $review['status'];
+                $list3['data'][$key]['username'] = $review['username'];
+                $list3['data'][$key]['review_status'] = $review['status'];
+                $list3['data'][$key]['review_time'] = date('Y-m-d',$review['create_time']);
             }
         }
         $this ->assign('list1',$list1['data']);
@@ -219,9 +220,15 @@ class Review extends Base{
                 return $this->error("无该数据表");
                 break;
         }
-        $map = array(
-            'status' => ['eq',$status],
-        );
+        if ($status == 2){
+            $map = array(
+                'status' => ['in',[1,$status]],
+            );
+        }else{
+            $map = array(
+                'status' => ['eq',$status],
+            );
+        }
         $order = 'create_time desc';
         $limit = "$count,1";
         $list = Db::name($table)->where($map) ->order($order) ->limit($limit) ->select();
@@ -265,6 +272,17 @@ class Review extends Base{
         $type = $len['type'];  //  获取 类型   0  发布审核  1 推送审核  2  已审核
         unset($len['type']);
         $list = $this ->getDataList($len,$type);
+        if ($type == 2){
+            foreach($list['data'] as $key => $value){
+                //  获取审核人
+                $review = Db::name('review')->where(['class' => $value['class'],'aid' => $value['id']])->find();
+                if (!empty($review)){
+                    $list['data'][$key]['username'] = $review['username'];
+                    $list['data'][$key]['review_status'] = $review['status'];
+                    $list['data'][$key]['review_time'] = date('Y-m-d',$review['create_time']);
+                }
+            }
+        }
         return $list;
     }
     /*
@@ -282,6 +300,7 @@ class Review extends Base{
      */
     public function review(){
         $userId = session('userId');
+        return 111;
         $user = WechatUser::where('userid', $userId)->find();
         $username = $user['name'];
         $msg = input('post.');
@@ -307,6 +326,7 @@ class Review extends Base{
      */
     public function push(){
         $msg = input('post.');
+        return dump($msg);
         if($msg['status'] == 3 ){  // 审核通过  推送消息
             $this->push_detail($msg['class'],$msg['id']);
         }

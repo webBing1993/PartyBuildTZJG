@@ -95,25 +95,20 @@
                             <img src="{$ll.front_cover}">
                             <span>{$ll.title}</span>
                             {switch name='ll.class'}
-                            {case value='1'}<p>[党建责任]</p><p>审核人：admin</p>{/case}
-                            {case value='2'}<p>[两学一做]</p><p>审核人：admin</p>{/case}
-                            {case value='3'}<p>[组织建设]</p><p>审核人：admin</p>{/case}
-                            {case value='4'}<p>[特色创新]</p><p>审核人：admin</p>{/case}
-                            {case value='5'}<p>[作风建设]</p><p>审核人：admin</p>{/case}
-                            {case value='6'}<p>[志愿服务]</p><p>审核人：admin</p>{/case}
-                            {default/}<p>[党风廉政]</p><p>审核人：admin</p>
+                            {case value='1'}<p>[党建责任]</p><p>审核人：{$ll.username}</p>{/case}
+                            {case value='2'}<p>[两学一做]</p><p>审核人：{$ll.username}</p>{/case}
+                            {case value='3'}<p>[组织建设]</p><p>审核人：{$ll.username}</p>{/case}
+                            {case value='4'}<p>[特色创新]</p><p>审核人：{$ll.username}</p>{/case}
+                            {case value='5'}<p>[作风建设]</p><p>审核人：{$ll.username}</p>{/case}
+                            {case value='6'}<p>[志愿服务]</p><p>审核人：{$ll.username}</p>{/case}
+                            {default/}<p>[党风廉政]</p><p>审核人：{$ll.username}</p>
                             {/switch}
-                            <span>{$ll.create_time}</span>
-                            <i class="refuse"></i>
+                            <span>{$ll.review_time}</span>
                             {eq name="ll.status" value="1"}
-                            <div class="arrow green">
-                                <img src="/home/images/review/yes.png" alt="" style="width:18px;height:18px;margin-top:36px;margin-left:4px;">
-                            </div>
+                            <i class="pass"></i>
                             {/eq}
-                            {eq name="li.status" value="-1"}
-                            <div class="arrow red">
-                                <img src="/home/images/review/tanhao.png" alt="" style="width:18px;height:18px;margin-top:36px;margin-left:4px;">
-                            </div>
+                            {eq name="ll.status" value="2"}
+                            <i class="refuse"></i>
                             {/eq}
                         </a>
                         </li>
@@ -272,17 +267,19 @@
                 html +=
                         '<li>'+
                         '<a href="#" class="list clear" data-type="1">'+
-                        '<img src="/uploads/download/2017-08-28/59a3bf3f4948e.jpg">'+
+                        '<img src="'+list.front_cover+'">'+
                         '<span>'+ list.title + '</span>'+
+                        '<p>'+ class_name+ '</p>'+
                         '<p>'+
-                        '	['+class_name+']'+
+                        '	审核人：  '+list.username+''+
                         '</p>'+
-                        '<p>'+
-                        '	审核人：admin'+
-                        '</p>'+
-                        '<span>2017-09-01</span>'+
-                        '<i class="refuse"></i>'+
-                        '</a>'+
+                        '<span> '+list.review_time+'</span>'
+                if (list.review_status == 1){
+                    html+='<i class="pass"></i>';
+                }else {
+                    html+='<i class="refuse"></i>';
+                }
+                        html +='</a>'+
                         '</li>';
             }
         }
@@ -433,6 +430,7 @@
 
             },
             success:function(data){
+                console.log(data)
                     if(data.code==1){
                         $(element).remove();
                         swal({

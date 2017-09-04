@@ -25,7 +25,7 @@ class Responsibility extends Admin {
         $list = $this->lists('Responsibility',$map);
         int_to_string($list, array(
             'type' => array(1=>"专题研究",2=>"责任清单",3=>"述职报告",4=>"工作计划"),
-            'status' => array(0=>'待审核',1=>'已发布'),
+            'status' => array(0=>'待审核',1=>'已发布',2=>'不通过'),
         ));
         $this->assign('list',$list);
         return $this->fetch();
