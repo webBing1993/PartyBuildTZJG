@@ -219,14 +219,12 @@
             type:"post",
             url: "{:Url('Responsibility/search')}",
             data:{
-                name:val,
-                class:2
+                name:val
             },
             beforeSend: function(XMLHttpRequest){
 
             },
             success:function(data){
-                console.log(data)
                 if(data.code == 1){
                         $(".secretary-all").hide();
                         $(".noresult").hide();
