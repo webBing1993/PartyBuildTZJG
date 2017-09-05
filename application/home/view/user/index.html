@@ -12,7 +12,11 @@
 </div>
 {else/}
 <div class="banner">
-	<div class="up" data-tab="{$user.headimgurl}"></div>
+	{notempty name="$user.header"}
+	<div class="up" data-tab="{$user.header}"></div>
+	{else/}
+	<div class="up" data-tab="{$user.avatar}"></div>
+	{/notempty}
 	<div class="name">{$user.name}</div>
 	<input type="file" class="hide" id="upload" accept="image/jpg, image/png, image/gif, image/jpeg">
 	<input type="hidden" name="header"  value="" required="">
@@ -75,7 +79,7 @@ $(function(){
 			formData.append("picture",img);
 			$.ajax({
 				type:"post",
-				url:"{:Url('File/uploadHead')}",
+				url:"{:Url('File/uploadPicture')}",
 				data:formData,
 				processData : false,
 				contentType : false,
