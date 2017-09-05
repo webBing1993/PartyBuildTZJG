@@ -157,9 +157,20 @@ class Responsibility extends Base{
     /*党建责任发布*/
     public function publish(){
         if(IS_POST) {
-            
+            $data = input('post.');
+            $Model = new ResponsibilityModel();
+            $user = WechatUser::where('userid',$data['create_user'])->find();
+            $data['publisher'] = $user['name'];
+            $data['front_cover'] = $this->default_pic(); //生成随机封面
+            $res = $Model->create($data);
+            if($res) {
+                return $this->success("添加成功");
+            }else {
+                return $this->error("添加失败");
+            }
         }else {
-            
+            $userId = session('userId');
+            $this->assign('userId',$userId);
             return $this->fetch();
         }
     }

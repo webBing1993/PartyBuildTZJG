@@ -12,6 +12,13 @@ namespace app\home\model;
 use think\Model;
 
 class Responsibility extends Model {
+    protected $insert = [
+        'views' => 0,
+        'likes' => 0,
+        'comments' => 0,
+        'create_time' => NOW_TIME,
+        'status' => 0
+    ];
     /**
      * 获取主页列表数据
      */
