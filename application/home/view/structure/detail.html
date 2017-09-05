@@ -2,7 +2,6 @@
 
 {block name="style"}
 <link rel="stylesheet" href="/home/css/structure/structure.css">
-<link rel="stylesheet" href="/home/css/common/rem.css">
 {/block}
 
 {block name="body"}
@@ -747,17 +746,12 @@ for(var i = 0 ; i < len ;i++){
 		var len3 = detail3.length;
 		var html = '';
 		for(var j = 0; j < len3 ; j++){
-			console.log(len3)
 			var party4 = detail3[j];
 			var detail4 = party4.detail4;
 			var len4 = detail4.length;
 			for(var m = 0 ;m < len4 ;m++){
 				html+='<li class="d_list">'+
-						'<div class="d_img_box">'+
-						'<div class="d_img" style="background-color:'+bg_color[Math.floor(Math.random()*10)]+'">'+
-						detail4[m].name[0]+'</div>'+
-						'</div>'+
-						'<div class="d_name">'+detail4[m].name +' '+detail4[m].position+'</div>'+
+						'<div class="d_name"><span>'+detail4[m].name +'</span><span>'+detail4[m].position+'</span> </div>'+
 						'<a class="d_tel" href="tel:'+detail4[m].phone+'" >'+
 							'<span class="d_tel_icon"></span>'+
 								detail4[m].phone+
@@ -765,6 +759,7 @@ for(var i = 0 ; i < len ;i++){
 						'</li>';
 			}
 		}
+		html += '<div class="title">'+party3+'</div>'
 		$('.d_lists' ).append(html);
 		break;
 	}else{

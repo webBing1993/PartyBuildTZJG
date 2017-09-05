@@ -216,6 +216,7 @@ body {
   color: #333;
   display: flex;
   align-items:Center;
+  line-height:0.4rem;
 }
 .listbox .box .box_ .lists .party1 {
   position: relative;
@@ -279,6 +280,7 @@ body {
   color: #333;
   border-bottom: 1px solid #f1f1f1;
   position: relative;
+  line-height:0.4rem;
 }
   .detail3.down{
     padding-left:40px;
@@ -382,6 +384,7 @@ body {
 
   .d_lists{
     background: #ffffff;
+    margin-top: 15vw;
   }
   .d_list{
     display: flex;
@@ -402,14 +405,13 @@ body {
     margin-right: 3.2vw;
   }
   .d_list>.d_name{
-    font-size: 1.4rem;
-    font-weight: bold;
+    font-size: 0.38rem;
     color: #333;
-    width:53.3vw;
+    width:100%;
   }
   .d_list>.d_tel{
     color: #29adf0;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
   }
   .d_list>.d_tel>.d_tel_icon{
     width:26.67vw;
@@ -418,4 +420,16 @@ body {
     background: url("/home/images/structure/tel.png") 50% 50% no-repeat;
     -webkit-background-size:3.47vw 4.53vw;
     background-size:3.47vw 4.53vw;
+  }
+  .d_lists .title{
+    font-size: 0.44rem;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    width: 100%;
+    margin-top: 5vw;
+  }
+  .d_name span{
+    display: inline-block;
+    width: 50%;
   }
