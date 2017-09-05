@@ -209,12 +209,13 @@ body {
 .listbox .box .box_ .lists .name1 {
   display: inline-block;
   width: 100%;
-  height: 1rem;
+  height: 1.2rem;
   font-size: 0.36rem;
-  line-height: 1rem;
   border-bottom: 1px solid #f1f1f1;
   padding-left: 0.6rem;
   color: #333;
+  display: flex;
+  align-items:Center;
 }
 .listbox .box .box_ .lists .party1 {
   position: relative;
@@ -222,6 +223,7 @@ body {
   font-size: 0.42rem;
   padding-left: 15px;
   line-height: 30px;
+  display: block;
 }
 .listbox .box .box_ .lists .party1 .tri {
   position: absolute;
@@ -237,7 +239,7 @@ body {
   position: absolute;
   top: 0.1rem;
   left: 0;
-  top: 0;
+  top: 0.36rem;
   content: '';
   height: 0.48rem;
   width: 0.48rem;
@@ -248,7 +250,7 @@ body {
   .listbox .box .box_ .lists .down .tri-left{
     position: absolute;
     content: '';
-    top: 0;
+    top: 0.36rem;
     height: 0.48rem;
     width: 0.48rem;
     background: url(/home/images/structure/tri.png) 0 0 no-repeat;
@@ -259,28 +261,36 @@ body {
   width: 100%;
   padding-left: 0.53rem;
 }
+  .listbox .box .box_ .lists .detail2{
+    width: 100%;
+    padding-left: 0.53rem;
+  }
+  .listbox .box .box_ .lists .detail3{
+    width: 100%;
+    padding-left: 0.53rem;
+  }
 .listbox .box .box_ .lists .detail1 .name2 {
-  display: inline-block;
+  display: flex;
+  align-items:Center;
   width: 90%;
-  height: 1rem;
+  height: 1.2rem;
   margin-left: 40px;
   font-size: 0.36rem;
   color: #333;
-  line-height: 1rem;
   border-bottom: 1px solid #f1f1f1;
+  position: relative;
 }
-
-  .listbox .box .box_ .lists .detail1 .detail2 .name2{
-    margin-left: 80px;
+  .detail3.down{
+    padding-left:40px;
   }
   .listbox .box .box_ .lists .detail1 .name2 .sj{
-    float: right;
+    position: absolute;
+    right:0;
     width: 0.16rem;
     height: 0.26rem;
     background: url(/home/images/structure/sj.png) no-repeat;
     background-size: 0.16rem 0.26rem;
-    margin-top: 0.27rem;
-    margin-right: 20px;
+    top:0.47rem;
   }
 .listbox .box .box_ .lists .todown {
   -webkit-animation: todown 0.4s linear alternate;
