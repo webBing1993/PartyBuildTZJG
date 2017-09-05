@@ -24,12 +24,11 @@
         </li>
         <li>
             标题
-            <input style="text" placeholder="请输入标题">
+            <input style="text" placeholder="请输入标题" name="title">
         </li>
         <div class="content">
-            <textarea placeholder="请输入内容，不少于500字..."></textarea>
+            <textarea placeholder="请输入内容，不少于500字..." name="content"></textarea>
             <div class="imgs clear">
-                <div class="img fl hide"></div>
                 <div class="img fl hide"></div>
                 <div class="img fl hide"></div>
                 <div class="img fl hide"></div>
@@ -79,7 +78,7 @@
             var this_ = $(this );
             $('#upimg').click().off("change").on('change',function(){
                 var size = ($(this)[0].files[0].size / 1024).toFixed(2);
-                if(size <= 2048){
+                if(size <= 3072){
                     var img = $(this)[0].files[0];
                     var formData = new FormData();
                     formData.append("picture",img);
@@ -100,7 +99,7 @@
                             if(msg.code == 1){
                                 if(this_.hasClass('add')){
                                     //图片添加
-                                    if(imglen == 3){
+                                    if(imglen == 2){
                                         $('.add' ).fadeOut();
                                     }
                                     $('.img').eq(imglen).removeClass('hide' )
@@ -120,7 +119,7 @@
                 } else {
                     swal({
                         title: ' ',
-                        text: '您的图片超过2M',
+                        text: '您的图片超过3M',
                         type: 'warning',
                         showConfirmButton:false,
                         timer:1500
@@ -142,6 +141,105 @@
         $("#openPopover2").html(select_it);
         mui('#popover2').popover("hide");
     })
+
+
+  //保存
+    $(".save").click(function(){
+        var single = false;
+        if(type==1){
+            var data={
+                pid:$(".select").attr('data-tab'),
+                title:$("input[name='title']").val(),
+                content:$("textarea[name='content']").val(),
+
+            };
+            console.log(data)
+            for(var key in data){
+                if(data[key]!= ''&& data[key]!=undefined){
+                    single = true;
+                    break;
+                }
+            }
+        }else if(type==2){
+            var data={
+                pid:$(".select").attr('data-tab'),
+                title:$("input[name='title']").val(),
+                content:$("textarea[name='content']").val(),
+            };
+            for(var key in data){
+                if(data[key]!= ''&& data[key]!=undefined){
+                    single = true;
+                    break;
+                }
+            }
+        }
+        if(single){
+            data['type'] = 2;
+            data['status'] = 3;
+            data['images'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
+            $.ajax({
+                type:"post",
+                url: "{:Url('Responsibility/publish')}",
+                data:data,
+                success:function(data){
+                    if(data.code == 1){
+                        swal({
+                            title: " ",
+                            html: '恭喜您，保存成功！<br>请至个人中心——情况发布中查看',
+                            type: 'success',
+                            showCancelButton: false,
+                            confirmButtonColor: "#a5dc87",
+                            confirmButtonText: "确定",
+                            allowOutsideClick:false
+                        }).then(function(isConfirm){
+                            if (isConfirm) {
+                                window.location.go(-1);
+                            }
+                        });
+                    }else{
+                        swal({
+                            title: ' ',
+                            html: '信息输入不完整',
+                            type: 'error',
+                            showConfirmButton:false,
+                            timer:1500
+                        });
+                    }
+                }
+
+            });
+        }else{
+            swal({
+                title: ' ',
+                html: '信息输入不完整',
+                type: 'error',
+                showConfirmButton:false,
+                timer:1500
+            });
+        }
+
+
+
+    });
+
+
+    function imgresize(){
+        setTimeout(function(){
+            var img = $('.img img' );
+            img.each(function(){
+                if($(this).width() == $(this).height()){
+                    $(this).height('2rem');
+                    $(this).width('2rem');
+                }else if($(this).width() > $(this).height()){
+                    var height = $(this).height();
+                    $(this).height('2rem' ).css({'left':-$(this).width()/2+height/2});
+                }else{
+                    $(this).width('2rem').css({'top':-$(this).height()/2+height/2});
+                }
+            });
+        },100);
+    }
+
 </script>
 
 {/block}
