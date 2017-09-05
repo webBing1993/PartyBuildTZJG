@@ -3,22 +3,22 @@
     transform: rotate(0deg);
   }
   10% {
-    transform: rotate(15deg);
+    transform: rotate(-15deg);
   }
   30% {
-    transform: rotate(25deg);
+    transform: rotate(-25deg);
   }
   50% {
-    transform: rotate(45deg);
+    transform: rotate(-45deg);
   }
   70% {
-    transform: rotate(60deg);
+    transform: rotate(-60deg);
   }
   90% {
-    transform: rotate(75deg);
+    transform: rotate(-75deg);
   }
   100% {
-    transform: rotate(90deg);
+    transform: rotate(-90deg);
   }
 }
 @-webkit-keyframes todown {
@@ -26,42 +26,42 @@
     transform: rotate(0deg);
   }
   10% {
-    transform: rotate(15deg);
+    transform: rotate(-15deg);
   }
   30% {
-    transform: rotate(25deg);
+    transform: rotate(-25deg);
   }
   50% {
-    transform: rotate(45deg);
+    transform: rotate(-45deg);
   }
   70% {
-    transform: rotate(60deg);
+    transform: rotate(-60deg);
   }
   90% {
-    transform: rotate(75deg);
+    transform: rotate(-75deg);
   }
   100% {
-    transform: rotate(90deg);
+    transform: rotate(-90deg);
   }
 }
 @keyframes toup {
   0% {
-    transform: rotate(90deg);
+    transform: rotate(-90deg);
   }
   10% {
-    transform: rotate(75deg);
+    transform: rotate(-75deg);
   }
   30% {
-    transform: rotate(60deg);
+    transform: rotate(-60deg);
   }
   50% {
-    transform: rotate(45deg);
+    transform: rotate(-45deg);
   }
   70% {
-    transform: rotate(30deg);
+    transform: rotate(-30deg);
   }
   90% {
-    transform: rotate(15deg);
+    transform: rotate(-15deg);
   }
   100% {
     transform: rotate(0deg);
@@ -69,22 +69,22 @@
 }
 @-webkit-keyframes toup {
   0% {
-    transform: rotate(90deg);
+    transform: rotate(-90deg);
   }
   10% {
-    transform: rotate(75deg);
+    transform: rotate(-75deg);
   }
   30% {
-    transform: rotate(60deg);
+    transform: rotate(-60deg);
   }
   50% {
-    transform: rotate(45deg);
+    transform: rotate(-45deg);
   }
   70% {
-    transform: rotate(30deg);
+    transform: rotate(-30deg);
   }
   90% {
-    transform: rotate(15deg);
+    transform: rotate(-15deg);
   }
   100% {
     transform: rotate(0deg);
@@ -209,11 +209,14 @@ body {
 .listbox .box .box_ .lists .name1 {
   display: inline-block;
   width: 100%;
-  height: 0.8rem;
+  height: 1.2rem;
   font-size: 0.36rem;
-  line-height: 0.8rem;
   border-bottom: 1px solid #f1f1f1;
   padding-left: 0.6rem;
+  color: #333;
+  display: flex;
+  align-items:Center;
+  line-height:0.4rem;
 }
 .listbox .box .box_ .lists .party1 {
   position: relative;
@@ -221,6 +224,7 @@ body {
   font-size: 0.42rem;
   padding-left: 15px;
   line-height: 30px;
+  display: block;
 }
 .listbox .box .box_ .lists .party1 .tri {
   position: absolute;
@@ -234,53 +238,67 @@ body {
 }
 .listbox .box .box_ .lists .party1 .tri-left{
   position: absolute;
-  top: 10px;
+  top: 0.1rem;
   left: 0;
+  top: 0.36rem;
   content: '';
-  height: 0.53rem;
-  width: 0.53rem;
-  background: url(/home/images/structure/structure1.png) 0 0 no-repeat;
-  background-size: 0.53rem 0.53rem;
+  height: 0.48rem;
+  width: 0.48rem;
+  background: url(/home/images/structure/tri.png) 0 0 no-repeat;
+  background-size: 0.48rem 0.48rem;
 }
-.listbox .box .box_ .lists .party1 .tri-left.structure2{
-  background: url(/home/images/structure/structure2.png) 0 0 no-repeat;
-  background-size: 0.53rem 0.53rem;
-}
-.listbox .box .box_ .lists .party1 .tri-left.structure3{
-  background: url(/home/images/structure/structure3.png) 0 0 no-repeat;
-  background-size: 0.53rem 0.53rem;
-}
-  .listbox .box .box_ .lists .party1 .tri-left.structure4{
-    background: url(/home/images/structure/structure4.png) 0 0 no-repeat;
-    background-size: 0.53rem 0.53rem;
+
+  .listbox .box .box_ .lists .down .tri-left{
+    position: absolute;
+    content: '';
+    top: 0.36rem;
+    height: 0.48rem;
+    width: 0.48rem;
+    background: url(/home/images/structure/tri.png) 0 0 no-repeat;
+    background-size: 0.48rem 0.48rem;
   }
+
 .listbox .box .box_ .lists .detail1 {
   width: 100%;
+  padding-left: 0.53rem;
 }
+  .listbox .box .box_ .lists .detail2{
+    width: 100%;
+    padding-left: 0.53rem;
+  }
+  .listbox .box .box_ .lists .detail3{
+    width: 100%;
+    padding-left: 0.53rem;
+  }
 .listbox .box .box_ .lists .detail1 .name2 {
-  display: inline-block;
+  display: flex;
+  align-items:Center;
   width: 90%;
-  height: 0.8rem;
+  height: 1.2rem;
   margin-left: 40px;
   font-size: 0.36rem;
   color: #333;
-  line-height: 0.8rem;
   border-bottom: 1px solid #f1f1f1;
+  position: relative;
+  line-height:0.4rem;
 }
+  .detail3.down{
+    padding-left:40px;
+  }
   .listbox .box .box_ .lists .detail1 .name2 .sj{
-    float: right;
+    position: absolute;
+    right:0;
     width: 0.16rem;
     height: 0.26rem;
     background: url(/home/images/structure/sj.png) no-repeat;
     background-size: 0.16rem 0.26rem;
-    margin-top: 0.27rem;
-    margin-right: 20px;
+    top:0.47rem;
   }
 .listbox .box .box_ .lists .todown {
   -webkit-animation: todown 0.4s linear alternate;
   animation: todown 0.4s linear alternate;
   transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
+  -webkit-transform: rotate(-90deg);
 }
 .listbox .box .box_ .lists .toup {
   -webkit-animation: toup 0.4s linear alternate;
@@ -366,6 +384,7 @@ body {
 
   .d_lists{
     background: #ffffff;
+    margin-top: 15vw;
   }
   .d_list{
     display: flex;
@@ -386,14 +405,13 @@ body {
     margin-right: 3.2vw;
   }
   .d_list>.d_name{
-    font-size: 1.4rem;
-    font-weight: bold;
+    font-size: 0.38rem;
     color: #333;
-    width:53.3vw;
+    width:100%;
   }
   .d_list>.d_tel{
     color: #29adf0;
-    font-size: 1.2rem;
+    font-size: 0.32rem;
   }
   .d_list>.d_tel>.d_tel_icon{
     width:26.67vw;
@@ -402,4 +420,16 @@ body {
     background: url("/home/images/structure/tel.png") 50% 50% no-repeat;
     -webkit-background-size:3.47vw 4.53vw;
     background-size:3.47vw 4.53vw;
+  }
+  .d_lists .title{
+    font-size: 0.44rem;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    width: 100%;
+    margin-top: 5vw;
+  }
+  .d_name span{
+    display: inline-block;
+    width: 50%;
   }

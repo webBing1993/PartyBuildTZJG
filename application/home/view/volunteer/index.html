@@ -185,9 +185,10 @@
 
     //tab点击事件
     mui('#tab').on('tap', 'a', function(e) {
-        $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
-        c = this.getAttribute("data-index");
+        mui('#refreshContainer').pullRefresh().scrollTo(0,0);
+        mui('#refreshContainer').scroll().scrollTo(0,0);
         mui('#refreshContainer').pullRefresh().refresh(true);
+        c = this.getAttribute("data-index");
         if(c==0){
             if($(".training ul a").length<10){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();

@@ -218,7 +218,7 @@ ul li a span:nth-child(3) {
 
 ul li a span:nth-child(4) {
     position: absolute;
-    bottom: 0.2rem;
+    bottom: 0.3rem;
     right: 35%;
     color: #999;
     font-size: 0.32rem;
@@ -229,7 +229,7 @@ ul li a span:nth-child(4) {
 
 .mui-icon-forward {
     position: absolute;
-    right: 35%;
+    right: 32%;
     top: 8vw;
     color: #999;
     width: 0.66rem;

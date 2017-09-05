@@ -10,13 +10,13 @@ body {
   /*margin-top: 10px;*/
 }
 .lists .list {
-  height: 50px;
+  height: 12vw;
   width: 100%;
-  padding-left: 13px;
-  padding-right: 13px;
+  padding-left: 0.34rem;
+  padding-right: 0.34rem;
   background: #ffffff;
   border-top: 1px solid #f1f1f1;
-  line-height: 50px;
+  line-height: 12vw;
 }
 .lists .list img {
   /*width: 40px;*/
@@ -29,21 +29,22 @@ body {
   /*overflow: hidden;*/
 }
 .lists .list .fl {
-  color: #333333;
-  font-size: 15px;
+  color: #333;
+  font-size: 0.4rem;
 }
 .lists .list .fr {
   color: #999999;
-  font-size: 14px;
+  font-size: 0.38rem;
 }
 .lists .list:last-child {
   border-bottom: 1px solid #f1f1f1;
 }
 .er{
-  width: 20px;
-  height: 20px;
-  margin-top: 15px;
+  width: 0.53rem;
+  height: 0.53rem;
   margin-right: 8px;
+  position: relative;
+  margin-top: -3px;
 }
 .modal-content{
   position: relative;
@@ -58,11 +59,13 @@ body {
 }
 .modal-content .header{
   position: absolute;
-  top:36%;
-  left:36%;
-  width: 80px;
-  height: 80px;
-  margin-top: 4px;
+  top: 50%;
+  left: 50%;
+  width: 1.06rem;
+  height: 1.06rem;
+  margin-top: -0.53rem;
+  margin-left: -0.53rem;
+  /* margin-top: 4px; */
   border: 8px solid #ffffff;
   -webkit-border-radius: 50%;
   border-radius: 50%;
@@ -70,8 +73,11 @@ body {
 }
 .lists .list.tag{
   width: 100%;
-  height: 30px;
-  line-height: 30px;
+  height: 8vw;
+  line-height: 8vw;
   padding: 0 4vw;
-  background: #eeeeee;
+  background: #eee;
+}
+.fr{
+  float: right;
 }

@@ -11,7 +11,7 @@ body,html{
     padding-left: 0.3rem;
     overflow: hidden;
 }
-#openPopover,#openPopover2{
+#openPopover,#openPopover2,#openPopover3{
     display: inline-block;
     height:1rem;
     line-height: 1.2rem;

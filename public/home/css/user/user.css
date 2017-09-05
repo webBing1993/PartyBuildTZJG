@@ -32,9 +32,9 @@ body {
 }
 .banner .name {
   width: 60%;
-  margin: 6px auto;
+  margin: 0.1rem auto;
   color: #ffffff;
-  font-size: 1.7rem;
+  font-size: 0.46rem
 }
 @media screen and (min-width: 1000px){
   .banner .name{
@@ -61,11 +61,13 @@ body {
   background-size: 7.5vw 7.5vw;
   color: #333333;
   line-height: 13.3vw;
+  font-size: 0.4rem;
 }
 .lists .list i {
-  color: #999999;
-  font-size: 20px;
+  color: #999;
+  font-size: 0.44rem;
   line-height: 13.3vw;
+  float: right;
 }
 .lists .list:nth-child(1) span {
   background: url("/home/images/user/message.png") 0 3vw no-repeat;
@@ -84,7 +86,7 @@ body {
   background-size: 7.5vw 7.5vw;
 }
 .lists .list:nth-child(5) span {
-  background: url("/home/images/user/feedback.png") 0 3vw no-repeat;
+  background: url("/home/images/user/integral.png") 0 3vw no-repeat;
   background-size: 7.5vw 7.5vw;
 }
 .lists .list:nth-child(6) span {

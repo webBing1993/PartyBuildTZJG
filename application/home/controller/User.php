@@ -24,7 +24,6 @@ class User extends Base {
      */
     public function index(){
         //游客判断
-        $this ->checkAnonymous();
         $this->anonymous();
         $userId = session('userId');
         $user = WechatUser::where('userid',$userId)->find();
