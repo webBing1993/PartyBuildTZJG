@@ -17,31 +17,31 @@
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
         <div class="article">
-            <div class="title"><p>{$new.title}</p></div>
+            <div class="title"><p>{$detail.title}</p></div>
             <div class="note clear">
-                <span class="publish">{$new.publisher}</span>
-                <span class="time">{$new.create_time|time_format="Y-m-d"}</span>
+                <span class="publish">{$detail.publisher}</span>
+                <span class="time">{$detail.create_time|time_format="Y-m-d"}</span>
             </div>
             <div class="content">
-                <div class="article-content">{$new.content}</div>
+                <div class="article-content">{$detail.content}</div>
                 <div class="like">
-                    <span class="read">{$new.views}</span>
+                    <span class="read">{$detail.views}</span>
                     {eq name="visit" value="0"}
-                    {eq name="new.is_like" value="1"}
-                    <span class="isgood good_ notvisitor"  data-type="2" data-id="{$new.id}">{$new.likes}</span>
+                    {eq name="detail.is_like" value="1"}
+                    <span class="isgood good_ notvisitor"  data-type="3" data-id="{$detail.id}">{$detail.likes}</span>
                     {else/}
-                    <span class="isgood good notvisitor"  data-type="2" data-id="{$new.id}">{$new.likes}</span>
+                    <span class="isgood good notvisitor"  data-type="3" data-id="{$detail.id}">{$detail.likes}</span>
                     {/eq}
                     {else/}
-                    <span class="isgood good">{$new.likes}</span>
+                    <span class="isgood good">{$detail.likes}</span>
                     {/eq}
                 </div>
             </div>
         </div>
         <div class="comment">
-            <div class="sum">共<span>{$new.comments}</span>条评论</div>
+            <div class="sum">共<span>{$detail.comments}</span>条评论</div>
             <div class="lists">
-                {volist name="new.comment" id="co"}
+                {volist name="comment" id="co"}
                 <div class="list clear">
                     <div class="fl">
                         <img src="{$co.header}" alt="用户" class="user">
@@ -67,7 +67,7 @@
     </div>
 </div>
 {eq name="visit" value="0"}
-<div class="bottom clear" onclick="send(this,2,{$new['id']})">
+<div class="bottom clear" onclick="send(this,3,{$detail['id']})">
     <div class="myword fl">
         <input type="text" placeholder="说说你的感想！" id="send" disabled>
     </div>
@@ -207,7 +207,7 @@
     //加载更多评论
     function loadScroll(){
         var len = $(".list" ).length;
-        var id = {$new['id']};
+        var id = {$detail['id']};
         $.ajax({
             type:"post",
             url:"{:Url('Base/morecomment')}",
@@ -289,9 +289,9 @@
     wx.ready(function () {
         //分享到朋友圈
         wx.onMenuShareTimeline({
-            title: '{$new.title}',
-            link: '{$new.link}',
-            imgUrl: '{$new.share_image}',
+            title: '{$detail.title}',
+            link: '{$detail.link}',
+            imgUrl: '{$detail.share_image}',
             success: function () {
                 // 用户确认分享后执行的回调函数
             },
@@ -301,10 +301,10 @@
         });
         //分享给朋友
         wx.onMenuShareAppMessage({
-            title: '{$new.title}', // 分享标题
-            desc: '{$new.desc}', // 分享描述
-            link: '{$new.link}', // 分享链接
-            imgUrl: '{$new.share_image}', // 分享图标
+            title: '{$detail.title}', // 分享标题
+            desc: '{$detail.desc}', // 分享描述
+            link: '{$detail.link}', // 分享链接
+            imgUrl: '{$detail.share_image}', // 分享图标
             type: '', // 分享类型,music、video或link，不填默认为link
             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
             success: function () {

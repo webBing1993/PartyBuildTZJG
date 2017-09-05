@@ -108,7 +108,7 @@ class Base extends Controller {
      * 0 评论点赞
      * 1 notice
      * 2 news
-     * 3
+     * 3 responsibility
      * 4
      * 5
      * 6
@@ -129,7 +129,7 @@ class Base extends Controller {
                 $table = "news";
                 break;
             case 3:
-                $table = "";
+                $table = "responsibility";
                 break;
             case 4:
                 $table = "";
@@ -178,7 +178,7 @@ class Base extends Controller {
      * type值：
      * 1 notice
      * 2 news
-     * 3
+     * 3 responsibility
      * 4
      * 5
      * 6
@@ -196,7 +196,7 @@ class Base extends Controller {
                     $table = "news";
                     break;
                 case 3:
-                    $table = "";
+                    $table = "responsibility";
                     break;
                 case 4:
                     $table = "";
@@ -300,7 +300,7 @@ class Base extends Controller {
                 $table = "news";
                 break;
             case 3:
-                $table = "";
+                $table = "responsibility";
                 break;
             case 4:
                 $table = "";

@@ -33,7 +33,11 @@
                     </ul>
                     <ul class="secretary-all">
                         {volist name="$list.one" id="vo1"}
+                        {eq name="vo1.templet" value="1"}
                         <a href="{:Url('Responsibility/detail?id='.$vo1['id'])}">
+                        {else/}
+                        <a href="{:Url('Responsibility/detail2?id='.$vo1['id'])}">
+                        {/eq}
                             <p>{$vo1.title}</p>
                             <span>{$vo1.publisher}</span>
                             <span>{$vo1.create_time|time_format='Y-m-d'}</span>
@@ -49,7 +53,11 @@
                     </ul>
                     <ul class="branch-secretary-all">
                         {volist name="$list.two" id="vo2"}
+                        {eq name="vo2.templet" value="1"}
                         <a href="{:Url('Responsibility/detail?id='.$vo2['id'])}">
+                        {else/}
+                        <a href="{:Url('Responsibility/detail2?id='.$vo2['id'])}">
+                        {/eq}
                             <p>{$vo2.title}</p>
                             <span>{$vo2.publisher}</span>
                             <span>{$vo2.create_time|time_format='Y-m-d'}</span>
@@ -114,13 +122,15 @@
         }else if(c==1){
             var len  = $(".branch-secretary ul a").length;
         }
-        var type=parseInt(c)+1;
+        var cla = parseInt(c)+1;
+        var type = {$type};
         $.ajax({
             type:"post",
-            url: "{:Url('News/listmore')}",
+            url: "{:Url('Responsibility/index')}",
             data:{
                 length:len,
-                class:type
+                type:type,
+                class:cla
             },
             beforeSend: function(XMLHttpRequest){
 

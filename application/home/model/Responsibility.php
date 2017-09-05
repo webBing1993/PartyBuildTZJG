@@ -47,4 +47,20 @@ class Responsibility extends Model {
         );
         return $res;
     }
+    
+    /**
+     * 加载更多
+     * $length 长度
+     * $type 类别
+     * $class type=3时分类，默认为0
+     */
+    public function getListMore($length,$type,$class = 0) {
+        $map = array(
+            'type' => $type,
+            'class' => $class,
+            'status' => 1
+        );
+        $res = $this->where($map)->order('create_time desc')->limit($length,8)->select();
+        return $res;
+    }
 }

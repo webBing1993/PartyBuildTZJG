@@ -17,7 +17,11 @@
             </ul>
             <ul class="all">
                 {volist name="list" id="vo"}
+                {eq name="vo.templet" value="1"}
                 <a href="{:Url('Responsibility/detail?id='.$vo['id'])}">
+                {else/}
+                <a href="{:Url('Responsibility/detail2?id='.$vo['id'])}">
+                {/eq}
                     <p>{$vo.title}</p>
                     <span>{$vo.publisher}</span>
                     <span>{$vo.create_time|time_format='Y-m-d'}</span>
@@ -56,11 +60,13 @@
     //上拉加载更多
     function loadScroll(){
         var len  = $(".list ul a").length;
+        var type = {$type};
         $.ajax({
             type:"post",
-            url: "{:Url('News/listmore')}",
+            url: "{:Url('Responsibility/index')}",
             data:{
-                length:len
+                length:len,
+                type: type
             },
             beforeSend: function(XMLHttpRequest){
 
