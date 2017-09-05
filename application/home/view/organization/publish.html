@@ -1,0 +1,115 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/common/publish.css">
+{/block}
+
+{block name="body"}
+<div class="list">
+    <ul>
+        <li>
+            模板
+            <a id="openPopover" href="#popover">请选择模板</a>
+            <span class="triangle-down"></span>
+        </li>
+        <li>
+            标题
+            <input style="text" placeholder="请输入标题">
+        </li>
+        <div class="content">
+            <textarea placeholder="请输入内容，不少于200字..."></textarea>
+            <div class="imgs clear">
+                <div class="img fl hide"></div>
+                <div class="img fl hide"></div>
+                <div class="img fl hide"></div>
+                <div class="img fl hide"></div>
+                <div class="add fl">
+                    +
+                </div>
+            </div>
+            <input type="file" class="hide" id="upimg" accept="image/jpg, image/png, image/gif, image/jpeg">
+        </div>
+    </ul>
+</div>
+<div class="save">保存</div>
+<div class="goreview">去审核</div>
+<p>注：点击保存将保存至个人中心-我的草稿；点击去审核，审核通过后将在相应栏目发布，并保存至我的发布。</p>
+
+<div id="popover" class="mui-popover" >
+    <ul class="mui-table-view">
+        <li class="mui-table-view-cell"><a>新闻模板1</a></li>
+        <li class="mui-table-view-cell"><a>新闻模板2</a></li>
+    </ul>
+</div>
+{/block}
+
+{block name="script"}
+<script>
+    $(function(){
+        //图片预览
+        $('.add' ).on('click',function(){
+            var imglen = $('.img img' ).length;
+            var this_ = $(this );
+            $('#upimg').click().off("change").on('change',function(){
+                var size = ($(this)[0].files[0].size / 1024).toFixed(2);
+                if(size <= 2048){
+                    var img = $(this)[0].files[0];
+                    var formData = new FormData();
+                    formData.append("picture",img);
+                    $.ajax({
+                        type:"post",
+                        url:"{:Url('File/uploadPicture')}",
+                        data:formData,
+                        processData : false,
+                        contentType : false,
+                        beforeSend: function(XMLHttpRequest){
+//							swal('');
+//							swal.showLoading();
+                            $('.swal2-confirm' ).css({'background-color':'#c1c1c1','border-left-color':'#c1c1c1','border-right-color':'#c1c1c1'})
+                        },
+                        success:function(data){
+                            swal.close();
+                            var msg = $.parseJSON(data);
+                            if(msg.code == 1){
+                                if(this_.hasClass('add')){
+                                    //图片添加
+                                    if(imglen == 3){
+                                        $('.add' ).fadeOut();
+                                    }
+                                    $('.img').eq(imglen).removeClass('hide' )
+                                            .append('<img src='+msg.data.path+' alt="图片" data-tab='+msg.data.id+'>');
+                                }else{
+                                    //图片修改
+                                    this_.find('img').remove();
+                                    this_.append('<img src='+msg.data.path+' alt="图片" data-tab='+msg.data.id+'>');
+                                }
+                                imgresize();
+
+                            } else {
+                                return;
+                            }
+                        }
+                    });
+                } else {
+                    swal({
+                        title: ' ',
+                        text: '您的图片超过2M',
+                        type: 'warning',
+                        showConfirmButton:false,
+                        timer:1500
+                    });
+                }
+            });
+
+        });
+    })
+
+    $("#popover ul li").click(function(){
+        var select_it = $(this).text();
+        $("#openPopover").html(select_it);
+        mui('#popover').popover("hide");
+    })
+
+</script>
+
+{/block}
