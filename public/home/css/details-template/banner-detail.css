@@ -214,10 +214,13 @@
     margin-top: 0.28rem;
 }
 .comment .lists .list .mid .name {
-    width: 100%;
     color: #999;
     font-size: 0.38rem;
     margin-left: 15vw;
+    width:80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .comment .lists .list .mid .content {
     width: 100%;

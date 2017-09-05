@@ -2,6 +2,13 @@
 
 {block name="style"}
 <link rel="stylesheet" href="/home/css/user/personal.css">
+<style>
+	@media (min-width: 768px) {
+		.modal-dialog {
+			width: auto!important;
+			margin: 10px!important;
+		}
+</style>
 {/block}
 
 {block name="body"}
@@ -15,7 +22,7 @@
 	</div>
 	<div class="list clear toshow"  data-toggle="modal" data-target="#modal">
 		<span class="fl">二维码</span>
-		<span class="fr"><img src="/home/images/user/er.png" alt="" class="er"><i class="fa fa-angle-right"></i></span>
+		<span class="fr"><img src="/home/images/user/code.png" alt="" class="er"><i class="fa fa-angle-right"></i></span>
 	</div>
 	<div class="list clear">
 		<span class="fl">性别</span>
@@ -72,7 +79,7 @@
 {/block}
 
 {block name="script"}
-<script src="/static/code/jquery.qrcode.min.js"></script>
+<script src="/home/js/jquery.qrcode.min.js"></script>
 <script>
 $(function(){
 	//模块标题
@@ -84,7 +91,7 @@ $(function(){
 	var ww = code.width();
 	var hh = code.height();
 	var id = '{$user.userid}';
-	jQuery('#qrcode').qrcode({
+	$('#qrcode').qrcode({
 		width: ww,
 		height:hh,
 		text: '{$request}/home/user/eg/id/'+id

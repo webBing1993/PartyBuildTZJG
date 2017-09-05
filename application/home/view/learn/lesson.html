@@ -324,7 +324,8 @@
     });
 
     mui('#tab').on('tap', 'a', function(e) {
-        $(".mui-scroll").css("transform","translate3d(0px, 0px, 0px) translateZ(0px)");
+        mui('#refreshContainer').pullRefresh().scrollTo(0,0);
+        mui('#refreshContainer').scroll().scrollTo(0,0);
         mui('#refreshContainer').pullRefresh().refresh(true);
         c = this.getAttribute("data-tab");
        if(c==0){

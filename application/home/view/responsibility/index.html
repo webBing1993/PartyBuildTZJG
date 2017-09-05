@@ -58,7 +58,7 @@
         var len  = $(".list ul a").length;
         $.ajax({
             type:"post",
-            url: "{:Url('News/listmore')}",
+            url: "{:Url('Responsibility/index')}",
             data:{
                 length:len
             },
@@ -82,7 +82,6 @@
     }
 
     function addLists(data,type){
-        console.log(data)
         var html = '';
         var lists = data.data;
         var len = lists.length;
