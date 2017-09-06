@@ -90,16 +90,10 @@ class Base extends Controller {
      * $carousel_pic 轮播图片id: 45-54
      */
     public function default_pic(){
-        //随机轮播图
-        $c = array('1'=>'a','2'=>'b','3'=>'c','4'=>'d','5'=>'e','6'=>'f','7'=>'g','8'=>'h','9'=>'i','10'=>'j','11'=>'k','12'=>'l','13'=>'m','14'=>'n','15'=>'o',
-            '16'=>'p','17'=>'q','18'=>'r','19'=>'s','20'=>'t','21'=>'u','22'=>'v','23'=>'w','24'=>'x','25'=>'y','26'=>'z');
-        $carousel_pic1 = array_rand($c,1);
-        $this->assign('p1',$carousel_pic1);
-        $carousel_pic2 = array_rand($c,1);
-        $this->assign('p2',$carousel_pic2);
-        $carousel_pic3 = array_rand($c,1);
-        $this->assign('p3',$carousel_pic3);
-
+        //随机封面图
+        $a = array('1'=>'a','2'=>'b','3'=>'c','4'=>'d','5'=>'e','6'=>'f','7'=>'g','8'=>'h','9'=>'i','10'=>'j','11'=>'k','12'=>'l','13'=>'m','14'=>'n','15'=>'o');
+        $front_pic = array_rand($a,1);
+        return $front_pic;
     }
 
     /**

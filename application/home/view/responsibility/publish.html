@@ -148,12 +148,13 @@
     $(".save").click(function(){
         var single = false;
         var templet = $("#openPopover").html();
+        var userid = {$userId};
         if(type==1){
             var data={
                 class:0,
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
-
+                create_user:userid,
             };
             console.log(data)
             for(var key in data){
@@ -167,6 +168,7 @@
             var data={
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
+                create_user:userid,
             };
             if(_class=="书记述职"){
                 data["class"] = 1;
@@ -181,7 +183,7 @@
             }
         }
         if(single){
-            data['list_image']=[];
+            data['list_images']=[];
             if(templet == "模板1"){
                 data["templet"] = 1;
             }else{
@@ -189,18 +191,16 @@
             }
             $(".img img").each(function(){
                 if($(this).data("tab")){
-                    data['list_image'].push($(this).data("tab")+"")  ;
+                    data['list_images'].push($(this).data("tab")+"")  ;
                 }
             })
 
 //            data['list_image'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
-            console.log(data)
             $.ajax({
                 type:"post",
                 url: "{:Url('Responsibility/publish')}",
                 data:data,
                 success:function(data){
-                    console.log(data)
                     if(data.code == 1){
                         swal({
                             title: " ",

@@ -10,7 +10,6 @@ use app\home\model\Comment;
 use app\home\model\Like;
 use app\home\model\Picture;
 use app\home\model\Responsibility as ResponsibilityModel;
-use app\home\model\WechatTest;
 use app\home\model\WechatUser;
 
 /**
@@ -162,6 +161,7 @@ class Responsibility extends Base{
             $user = WechatUser::where('userid',$data['create_user'])->find();
             $data['publisher'] = $user['name'];
             $data['front_cover'] = $this->default_pic(); //生成随机封面
+            isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";
             $res = $Model->create($data);
             if($res) {
                 return $this->success("添加成功");
