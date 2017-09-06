@@ -96,7 +96,7 @@
         for(var i = 0; i< len;i++){
             var list = lists[i];
             html +=
-                    '<a href="/home/responsibility/detail/id/"'+list.id+'>'+
+                    '<a href="/home/responsibility/detail/id/'+list.id+'.html">'+
                     '<p>'+list.title+'</p>'+
                     '<span>'+list.publisher+'</span>'+
                     '<span>'+list.time+'</span>'+
@@ -137,12 +137,13 @@
                     $(".noresult").hide();
                     $(".search-result").show();
                     addLists(data,2);
-                    var dataLen =data.data.length;
-                    mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
                 }else{
                     $(".all").hide();
                    $(".search-result").show().html("<p class='noresult'>无搜索结果</P>")
                 }
+                mui('#refreshContainer').pullRefresh().scrollTo(0,0);
+                mui('#refreshContainer').scroll().scrollTo(0,0);
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }
         })
 
@@ -156,6 +157,6 @@
         }
     };
 
-    document.getElementById('search').addEventListener('keyup', debounce(), false);
+    document.getElementById('search').addEventListener('input', debounce(), false);
 </script>
 {/block}

@@ -24,7 +24,7 @@
         </li>
         <li class="type2">
             模板
-            <a id="openPopover2" href="#popover2">请选择模板</a>
+            <a id="openPopover2" href="#popover2">模板1</a>
             <span class="triangle-down"></span>
         </li>
         <li>
@@ -81,8 +81,8 @@
 
 <div id="popover2" class="mui-popover" >
     <ul class="mui-table-view">
-        <li class="mui-table-view-cell"><a>新闻列表1</a></li>
-        <li class="mui-table-view-cell"><a>新闻列表2</a></li>
+        <li class="mui-table-view-cell"><a>模板1</a></li>
+        <li class="mui-table-view-cell"><a>模板2</a></li>
     </ul>
 </div>
 
@@ -176,12 +176,17 @@
         var select_it = $(this).text();
         $("#openPopover").html(select_it);
         mui('#popover').popover("hide");
-    })
+    });
     $("#popover2 ul li").click(function(){
         var select_it = $(this).text();
         $("#openPopover2").html(select_it);
         mui('#popover2').popover("hide");
-    })
+    });
+    $("#popover3 ul li").click(function(){
+        var select_it = $(this).text();
+        $("#openPopover3").html(select_it);
+        mui('#popover3').popover("hide");
+    });
 
     options = {
         scrollY: true, //是否竖向滚动
