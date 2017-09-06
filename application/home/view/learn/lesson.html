@@ -191,31 +191,31 @@
         moveanyway("publish");
         tabmove();
         if(c==0){
-            if ($(".all ul a").length < 10) {
+            if ($(".all ul a").length < 7) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(c==1){
-            if ($(".list1 ul a").length < 10) {
+            if ($(".list1 ul a").length < 7) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(c==2){
-            if ($(".list2 ul a").length < 10) {
+            if ($(".list2 ul a").length < 7) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(c==3){
-            if ($(".list3 ul a").length < 10) {
+            if ($(".list3 ul a").length < 7) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(c==4){
-            if ($(".list4 ul a").length < 10) {
+            if ($(".list4 ul a").length < 7) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -272,7 +272,7 @@
                 if(data.code == 1){
                     addLists(data,c);
                     var dataLen =data.data.length;
-                    if(data.data.length == 10){
+                    if(data.data.length == 7){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                     }else{
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
@@ -293,9 +293,9 @@
             var list = lists[i];
             html +=
                     '<a>'+
-                    '<p>主题党日</p>'+
-                    '<span>之图党支部</span>'+
-                    '<span>2017-8-21</span>'+
+                    '<p>'+list.title+'</p>'+
+                    '<span>'+list.publisher+'</span>'+
+                    '<span>'+list.time+'</span>'+
                     '</a>'
         }
        switch (type){
@@ -329,31 +329,31 @@
         mui('#refreshContainer').pullRefresh().refresh(true);
         c = this.getAttribute("data-tab");
        if(c==0){
-           if ($(".all ul a").length < 10) {
+           if ($(".all ul a").length < 7) {
                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
            } else {
                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
            }
        }else if(c==1){
-           if ($(".list1 ul a").length < 10) {
+           if ($(".list1 ul a").length < 7) {
                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
            } else {
                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
            }
        }else if(c==2){
-           if ($(".list2 ul a").length < 10) {
+           if ($(".list2 ul a").length < 7) {
                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
            } else {
                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
            }
        }else if(c==3){
-           if ($(".list3 ul a").length < 10) {
+           if ($(".list3 ul a").length < 7) {
                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
            } else {
                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
            }
        }else if(c==4){
-           if ($(".list4 ul a").length < 10) {
+           if ($(".list4 ul a").length < 7) {
                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
            } else {
                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();

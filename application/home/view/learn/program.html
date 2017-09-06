@@ -28,7 +28,7 @@
 <script>
     window.onload = function() {
         moveanyway("publish");
-            if ($(".list ul a").length < 10) {
+            if ($(".list ul a").length < 7) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -61,7 +61,7 @@
                 if(data.code == 1){
                     addLists(data);
                     var dataLen =data.data.length;
-                    if(data.data.length == 5){
+                    if(data.data.length == 7){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                     }else{
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
@@ -82,9 +82,9 @@
             var list = lists[i];
             html +=
         '<a>'+
-            '<p>"两学一做"方案</p>'+
-            '<span>之图党支部</span>'+
-           '<span>2017-8-21</span>'+
+            '<p>'+list.title+'</p>'+
+            '<span>+list.publisher+</span>'+
+           '<span>+list.time+</span>'+
             '</a>'
         }
         $('.list ul').append(html);
