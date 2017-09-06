@@ -15,16 +15,16 @@
 {block name="body"}
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
-        <div class="banner">
-            <ul>
+        <!--轮播图-->
+        <div class="mui-slider banner">
+            <div class="mui-slider-group mui-slider-loop">
                 {volist name="detail.images" id="li"}
-                <li >
-                    <img src="{$li|get_cover='path'}">
-                </li>
+                <!--支持循环，需要重复图片节点-->
+                <div class="mui-slider-item"><a :href="'/index/news/detail/id/' + item.id "><img src="{$li|get_cover='path'}"></a></div>
                 {/volist}
-            </ul>
-            <span class="read">{$detail.views}</span>
+            </div>
         </div>
+        <span class="read">{$detail.views}</span>
         <div class="article">
             <div class="title"><p>{$detail.title}</p></div>
             <div class="note clear">
@@ -202,6 +202,7 @@
                 });
     };
 
+
     //初始化下拉加载
     mui.init({
         pullRefresh: {
@@ -220,7 +221,7 @@
             type:"post",
             url:"{:Url('Base/morecomment')}",
             data:{
-                type:2,
+                type:3,
                 aid:id,
                 length:len
             },

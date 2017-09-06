@@ -40,7 +40,7 @@
 <script>
     window.onload = function() {
         moveanyway("publish");
-        if ($(".list ul a").length < 10) {
+        if ($(".list ul a").length < 8) {
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
         } else {
             mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -71,11 +71,12 @@
             beforeSend: function(XMLHttpRequest){
 
             },
+
             success:function(data){
                 if(data.code == 1){
                     addLists(data,1);
                     var dataLen =data.data.length;
-                    if(data.data.length == 10){
+                    if(data.data.length == 8){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                     }else{
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
@@ -88,6 +89,7 @@
     }
 
     function addLists(data,type){
+        console.log(data)
         var html = '';
         var lists = data.data;
         var len = lists.length;
@@ -130,18 +132,13 @@
 
             },
             success:function(data){
-                console.log(data)
                 if(data.code == 1){
                     $(".all").hide();
                     $(".noresult").hide();
                     $(".search-result").show();
                     addLists(data,2);
                     var dataLen =data.data.length;
-                    if(data.data.length == 10){
-                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
-                    }else{
-                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
-                    }
+                    mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
                 }else{
                     $(".all").hide();
                    $(".search-result").show().html("<p class='noresult'>无搜索结果</P>")
@@ -151,7 +148,7 @@
 
     };
     var debounce = function() {
-        var wait = 1000;
+        var wait = 200;
         var timeout;
         return function () {
             if (timeout) clearTimeout(timeout);
