@@ -19,7 +19,7 @@
         </li>
         <li>
             栏目
-            <a id="openPopover" href="#popover">请选择模板</a>
+            <a id="openPopover" href="#popover">模板1</a>
             <span class="triangle-down"></span>
         </li>
         <li>
@@ -46,8 +46,8 @@
 
 <div id="popover" class="mui-popover" >
     <ul class="mui-table-view">
-        <li class="mui-table-view-cell"><a>新闻模板1</a></li>
-        <li class="mui-table-view-cell"><a>新闻模板2</a></li>
+        <li class="mui-table-view-cell"><a>模板1</a></li>
+        <li class="mui-table-view-cell"><a>模板2</a></li>
     </ul>
 </div>
 
@@ -147,9 +147,10 @@
   //保存
     $(".save").click(function(){
         var single = false;
+        var templet = $("#openPopover").html();
         if(type==1){
             var data={
-                pid:$(".select").attr('data-tab'),
+                class:0,
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
 
@@ -162,11 +163,16 @@
                 }
             }
         }else if(type==2){
+            var _class = $("#openPopover2").html();
             var data={
-                pid:$(".select").attr('data-tab'),
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
             };
+            if(_class=="书记述职"){
+                data["class"] = 1;
+            }else{
+                data["class"] = 2;
+            }
             for(var key in data){
                 if(data[key]!= ''&& data[key]!=undefined){
                     single = true;
@@ -175,14 +181,26 @@
             }
         }
         if(single){
-            data['type'] = 2;
-            data['status'] = 3;
-            data['images'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
+            data['list_image']=[];
+            if(templet = "模板1"){
+                data["templet"] = 1;
+            }else{
+                data["templet"] = 2;
+            }
+            $(".img img").each(function(){
+                if($(this).data("tab")){
+                    data['list_image'].push($(this).data("tab")+"")  ;
+                }
+            })
+
+//            data['list_image'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
+            console.log(data)
             $.ajax({
                 type:"post",
                 url: "{:Url('Responsibility/publish')}",
                 data:data,
                 success:function(data){
+                    console.log(data)
                     if(data.code == 1){
                         swal({
                             title: " ",
@@ -218,9 +236,6 @@
                 timer:1500
             });
         }
-
-
-
     });
 
 
