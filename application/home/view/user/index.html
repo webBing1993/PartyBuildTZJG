@@ -38,10 +38,12 @@
 		<span>我的发布</span>
 		<i class="fa fa-angle-right fr"></i>
 	</a>
-	<a href="{:Url('User/mypublish')}" class="list clear">
+	{eq name="$is" value="1"}
+	<a href="{:Url('User/item')}" class="list clear">
 		<span>积分明细</span>
 		<i class="fa fa-angle-right fr"></i>
 	</a>
+	{/eq}
 </div>
 {/eq}
 {/block}

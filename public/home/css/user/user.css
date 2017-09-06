@@ -73,15 +73,15 @@ body {
   background: url("/home/images/user/message.png") 0 3vw no-repeat;
   background-size: 7.5vw 7.5vw;
 }
-.lists .list:nth-child(2) span {
+.lists .list:nth-child(6) span {
   background: url("/home/images/user/collect.png") 0 3vw no-repeat;
   background-size: 7.5vw 7.5vw;
 }
-.lists .list:nth-child(3) span {
+.lists .list:nth-child(2) span {
   background: url("/home/images/user/join.png") 0 3vw no-repeat;
   background-size: 7.5vw 7.5vw;
 }
-.lists .list:nth-child(4) span {
+.lists .list:nth-child(7) span {
   background: url("/home/images/user/score.jpg") 0 3vw no-repeat;
   background-size: 7.5vw 7.5vw;
 }
@@ -89,11 +89,11 @@ body {
   background: url("/home/images/user/integral.png") 0 3vw no-repeat;
   background-size: 7.5vw 7.5vw;
 }
-.lists .list:nth-child(6) span {
+.lists .list:nth-child(3) span {
   background: url("/home/images/user/notes.png") 0 3vw no-repeat;
   background-size: 7.5vw 7.5vw;
 }
-.lists .list:nth-child(7) span {
+.lists .list:nth-child(4) span {
   background: url("/home/images/user/publish.png") 0 3vw no-repeat;
   background-size: 7.5vw 7.5vw;
 }

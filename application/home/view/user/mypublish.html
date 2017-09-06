@@ -1,0 +1,247 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/user/collect.css">
+{/block}
+
+{block name="body"}
+{empty name="list1"}
+<div class="default">
+	<img src="/home/images/common/nomessage.png" alt="暂无消息">
+</div>
+{else/}
+<!--四种状态：通过pass 1、待审核delay 0、未通过refer 2、草稿draft 3-->
+<div class="lists">
+	{volist name="list1" id="vo"}
+	<div class="listbox">
+		<a href="{:Url('User/publishreview?id='.$vo['id'])}" class="list list_des clear">
+			<div class="title limit">{$vo.title}</div>
+			<div class="content limit_">{$vo.description}</div>
+			<div class="note clear">
+				{if condition="$vo.status eq 0"}
+				<span class="fl delay">待审核</span>
+				{elseif condition="$vo.status eq 1" /}
+				<span class="fl pass">通过</span>
+				{elseif condition="$vo.status eq 2" /}
+				<span class="fl refer">未通过</span>
+				{else/}
+				<span class="fl draft">草稿</span>
+				{/if}
+				<span class="time fr">{$vo.create_time|time_format="Y-m-d"}</span>
+			</div>
+		</a>
+		<div class="delete" onclick="listDel(this,{$vo['id']})">
+			删除
+		</div>
+		{eq name="vo.status" value="3"}
+		<a href="{:Url('Notice/publish?id='.$vo['id'])}" class="edit">
+			修改
+		</a>
+		{/eq}
+	</div>
+	{/volist}
+</div>
+<div class="tip"></div>
+<div class="loading hidden">
+	<div class="typing_loader"></div>
+</div>
+{/empty}
+{/block}
+
+{block name="script"}
+<script>
+$(function(){
+	//模块标题
+	$('title' ).text('个人中心');
+	//reset
+	var len = $(".list" ).length;
+	if(len >= 7){
+		$('.tip' ).text('上拉加载更多');
+	}
+	//上拉加载
+	loadScroll();
+	//滑动删除
+	listMove();
+});
+function listMove(){
+	var lastX;
+	var pressedObj;
+	var lastLeftObj;
+	var start; //按下的点
+	var list = $('.listbox');
+	// 滑动删除
+	for (var i = 0; i < list.length; ++i) {
+		//当前滑动的点
+		list[i].addEventListener('touchstart', function(e){
+			lastX = e.changedTouches[0].pageX;
+			pressedObj = this;
+			var touches = event.touches[0];
+			start = {
+				x: touches.pageX,
+				y: touches.pageY
+			};
+		});
+		//阻止纵向滚动
+		list[i].addEventListener('touchmove',function(e){
+			var touches = event.touches[0];
+			delta = {
+				x: touches.pageX - start.x,
+				y: touches.pageY - start.y
+			};
+			if (Math.abs(delta.x) > Math.abs(delta.y)) {
+				event.preventDefault();
+			}
+		});
+		list[i].addEventListener('touchend', function(e){
+			var diffX = e.changedTouches[0].pageX - lastX;
+			var del = $(this ).find('.delete');
+			var edit = $(this ).find('.edit');
+			if (diffX < 0) {
+				if($(pressedObj).children().length ==2 ){
+					// 左滑
+					$(pressedObj).animate({marginLeft:"-60px"},{duration: 400, easing: "swing" });
+					del.animate({'right':0},{duration: 400, easing: "swing" });
+				}else{
+					// 左滑
+					$(pressedObj).animate({marginLeft:"-120px"},{duration: 400, easing: "swing" });
+					del.animate({'right':'60px'},{duration: 400, easing: "swing" });
+					edit.animate({'right':0},{duration: 400, easing: "swing" });
+				}
+				if($(lastLeftObj).children().length ==2 ){
+					// 重置
+					lastLeftObj && lastLeftObj != pressedObj &&
+					$(lastLeftObj).animate({marginLeft:"0"},{duration: 400, easing: "swing" })&&
+					$(lastLeftObj).find(".delete").animate({'right':'-60px'},{duration: 400, easing: "swing" });
+				}else{
+					// 重置
+					lastLeftObj && lastLeftObj != pressedObj &&
+					$(lastLeftObj).animate({marginLeft:"0"},{duration: 400, easing: "swing" })&&
+					$(lastLeftObj).find(".delete").animate({'right':'-60px'},{duration: 400, easing: "swing" });
+					$(lastLeftObj).find(".edit").animate({'right':'-120px'},{duration: 400, easing: "swing" });
+				}
+				lastLeftObj = pressedObj;
+			} else if (diffX > 0) {
+				// 右滑
+				$(pressedObj).animate({marginLeft:"0"},{duration: 400, easing: "swing" });
+				del.animate({'right':'-60px'},{duration: 400, easing: "swing" });
+				if($(pressedObj).children().length == 3 ){
+					edit.animate({'right':'-120px'},{duration: 400, easing: "swing" });
+				}
+
+				//重置
+				lastLeftObj = null;
+			}
+		});
+	}
+}
+function listDel(e,cid){
+	var this_ = $(e );
+	var ww = this_.parents('.listbox').width()-this_.width();
+	//移到success
+	if(this_.children().length ==2 ){
+		this_.animate({right:ww},{duration: 400, easing: "swing" });
+		this_.parents('.listbox').animate({marginLeft:-ww},function(){
+			this_.parents('.listbox' ).slideUp(600)
+		});
+	}else{
+		this_.animate({right:ww},{duration: 400, easing: "swing" });
+		this_.next('.edit').animate({right:ww},{duration: 400, easing: "swing" });
+		this_.parents('.listbox').animate({marginLeft:-ww},function(){
+			this_.parents('.listbox' ).slideUp(600)
+		});
+	}
+	$.ajax({
+		type:"post",
+		url:"{:Url('User/mydel')}",
+		data:{
+			id:cid
+		},
+		success:function(){
+
+		}
+	})
+}
+function loadScroll(){
+	$(window ).off("scroll" ).on("scroll",function(){
+		var dh = $(document).height();
+		var end = $(window).height() + $(window ).scrollTop();
+		var len = $(".list" ).length;
+		var tip = $(".tip");
+		var loading = $('.loading');
+		var userId = '{$Think.session.userId}';
+		if(dh == end){
+			$.ajax({
+				type:"post",
+				url:"{:Url('User/publishmore')}",
+				data:{
+					length:len,
+					userid:userId
+				},
+				beforeSend: function(XMLHttpRequest){
+					tip.hide();
+					loading.toggleClass('hidden');
+				},
+				success:function(data){
+					loading.toggleClass('hidden');
+					tip.show();
+					if(data.code == 1){
+						addLists(data);
+						var dataLen =data.data.length;
+						if(data.data.length == 5){
+							tip.text('上拉加载更多');
+						}
+						listMove();
+					}else{
+						tip.text('没有更多了');
+						$(window ).off("scroll");
+					}
+				}
+			})
+		}
+	})
+}
+function addLists(data){
+	var html = '';
+	var lists = data.data;
+	var len = lists.length;
+	for(var i = 0; i< len;i++){
+		var list = lists[i];
+		html +=
+				'<div class="listbox">'+
+				'<a href="/home/user/publishreview/id/'+list.id+'.html" class="list list_des clear">'+
+				'<div class="title limit">'+list.title+'</div>'+
+				'<div class="content limit_">'+list.description+'</div>'+
+				'<div class="note clear">';
+		if(list.status == 1){
+			html +=
+					'<span class="fl pass">审核通过</span>';
+		}else if(list.status == 0){
+			html +=
+					'<span class="fl delay">待审核</span>';
+		}else if(list.status == 2){
+			html +=
+					'<span class="fl refer">审核未通过</span>';
+		}else if(list.status == 3){
+			html +=
+					'<span class="fl draft">草稿</span>';
+		}
+		html +=
+				'<span class="time fr">'+list.time+'</span>'+
+				'</div>'+
+				'</a>'+
+				'<div class="delete" onclick="listDel(this,'+list.id+')">'+
+				'删除'+
+				'</div>';
+		if(list.status == 3){
+			html +=
+					'<a href="/home/notice/publish/id/'+list.id+'.html" class="edit">修改 </a>';
+		}
+		html +=
+				'</div>';
+
+
+	}
+	$(".lists" ).append(html);
+}
+</script>
+{/block}

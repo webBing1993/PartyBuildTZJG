@@ -407,7 +407,7 @@ body {
   .d_list>.d_name{
     font-size: 0.38rem;
     color: #333;
-    width:100%;
+    width:60%;
   }
   .d_list>.d_tel{
     color: #29adf0;

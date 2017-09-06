@@ -20,17 +20,21 @@
 		<span class="fl">姓名</span>
 		<span class="fr">{$user.name}</span>
 	</div>
-	<div class="list clear toshow"  data-toggle="modal" data-target="#modal">
-		<span class="fl">二维码</span>
-		<span class="fr"><img src="/home/images/user/code.png" alt="" class="er"><i class="fa fa-angle-right"></i></span>
-	</div>
+	<!--<div class="list clear toshow"  data-toggle="modal" data-target="#modal">-->
+		<!--<span class="fl">二维码</span>-->
+		<!--<span class="fr"><img src="/home/images/user/code.png" alt="" class="er"><i class="fa fa-angle-right"></i></span>-->
+	<!--</div>-->
 	<div class="list clear">
 		<span class="fl">性别</span>
 		<span class="fr">{$user.sex}</span>
 	</div>
 	<div class="list clear">
 		<span class="fl">出生日期</span>
+		{empty name="$user.birthday"}
+		<span class="fr"></span>
+		{else/}
 		<span class="fr">{$user.birthday|time_format="Y-m-d"}</span>
+		{/empty}
 	</div>
 	<div class="list clear">
 		<span class="fl">手机号</span>
@@ -42,29 +46,33 @@
 	</div>
 	<div class="list clear">
 		<span class="fl">入党时间</span>
+		{empty name="$user.birthday"}
+		<span class="fr"></span>
+		{else/}
 		<span class="fr">{$user.partytime|time_format="Y-m-d"}</span>
+		{/empty}
 	</div>
 	<div class="list clear">
-		<span class="fl">所在分组</span>
+		<span class="fl">所在支部</span>
 		<span class="fr">{$user.department}</span>
 	</div>
 </div>
-<div class="lists">
-	<div class="list clear tag">
-		<span class="fl">党员缴费</span>
-	</div>
-	<div class="list clear">
-		<span class="fl">暂无</span>
-		<!--<span class="fr">10</span>-->
-	</div>
-	<!--<div class="list clear">-->
-		<!--<span class="fl">2016年10月</span>-->
-		<!--<span class="fr">10</span>-->
+<!--<div class="lists">-->
+	<!--<div class="list clear tag">-->
+		<!--<span class="fl">党员缴费</span>-->
 	<!--</div>-->
 	<!--<div class="list clear">-->
-	<!--<span class="fl">2016年10月</span>-->
-	<!--<span class="fr">10</span>-->
-</div>
+		<!--<span class="fl">暂无</span>-->
+		<!--&lt;!&ndash;<span class="fr">10</span>&ndash;&gt;-->
+	<!--</div>-->
+	<!--&lt;!&ndash;<div class="list clear">&ndash;&gt;-->
+		<!--&lt;!&ndash;<span class="fl">2016年10月</span>&ndash;&gt;-->
+		<!--&lt;!&ndash;<span class="fr">10</span>&ndash;&gt;-->
+	<!--&lt;!&ndash;</div>&ndash;&gt;-->
+	<!--&lt;!&ndash;<div class="list clear">&ndash;&gt;-->
+	<!--&lt;!&ndash;<span class="fl">2016年10月</span>&ndash;&gt;-->
+	<!--&lt;!&ndash;<span class="fr">10</span>&ndash;&gt;-->
+<!--</div>-->
 <!-- 二维码 -->
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -72,7 +80,11 @@
 			<div class="code">
 				<div id="qrcode"></div>
 			</div>
-			<img src="{$user.headimgurl}" alt="个人头像" class="header">
+			{notempty name="$user.header"}
+			<img src="{$user.header}" alt="个人头像" class="header">
+			{else/}
+			<img src="{$user.avatar}" alt="个人头像" class="header">
+			{/notempty}
 		</div>
 	</div>
 </div>
