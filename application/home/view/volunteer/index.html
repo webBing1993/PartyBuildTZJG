@@ -104,13 +104,13 @@
     window.onload = function() {
         moveanyway("publish");
         if(c==0){
-            if ($(".training ul a").length < 10) {
+            if ($(".training ul a").length < 7) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(c==1){
-            if ($(".theory ul a").length < 10) {
+            if ($(".theory ul a").length < 7) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -150,7 +150,7 @@
                 if(data.code == 1){
                     addLists(data,c);
                     var dataLen =data.data.length;
-                    if(data.data.length == 5){
+                    if(data.data.length == 7){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                     }else{
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
@@ -171,9 +171,9 @@
             html +=
                     '<a>'+
                     '<img src="/home/images/pioneer/banner.png">'+
-                    '<p>主题党日</p>'+
-                    '<span>之图党支部</span>'+
-                    '<span>2017-8-21</span>'+
+                    '<p>'+list.title+'</p>'+
+                    '<span>'+list.publisher+'</span>'+
+                    '<span>'+list.time+'</span>'+
                     '</a>'
         }
         if(type==0){
@@ -190,13 +190,13 @@
         mui('#refreshContainer').pullRefresh().refresh(true);
         c = this.getAttribute("data-index");
         if(c==0){
-            if($(".training ul a").length<10){
+            if($(".training ul a").length<7){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(c==1){
-            if($(".theory ul a").length<10){
+            if($(".theory ul a").length<7){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
