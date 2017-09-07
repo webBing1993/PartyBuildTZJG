@@ -188,3 +188,10 @@ a:active {
   top: 17px;
   left: calc( 50vw - 20px );
 }
+.default{
+  text-align: center;
+}
+.default img{
+  width:16vw;
+  margin-top: 50%;
+}
