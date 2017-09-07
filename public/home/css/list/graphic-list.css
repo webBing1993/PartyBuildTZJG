@@ -6,10 +6,11 @@
     overflow: hidden;
     padding: 2vw 3vw;
     border-bottom: 1px solid #f1f1f1;
+    position:relative;
 }
 .list ul a img{
-    width:2.4rem;
-    height:1.6rem;
+    width: 24vw;
+    height: 16vw;
     float: left;
     margin-right: 2vw;
 }
@@ -33,9 +34,13 @@
     overflow: hidden;
     white-space:nowrap;
     width: 50%;
+    position: absolute;
+    bottom: 2vw;
 }
 .list ul a span:nth-child(4){
-    float: right;
+    position: absolute;
+    right: 3vw;
+    bottom: 2vw;
 }
 
 /*suspension button*/

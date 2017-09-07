@@ -10,7 +10,7 @@ use app\home\model\WechatTest;
 use app\home\model\WechatUser;
 
 class Features extends Base{
-    /* 方案部署 */
+    /* 特色创新 */
     public function index(){
         return $this->fetch();
     }
