@@ -19,12 +19,13 @@
     </div>
 </div>
 <!--[悬浮按钮]-->
-<a href="{:Url('incorrupt/publish')}" class="after manager" id="publish"></a>
+<span href="{:Url('incorrupt/publish')}" class="after manager" id="publish"></span>
 {/block}
 
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+    var type =  parseInt(window.location.href.split("/type/")[1]);
     window.onload = function() {
         moveanyway("publish");
         if ($(".list ul a").length < 7) {
@@ -92,6 +93,12 @@
     //触发点击事件
     mui('#refreshContainer').on('tap', 'a', function(e) {
         var url = this.getAttribute("href");
+        window.location.href = url;
+    });
+
+    //触发点击事件
+    mui('body').on('tap', '#publish', function(e) {
+        var url = this.getAttribute("href")+"?"+type;
         window.location.href = url;
     });
 </script>
