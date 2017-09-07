@@ -21,12 +21,13 @@
 </div>
 
 <!--[悬浮按钮]-->
-<a href="{:Url('style/publish')}" class="after manager" id="publish"></a>
+<span href="{:Url('style/publish')}" class="after manager" id="publish"></span>
 {/block}
 
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+    var type =  parseInt(window.location.href.split("/style/")[1]);
     window.onload = function() {
         moveanyway();
         if ($(".list ul a").length < 7) {
@@ -92,6 +93,11 @@
 
     mui('#refreshContainer').on('tap', 'a', function(e) {
         var url = this.getAttribute("href");
+        window.location.href = url;
+    });
+
+    mui('body').on('tap', '#publish', function(e) {
+        var url = this.getAttribute("href")+"?"+type;
         window.location.href = url;
     });
 </script>
