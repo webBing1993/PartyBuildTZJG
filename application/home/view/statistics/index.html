@@ -11,7 +11,7 @@
 {block name="body"}
 <div class="listbox">
         <div class="list">
-            <div class="title">党员关注比例</div>
+            <div class="title">党支部关注比例</div>
             <div class="pie" id="pie3" ></div>
         </div>
 </div>
@@ -46,8 +46,8 @@
                 },
                 data:[
                     {
-                        value:801,
-                        name:'关注：'+Math.round((801 / 824)*100)+'%',
+                        value:"{$msg.num_is}",
+                        name:'关注：'+Math.round(("{$msg.num_is}" / "{$msg.sum}")*100)+'%',
                         label:{
                             normal:{
                                 fontSize:30
@@ -55,8 +55,8 @@
                         }
                     },
                     {
-                        value:23,
-                        name:'未关注：'+Math.round((23 / 824)*100)+'%',
+                        value:"{$msg.num_not}",
+                        name:'未关注：'+Math.round(("{$msg.num_not}" / "{$msg.sum}")*100)+'%',
                         label:{
                             normal:{
                                 fontSize:30
