@@ -189,6 +189,9 @@ class Review extends Base{
             'status' => ['egt',0],
         );
         $info = Db::name($table)->where($map)->find();
+        if(!empty($info['list_images'])){
+            $info['list_images'] = json_decode($info['list_images']);
+        }
         return $info;
     }
     /**

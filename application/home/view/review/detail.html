@@ -22,7 +22,7 @@
             </div>
             <div class="content">
                 {volist name="$info.list_images" id="img"}
-                <img src="{$img}" alt="笔记图片" class="img" style="width:100%">
+                <img src="{$img|get_cover='path'}" alt="笔记图片" class="img" style="width:100%"><br>
                 {/volist}
                 <div class="article-content">{$info.content}</div>
             </div>
