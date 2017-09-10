@@ -1,7 +1,7 @@
 {extend name="public/common"}
 
 {block name="style"}
-<link rel="stylesheet" href="/home/css/user/collect.css">
+<link rel="stylesheet" href="/home/css/review/index.css">
 {/block}
 
 {block name="body"}
@@ -10,41 +10,42 @@
 	<img src="/home/images/common/nomessage.png" alt="暂无消息">
 </div>
 {else/}
-<!--四种状态：通过pass 1、待审核delay 0、未通过refer 2、草稿draft 3-->
-<div class="lists">
-	{volist name="list1" id="vo"}
-	<div class="listbox">
-		<a href="{:Url('User/publishreview?id='.$vo['id'])}" class="list list_des clear">
-			<div class="title limit">{$vo.title}</div>
-			<div class="content limit_">{$vo.description}</div>
-			<div class="note clear">
-				{if condition="$vo.status eq 0"}
-				<span class="fl delay">待审核</span>
-				{elseif condition="$vo.status eq 1" /}
-				<span class="fl pass">通过</span>
-				{elseif condition="$vo.status eq 2" /}
-				<span class="fl refer">未通过</span>
-				{else/}
-				<span class="fl draft">草稿</span>
-				{/if}
-				<span class="time fr">{$vo.create_time|time_format="Y-m-d"}</span>
-			</div>
-		</a>
-		<div class="delete" onclick="listDel(this,{$vo['id']})">
-			删除
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+	<div class="mui-scroll">
+<div class="Audited">
+	{empty name="list3"}
+	<div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+	{else/}
+	<ul>
+		{volist name="list3" id="ll"}
+		<li>
+			<a href="#" class="list clear" data-type="{$ll.class}">
+				<img src="{$ll.front_cover}">
+				<span>{$ll.title}</span>
+				{switch name='ll.class'}
+				{case value='1'}<p>[党建责任]</p><p>审核人：{$ll.username}</p>{/case}
+				{case value='2'}<p>[两学一做]</p><p>审核人：{$ll.username}</p>{/case}
+				{case value='3'}<p>[组织建设]</p><p>审核人：{$ll.username}</p>{/case}
+				{case value='4'}<p>[特色创新]</p><p>审核人：{$ll.username}</p>{/case}
+				{case value='5'}<p>[作风建设]</p><p>审核人：{$ll.username}</p>{/case}
+				{case value='6'}<p>[志愿服务]</p><p>审核人：{$ll.username}</p>{/case}
+				{default/}<p>[党风廉政]</p><p>审核人：{$ll.username}</p>
+				{/switch}
+				<span>{$ll.review_time}</span>
+				{eq name="ll.status" value="1"}
+				<i class="pass"></i>
+				{/eq}
+				{eq name="ll.status" value="2"}
+				<i class="refuse"></i>
+				{/eq}
+			</a>
+		</li>
+		{/volist}
+	</ul>
+	{/empty}
+</div>
 		</div>
-		{eq name="vo.status" value="3"}
-		<a href="{:Url('Notice/publish?id='.$vo['id'])}" class="edit">
-			修改
-		</a>
-		{/eq}
 	</div>
-	{/volist}
-</div>
-<div class="tip"></div>
-<div class="loading hidden">
-	<div class="typing_loader"></div>
-</div>
 {/empty}
 {/block}
 
@@ -53,123 +54,31 @@
 $(function(){
 	//模块标题
 	$('title' ).text('个人中心');
-	//reset
-	var len = $(".list" ).length;
-	if(len >= 7){
-		$('.tip' ).text('上拉加载更多');
-	}
-	//上拉加载
-	loadScroll();
-	//滑动删除
-	listMove();
 });
-function listMove(){
-	var lastX;
-	var pressedObj;
-	var lastLeftObj;
-	var start; //按下的点
-	var list = $('.listbox');
-	// 滑动删除
-	for (var i = 0; i < list.length; ++i) {
-		//当前滑动的点
-		list[i].addEventListener('touchstart', function(e){
-			lastX = e.changedTouches[0].pageX;
-			pressedObj = this;
-			var touches = event.touches[0];
-			start = {
-				x: touches.pageX,
-				y: touches.pageY
-			};
-		});
-		//阻止纵向滚动
-		list[i].addEventListener('touchmove',function(e){
-			var touches = event.touches[0];
-			delta = {
-				x: touches.pageX - start.x,
-				y: touches.pageY - start.y
-			};
-			if (Math.abs(delta.x) > Math.abs(delta.y)) {
-				event.preventDefault();
-			}
-		});
-		list[i].addEventListener('touchend', function(e){
-			var diffX = e.changedTouches[0].pageX - lastX;
-			var del = $(this ).find('.delete');
-			var edit = $(this ).find('.edit');
-			if (diffX < 0) {
-				if($(pressedObj).children().length ==2 ){
-					// 左滑
-					$(pressedObj).animate({marginLeft:"-60px"},{duration: 400, easing: "swing" });
-					del.animate({'right':0},{duration: 400, easing: "swing" });
-				}else{
-					// 左滑
-					$(pressedObj).animate({marginLeft:"-120px"},{duration: 400, easing: "swing" });
-					del.animate({'right':'60px'},{duration: 400, easing: "swing" });
-					edit.animate({'right':0},{duration: 400, easing: "swing" });
-				}
-				if($(lastLeftObj).children().length ==2 ){
-					// 重置
-					lastLeftObj && lastLeftObj != pressedObj &&
-					$(lastLeftObj).animate({marginLeft:"0"},{duration: 400, easing: "swing" })&&
-					$(lastLeftObj).find(".delete").animate({'right':'-60px'},{duration: 400, easing: "swing" });
-				}else{
-					// 重置
-					lastLeftObj && lastLeftObj != pressedObj &&
-					$(lastLeftObj).animate({marginLeft:"0"},{duration: 400, easing: "swing" })&&
-					$(lastLeftObj).find(".delete").animate({'right':'-60px'},{duration: 400, easing: "swing" });
-					$(lastLeftObj).find(".edit").animate({'right':'-120px'},{duration: 400, easing: "swing" });
-				}
-				lastLeftObj = pressedObj;
-			} else if (diffX > 0) {
-				// 右滑
-				$(pressedObj).animate({marginLeft:"0"},{duration: 400, easing: "swing" });
-				del.animate({'right':'-60px'},{duration: 400, easing: "swing" });
-				if($(pressedObj).children().length == 3 ){
-					edit.animate({'right':'-120px'},{duration: 400, easing: "swing" });
-				}
 
-				//重置
-				lastLeftObj = null;
-			}
-		});
-	}
-}
-function listDel(e,cid){
-	var this_ = $(e );
-	var ww = this_.parents('.listbox').width()-this_.width();
-	//移到success
-	if(this_.children().length ==2 ){
-		this_.animate({right:ww},{duration: 400, easing: "swing" });
-		this_.parents('.listbox').animate({marginLeft:-ww},function(){
-			this_.parents('.listbox' ).slideUp(600)
-		});
-	}else{
-		this_.animate({right:ww},{duration: 400, easing: "swing" });
-		this_.next('.edit').animate({right:ww},{duration: 400, easing: "swing" });
-		this_.parents('.listbox').animate({marginLeft:-ww},function(){
-			this_.parents('.listbox' ).slideUp(600)
-		});
-	}
-	$.ajax({
-		type:"post",
-		url:"{:Url('User/mydel')}",
-		data:{
-			id:cid
-		},
-		success:function(){
-
+window.onload = function() {
+		if ($(".Audited ul li").length < 7) {
+			mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+		} else {
+			mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
 		}
-	})
 }
+
+
+
+
+//初始化下拉加载
+mui.init({
+	pullRefresh: {
+		container: '#refreshContainer',
+		up: {
+			callback: loadScroll
+		}
+	}
+});
+
 function loadScroll(){
-	$(window ).off("scroll" ).on("scroll",function(){
-		var dh = $(document).height();
-		var end = $(window).height() + $(window ).scrollTop();
-		var len = $(".list" ).length;
-		var tip = $(".tip");
-		var loading = $('.loading');
 		var userId = '{$Think.session.userId}';
-		if(dh == end){
 			$.ajax({
 				type:"post",
 				url:"{:Url('User/publishmore')}",
@@ -178,27 +87,21 @@ function loadScroll(){
 					userid:userId
 				},
 				beforeSend: function(XMLHttpRequest){
-					tip.hide();
-					loading.toggleClass('hidden');
 				},
 				success:function(data){
-					loading.toggleClass('hidden');
-					tip.show();
 					if(data.code == 1){
 						addLists(data);
 						var dataLen =data.data.length;
-						if(data.data.length == 5){
-							tip.text('上拉加载更多');
+						if(data.data.length == 7){
+							mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+						}else{
+							mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
 						}
-						listMove();
 					}else{
-						tip.text('没有更多了');
-						$(window ).off("scroll");
+						mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
 					}
 				}
 			})
-		}
-	})
 }
 function addLists(data){
 	var html = '';
@@ -206,42 +109,43 @@ function addLists(data){
 	var len = lists.length;
 	for(var i = 0; i< len;i++){
 		var list = lists[i];
-		html +=
-				'<div class="listbox">'+
-				'<a href="/home/user/publishreview/id/'+list.id+'.html" class="list list_des clear">'+
-				'<div class="title limit">'+list.title+'</div>'+
-				'<div class="content limit_">'+list.description+'</div>'+
-				'<div class="note clear">';
-		if(list.status == 1){
-			html +=
-					'<span class="fl pass">审核通过</span>';
-		}else if(list.status == 0){
-			html +=
-					'<span class="fl delay">待审核</span>';
-		}else if(list.status == 2){
-			html +=
-					'<span class="fl refer">审核未通过</span>';
-		}else if(list.status == 3){
-			html +=
-					'<span class="fl draft">草稿</span>';
+		var link = '/home/review/detail/class/'+list.class+'/id/'+list.id;
+		if(list.class == 1){
+			class_name = '[党建责任]';
+		}else if(list.class == 2){
+			class_name = '[两学一做]';
+		}else if(list.class == 3){
+			class_name = '[组织建设]';
+		}else if(list.class == 4){
+			class_name = '[特色创新]';
+		}else if(list.class == 5){
+			class_name = '[作风建设]';
+		}else if(list.class == 6){
+			class_name = '[志愿服务]';
+		}else if(list.class == 7){
+			class_name = '[党风廉政]';
 		}
 		html +=
-				'<span class="time fr">'+list.time+'</span>'+
-				'</div>'+
-				'</a>'+
-				'<div class="delete" onclick="listDel(this,'+list.id+')">'+
-				'删除'+
-				'</div>';
-		if(list.status == 3){
-			html +=
-					'<a href="/home/notice/publish/id/'+list.id+'.html" class="edit">修改 </a>';
+				'<li>'+
+				'<a href="#" class="list clear" data-type="1">'+
+				'<img src="'+list.front_cover+'">'+
+				'<span>'+ list.title + '</span>'+
+				'<p>'+ class_name+ '</p>'+
+				'<p>'+
+				'	审核人：  '+list.username+''+
+				'</p>'+
+				'<span> '+list.review_time+'</span>'
+		if (list.review_status == 1){
+			html+='<i class="pass"></i>';
+		}else {
+			html+='<i class="refuse"></i>';
 		}
-		html +=
-				'</div>';
+		html +='</a>'+
+				'</li>';
 
 
 	}
-	$(".lists" ).append(html);
+	$(".Audited" ).append(html);
 }
 </script>
 {/block}
