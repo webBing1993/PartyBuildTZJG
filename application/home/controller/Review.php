@@ -412,42 +412,49 @@ class Review extends Base{
                 $pre = "【党建责任】";
                 $url = "Responsibility/detail";
                 $agentid = 1000002;
+                $Wechat = new TPQYWechat(Config::get('responsibility'));
                 break;
             case 2:
                 $table = "learn";
                 $pre = "【两学一做】";
                 $url = "Learn/detail";
                 $agentid = 1000003;
+                $Wechat = new TPQYWechat(Config::get('learn'));
                 break;
             case 3:
                 $table = "organization";
                 $pre = "【组织建设】";
                 $url = "Organization/detail";
                 $agentid = 1000004;
+                $Wechat = new TPQYWechat(Config::get('organization'));
                 break;
             case 4:
                 $table = "special";
                 $pre = "【特色创新】";
                 $url = "Special/detail";
                 $agentid = 1000005;
+                $Wechat = new TPQYWechat(Config::get('special'));
                 break;
             case 5:
                 $table = "style";
                 $pre = "【作风建设】";
                 $url = "Style/detail";
-                $agentid = '';
+                $agentid = 1000013;
+                $Wechat = new TPQYWechat(Config::get('style'));
                 break;
             case 6:
                 $table = "volunteer";
                 $pre = "【志愿服务】";
                 $url = "Volunteer/detail";
                 $agentid = 1000006;
+                $Wechat = new TPQYWechat(Config::get('volunteer'));
                 break;
             case 7:
                 $table = "incorrupt";
                 $pre = "【党风廉政】";
                 $url = "Incorrupt/detail";
                 $agentid = 1000007;
+                $Wechat = new TPQYWechat(Config::get('incorrupt'));
                 break;
             default:
                 return $this->error("无该数据表");
@@ -473,7 +480,6 @@ class Review extends Base{
             )
         );
         //发送给服务号
-        $Wechat = new TPQYWechat(Config::get('news'));
         $message = array(
             'touser' =>'17557289172',
 //                   "touser" => "@all",   //发送给全体，@all

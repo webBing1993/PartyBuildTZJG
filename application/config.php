@@ -107,6 +107,12 @@ return [
         'appsecret' => '_zbJURRstsnvrTvIkWYGBzHsDyI2q7Wa0TOq8I_K3nE',
         'agentid' => 1000012
     ],
+    //作风建设
+    'style' => [
+        'appid' => 'wwbab5777aedaa7c19',
+        'appsecret' => 'K2N7ey3R2-ohVx9ooAWWE80eIJhMXS1QhTJZjJdZDYw',
+        'agentid' => 1000013
+    ],
 
     'host_url' => "http://".$_SERVER['HTTP_HOST']
 ];
