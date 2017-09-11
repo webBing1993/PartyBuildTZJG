@@ -33,8 +33,8 @@ class Statistics extends Base{
         $num1 = count($arr);
         $num2 = $sum - $num1;
         $msg = array(
-            'sum' => $sum,  // 总
-            'num_is' => $num1,  // 关注
+            'sum' => 800,  // 总
+            'num_is' => 500,  // 关注
             'num_not' => $num2   // 未关注
         );
         $this->assign('msg',$msg);

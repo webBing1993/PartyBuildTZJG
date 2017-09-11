@@ -29,6 +29,9 @@
             <div id="item1mobile" class="mui-slider-item mui-control-content">
                 <!--书记述职-->
                 <div class="list secretary">
+                    {empty name="$list.one"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <ul class="search-result-one">
                     </ul>
                     <ul class="secretary-all">
@@ -44,11 +47,15 @@
                         </a>
                         {/volist}
                     </ul>
+                    {/empty}
                 </div>
             </div>
             <div id="item2mobile" class="mui-slider-item mui-control-content">
                 <!--支部书记述职-->
                 <div class="list branch-secretary">
+                    {empty name="$list.two"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <ul class="search-result-two">
                     </ul>
                     <ul class="branch-secretary-all">
@@ -64,6 +71,7 @@
                         </a>
                         {/volist}
                     </ul>
+                    {/empty}
                 </div>
             </div>
         </div>

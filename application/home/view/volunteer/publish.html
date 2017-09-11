@@ -22,7 +22,7 @@
             <input style="text" placeholder="请输入标题">
         </li>
         <div class="content">
-            <textarea placeholder="请输入内容，不少于500字..."></textarea>
+            <textarea placeholder="请输入内容，不少于200字..."></textarea>
             <div class="imgs clear">
                 <div class="img fl hide"></div>
                 <div class="img fl hide"></div>
@@ -32,6 +32,7 @@
                     +
                 </div>
             </div>
+            <div style="color: #666;font-size: 0.32rem">（您最多上传3张图片，图片小于3M）</div>
             <input type="file" class="hide" id="upimg" accept="image/jpg, image/png, image/gif, image/jpeg">
         </div>
     </ul>
@@ -81,10 +82,10 @@
         };
         for(var key in data){
             if(data["title"]!= ''&& data["content"]!=""){
-//                    if(data["content"].length<300){
+//                    if(data["content"].length<200){
 //                        swal({
 //                            title: ' ',
-//                            text: '内容不少于500字',
+//                            text: '内容不少于200字',
 //                            type: 'error',
 //                            showConfirmButton:false,
 //                            timer:1500

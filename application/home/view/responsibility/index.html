@@ -13,6 +13,9 @@
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
         <div class="list">
+            {empty name="$list"}
+            <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+            {else/}
             <ul class="search-result">
             </ul>
             <ul class="all">
@@ -28,6 +31,7 @@
                 </a>
                 {/volist}
             </ul>
+            {/empty}
         </div>
     </div>
 </div>

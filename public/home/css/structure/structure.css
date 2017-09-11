@@ -412,6 +412,8 @@ body {
   .d_list>.d_tel{
     color: #29adf0;
     font-size: 0.32rem;
+    position: absolute;
+    right: 1rem;
   }
   .d_list>.d_tel>.d_tel_icon{
     width:26.67vw;
@@ -432,4 +434,5 @@ body {
   .d_name span{
     display: inline-block;
     width: 50%;
+    text-align: center;
   }

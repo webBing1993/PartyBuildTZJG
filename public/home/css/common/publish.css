@@ -77,6 +77,12 @@ input[type="date"]:before{
     margin: 0.2rem 0;
     padding-left: 0.3rem;
 }
+@media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2){
+    .list ul textarea{
+        height: 40vw;
+    }
+}
+
 textarea::-webkit-input-placeholder{
     font-size: 0.38rem;
     color: #999;

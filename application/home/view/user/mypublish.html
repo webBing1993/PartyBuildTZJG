@@ -57,11 +57,15 @@ $(function(){
 });
 
 window.onload = function() {
+	if ($(".Audited ul li").length > 0) {
 		if ($(".Audited ul li").length < 7) {
 			mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
 		} else {
 			mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
 		}
+	}
+
+
 }
 
 

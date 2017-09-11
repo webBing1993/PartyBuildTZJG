@@ -81,7 +81,7 @@
     </div>
 </div>
 <!--[悬浮按钮]-->
-<a href="{:Url('learn/publish?type=2')}" class="after manager" id="publish"></a>
+<span href="{:Url('learn/publish?type=3&style=3')}" class="after manager" id="publish"></span>
 {/block}
 
 {block name="script"}
@@ -204,6 +204,11 @@
 
     mui('#refreshContainer').on('tap', 'a', function(e) {
         var url = this.getAttribute("href");
+        window.location.href = url;
+    });
+
+    mui('body').on('tap', '#publish', function(e) {
+        var url = this.getAttribute("href")+"?"+c;
         window.location.href = url;
     });
 </script>
