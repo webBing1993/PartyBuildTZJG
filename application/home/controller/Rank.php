@@ -7,8 +7,11 @@
  */
 
 namespace app\home\controller;
+use app\home\model\WechatDepartment;
+use app\home\model\WechatDepartmentUser;
 use app\home\model\WechatUser;
 use app\home\model\WechatUserTag;
+use com\wechat\Wechat;
 use think\Controller;
 use think\Db;
 
@@ -22,6 +25,7 @@ class Rank extends Base {
      */
     public function department(){
         $this->anonymous();
+        $userId = session('userId');
         // 获取考核人员列表
         $list = WechatUserTag::where('tagid',1)->select();
         foreach($list as $value){
@@ -44,6 +48,9 @@ class Rank extends Base {
                 $list[$i+1] = $list[$i];
              }
         }
+        $depart = WechatDepartmentUser::where('userid',$userId)->value(['departmentid']);
+        $name = WechatDepartment::where('id',$depart)->value('name');
+        $this->assign('name',$name);
         $this->assign('all',$list);
         return $this->fetch();
     }
