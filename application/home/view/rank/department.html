@@ -92,7 +92,7 @@
             <ul>
                 <li>
                     <p>部门所有积分</p>
-                    {eq name="visit" value="1"}<p>无</p>{else/}<p>666</p>{/eq}
+                    {eq name="visit" value="1"}<p>无</p>{else/}<p>{$score}</p>{/eq}
                 </li>
             </ul>
         </div>
@@ -130,21 +130,13 @@
     <div class="foot" id="body">
         <div class="rank" age="1">
             <ul>
+                {volist name="all" id="al"}
                 <li>
-                    <span>1</span>
-                    <span>大家安静发动机房间爱上咖啡机卡十多斤福克斯看风景</span>
-                    <span>333分</span>
+                    <span>{$i}</span>
+                    <span>{$al.name}</span>
+                    <span>{$al.score}分</span>
                 </li>
-                <li>
-                    <span>2</span>
-                    <span>大家安静发动机房间爱上咖啡机卡十多斤福克斯看风景</span>
-                    <span>333分</span>
-                </li>
-                <li>
-                    <span>3</span>
-                    <span>大家安静发动机房间爱上咖啡机卡十多斤福克斯看风景</span>
-                    <span>333分</span>
-                </li>
+                {/volist}
             </ul>
         </div>
     </div>
