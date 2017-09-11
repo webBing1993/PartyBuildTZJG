@@ -78,11 +78,7 @@
             <img src="/home/images/vistor.jpg">
             <p>游客</p>
             {else/}
-            <img src="/home/images/pb.png" id="pic">
-            <div id="score">
-                <img src="/home/images/score.png" alt="规则" data-toggle="modal" data-target="#myModal">
-                <span data-toggle="modal" data-target="#myModal">积分规则</span>
-            </div>
+            <img src="/home/images/banner/pb.png" id="pic">
             <p>{$personal.name}</p>
             {/eq}
             <!--<p>杭州</p>-->
@@ -92,17 +88,6 @@
                 <li>
                     <p>部门所有积分</p>
                     {eq name="visit" value="1"}<p>无</p>{else/}<p>{$personal.score}</p>{/eq}
-                </li>
-                <span></span>
-                <li>
-                    <p>部门所在排名</p>
-                    {eq name="visit" value="1"}<p>无</p>{else/}
-                    {eq name="$personal.score" value="0"}
-                    <p>无</p>
-                    {else/}
-                    <p>{$personal.rank}</p>
-                    {/eq}
-                    {/eq}
                 </li>
             </ul>
         </div>
@@ -133,7 +118,7 @@
 
     <div class="body">
         <div class="body_top">
-            <img src="/home/images/int.jpg">
+            <img src="/home/images/banner/int.jpg">
             <span>系统积分排行榜</span>
         </div>
         <div class="body_body" id="title">
@@ -153,35 +138,17 @@
     <div class="foot" id="body">
         <div class="rank" age="1">
             <ul>
-                {volist name="week" id="fi" key="k"}
-                <li class="clear">
-                    <span class="fl ranking">{$k}</span>
-                    <span class="fl department">{$fi.name}</span>
-                    <span class="fl int">积分{$fi.score}分</span>
-                </li>
-                {/volist}
+
             </ul>
         </div>
         <div class="rank" age="2" style="display: none;">
             <ul>
-                {volist name="month" id="mo" key="k"}
-                <li class="clear">
-                    <span class="fl ranking">{$k}</span>
-                    <span class="fl department">{$mo.name}</span>
-                    <span class="fl int">积分{$mo.score}分</span>
-                </li>
-                {/volist}
+
             </ul>
         </div>
         <div class="rank" age="3" style="display: none;">
             <ul>
-                {volist name="all" id="vo" key="k"}
-                <li class="clear">
-                    <span class="fl ranking">{$k}</span>
-                    <span class="fl department">{$vo.name}</span>
-                    <span class="fl int">积分{$vo.score}分</span>
-                </li>
-                {/volist}
+
             </ul>
         </div>
     </div>
