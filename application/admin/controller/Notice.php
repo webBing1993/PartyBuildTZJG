@@ -110,7 +110,7 @@ class Notice extends Admin
         }else{
             // 指定对象  标签
             $message = array(
-                "totag" => "",
+                "totag" => 1,
                 "msgtype" => 'news',
                 "agentid" => '',  // 消息审核
                 "news" => ["articles" => $information],
