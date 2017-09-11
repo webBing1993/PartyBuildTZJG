@@ -8,6 +8,7 @@
 
 namespace app\home\controller;
 use app\home\model\WechatUser;
+use app\home\model\WechatUserTag;
 use think\Controller;
 use think\Db;
 
@@ -21,81 +22,29 @@ class Rank extends Base {
      */
     public function department(){
         $this->anonymous();
-        $userId = session('userId');
-        if($userId != "visitor"){
-            //所在部门名称
-            $personal = Db::table('pb_wechat_department_user')
-                ->alias('a')
-                ->join('pb_wechat_department b','a.departmentid = b.id','LEFT')
-                ->where('a.userid',$userId)
-                ->find();
-        }else{
-            $personal = array(
-                'id' => '',
-            );
+        // 获取考核人员列表
+        $list = WechatUserTag::where('tagid',1)->select();
+        foreach($list as $value){
+            $User = WechatUser::where('userid',$value['userid'])->find();
+            $score1 = $User['score_efficiency'];  // 机关效能积分
+            $score2 = $User['score_form'];  // 四种形态积分
+            $score3 = $User['score_satisfaction'];  // 满意度测评积分
+            $Arr = Db::name('score')->where('userid',$value['userid'])->whereTime('create_time','y')->select();
+            $score4 = 0;
+            foreach($Arr as $val){
+                $score4 += ($val['score_up'] / $val['score_down']);
+            }
+            $value['score'] = $score1 + $score2 + $score3 + $score4;
         }
-        //总榜，获取部门人员信息
-        $dpall = Db::table('pb_wechat_department')
-            ->alias('a')
-            ->join('pb_wechat_department_user b','a.id = b.departmentid','LEFT')
-            ->join('pb_wechat_user c','b.userid = c.userid','LEFT')
-            ->field('a.id,a.name,c.score')
-            ->select();
-
-        //合并相同数组的数据并值累加
-        $item = array();
-        foreach($dpall as $k=>$v){
-            if ($v['score'] != 0){
-                $v['score'] += 10;
-            }
-            if(!isset($item[$v['id']])){
-                $item[$v['id']]=$v;
-            }else{
-                $item[$v['id']]['score']+=$v['score'];
-            }
+        // 冒泡排序
+        for($i = 0;$i < count($list); $i++){
+            if ($list[$i] < $list[$i+1]){
+                $temp = $list[$i+1];
+                $list[$i] = $temp;
+                $list[$i+1] = $list[$i];
+             }
         }
-
-        //倒序，字段score排序
-        $sort = array(
-            'direction' => 'SORT_DESC',
-            'field' => 'score',
-        );
-        $arrSort = array();
-        foreach ($item as $k => $v){
-            foreach ($v as $key => $value){
-                $arrSort[$key][$k] = $value;
-            }
-        }
-        if($sort['direction'] && $arrSort){
-            array_multisort($arrSort[$sort['field']],constant($sort['direction']),$item);
-        }
-
-        //获取头部信息，并取20名用户
-        $new = array();
-        foreach ($item as $key=>$value){
-            if($value['id'] == $personal['id']){
-                $personal['score'] = $value['score'];
-            }
-            if($value['score'] != 0){
-                $new[$key] = $value;
-            }
-        }
-        $last = array();
-        foreach ($new as $k => $v){
-            if($v['id'] == $personal['id']){
-                $personal['score'] = $v['score'];
-                $personal['rank'] = $k+1;
-            }
-            if($k < 20){ //取小于20名排行
-                if ($v['id'] != 2){
-                    $last[$k] = $v;
-                } else {
-                    $personal['contrast']= $k+1;
-                }
-            }
-        }
-        $this->assign('all',$last);
-        $this->assign('personal',$personal);
+        $this->assign('all',$list);
         return $this->fetch();
     }
 

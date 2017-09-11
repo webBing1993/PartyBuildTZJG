@@ -191,14 +191,14 @@ function get_score($class,$aid,$userid){
                 case 1:  // 专题研究
                     if ($count < 2){
                         // 可以积分
-                        \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 0,'create_time' => time()]);
+                        \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 1,'create_time' => time()]);
                     }
                     break;
                 case 2:  // 责任清单
                 case 4:   // 工作计划
                     if ($count < 1){
                         // 可以积分
-                        \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 2,'score_down' => 0,'create_time' => time()]);
+                        \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 2,'score_down' => 1,'create_time' => time()]);
                     }
                     break;
                 case 3:  // 述职报告
@@ -218,7 +218,7 @@ function get_score($class,$aid,$userid){
                     $count = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();  // 获取已发布个数
                     if ($count < 1){
                         // 可以积分
-                        \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 0,'create_time' => time()]);
+                        \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 1,'create_time' => time()]);
                     }
                     break;
 
@@ -233,7 +233,7 @@ function get_score($class,$aid,$userid){
                 case 1:  // 方案部署
                     if ($count < 2){
                         // 可以积分
-                        \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 0,'create_time' => time()]);
+                        \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 1,'create_time' => time()]);
                     }
                     break;
                 case 3:  // 年度计划
@@ -253,13 +253,13 @@ function get_score($class,$aid,$userid){
                     $counts = \think\Db::name('score')->where($maps)->whereTime('create_time','y')->count();  // 获取已发布个数
                     if ($counts < 1){
                         // 可以积分
-                        \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 0,'create_time' => time()]);
+                        \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 1,'create_time' => time()]);
                     }
                     break;
                 case 4:   // 主题党日
                     if ($count < 1){
                         // 可以积分
-                        \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 2,'score_down' => 0,'create_time' => time()]);
+                        \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 2,'score_down' => 1,'create_time' => time()]);
                     }
                     break;
                 case 2:  // 三会一课  1支部委员大会 2党支部委员会 3党小组会 4党课
@@ -275,7 +275,7 @@ function get_score($class,$aid,$userid){
                             $count = \think\Db::name('score')->where($map)->count();  // 获取已发布个数
                             if ($count < 1){
                                 // 可以积分
-                                \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 0,'create_time' => time()]);
+                                \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 4,'create_time' => time()]);
                             }
                             break;
                         case 2:
@@ -287,7 +287,7 @@ function get_score($class,$aid,$userid){
                             $count = \think\Db::name('score')->where($map)->count();  // 获取已发布个数
                             if ($count < 1){
                                 // 可以积分
-                                \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 0,'create_time' => time()]);
+                                \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 10,'create_time' => time()]);
                             }
                             break;
                         case 3:
@@ -299,7 +299,7 @@ function get_score($class,$aid,$userid){
                             $count = \think\Db::name('score')->where($map)->count();  // 获取已发布个数
                             if ($count < 1){
                                 // 可以积分
-                                \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 0,'create_time' => time()]);
+                                \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 10,'create_time' => time()]);
                             }
                             break;
                         case 4:
@@ -309,7 +309,7 @@ function get_score($class,$aid,$userid){
                             $count = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();  // 获取已发布个数
                             if ($count < 3){
                                 // 可以积分
-                                \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 0,'create_time' => time()]);
+                                \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 1,'create_time' => time()]);
                             }
                             break;
                         default:
@@ -326,7 +326,7 @@ function get_score($class,$aid,$userid){
                     $count = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();  // 获取已发布个数
                     if ($count < 1){
                         // 可以积分
-                        \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 4,'score_down' => 0,'create_time' => time()]);
+                        \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 4,'score_down' => 1,'create_time' => time()]);
                     }
                     break;
                 default:  // 信息录用
@@ -342,7 +342,7 @@ function get_score($class,$aid,$userid){
             $counts = \think\Db::name('score')->where($maps)->whereTime('create_time','y')->count();  // 获取已发布个数
             if ($counts < 1){
                 // 可以积分
-                \think\Db::name('score')->insert(['class' => $class,'type' => 0,'aid' => $aid,'userid' => $userid,'score_up' => 10,'score_down' => 0,'create_time' => time()]);
+                \think\Db::name('score')->insert(['class' => $class,'type' => 0,'aid' => $aid,'userid' => $userid,'score_up' => 10,'score_down' => 1,'create_time' => time()]);
             }
             break;
         case 5:  // 作风建设
@@ -352,7 +352,7 @@ function get_score($class,$aid,$userid){
             $count = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();  // 获取已发布个数
             if ($count < 1){
                 // 可以积分
-                \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 2,'score_down' => 0,'create_time' => time()]);
+                \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 2,'score_down' => 1,'create_time' => time()]);
             }
             break;
         case 6:  // 志愿服务
@@ -364,10 +364,10 @@ function get_score($class,$aid,$userid){
                 // 可以积分
                 switch($info['type']){
                     case 1: // 四跑志愿活动
-                        \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 2,'score_down' => 0,'create_time' => time()]);
+                        \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 2,'score_down' => 1,'create_time' => time()]);
                         break;
                     default:
-                        \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 4,'score_down' => 0,'create_time' => time()]);
+                        \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 4,'score_down' => 1,'create_time' => time()]);
                 }
             }
             break;
@@ -378,7 +378,7 @@ function get_score($class,$aid,$userid){
             $count = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();  // 获取已发布个数
             if ($count < 1){
                 // 可以积分
-                \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 2,'score_down' => 0,'create_time' => time()]);
+                \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 2,'score_down' => 1,'create_time' => time()]);
             }
             break;
         default:
