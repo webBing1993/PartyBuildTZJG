@@ -41,3 +41,5 @@ class Statistics extends Base{
         return $this->fetch();
     }
 }
+
+
