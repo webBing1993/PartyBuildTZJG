@@ -44,6 +44,7 @@ class Learn extends Admin {
             }
             $res = $Model->validate(true)->save($data);
             if($res){
+                get_score(2,$res,$_SESSION['think']['user_auth']['id']);
                 return $this->success("新增成功",Url("Learn/index"));
             }else{
                 return $this->error($Model->getError());
