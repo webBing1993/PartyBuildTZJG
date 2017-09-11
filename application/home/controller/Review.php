@@ -442,6 +442,7 @@ class Review extends Base{
                 $agentid = 1000013;
                 $Wechat = new TPQYWechat(Config::get('style'));
                 break;
+            
             case 6:
                 $table = "volunteer";
                 $pre = "【志愿服务】";

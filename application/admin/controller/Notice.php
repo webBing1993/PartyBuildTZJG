@@ -120,6 +120,7 @@ class Notice extends Admin
         //发送给企业号
         $Wechat = new TPQYWechat(Config::get('notice'));
         $msg = $Wechat->sendMessage($message);  // 推送至审核
+        
         if($msg['errcode'] == 0){
             //保存到推送列表
             $result = NoticeModel::where('id',$id)->update(['push' => 1]);

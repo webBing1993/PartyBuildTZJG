@@ -107,6 +107,7 @@ return [
         'appsecret' => '_zbJURRstsnvrTvIkWYGBzHsDyI2q7Wa0TOq8I_K3nE',
         'agentid' => 1000012
     ],
+    
     //作风建设
     'style' => [
         'appid' => 'wwbab5777aedaa7c19',
