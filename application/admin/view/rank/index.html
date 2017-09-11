@@ -3,6 +3,10 @@
 {block name="style"}
 <style>
     .shadow{width: 100%;height: 100%;position: absolute;left: 0;top: 0;background: rgba(0,0,0,0.4);z-index: 88;}
+    input[name='jg'],input[name='xt'],input[name='my']{width:40px;text-align: center;margin:0 10px;}
+    .table tr td span{cursor: pointer;display: inline-block;
+        width: 20px;
+        text-align: center;}
 </style>
 {/block}
 
@@ -56,9 +60,9 @@
                                 <td>{$vo.name}</td>
                                 <td>{$vo.score}</td>
                                 <td>{$vo.push}</td>
-                                <td>{$vo.efficiency}</td>
-                                <td>{$vo.form}</td>
-                                <td>{$vo.satisfaction}</td>
+                                <td><span class="minus">-</span><input value="{$vo.efficiency}" name="jg"><span class="add">+</span></td>
+                                <td><span class="minus">-</span><input value="{$vo.form}" name="xt"><span class="add">+</span></td>
+                                <td><span class="minus">-</span><input value="{$vo.satisfaction}" name="my"><span class="add1">+</span></td>
                             </tr>
                             {/volist}
                             </tbody>
@@ -91,5 +95,32 @@
             radioClass: 'iradio_square-green',
         });
     });
+
+    $(".minus").click(function(){
+        var val = $(this).parent().children("input").val();
+        if(val==0){
+            return false;
+        }else {
+            $(this).parent().children("input").val(val - 1);
+        }
+    })
+
+    $(".add").click(function(){
+        var val = $(this).parent().children("input").val();
+        if(val==2){
+            return false
+        }else {
+            $(this).parent().children("input").val(parseInt(val) + 1);
+        }
+    })
+    $(".add1").click(function(){
+        var val = $(this).parent().children("input").val();
+        if(val==40){
+            return false;
+        }else{
+            $(this).parent().children("input").val(parseInt(val) + 1);
+        }
+
+    })
 </script>
 {/block}
