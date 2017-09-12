@@ -1,55 +1,47 @@
 {extend name="public/common"}
 
 {block name="style"}
-<link rel="stylesheet" href="/home/css/user/collect.css">
+<link rel="stylesheet" href="/home/css/review/index.css">
+<style>
+	#refreshContainer {
+		top: 0;
+	}
+</style>
 {/block}
 
 {block name="body"}
-{empty name="list"}
-<div class="default">
-	<img src="/home/images/common/nomessage.png" alt="暂无消息">
-</div>
-{else/}
-<!--四种状态：通过pass、待审核delay、未通过refer、草稿draft-->
-<div class="lists">
-	{volist name="list" id="vo"}
-	<div class="listbox">
-		<a href="{:Url('User/notesreview?id='.$vo['id'])}" class="list list_img clear">
-			<div class="fl">
-				<img src="{$vo.front_cover}" alt="图片">
-			</div>
-			<div class="fl lr">
-				<div class="title limit_">{$vo.title}</div>
-				<div class="clear">
-					{if condition="$vo.status eq 0"}
-					<span class="fl delay">待审核</span>
-					{elseif condition="$vo.status eq 1" /}
-					<span class="fl pass">通过</span>
-					{elseif condition="$vo.status eq 2" /}
-					<span class="fl refer">未通过</span>
-					{else/}
-					<span class="fl draft">草稿</span>
-					{/if}
-					<span class="fr">{$vo.create_time|time_format="Y-m-d"}</span>
-				</div>
-			</div>
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+	<div class="mui-scroll">
+<div class="list push">
+	{empty name="list"}
+	<div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+	{else/}
+	<ul>
+		{volist name="list" id="li"}
+		<li><a href="{:Url('User/detail?class='.$li['class'].'&id='.$li['id'])}" class="list clear" data-type="{$li.class}">
+			<img src="{$li.front_cover}">
+			<span>{$li.title}</span>
+			{switch name='$li.class'}
+			{case value='1'}<span>[党建责任] 发布人：{$li.publisher}</span>{/case}
+			{case value='2'}<span>[两学一做] 发布人：{$li.publisher}</span>{/case}
+			{case value='3'}<span>[组织建设] 发布人：{$li.publisher}</span>{/case}
+			{case value='4'}<span>[特色创新] 发布人：{$li.publisher}</span>{/case}
+			{case value='5'}<span>[作风建设] 发布人：{$li.publisher}</span>{/case}
+			{case value='6'}<span>[志愿服务] 发布人：{$li.publisher}</span>{/case}
+			{default/}<span>[党风廉政] 发布人：{$li.publisher}</span>
+			{/switch}
+			<span>{$li.create_time}</span>
+			<span class="mui-icon mui-icon-forward"></span>
+			<i class="fail" data-id="{$li.id}" data-class="{$li.class}">删&nbsp;除</i>
+			<i class="pass" data-id="{$li.id}" data-class="{$li.class}">修&nbsp;改</i>
 		</a>
-		<div class="delete" onclick="listDel(this,{$vo.id})">
-			删除
+		</li>
+		{/volist}
+	</ul>
+	{/empty}
+</div>
 		</div>
-		{eq name="vo.status" value="3"}
-		<a href="{:Url('Notice/notes?id='.$vo['id'])}" class="edit">
-			修改
-		</a>
-		{/eq}
 	</div>
-	{/volist}
-</div>
-<div class="tip"></div>
-<div class="loading hidden">
-	<div class="typing_loader"></div>
-</div>
-{/empty}
 {/block}
 
 {block name="script"}
@@ -57,197 +49,245 @@
 $(function(){
 	//模块标题
 	$('title' ).text('个人中心');
-	//reset
-	var len = $(".list" ).length;
-	if(len >= 7){
-		$('.tip' ).text('上拉加载更多');
-	}
-	//上拉加载
-	loadScroll();
-	//滑动删除
-	listMove();
 });
-function listMove(){
-	var lastX;
-	var pressedObj;
-	var lastLeftObj;
-	var start; //按下的点
-	var list = $('.listbox');
-	// 滑动删除
-	for (var i = 0; i < list.length; ++i) {
-		//当前滑动的点
-		list[i].addEventListener('touchstart', function(e){
-			lastX = e.changedTouches[0].pageX;
-			pressedObj = this;
-			var touches = event.touches[0];
-			start = {
-				x: touches.pageX,
-				y: touches.pageY
-			};
-		});
-		//阻止纵向滚动
-		list[i].addEventListener('touchmove',function(e){
-			var touches = event.touches[0];
-			delta = {
-				x: touches.pageX - start.x,
-				y: touches.pageY - start.y
-			};
-			if (Math.abs(delta.x) > Math.abs(delta.y)){
-				event.preventDefault();
-			}
-		});
-		list[i].addEventListener('touchend', function(e){
-			var diffX = e.changedTouches[0].pageX - lastX;
-			var del = $(this ).find('.delete');
-			var edit = $(this ).find('.edit');
-			if (diffX < 0) {
-				if($(pressedObj).children().length ==2 ){
-					// 左滑
-					$(pressedObj).animate({marginLeft:"-60px"},{duration: 400, easing: "swing" });
-					del.animate({'right':0},{duration: 400, easing: "swing" });
-				}else{
-					// 左滑
-					$(pressedObj).animate({marginLeft:"-120px"},{duration: 400, easing: "swing" });
-					del.animate({'right':'60px'},{duration: 400, easing: "swing" });
-					edit.animate({'right':0},{duration: 400, easing: "swing" });
-				}
-				if($(lastLeftObj).children().length ==2 ){
-					// 重置
-					lastLeftObj && lastLeftObj != pressedObj &&
-					$(lastLeftObj).animate({marginLeft:"0"},{duration: 400, easing: "swing" })&&
-					$(lastLeftObj).find(".delete").animate({'right':'-60px'},{duration: 400, easing: "swing" });
-				}else{
-					// 重置
-					lastLeftObj && lastLeftObj != pressedObj &&
-					$(lastLeftObj).animate({marginLeft:"0"},{duration: 400, easing: "swing" })&&
-					$(lastLeftObj).find(".delete").animate({'right':'-60px'},{duration: 400, easing: "swing" });
-					$(lastLeftObj).find(".edit").animate({'right':'-120px'},{duration: 400, easing: "swing" });
-				}
-				lastLeftObj = pressedObj;
-			} else if (diffX > 0) {
-				// 右滑
-				$(pressedObj).animate({marginLeft:"0"},{duration: 400, easing: "swing" });
-				del.animate({'right':'-60px'},{duration: 400, easing: "swing" });
-				if($(pressedObj).children().length == 3 ){
-					edit.animate({'right':'-120px'},{duration: 400, easing: "swing" });
-				}
 
-				//重置
-				lastLeftObj = null;
-			}
-		});
+window.onload = function() {
+	skidding();
+	if ($(".list ul li").length > 0) {
+		if ($(".list ul li").length < 7) {
+			mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+		} else {
+			mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+		}
 	}
-}
-function listDel(e,cid){
-	var this_ = $(e );
-	var ww = this_.parents('.listbox').width()-this_.width();
-	//移到success
-	if(this_.children().length ==2 ){
-		this_.animate({right:ww},{duration: 400, easing: "swing" });
-		this_.parents('.listbox').animate({marginLeft:-ww},function(){
-			this_.parents('.listbox' ).slideUp(600)
-		});
-	}else{
-		this_.animate({right:ww},{duration: 400, easing: "swing" });
-		this_.next('.edit').animate({right:ww},{duration: 400, easing: "swing" });
-		this_.parents('.listbox').animate({marginLeft:-ww},function(){
-			this_.parents('.listbox' ).slideUp(600)
-		});
+};
+
+//初始化下拉加载
+mui.init({
+	pullRefresh: {
+		container: '#refreshContainer',
+		up: {
+			callback: loadScroll
+		}
 	}
+});
+function loadScroll(){
+	var userId = '{$Think.session.userId}';
+	var responsibility_len = $('.list ul li .list[data-type=1]').length;
+	var learn_len = $('.list ul li .list[data-type=2]').length;
+	var organization_len = $('.list ul li .list[data-type=3]').length;
+	var special_len = $('.list ul li .list[data-type=4]').length;
+	var style_len = $('.list ul li .list[data-type=5]').length;
+	var volunteer_len = $('.list ul li .list[data-type=6]').length;
+	var incorrupt_len = $('.list ul li .list[data-type=7]').length;
 	$.ajax({
 		type:"post",
-		url:"{:Url('User/mydel')}",
+		url:"{:Url('User/more')}",
 		data:{
-			id:cid
+			responsibility:responsibility_len,
+			learn:learn_len,
+			organization:organization_len,
+			special:special_len,
+			style:style_len,
+			volunteer:volunteer_len,
+			incorrupt:incorrupt_len,
+			type:3
 		},
-		success:function(){
-
-		}
-	})
-}
-function loadScroll(){
-	$(window ).off("scroll" ).on("scroll",function(){
-		var dh = $(document).height();
-		var end = $(window).height() + $(window ).scrollTop();
-		var len = $(".list" ).length;
-		var tip = $(".tip");
-		var loading = $('.loading');
-		var userId = '{$Think.session.userId}';
-		if(dh == end){
-			$.ajax({
-				type:"post",
-				url:"{:Url('User/notesmore')}",
-				data:{
-					length:len,
-					userid:userId
-				},
-				beforeSend: function(XMLHttpRequest){
-					tip.hide();
-					loading.toggleClass('hidden');
-				},
-				success:function(data){
-					loading.toggleClass('hidden');
-					tip.show();
-					if(data.code == 1){
-						addLists(data);
-						var dataLen =data.data.length;
-						if(data.data.length == 5){
-							tip.text('上拉加载更多');
-						}
-						listMove();
-					}else{
-						tip.text('没有更多了');
-						$(window ).off("scroll");
-					}
+		beforeSend: function(XMLHttpRequest){
+		},
+		success:function(data){
+			if(data.code == 1){
+				addLists(data);
+				var dataLen =data.data.length;
+				if(data.data.length == 7){
+					mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+				}else{
+					mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
 				}
-			})
+			}else{
+					mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+			}
 		}
 	})
 }
+
+mui('#refreshContainer').on('tap', 'a', function(e) {
+	var url = this.getAttribute("href");
+	window.location.href = url;
+});
+
 function addLists(data){
 	var html = '';
 	var lists = data.data;
 	var len = lists.length;
 	for(var i = 0; i< len;i++){
 		var list = lists[i];
-		html +=
-				'<div class="listbox">'+
-				'<a href="/home/user/notesreview/id/'+list.id+'.html" class="list list_img clear">'+
-				'<div class="fl">'+
-				'<img src="'+list.img+'" alt="图片">'+
-				'</div>'+
-				'<div class="fl lr">'+
-				'<div class="title limit_">'+list.title+'</div>'+
-				'<div class="clear">';
-		if(list.status == 1){
-			html +=
-					'<span class="fl pass">审核通过</span>';
-		}else if(list.status == 0){
-			html +=
-					'<span class="fl delay">待审核</span>';
-		}else if(list.status == 2){
-			html +=
-					'<span class="fl refer">审核未通过</span>';
-		}else if(list.status == 3){
-			html +=
-					'<span class="fl draft">草稿</span>';
+		var link = '/home/user/detail/class/'+list.class+'/id/'+list.id;
+		if(list.class == 1){
+			class_name = '[党建责任]';
+		}else if(list.class == 2){
+			class_name = '[两学一做]';
+		}else if(list.class == 3){
+			class_name = '[组织建设]';
+		}else if(list.class == 4){
+			class_name = '[特色创新]';
+		}else if(list.class == 5){
+			class_name = '[作风建设]';
+		}else if(list.class == 6){
+			class_name = '[志愿服务]';
+		}else if(list.class == 7){
+			class_name = '[党风廉政]';
 		}
 		html +=
-				'<span class="fr">'+list.time+'</span>'+
-				'</div>'+
-				'</div>'+
-				'</a>'+
-				'<div class="delete" onclick="listDel(this,'+list.id+')">'+
-				'删除'+
-				'</div>';
-		if(list.status == 3){
-			html +=
-					'<a href="/home/notice/notes/id/'+list.id+'.html" class="edit">修改 </a>';
-		}
-		html +=
-				'</div>';
+				'<li>' +
+				'<a href="' + link + '"  class="list clear" data-type="' + list.class + '">' +
+				'<img src="' + list.front_cover + '">' +
+				'<span>' + list.title + '</span>' +
+				'<span>' + class_name + ' 发布人：' + list.publisher + '</span>' +
+				'<span>' + list.create_time + '</span>' +
+				'<span class="mui-icon mui-icon-forward"></span>' +
+				'<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">删&nbsp;除</i><i class="pass"  data-id="' + list.id + '" data-class="' + list.class + '">修&nbsp;改</i>' +
+				'</a>' +
+				'</li>'
 	}
-	$(".lists" ).append(html);
+	$(".list ul" ).append(html);
+	skidding();
+}
+
+mui('#refreshContainer').on('tap', '.pass', function(e) {
+	event.stopPropagation();
+	event.preventDefault();
+	var element = this.parentNode.parentNode;
+	var id = this.getAttribute("data-id");
+	var _class = this.getAttribute("data-class");
+	switch(_class){
+		case 1:  // 党建责任
+			window.location.href="/home/responsibility/publish/id/"+id;
+			break;
+		case 2:  // 两学一做
+			window.location.href="/home/learn/publish/id/"+id;
+			break;
+		case 3:  // 组织建设
+			window.location.href="/home/organization/publish/id/"+id;
+			break;
+		case 4:  //特色创新
+			window.location.href="/home/special/publish/id/"+id;
+			break;
+		case 5:  // 作风建设
+			window.location.href="/home/style/publish/id/"+id;
+			break;
+		case 6:  // 志愿服务
+			window.location.href="/home/volunteer/publish/id/"+id;
+			break;
+		default:  // 党风廉政
+			window.location.href="/home/incorrupt/publish/id/"+id;
+	}
+})
+
+
+
+mui('#refreshContainer').on('tap', '.fail', function(e) {
+	event.stopPropagation();
+	event.preventDefault();
+	var element = this.parentNode.parentNode;
+	var id = this.getAttribute("data-id");
+	var _class = this.getAttribute("data-class");
+	swal({
+		title: "",
+		text: "确定删除？",
+		type: "warning",
+		showCancelButton: true,
+		closeOnConfirm: false,
+		confirmButtonText: "确认",
+		cancelButtonText: "取消",
+		confirmButtonColor: "#ec6c62"
+	}, function() {
+		deleted(element,id,_class);
+	});
+});
+
+
+//删除ajax
+var deleted = function (element,id,_class){
+	$.ajax({
+		type:"post",
+		url: "{:Url('User/del')}",
+		data:{
+			id:id,
+			class:_class
+		},
+		beforeSend: function(XMLHttpRequest){
+			swal({
+				title: '',
+				text: '删除中...',
+				showConfirmButton:false
+			});
+		},
+		success:function(data){
+			if(data.code==1){
+				$(element).remove();
+				swal({
+					title: "",
+					text: "删除成功",
+					type: "success",
+					confirmButtonText: "确认",
+					timer:2000
+				},function(){
+//					window.location.reload();
+				});
+			}else{
+				swal({
+					title: "",
+					text: data.msg,
+					type: "error",
+					confirmButtonText: "确认",
+					timer:2000
+				});
+			}
+		}
+	})
+}
+
+var skidding = function() {
+	//侧滑显示删除按钮
+	var expansion = null; //是否存在展开的list
+	var container = document.querySelectorAll('.list li a');
+	for (var i = 0; i < container.length; i++) {
+		var x, y, X, Y, swipeX, swipeY;
+		container[i].addEventListener('touchstart', function (event) {
+			x = event.changedTouches[0].pageX;
+			y = event.changedTouches[0].pageY;
+			swipeX = true;
+			swipeY = true;
+		});
+		container[i].addEventListener('touchmove', function (event) {
+
+			X = event.changedTouches[0].pageX;
+			Y = event.changedTouches[0].pageY;
+			if (expansion) {   //判断是否展开，如果展开则收起
+				expansion.className = "";
+			}
+			// 左右滑动
+			if (swipeX && Math.abs(X - x) - Math.abs(Y - y) > 0) {
+				// 阻止事件冒泡
+				event.stopPropagation();
+				if (X - x > 50) {   //右滑
+					event.preventDefault();
+					this.className = "";    //右滑收起
+				}
+				if (x - X > 50) {   //左滑
+					event.preventDefault();
+					this.className = "swipeleft";   //左滑展开
+					expansion = this;
+				}
+				swipeY = false;
+			}
+			// 上下滑动
+			if (swipeY && Math.abs(X - x) - Math.abs(Y - y) < 0) {
+				swipeX = false;
+			}
+		});
+	}
 }
 </script>
 {/block}

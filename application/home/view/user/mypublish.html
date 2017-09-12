@@ -2,10 +2,15 @@
 
 {block name="style"}
 <link rel="stylesheet" href="/home/css/review/index.css">
+<style>
+	#refreshContainer {
+		top: 0;
+	}
+</style>
 {/block}
 
 {block name="body"}
-{empty name="list1"}
+{empty name="list"}
 <div class="default">
 	<img src="/home/images/common/nomessage.png" alt="暂无消息">
 </div>
@@ -13,11 +18,11 @@
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
 	<div class="mui-scroll">
 <div class="Audited">
-	{empty name="list3"}
+	{empty name="list"}
 	<div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
 	{else/}
 	<ul>
-		{volist name="list3" id="ll"}
+		{volist name="list" id="ll"}
 		<li>
 			<a href="#" class="list clear" data-type="{$ll.class}">
 				<img src="{$ll.front_cover}">
@@ -83,29 +88,42 @@ mui.init({
 
 function loadScroll(){
 		var userId = '{$Think.session.userId}';
-			$.ajax({
-				type:"post",
-				url:"{:Url('User/publishmore')}",
-				data:{
-					length:len,
-					userid:userId
-				},
-				beforeSend: function(XMLHttpRequest){
-				},
-				success:function(data){
-					if(data.code == 1){
-						addLists(data);
-						var dataLen =data.data.length;
-						if(data.data.length == 7){
-							mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
-						}else{
-							mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
-						}
+		var responsibility_len = $('.Audited ul .list[data-type=1]').length;
+		var learn_len = $('.Audited ul .list[data-type=2]').length;
+		var organization_len = $('.Audited ul .list[data-type=3]').length;
+		var special_len = $('.Audited ul .list[data-type=4]').length;
+		var style_len = $('.Audited ul .list[data-type=5]').length;
+		var volunteer_len = $('.Audited ul .list[data-type=6]').length;
+		var incorrupt_len = $('.Audited ul .list[data-type=7]').length;
+		$.ajax({
+			type:"post",
+			url:"{:Url('User/more')}",
+			data:{
+				responsibility:responsibility_len,
+				learn:learn_len,
+				organization:organization_len,
+				special:special_len,
+				style:style_len,
+				volunteer:volunteer_len,
+				incorrupt:incorrupt_len,
+				type:2
+			},
+			beforeSend: function(XMLHttpRequest){
+			},
+			success:function(data){
+				if(data.code == 1){
+					addLists(data);
+					var dataLen =data.data.length;
+					if(data.data.length == 7){
+						mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
 					}else{
 						mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
 					}
+				}else{
+					mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
 				}
-			})
+			}
+		})
 }
 function addLists(data){
 	var html = '';
@@ -131,7 +149,7 @@ function addLists(data){
 		}
 		html +=
 				'<li>'+
-				'<a href="#" class="list clear" data-type="1">'+
+				'<a href="#" class="list clear" data-type="' + list.class + '">'+
 				'<img src="'+list.front_cover+'">'+
 				'<span>'+ list.title + '</span>'+
 				'<p>'+ class_name+ '</p>'+
@@ -146,10 +164,8 @@ function addLists(data){
 		}
 		html +='</a>'+
 				'</li>';
-
-
 	}
-	$(".Audited" ).append(html);
+	$(".Audited ul" ).append(html);
 }
 </script>
 {/block}

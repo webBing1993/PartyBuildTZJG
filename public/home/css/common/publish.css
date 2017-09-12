@@ -15,7 +15,7 @@ body,html{
     display: inline-block;
     height:1rem;
     line-height: 1.2rem;
-    width: 30%;
+    width: 40%;
     font-size: 0.38rem;
     color: #999;
     float: right;
@@ -51,8 +51,8 @@ body,html{
 }
 
 input[type="date"]{
-    width:40%!important;
-    margin-right:-0.6rem!important;
+    width:45%!important;
+    margin-right:-0.5rem!important;
 }
 
 .list ul li input::-webkit-input-placeholder{

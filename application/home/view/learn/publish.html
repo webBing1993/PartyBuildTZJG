@@ -14,7 +14,7 @@
     <ul>
         <li class="type1">
             模块
-            <a id="openPopover" href="#popover">支部委员会</a>
+            <a id="openPopover" href="#popover">支部委员大会</a>
             <span class="triangle-down"></span>
         </li>
         <li class="type2">
@@ -71,7 +71,7 @@
     <ul class="mui-table-view">
         <div class="mui-scroll-wrapper">
             <div class="mui-scroll">
-                <li class="mui-table-view-cell"><a>支部委员会</a></li>
+                <li class="mui-table-view-cell"><a>支部委员大会</a></li>
                 <li class="mui-table-view-cell"><a>党支部委员会</a></li>
                 <li class="mui-table-view-cell"><a>党小组会</a></li>
                 <li class="mui-table-view-cell"><a>党课</a></li>
@@ -111,9 +111,23 @@
             case 2:
                 $(".type2").hide();
                 $(".template").hide();
+                if(index==1){
+                    $("#openPopover").html("支部委员大会");
+                }else if(index==2){
+                    $("#openPopover").html("党支部委员会");
+                }else if(index==3){
+                    $("#openPopover").html("党小组会");
+                }else if(index==4){
+                    $("#openPopover").html("党课");
+                }
                 break;
             case 3:
                 $(".type1").hide();
+                if(index==0){
+                    $("#openPopover3").html("培训计划");
+                }else if(index==1){
+                    $("#openPopover3").html("理论研究");
+                }
                 break;
             case 4:
                 $(".type1").hide();
@@ -186,9 +200,9 @@
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
                 address:$("input[name='address']").val(),
-                time:$("textarea[name='time']").val(),
+                time:$("input[name='time']").val(),
                 people:$("input[name='people']").val(),
-                compere:$("textarea[name='compere']").val(),
+                compere:$("input[name='compere']").val(),
                 create_user:userid,
                 type:type
             };
@@ -288,17 +302,17 @@
                     data['list_images'].push($(this).data("tab")+"")  ;
                 }
             })
-
+                console.log(data)
 //            data['list_image'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
             $.ajax({
                 type:"post",
-                url: "{:Url('Responsibility/publish')}",
+                url: "{:Url('Learn/publish')}",
                 data:data,
                 success:function(data){
                     if(data.code == 1){
                         swal({
-                            title: " ",
-                            text: '恭喜您，保存成功！<br>请至个人中心——我的草稿中查看',
+                            title: "保存成功！",
+                            text: '请至个人中心——我的草稿中查看',
                             type: 'success',
                             showCancelButton: false,
                             confirmButtonText: "确定",

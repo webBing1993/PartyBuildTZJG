@@ -1,0 +1,44 @@
+{extend name="public/common"}
+
+{block name="style"}
+<title>党建动态</title>
+<link rel="stylesheet" href="/home/css/details-template/detail.css">
+<style>
+    .mui-pull-bottom-pocket {
+        height: 0.8rem;
+        bottom: 0.8rem;
+    }
+    .comment{
+        padding-bottom: 1rem;
+    }
+    .banner{
+        height:50vw;
+    }
+    .banner img{
+        height:100%;
+    }
+</style>
+{/block}
+{block name="body"}
+<div class="banner">
+    <img src="{$info.front_cover|get_cover='path'}">
+</div>
+        <div class="article">
+            <div class="title"><p>{$info.title}</p></div>
+            <div class="note clear">
+                <span class="publish">{$info.publisher}</span>
+                <span class="time">{$info.create_time|time_format="Y-m-d"}</span>
+            </div>
+            <div class="content">
+                {volist name="$info.list_images" id="img"}
+                <img src="{$img|get_cover='path'}" alt="笔记图片" class="img" style="width:100%"><br>
+                {/volist}
+                <div class="article-content">{$info.content}</div>
+            </div>
+        </div>
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+{/block}

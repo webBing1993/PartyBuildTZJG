@@ -95,15 +95,68 @@ class User extends Base {
         return $this->fetch();
     }
     /**
+     * 草稿 查看详情
+     */
+    public function detail(){
+        $class = input('get.class');
+        $id = input('get.id');
+        $info = $this->get_detail($class,$id);
+        $this->assign('info',$info);
+        return  $this->fetch();
+    }
+    /**
+     * 草稿 删除
+     */
+    public function del(){
+        $data = input('post.');
+        $class = $data['class'];
+        $id = $data['id'];
+        $res = $this->get_detail($class,$id,true);
+        if ($res){
+            return $this->success('删除成功');
+        }else{
+            return $this->error('删除失败');
+        }
+    }
+    /**
      * 我的发布  1 审核通过  2  不通过
      */
     public function mypublish(){
         $len = array('responsibility' => 0,'learn' => 0,'organization' => 0,'special' => 0,'style' => 0,'volunteer' => 0,'incorrupt' => 0);
-        $list1 = $this ->getDataList($len,1);  //  审核通过
-        $list2 = $this ->getDataList($len,2);  //  审核不通过
-        $this->assign('list1',$list1['data']);
-        $this->assign('list2',$list2['data']);
+        $list = $this ->getDataList($len,2);  //  已审核
+        foreach($list['data'] as $key => $value){
+            //  获取审核人
+            $review = Db::name('review')->where(['class' => $value['class'],'aid' => $value['id']])->find();
+            if (!empty($review)){
+                $list['data'][$key]['username'] = $review['username'];
+                $list['data'][$key]['review_status'] = $review['status'];
+                $list['data'][$key]['review_time'] = date('Y-m-d',$review['create_time']);
+            }
+        }
+        $this->assign('list',$list['data']);
         return $this->fetch();
+    }
+    /**
+     * 加载更多  我的发布 2  我的草稿 3
+     * @return array
+     */
+    public function more(){
+        $len = input('post.');
+        $type = $len['type'];  // 2  我的发布  3  我的草稿
+        unset($len['type']);
+        $list = $this ->getDataList($len,$type);
+        if ($type == 2){
+            foreach($list['data'] as $key => $value){
+                //  获取审核人
+                $review = Db::name('review')->where(['class' => $value['class'],'aid' => $value['id']])->find();
+                if (!empty($review)){
+                    $list['data'][$key]['username'] = $review['username'];
+                    $list['data'][$key]['review_status'] = $review['status'];
+                    $list['data'][$key]['review_time'] = date('Y-m-d',$review['create_time']);
+                }
+            }
+        }
+        return $list;
     }
     /**
      * 获取数据列表 党建责任 responsibility  两学一做 learn 组织建设 organization 特色创新 special 作风建设 style 志愿服务 volunteer 党风廉政 incorrupt
@@ -218,7 +271,7 @@ class User extends Base {
      * 获取  数据详情
      * 1 responsibility  2 learn 3 organization 4 special 5 style 6 volunteer 7 incorrupt
      */
-    public function get_detail($type,$id){
+    public function get_detail($type,$id,$del=false){
         switch ($type) {    //根据类别获取表明
             case 1:
                 $table = "responsibility";
@@ -249,8 +302,13 @@ class User extends Base {
             'id' => $id,
             'status' => ['egt',0],
         );
-        $info = Db::name($table)->where($map)->find();
-        return $info;
+        if ($del){
+            $rs = Db::name($table)->where('id',$id)->update(['status' => -1]);
+            return $rs;
+        }else{
+            $info = Db::name($table)->where($map)->find();
+            return $info;
+        }
     }
     /**
      * 获取 每个表结构  数据
@@ -284,10 +342,17 @@ class User extends Base {
                 break;
         }
         $userid = session('userId');
-        $map = array(
-            'create_user' => $userid,
-            'status' => ['eq',$status],
-        );
+        if ($status == 2){
+            $map = array(
+                'create_user' => $userid,
+                'status' => ['in',[1,$status]],
+            );
+        }else{
+            $map = array(
+                'create_user' => $userid,
+                'status' => ['eq',$status],
+            );
+        }
         $order = 'create_time desc';
         $limit = "$count,1";
         $list = Db::name($table)->where($map) ->order($order) ->limit($limit) ->select();
