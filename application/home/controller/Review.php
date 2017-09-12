@@ -410,35 +410,60 @@ class Review extends Base{
             case 1:
                 $table = "responsibility";
                 $pre = "【党建责任】";
-                $url = "Responsibility/detail";
+                $temp = Db::name($table)->where('id',$main)->value('templet');
+                if ($temp == 1){
+                    $url = "Responsibility/detail";
+                }else{
+                    $url = "Responsibility/detail2";
+                }
                 $agentid = 1000002;
                 $Wechat = new TPQYWechat(Config::get('responsibility'));
                 break;
             case 2:
                 $table = "learn";
                 $pre = "【两学一做】";
-                $url = "Learn/detail";
+                $temp = Db::name($table)->where('id',$main)->value('templet');
+                if ($temp == 1){
+                    $url = "Learn/detail";
+                }else{
+                    $url = "Learn/detail2";
+                }
                 $agentid = 1000003;
                 $Wechat = new TPQYWechat(Config::get('learn'));
                 break;
             case 3:
                 $table = "organization";
                 $pre = "【组织建设】";
-                $url = "Organization/detail";
+                $temp = Db::name($table)->where('id',$main)->value('templet');
+                if ($temp == 1){
+                    $url = "Organization/detail";
+                }else{
+                    $url = "Organization/detail2";
+                }
                 $agentid = 1000004;
                 $Wechat = new TPQYWechat(Config::get('organization'));
                 break;
             case 4:
                 $table = "special";
                 $pre = "【特色创新】";
-                $url = "Special/detail";
+                $temp = Db::name($table)->where('id',$main)->value('templet');
+                if ($temp == 1){
+                    $url = "Special/detail";
+                }else{
+                    $url = "Special/detail2";
+                }
                 $agentid = 1000005;
                 $Wechat = new TPQYWechat(Config::get('special'));
                 break;
             case 5:
                 $table = "style";
                 $pre = "【作风建设】";
-                $url = "Style/detail";
+                $temp = Db::name($table)->where('id',$main)->value('templet');
+                if ($temp == 1){
+                    $url = "Style/detail";
+                }else{
+                    $url = "Style/detail2";
+                }
                 $agentid = 1000013;
                 $Wechat = new TPQYWechat(Config::get('style'));
                 break;
@@ -446,14 +471,24 @@ class Review extends Base{
             case 6:
                 $table = "volunteer";
                 $pre = "【志愿服务】";
-                $url = "Volunteer/detail";
+                $temp = Db::name($table)->where('id',$main)->value('templet');
+                if ($temp == 1){
+                    $url = "Volunteer/detail";
+                }else{
+                    $url = "Volunteer/detail2";
+                }
                 $agentid = 1000006;
                 $Wechat = new TPQYWechat(Config::get('volunteer'));
                 break;
             case 7:
                 $table = "incorrupt";
                 $pre = "【党风廉政】";
-                $url = "Incorrupt/detail";
+                $temp = Db::name($table)->where('id',$main)->value('templet');
+                if ($temp == 1){
+                    $url = "Incorrupt/detail";
+                }else{
+                    $url = "Incorrupt/detail2";
+                }
                 $agentid = 1000007;
                 $Wechat = new TPQYWechat(Config::get('incorrupt'));
                 break;
