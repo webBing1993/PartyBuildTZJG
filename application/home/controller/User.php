@@ -108,7 +108,15 @@ class User extends Base {
      * 草稿 删除
      */
     public function del(){
-        
+        $data = input('post.');
+        $class = $data['class'];
+        $id = $data['id'];
+        $res = $this->get_detail($class,$id,true);
+        if ($res){
+            return $this->success('删除成功');
+        }else{
+            return $this->error('删除失败');
+        }
     }
     /**
      * 我的发布  1 审核通过  2  不通过
@@ -263,7 +271,7 @@ class User extends Base {
      * 获取  数据详情
      * 1 responsibility  2 learn 3 organization 4 special 5 style 6 volunteer 7 incorrupt
      */
-    public function get_detail($type,$id){
+    public function get_detail($type,$id,$del=false){
         switch ($type) {    //根据类别获取表明
             case 1:
                 $table = "responsibility";
@@ -294,8 +302,13 @@ class User extends Base {
             'id' => $id,
             'status' => ['egt',0],
         );
-        $info = Db::name($table)->where($map)->find();
-        return $info;
+        if ($del){
+            $rs = Db::name($table)->where('id',$id)->update(['status' => -1]);
+            return $rs;
+        }else{
+            $info = Db::name($table)->where($map)->find();
+            return $info;
+        }
     }
     /**
      * 获取 每个表结构  数据

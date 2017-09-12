@@ -32,7 +32,8 @@
 			{/switch}
 			<span>{$li.create_time}</span>
 			<span class="mui-icon mui-icon-forward"></span>
-			<i class="fail" data-id="{$li.id}" data-class="{$li.class}">删&nbsp;除</i><i class="pass" data-id="{$li.id}" data-class="{$li.class}">修&nbsp;改</i>
+			<i class="fail" data-id="{$li.id}" data-class="{$li.class}">删&nbsp;除</i>
+			<i class="pass" data-id="{$li.id}" data-class="{$li.class}">修&nbsp;改</i>
 		</a>
 		</li>
 		{/volist}
@@ -47,7 +48,7 @@
 <script>
 $(function(){
 	//模块标题
-//	$('title' ).text('个人中心');
+	$('title' ).text('个人中心');
 });
 
 window.onload = function() {
@@ -110,6 +111,10 @@ function loadScroll(){
 	})
 }
 
+mui('#refreshContainer').on('tap', 'a', function(e) {
+	var url = this.getAttribute("href");
+	window.location.href = url;
+});
 
 function addLists(data){
 	var html = '';
@@ -117,7 +122,7 @@ function addLists(data){
 	var len = lists.length;
 	for(var i = 0; i< len;i++){
 		var list = lists[i];
-		var link = '/home/review/detail/class/'+list.class+'/id/'+list.id;
+		var link = '/home/user/detail/class/'+list.class+'/id/'+list.id;
 		if(list.class == 1){
 			class_name = '[党建责任]';
 		}else if(list.class == 2){
@@ -149,6 +154,37 @@ function addLists(data){
 	skidding();
 }
 
+mui('#refreshContainer').on('tap', '.pass', function(e) {
+	event.stopPropagation();
+	event.preventDefault();
+	var element = this.parentNode.parentNode;
+	var id = this.getAttribute("data-id");
+	var _class = this.getAttribute("data-class");
+	switch(_class){
+		case 1:  // 党建责任
+			window.location.href="/home/responsibility/publish/id/"+id;
+			break;
+		case 2:  // 两学一做
+			window.location.href="/home/learn/publish/id/"+id;
+			break;
+		case 3:  // 组织建设
+			window.location.href="/home/organization/publish/id/"+id;
+			break;
+		case 4:  //特色创新
+			window.location.href="/home/special/publish/id/"+id;
+			break;
+		case 5:  // 作风建设
+			window.location.href="/home/style/publish/id/"+id;
+			break;
+		case 6:  // 志愿服务
+			window.location.href="/home/volunteer/publish/id/"+id;
+			break;
+		default:  // 党风廉政
+			window.location.href="/home/incorrupt/publish/id/"+id;
+	}
+})
+
+
 
 mui('#refreshContainer').on('tap', '.fail', function(e) {
 	event.stopPropagation();
@@ -166,7 +202,7 @@ mui('#refreshContainer').on('tap', '.fail', function(e) {
 		cancelButtonText: "取消",
 		confirmButtonColor: "#ec6c62"
 	}, function() {
-		deleted(element,id,_class,2);
+		deleted(element,id,_class);
 	});
 });
 
@@ -175,21 +211,19 @@ mui('#refreshContainer').on('tap', '.fail', function(e) {
 var deleted = function (element,id,_class){
 	$.ajax({
 		type:"post",
-		url: "{:Url('Review/review')}",
+		url: "{:Url('User/del')}",
 		data:{
 			id:id,
-			class:_class,
-			status:status
+			class:_class
 		},
 		beforeSend: function(XMLHttpRequest){
 			swal({
-				title: ' ',
+				title: '',
 				text: '删除中...',
 				showConfirmButton:false
 			});
 		},
 		success:function(data){
-			console.log(data)
 			if(data.code==1){
 				$(element).remove();
 				swal({

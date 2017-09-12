@@ -11,9 +11,18 @@
     .comment{
         padding-bottom: 1rem;
     }
+    .banner{
+        height:50vw;
+    }
+    .banner img{
+        height:100%;
+    }
 </style>
 {/block}
 {block name="body"}
+<div class="banner">
+    <img src="{$info.front_cover|get_cover='path'}">
+</div>
         <div class="article">
             <div class="title"><p>{$info.title}</p></div>
             <div class="note clear">

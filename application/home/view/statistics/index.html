@@ -25,6 +25,8 @@
     var myGender = echarts.init(document.getElementById('pie3'));
 
     //修改提示信息
+    console.log("{$msg.sum}")
+    console.log("{$msg.num_is}")
     var genderOption={
         calculable : true,
         series : [
@@ -40,7 +42,7 @@
                         },
                         labelLine : {
                             show : true,
-                            length:0,
+                            length:3,
                         }
                     },
                 },
@@ -50,16 +52,16 @@
                         name:'关注：'+Math.round(("{$msg.num_is}" / "{$msg.sum}")*100)+'%',
                         label:{
                             normal:{
-                                fontSize:20
+                                fontSize:19
                             }
                         }
                     },
                     {
                         value:"{$msg.num_not}",
-                        name:'未关注：'+Math.round(("{$msg.num_not}" / "{$msg.sum}")*100)+'%',
+                        name:'未关注：'+Math.round("{$msg.num_not}" / "{$msg.sum}"*100)+'%',
                         label:{
                             normal:{
-                                fontSize:20
+                                fontSize:19
                             }
                         }
                     },
