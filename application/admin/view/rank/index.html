@@ -60,9 +60,9 @@
                                 <td>{$vo.name}</td>
                                 <td>{$vo.score}</td>
                                 <td>{$vo.push}</td>
-                                <td><span class="minus">-</span><input value="{$vo.efficiency}" name="jg"><span class="add">+</span></td>
-                                <td><span class="minus">-</span><input value="{$vo.form}" name="xt"><span class="add">+</span></td>
-                                <td><span class="minus">-</span><input value="{$vo.satisfaction}" name="my"><span class="add1">+</span></td>
+                                <td><span class="minus">-</span><input value="{$vo.efficiency}" name="jg" readonly><span class="add">+</span></td>
+                                <td><span class="minus">-</span><input value="{$vo.form}" name="xt" readonly><span class="add">+</span></td>
+                                <td><span class="minus">-</span><input value="{$vo.satisfaction}" name="my" readonly><span class="add1">+</span></td>
                             </tr>
                             {/volist}
                             </tbody>
@@ -94,32 +94,62 @@
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
         });
+
+        $(".minus").each(function(){
+            var val = $(this).parent().children("input").val();
+            if(val<=0){
+                $(this).css("visibility","hidden");
+            }
+        })
+
+        $(".add").each(function(){
+            var val = $(this).parent().children("input").val();
+            if(val>=2){
+                $(this).css("visibility","hidden");
+            }
+        })
+
+        $(".add1").each(function(){
+            var val = $(this).parent().children("input").val();
+            if(val>=40){
+                $(this).css("visibility","hidden");
+            }
+        })
     });
 
     $(".minus").click(function(){
         var val = $(this).parent().children("input").val();
-        if(val==0){
-            return false;
+        if(val==1){
+            $(this).css("visibility","hidden");
         }else {
-            $(this).parent().children("input").val(val - 1);
+            $(this).css("visibility","visible");
         }
+        $(this).parent().children("input").val(val - 1);
+        $(this).parent().children(".add").css("visibility","visible");
+        $(this).parent().children(".add1").css("visibility","visible");
     })
 
     $(".add").click(function(){
         var val = $(this).parent().children("input").val();
-        if(val==2){
-            return false
+        if(val==1){
+            $(this).css("visibility","hidden");
         }else {
-            $(this).parent().children("input").val(parseInt(val) + 1);
+            $(this).css("visibility","visible");
         }
-    })
+        $(this).parent().children("input").val(parseInt(val) + 1);
+        $(this).parent().children(".minus").css("visibility","visible");
+    });
+
+
     $(".add1").click(function(){
         var val = $(this).parent().children("input").val();
-        if(val==40){
-            return false;
+        if(val==39){
+            $(this).css("visibility","hidden");
         }else{
-            $(this).parent().children("input").val(parseInt(val) + 1);
+            $(this).css("visibility","visible");
         }
+        $(this).parent().children("input").val(parseInt(val) + 1);
+        $(this).parent().children(".minus").css("visibility","visible");
 
     })
 </script>
