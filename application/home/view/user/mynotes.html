@@ -21,15 +21,7 @@
 			<div class="fl lr">
 				<div class="title limit_">{$vo.title}</div>
 				<div class="clear">
-					{if condition="$vo.status eq 0"}
-					<span class="fl delay">待审核</span>
-					{elseif condition="$vo.status eq 1" /}
-					<span class="fl pass">通过</span>
-					{elseif condition="$vo.status eq 2" /}
-					<span class="fl refer">未通过</span>
-					{else/}
 					<span class="fl draft">草稿</span>
-					{/if}
 					<span class="fr">{$vo.create_time|time_format="Y-m-d"}</span>
 				</div>
 			</div>
@@ -37,11 +29,9 @@
 		<div class="delete" onclick="listDel(this,{$vo.id})">
 			删除
 		</div>
-		{eq name="vo.status" value="3"}
 		<a href="{:Url('Notice/notes?id='.$vo['id'])}" class="edit">
 			修改
 		</a>
-		{/eq}
 	</div>
 	{/volist}
 </div>
