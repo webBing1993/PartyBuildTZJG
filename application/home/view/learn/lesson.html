@@ -2,7 +2,7 @@
 
 {block name="style"}
 <link rel="stylesheet" href="/home/css/list/title-pos-time.css">
-<title>主题党日</title>
+<title>三会一课</title>
 <style>
     .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active span{
         border-bottom: 0.08rem solid #e51c23;
@@ -109,11 +109,17 @@
                 <!--全部-->
                 <div class="list all">
                     <ul>
-                        <a href="">
-                            <p>主题党日</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
+                        {volist name="list.all" id="vo"}
+                        {eq name="vo.templet" value="1"}
+                        <a href="{:Url('Learn/detail?id='.$vo['id'])}">
+                        {else/}
+                        <a href="{:Url('Learn/detail2?id='.$vo['id'])}">
+                        {/eq}
+                            <p>{$vo.title}</p>
+                            <span>{$vo.publisher}</span>
+                            <span>{$vo.create_time|time_format="Y-m-d"}</span>
                         </a>
+                        {/volist}
                     </ul>
                 </div>
             </div>
@@ -121,11 +127,17 @@
                 <!--支部委员大会-->
                 <div class="list list1">
                     <ul>
-                        <a href="">
-                            <p>主题党日2222</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
+                        {volist name="list.one" id="vo1"}
+                        {eq name="vo1.templet" value="1"}
+                        <a href="{:Url('Learn/detail?id='.$vo1['id'])}">
+                        {else/}
+                        <a href="{:Url('Learn/detail2?id='.$vo1['id'])}">
+                        {/eq}
+                            <p>{$vo1.title}</p>
+                            <span>{$vo1.publisher}</span>
+                            <span>{$vo1.create_time|time_format="Y-m-d"}</span>
                         </a>
+                        {/volist}
                     </ul>
                 </div>
             </div>
@@ -133,11 +145,17 @@
                 <!--党支部委员会-->
                 <div class="list list2">
                     <ul>
-                        <a href="">
-                            <p>主题党3333日</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
+                        {volist name="list.two" id="vo2"}
+                        {eq name="vo2.templet" value="1"}
+                        <a href="{:Url('Learn/detail?id='.$vo2['id'])}">
+                        {else/}
+                        <a href="{:Url('Learn/detail2?id='.$vo2['id'])}">
+                        {/eq}
+                            <p>{$vo2.title}</p>
+                            <span>{$vo2.publisher}</span>
+                            <span>{$vo2.create_time|time_format="Y-m-d"}</span>
                         </a>
+                        {/volist}
                     </ul>
                 </div>
             </div>
@@ -145,11 +163,17 @@
                 <!--党小组会-->
                 <div class="list list3">
                     <ul>
-                        <a href="">
-                            <p>主题党dfdf df d日</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
+                        {volist name="list.three" id="vo3"}
+                        {eq name="vo3.templet" value="1"}
+                        <a href="{:Url('Learn/detail?id='.$vo3['id'])}">
+                        {else/}
+                        <a href="{:Url('Learn/detail2?id='.$vo3['id'])}">
+                        {/eq}
+                            <p>{$vo3.title}</p>
+                            <span>{$vo3.publisher}</span>
+                            <span>{$vo3.create_time|time_format="Y-m-d"}</span>
                         </a>
+                        {/volist}
                     </ul>
                 </div>
             </div>
@@ -157,11 +181,17 @@
                 <!--党课-->
                 <div class="list list4">
                     <ul>
-                        <a href="">
-                            <p>的点点滴滴多多多多多多多多多多多多多多多多多</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
+                        {volist name="list.four" id="vo4"}
+                        {eq name="vo4.templet" value="1"}
+                        <a href="{:Url('Learn/detail?id='.$vo4['id'])}">
+                        {else/}
+                        <a href="{:Url('Learn/detail2?id='.$vo4['id'])}">
+                        {/eq}
+                            <p>{$vo4.title}</p>
+                            <span>{$vo4.publisher}</span>
+                            <span>{$vo4.create_time|time_format="Y-m-d"}</span>
                         </a>
+                        {/volist}
                     </ul>
                 </div>
             </div>
@@ -260,7 +290,7 @@
        }
         $.ajax({
             type:"post",
-            url: "{:Url('News/listmore')}",
+            url: "{:Url('Learn/listmore')}",
             data:{
                 length:len,
                 type:c

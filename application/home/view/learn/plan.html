@@ -57,11 +57,17 @@
                 <!--培训计划-->
                 <div class="list training">
                     <ul>
-                        <a href="">
-                            <p>培训计划</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
+                        {volist name="list.one" id="vo1"}
+                        {eq name="vo1.templet" value="1"}
+                        <a href="{:Url('Learn/detail?id='.$vo1['id'])}">
+                        {else/}
+                        <a href="{:Url('Learn/detail2?id='.$vo1['id'])}">
+                        {/eq}
+                            <p>{$vo1.title}</p>
+                            <span>{$vo1.publisher}</span>
+                            <span>{$vo1.create_time|time_format='Y-m-d'}</span>
                         </a>
+                        {/volist}
                     </ul>
                 </div>
             </div>
@@ -69,11 +75,17 @@
                 <!--理论研究-->
                 <div class="list theory">
                     <ul>
-                        <a href="">
-                            <p>理论研究</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
+                        {volist name="list.two" id="vo2"}
+                        {eq name="vo2.templet" value="1"}
+                        <a href="{:Url('Learn/detail?id='.$vo2['id'])}">
+                        {else/}
+                        <a href="{:Url('Learn/detail2?id='.$vo2['id'])}">
+                        {/eq}
+                            <p>{$vo2.title}</p>
+                            <span>{$vo2.publisher}</span>
+                            <span>{$vo2.create_time|time_format='Y-m-d'}</span>
                         </a>
+                        {/volist}
                     </ul>
                 </div>
             </div>
@@ -81,7 +93,7 @@
     </div>
 </div>
 <!--[悬浮按钮]-->
-<span href="{:Url('learn/publish?type=3&style=3')}" class="after manager" id="publish"></span>
+<span href="{:Url('Learn/publish?type=3&style=3')}" class="after manager" id="publish"></span>
 {/block}
 
 {block name="script"}
@@ -135,7 +147,7 @@
         }
         $.ajax({
             type:"post",
-            url: "{:Url('learn/plan')}",
+            url: "{:Url('Learn/listmore')}",
             data:{
 
                 length:len,

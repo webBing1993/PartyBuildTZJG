@@ -20,7 +20,7 @@
             <div class="mui-slider-group mui-slider-loop">
                 {volist name="detail.images" id="li"}
                 <!--支持循环，需要重复图片节点-->
-                <div class="mui-slider-item"><a :href="'/index/news/detail/id/' + item.id "><img src="{$li|get_cover='path'}"></a></div>
+                <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
                 {/volist}
             </div>
         </div>

@@ -103,7 +103,7 @@ class Base extends Controller {
      * 1 notice
      * 2 news
      * 3 responsibility
-     * 4
+     * 4 learn   
      * 5
      * 6
      * 7
@@ -126,7 +126,7 @@ class Base extends Controller {
                 $table = "responsibility";
                 break;
             case 4:
-                $table = "";
+                $table = "learn";
                 break;
             case 5:
                 $table = "";
@@ -173,7 +173,7 @@ class Base extends Controller {
      * 1 notice
      * 2 news
      * 3 responsibility
-     * 4
+     * 4 learn
      * 5
      * 6
      */
@@ -193,7 +193,7 @@ class Base extends Controller {
                     $table = "responsibility";
                     break;
                 case 4:
-                    $table = "";
+                    $table = "learn";
                     break;
                 case 5:
                     $table = "";
@@ -297,7 +297,7 @@ class Base extends Controller {
                 $table = "responsibility";
                 break;
             case 4:
-                $table = "";
+                $table = "learn";
                 break;
             case 5:
                 $table = "";
