@@ -33,22 +33,22 @@
         </li>
         <li class="type1">
             时间
-            <input type="date" placeholder="请选择时间" onfocus="this.removeAttribute('placeholder')" name="date">
+            <input type="date" placeholder="请选择时间" onfocus="this.removeAttribute('placeholder')" name="time">
         </li>
         <li class="type1">
             地点
-            <input type="text" placeholder="请输入地点" name="place">
+            <input type="text" placeholder="请输入地点" name="address">
         </li>
         <li class="type1">
             参会人数
-            <input type="text" placeholder="请输入参会人数" name="number">
+            <input type="text" placeholder="请输入参会人数" name="people">
         </li>
         <li class="type1">
             主持人
-            <input type="text" placeholder="请输入主持人"name="host">
+            <input type="text" placeholder="请输入主持人"name="compere">
         </li>
         <div class="content">
-            <textarea placeholder="请输入内容，不少于500字..." name="title"></textarea>
+            <textarea placeholder="请输入内容，不少于500字..." name="content"></textarea>
             <div class="imgs clear">
                 <div class="img fl hide"></div>
                 <div class="img fl hide"></div>
@@ -185,10 +185,10 @@
             var data={
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
-                place:$("input[name='place']").val(),
-                date:$("textarea[name='date']").val(),
-                number:$("input[name='number']").val(),
-                host:$("textarea[name='host']").val(),
+                address:$("input[name='address']").val(),
+                time:$("textarea[name='time']").val(),
+                people:$("input[name='people']").val(),
+                compere:$("textarea[name='compere']").val(),
                 create_user:userid,
                 type:type
             };
