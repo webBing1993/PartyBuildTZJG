@@ -166,9 +166,53 @@ mui('#refreshContainer').on('tap', '.fail', function(e) {
 		cancelButtonText: "取消",
 		confirmButtonColor: "#ec6c62"
 	}, function() {
-		delete(element,id,_class,2);
+		deleted(element,id,_class,2);
 	});
 });
+
+
+//删除ajax
+var deleted = function (element,id,_class){
+	$.ajax({
+		type:"post",
+		url: "{:Url('Review/review')}",
+		data:{
+			id:id,
+			class:_class,
+			status:status
+		},
+		beforeSend: function(XMLHttpRequest){
+			swal({
+				title: ' ',
+				text: '删除中...',
+				showConfirmButton:false
+			});
+		},
+		success:function(data){
+			console.log(data)
+			if(data.code==1){
+				$(element).remove();
+				swal({
+					title: "",
+					text: "删除成功",
+					type: "success",
+					confirmButtonText: "确认",
+					timer:2000
+				},function(){
+//					window.location.reload();
+				});
+			}else{
+				swal({
+					title: "",
+					text: data.msg,
+					type: "error",
+					confirmButtonText: "确认",
+					timer:2000
+				});
+			}
+		}
+	})
+}
 
 var skidding = function() {
 	//侧滑显示删除按钮
