@@ -129,7 +129,7 @@ class Base extends Controller {
                 $table = "learn";
                 break;
             case 5:
-                $table = "";
+                $table = "organization";
                 break;
             default:
                 return $this->error("无该数据表");
@@ -196,7 +196,7 @@ class Base extends Controller {
                     $table = "learn";
                     break;
                 case 5:
-                    $table = "";
+                    $table = "organization";
                     break;
                 default:
                     return $this->error("无该数据表");
@@ -300,7 +300,7 @@ class Base extends Controller {
                 $table = "learn";
                 break;
             case 5:
-                $table = "";
+                $table = "organization";
                 break;
             default:
                 return $this->error("无该数据表");

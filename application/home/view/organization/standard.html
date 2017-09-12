@@ -10,11 +10,17 @@
     <div class="mui-scroll">
         <div class="list">
             <ul>
-                <a href="">
-                    <p>规范化建设图文</p>
-                    <span>之图党支部</span>
-                    <span>2017-8-21</span>
+                {volist name="list" id="vo"}
+                {eq name="vo.templet" value="1"}
+                <a href="{:Url('Organization/detail?id='.$vo['id'])}">
+                {else/}
+                <a href="{:Url('Organization/detail2?id='.$vo['id'])}">
+                {/eq}
+                    <p>{$vo.title}</p>
+                    <span>{$vo.publisher}</span>
+                    <span>{$vo.create_time|time_format="Y-m-d"}</span>
                 </a>
+                {/volist}
             </ul>
         </div>
     </div>
