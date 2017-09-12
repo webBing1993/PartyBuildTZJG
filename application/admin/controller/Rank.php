@@ -84,7 +84,7 @@ class Rank extends Admin
             if ($value['type'] == 1){
                 $ps = "减去";
             }else{
-                $ps = "增添";
+                $ps = "增加";
             }
             $value['content'] = "对用户：【".$name."】的【".$pre.'】【'.$ps."】1分";
         }
