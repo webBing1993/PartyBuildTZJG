@@ -63,9 +63,9 @@ class Rank extends Base {
             $depart_id = $depart;
         }
         $users = WechatDepartmentUser::where('departmentid',$depart_id)->field('userid')->select();
+        $score = 0;
         foreach($users as $value){  // 获取自己所在部门的管理员积分
             $res = WechatUserTag::where(['tagid' => 1,'userid' => $value['userid']])->find();
-            $score = 0;
             if (!empty($res)){
                 $User = WechatUser::where('userid',$value['userid'])->find();
                 $score1 = $User['score_efficiency'];  // 机关效能积分
