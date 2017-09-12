@@ -84,7 +84,7 @@ class Rank extends Admin
             if ($value['type'] == 1){
                 $ps = "减去";
             }else{
-                $ps = "增添";
+                $ps = "增加";
             }
             $value['content'] = "对用户：【".$name."】的【".$pre.'】【'.$ps."】1分";
         }
@@ -95,10 +95,14 @@ class Rank extends Admin
      * 人工操作积分
      */
     public function handle(){
-        $data = input('post.data');
+        $data = input('post.');
         $userid = $data['userid'];
         $class = $data['class'];  // 1 机关效能 2 四种形态 3 满意度测评
         $type = $data['type'];  // 1 减  2 加
+        $User = WechatUser::where('userid',$userid)->find();
+        if (empty($User)){
+            return $this->error('操作失败');
+        }
         switch ($class){
             case 1:
                 $field = 'score_efficiency';

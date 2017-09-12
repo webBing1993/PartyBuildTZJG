@@ -33,22 +33,22 @@
         </li>
         <li class="type1">
             时间
-            <input type="date" placeholder="请选择时间" onfocus="this.removeAttribute('placeholder')" name="time">
+            <input type="date" placeholder="请选择时间" onfocus="this.removeAttribute('placeholder')" name="date">
         </li>
         <li class="type1">
             地点
-            <input type="text" placeholder="请输入地点" name="address">
+            <input type="text" placeholder="请输入地点" name="place">
         </li>
         <li class="type1">
             参会人数
-            <input type="text" placeholder="请输入参会人数" name="people">
+            <input type="text" placeholder="请输入参会人数" name="number">
         </li>
         <li class="type1">
             主持人
-            <input type="text" placeholder="请输入主持人" name="compere">
+            <input type="text" placeholder="请输入主持人"name="host">
         </li>
         <div class="content">
-            <textarea placeholder="请输入内容，不少于500字..." name="content"></textarea>
+            <textarea placeholder="请输入内容，不少于500字..." name="title"></textarea>
             <div class="imgs clear">
                 <div class="img fl hide"></div>
                 <div class="img fl hide"></div>
@@ -154,7 +154,7 @@
     //保存
     $(".save").click(function(){
         var single = false;
-        var templet = $("#openPopover").html();
+        var templet = $("#openPopover2").html();
         var userid = {$userId};
         if(c==1){
             var data={
@@ -181,18 +181,84 @@
                 }
             }
         }else if(c==2){
-            var _class = $("#openPopover2").html();
+            var _class = $("#openPopover").html();
+            var data={
+                title:$("input[name='title']").val(),
+                content:$("textarea[name='content']").val(),
+                place:$("input[name='place']").val(),
+                date:$("textarea[name='date']").val(),
+                number:$("input[name='number']").val(),
+                host:$("textarea[name='host']").val(),
+                create_user:userid,
+                type:type
+            };
+            switch (_class){
+                case "支部委员大会":
+                    data["class"] = 1;
+                    break;
+                case "党支部委员会":
+                    data["class"] = 2;
+                    break;
+                case "党小组会":
+                    data["class"] = 3;
+                    break;
+                case "党课":
+                    data["class"] = 4;
+                    break;
+            }
+            for(var key in data){
+                if(data["title"]!= ''&& data["content"]!=""&& data["place"]!=""&& data["date"]!=""&& data["number"]!=""&& data["host"]!=""){
+//                    if(data["content"].length<300){
+//                        swal({
+//                            title: ' ',
+//                            text: '内容不少于500字',
+//                            type: 'error',
+//                            showConfirmButton:false,
+//                            timer:1500
+//                        });
+//                        return;
+//                    }
+                    single = true;
+                    continue;
+                }
+            }
+        }else if(c==3){
+            var _class = $("#openPopover3").html();
             var data={
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
                 create_user:userid,
                 type:type
             };
-            if(_class=="书记述职"){
+            for(var key in data){
+                if(data["title"]!= ''&& data["content"]!=""){
+//                    if(data["content"].length<300){
+//                        swal({
+//                            title: ' ',
+//                            text: '内容不少于500字',
+//                            type: 'error',
+//                            showConfirmButton:false,
+//                            timer:1500
+//                        });
+//                        return;
+//                    }
+                    single = true;
+                    continue;
+                }
+            }
+            if(_class=="培训计划"){
                 data["class"] = 1;
             }else{
                 data["class"] = 2;
             }
+        }else if(c==4){
+            var data={
+                class:0,
+                title:$("input[name='title']").val(),
+                content:$("textarea[name='content']").val(),
+                create_user:userid,
+                type:type
+            };
             for(var key in data){
                 if(data["title"]!= ''&& data["content"]!=""){
 //                    if(data["content"].length<300){
