@@ -158,14 +158,14 @@
 <script src="/home/js/reset.js"></script>
 <script>
     var win_w = $(window).width();
-    var c =  parseInt(window.location.href.split("index/c/")[1]);
+    var c = 0;
     $(function(){
         //tab初始化和数据存储
         var co = getCookie("type");
         if(co == 0 || co == 1 ){
             c = co;
         }else{
-            c =  parseInt(window.location.href.split("index/c/")[1]);
+            c =  0;
         }
         $("#tab a").eq(c).addClass('mui-active');
         $(".mui-slider-group>div").eq(c).addClass('mui-active');
