@@ -95,6 +95,22 @@ class User extends Base {
         return $this->fetch();
     }
     /**
+     * 草稿 查看详情
+     */
+    public function detail(){
+        $class = input('get.class');
+        $id = input('get.id');
+        $info = $this->get_detail($class,$id);
+        $this->assign('info',$info);
+        return  $this->fetch();
+    }
+    /**
+     * 草稿 删除
+     */
+    public function del(){
+        
+    }
+    /**
      * 我的发布  1 审核通过  2  不通过
      */
     public function mypublish(){
@@ -113,19 +129,23 @@ class User extends Base {
         return $this->fetch();
     }
     /**
-     * 加载更多  我的发布
+     * 加载更多  我的发布 2  我的草稿 3
      * @return array
      */
-    public function publishmore(){
+    public function more(){
         $len = input('post.');
-        $list = $this ->getDataList($len,2);
-        foreach($list['data'] as $key => $value){
-            //  获取审核人
-            $review = Db::name('review')->where(['class' => $value['class'],'aid' => $value['id']])->find();
-            if (!empty($review)){
-                $list['data'][$key]['username'] = $review['username'];
-                $list['data'][$key]['review_status'] = $review['status'];
-                $list['data'][$key]['review_time'] = date('Y-m-d',$review['create_time']);
+        $type = $len['type'];  // 2  我的发布  3  我的草稿
+        unset($len['type']);
+        $list = $this ->getDataList($len,$type);
+        if ($type == 2){
+            foreach($list['data'] as $key => $value){
+                //  获取审核人
+                $review = Db::name('review')->where(['class' => $value['class'],'aid' => $value['id']])->find();
+                if (!empty($review)){
+                    $list['data'][$key]['username'] = $review['username'];
+                    $list['data'][$key]['review_status'] = $review['status'];
+                    $list['data'][$key]['review_time'] = date('Y-m-d',$review['create_time']);
+                }
             }
         }
         return $list;
@@ -309,15 +329,15 @@ class User extends Base {
                 break;
         }
         $userid = session('userId');
-        if ($status == 3){
+        if ($status == 2){
             $map = array(
                 'create_user' => $userid,
-                'status' => ['eq',$status],
+                'status' => ['in',[1,$status]],
             );
         }else{
             $map = array(
                 'create_user' => $userid,
-                'status' => ['in',[1,$status]],
+                'status' => ['eq',$status],
             );
         }
         $order = 'create_time desc';

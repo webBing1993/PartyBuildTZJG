@@ -97,7 +97,7 @@ function loadScroll(){
 		var incorrupt_len = $('.Audited ul .list[data-type=7]').length;
 		$.ajax({
 			type:"post",
-			url:"{:Url('User/publishmore')}",
+			url:"{:Url('User/more')}",
 			data:{
 				responsibility:responsibility_len,
 				learn:learn_len,
@@ -106,6 +106,7 @@ function loadScroll(){
 				style:style_len,
 				volunteer:volunteer_len,
 				incorrupt:incorrupt_len,
+				type:2
 			},
 			beforeSend: function(XMLHttpRequest){
 			},

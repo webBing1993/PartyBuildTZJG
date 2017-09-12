@@ -2,24 +2,37 @@
 
 {block name="style"}
 <link rel="stylesheet" href="/home/css/review/index.css">
+<style>
+	#refreshContainer {
+		top: 0;
+	}
+</style>
 {/block}
 
 {block name="body"}
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
 	<div class="mui-scroll">
 <div class="list push">
-	{empty name="list2"}
+	{empty name="list"}
 	<div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
 	{else/}
 	<ul>
-		{volist name="list2" id="lo"}
-		<li><a href="{:Url('Review/detail?class='.$lo['class'].'&id='.$lo['focus_main'])}" class="list clear" data-type="{$lo.class}">
-			<img src="{$lo.front_cover}">
-			<span>{$lo.title}</span>
-			<span>{$lo.pre} 发布人：{$lo.publisher}</span>
-			<span>{$lo.create_time}</span>
+		{volist name="list" id="li"}
+		<li><a href="{:Url('User/detail?class='.$li['class'].'&id='.$li['id'])}" class="list clear" data-type="{$li.class}">
+			<img src="{$li.front_cover}">
+			<span>{$li.title}</span>
+			{switch name='$li.class'}
+			{case value='1'}<span>[党建责任] 发布人：{$li.publisher}</span>{/case}
+			{case value='2'}<span>[两学一做] 发布人：{$li.publisher}</span>{/case}
+			{case value='3'}<span>[组织建设] 发布人：{$li.publisher}</span>{/case}
+			{case value='4'}<span>[特色创新] 发布人：{$li.publisher}</span>{/case}
+			{case value='5'}<span>[作风建设] 发布人：{$li.publisher}</span>{/case}
+			{case value='6'}<span>[志愿服务] 发布人：{$li.publisher}</span>{/case}
+			{default/}<span>[党风廉政] 发布人：{$li.publisher}</span>
+			{/switch}
+			<span>{$li.create_time}</span>
 			<span class="mui-icon mui-icon-forward"></span>
-			<i class="fail" data-id="{$lo.id}" data-class="{$lo.class}">删&nbsp;除</i><i class="pass" data-id="{$lo.id}" data-class="{$lo.class}">修&nbsp;改</i>
+			<i class="fail" data-id="{$li.id}" data-class="{$li.class}">删&nbsp;除</i><i class="pass" data-id="{$li.id}" data-class="{$li.class}">修&nbsp;改</i>
 		</a>
 		</li>
 		{/volist}
@@ -39,7 +52,7 @@ $(function(){
 
 window.onload = function() {
 	skidding();
-	if ($(".Audited ul li").length > 0) {
+	if ($(".list ul li").length > 0) {
 		if ($(".list ul li").length < 7) {
 			mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
 		} else {
@@ -48,30 +61,53 @@ window.onload = function() {
 	}
 };
 
+//初始化下拉加载
+mui.init({
+	pullRefresh: {
+		container: '#refreshContainer',
+		up: {
+			callback: loadScroll
+		}
+	}
+});
 function loadScroll(){
-		var len = $(".list ul li" ).length;
-			$.ajax({
-				type:"post",
-				url:"{:Url('User/notesmore')}",
-				data:{
-					length:len
-				},
-				beforeSend: function(XMLHttpRequest){
-				},
-				success:function(data){
-					if(data.code == 1){
-						addLists(data);
-						var dataLen =data.data.length;
-						if(data.data.length == 7){
-							mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
-						}else{
-							mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
-						}
-					}else{
-							mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
-					}
+	var userId = '{$Think.session.userId}';
+	var responsibility_len = $('.list ul li .list[data-type=1]').length;
+	var learn_len = $('.list ul li .list[data-type=2]').length;
+	var organization_len = $('.list ul li .list[data-type=3]').length;
+	var special_len = $('.list ul li .list[data-type=4]').length;
+	var style_len = $('.list ul li .list[data-type=5]').length;
+	var volunteer_len = $('.list ul li .list[data-type=6]').length;
+	var incorrupt_len = $('.list ul li .list[data-type=7]').length;
+	$.ajax({
+		type:"post",
+		url:"{:Url('User/more')}",
+		data:{
+			responsibility:responsibility_len,
+			learn:learn_len,
+			organization:organization_len,
+			special:special_len,
+			style:style_len,
+			volunteer:volunteer_len,
+			incorrupt:incorrupt_len,
+			type:3
+		},
+		beforeSend: function(XMLHttpRequest){
+		},
+		success:function(data){
+			if(data.code == 1){
+				addLists(data);
+				var dataLen =data.data.length;
+				if(data.data.length == 7){
+					mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+				}else{
+					mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
 				}
-			})
+			}else{
+					mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+			}
+		}
+	})
 }
 
 
@@ -81,19 +117,35 @@ function addLists(data){
 	var len = lists.length;
 	for(var i = 0; i< len;i++){
 		var list = lists[i];
+		var link = '/home/review/detail/class/'+list.class+'/id/'+list.id;
+		if(list.class == 1){
+			class_name = '[党建责任]';
+		}else if(list.class == 2){
+			class_name = '[两学一做]';
+		}else if(list.class == 3){
+			class_name = '[组织建设]';
+		}else if(list.class == 4){
+			class_name = '[特色创新]';
+		}else if(list.class == 5){
+			class_name = '[作风建设]';
+		}else if(list.class == 6){
+			class_name = '[志愿服务]';
+		}else if(list.class == 7){
+			class_name = '[党风廉政]';
+		}
 		html +=
 				'<li>' +
 				'<a href="' + link + '"  class="list clear" data-type="' + list.class + '">' +
 				'<img src="' + list.front_cover + '">' +
 				'<span>' + list.title + '</span>' +
-				'<span>' + list.pre + ' 发布人：' + list.publisher + '</span>' +
+				'<span>' + class_name + ' 发布人：' + list.publisher + '</span>' +
 				'<span>' + list.create_time + '</span>' +
 				'<span class="mui-icon mui-icon-forward"></span>' +
 				'<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">删&nbsp;除</i><i class="pass"  data-id="' + list.id + '" data-class="' + list.class + '">修&nbsp;改</i>' +
 				'</a>' +
 				'</li>'
 	}
-	$(".lists ul" ).append(html);
+	$(".list ul" ).append(html);
 	skidding();
 }
 
