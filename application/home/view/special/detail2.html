@@ -1,8 +1,7 @@
 {extend name="public/common"}
 
 {block name="style"}
-<title>党建动态</title>
-<link rel="stylesheet" href="/home/css/details-template/detail.css">
+<link rel="stylesheet" href="/home/css/details-template/banner-detail.css">
 <style>
     .mui-pull-bottom-pocket {
         height: 0.8rem;
@@ -16,6 +15,16 @@
 {block name="body"}
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
+        <!--轮播图-->
+        <div class="mui-slider banner">
+            <div class="mui-slider-group mui-slider-loop">
+                {volist name="detail.images" id="li"}
+                <!--支持循环，需要重复图片节点-->
+                <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
+                {/volist}
+            </div>
+        </div>
+        <span class="read">{$detail.views}</span>
         <div class="article">
             <div class="title"><p>{$detail.title}</p></div>
             <div class="note clear">
@@ -25,12 +34,11 @@
             <div class="content">
                 <div class="article-content">{$detail.content}</div>
                 <div class="like">
-                    <span class="read">{$detail.views}</span>
                     {eq name="visit" value="0"}
                     {eq name="detail.is_like" value="1"}
-                    <span class="isgood good_ notvisitor"  data-type="3" data-id="{$detail.id}">{$detail.likes}</span>
+                    <span class="isgood good_ notvisitor"  data-type="6" data-id="{$detail.id}">{$detail.likes}</span>
                     {else/}
-                    <span class="isgood good notvisitor"  data-type="3" data-id="{$detail.id}">{$detail.likes}</span>
+                    <span class="isgood good notvisitor"  data-type="6" data-id="{$detail.id}">{$detail.likes}</span>
                     {/eq}
                     {else/}
                     <span class="isgood good">{$detail.likes}</span>
@@ -67,7 +75,7 @@
     </div>
 </div>
 {eq name="visit" value="0"}
-<div class="bottom clear" onclick="send(this,3,{$detail['id']})">
+<div class="bottom clear" onclick="send(this,6,{$detail['id']})">
     <div class="myword fl">
         <input type="text" placeholder="说说你的感想！" id="send" disabled>
     </div>
@@ -80,7 +88,7 @@
 <script src="/home/js/reset.js"></script>
 <script>
     window.onload = function(){
-        if($(".list").length<7){
+        if($(".list").length<10){
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
         }else{
             mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -194,6 +202,7 @@
                 });
     };
 
+
     //初始化下拉加载
     mui.init({
         pullRefresh: {
@@ -204,7 +213,6 @@
         }
     });
 
-
     //加载更多评论
     function loadScroll(){
         var len = $(".list" ).length;
@@ -213,18 +221,17 @@
             type:"post",
             url:"{:Url('Base/morecomment')}",
             data:{
-                type:3,
+                type:6,
                 aid:id,
                 length:len
             },
             beforeSend: function(XMLHttpRequest){
             },
             success:function(data){
-                console.log(data)
                 if(data.code == 1){
                     addComment(data);
                     var dataLen =data.data.length;
-                    if(data.data.length == 7){
+                    if(data.data.length == 10){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                     }else{
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);

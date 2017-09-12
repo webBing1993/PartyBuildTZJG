@@ -131,6 +131,18 @@ class Base extends Controller {
             case 5:
                 $table = "organization";
                 break;
+            case 6:
+                $table = "special";
+                break;
+            case 7:
+                $table = "style";
+                break;
+            case 8:
+                $table = "volunteer";
+                break;
+            case 9:
+                $table = "incorrupt";
+                break;
             default:
                 return $this->error("无该数据表");
                 break;
@@ -197,6 +209,18 @@ class Base extends Controller {
                     break;
                 case 5:
                     $table = "organization";
+                    break;
+                case 6:
+                    $table = "special";
+                    break;
+                case 7:
+                    $table = "style";
+                    break;
+                case 8:
+                    $table = "volunteer";
+                    break;
+                case 9:
+                    $table = "incorrupt";
                     break;
                 default:
                     return $this->error("无该数据表");
@@ -301,6 +325,18 @@ class Base extends Controller {
                 break;
             case 5:
                 $table = "organization";
+                break;
+            case 6:
+                $table = "special";
+                break;
+            case 7:
+                $table = "style";
+                break;
+            case 8:
+                $table = "volunteer";
+                break;
+            case 9:
+                $table = "incorrupt";
                 break;
             default:
                 return $this->error("无该数据表");
