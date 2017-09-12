@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Lxx<779219930@qq.com>
  * Date: 2017/9/12
- * Time: 17:54
+ * Time: 18:29
  */
 
 namespace app\home\model;
@@ -11,7 +11,7 @@ namespace app\home\model;
 
 use think\Model;
 
-class Special extends Model {
+class Style extends Model {
     protected $insert = [
         'views' => 0,
         'likes' => 0,
@@ -21,11 +21,16 @@ class Special extends Model {
     ];
 
     /**
+     * @param $type
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
      * 主页列表
      */
-    public function getIndex() {
+    public function getIndex($type) {
         $map = array(
-            'status' => 1
+            'status' => 1,
+            'type' => $type
         );
         $res = $this->where($map)->order('create_time desc')->limit(8)->select();
         return $res;
@@ -33,20 +38,20 @@ class Special extends Model {
 
     /**
      * @param $length
+     * @param $type
      * @return false|\PDOStatement|string|\think\Collection
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * 加载更多
      */
-    public function getListMore($length) {
+    public function getListMore($length,$type) {
         $map = array(
-            'status' => 1
+            'status' => 1,
+            'type' => $type,
         );
         $res = $this->where($map)->order('create_time desc')->limit($length,8)->select();
         foreach ($res as $value) {
             $value['time'] = date("Y-m-d",$value['create_time']);
-            $path = Picture::get($value['front_cover']);
-            $value['path'] = $path['path'];
         }
         return $res;
     }
