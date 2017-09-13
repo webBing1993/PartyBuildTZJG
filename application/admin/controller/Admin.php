@@ -8,6 +8,7 @@
  */
 
 namespace app\admin\controller;
+use app\admin\model\Member;
 use app\admin\model\Menu;
 use org\Auth;
 use org\Page;
@@ -463,6 +464,15 @@ class Admin extends Controller {
         }else{
             return $this->error($msg);
         }
+    }
 
+    /**
+     * 获取发布者名称
+     */
+    public function getPublisher() {
+        $id = $_SESSION['think']['user_auth']['id'];
+        $Model = new Member();
+        $name = $Model->get($id);
+        $this->assign('name',$name['nickname']);
     }
 }

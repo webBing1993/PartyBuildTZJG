@@ -52,6 +52,7 @@ class Learn extends Admin {
         }else{
             $this->default_pic();
             $this->assign('msg','');
+            $this->getPublisher();
             return $this->fetch('edit');
         }
     }
@@ -63,7 +64,6 @@ class Learn extends Admin {
         $Model = new LearnModel();
         if(IS_POST) {
             $data = input('post.');
-            $data['create_user'] = $_SESSION['think']['user_auth']['id'];
             if($data['time']) {
                 $data['time'] = strtotime($data['time']);
             }

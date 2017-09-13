@@ -49,6 +49,7 @@ class Responsibility extends Admin {
         }else{
             $this->default_pic();
             $this->assign('msg','');
+            $this->getPublisher();
             return $this->fetch('edit');
         }
     }
@@ -60,14 +61,12 @@ class Responsibility extends Admin {
         $Model = new ResponsibilityModel();
         if(IS_POST) {
             $data = input('post.');
-            $data['create_user'] = $_SESSION['think']['user_auth']['id'];
             $res = $Model->validate(true)->save($data,['id'=>input('id')]);
             if($res){
                 return $this->success("修改成功",Url("Responsibility/index"));
             }else{
                 return $this->get_update_error_msg($Model->getError());
             }
-
         }else{
             $this->default_pic();
             $id = input('id');

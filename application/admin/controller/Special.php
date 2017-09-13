@@ -48,6 +48,7 @@ class Special extends Admin {
         }else{
             $this->default_pic();
             $this->assign('msg','');
+            $this->getPublisher();
             return $this->fetch('edit');
         }
     }
@@ -59,14 +60,12 @@ class Special extends Admin {
         $Model = new SpecialModel();
         if(IS_POST) {
             $data = input('post.');
-            $data['create_user'] = $_SESSION['think']['user_auth']['id'];
             $res = $Model->validate(true)->save($data,['id'=>input('id')]);
             if($res){
                 return $this->success("修改成功",Url("Special/index"));
             }else{
                 return $this->get_update_error_msg($Model->getError());
             }
-
         }else{
             $this->default_pic();
             $id = input('id');

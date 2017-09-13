@@ -142,7 +142,11 @@
                                 <label>发布人:</label>
                             </div>
                             <div class="col-lg-11">
-                                <input type="text" placeholder="请输入发布人" class="form-control form_title" name="publisher" value="{$msg.publisher || default=''}">
+                                {empty name="$msg"}
+                                <input type="text" placeholder="请输入发布人" class="form-control form_title" name="publisher" value="{$name}">
+                                {else/}
+                                <input type="text" placeholder="请输入发布人" class="form-control form_title" name="publisher" value="{$msg.publisher}">
+                                {/empty}
                             </div>
                         </div>
                         <input type="hidden" name="id" value="{$msg.id || default=''}">

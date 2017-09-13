@@ -51,7 +51,7 @@ class Organization extends Base{
         if(IS_POST) {
             $data = input('post.');
             $Model = new OrganizationModel();
-            $user = WechatUser::where('userid',$data['create_user'])->find();
+            $user = WechatUser::where('userid',$data['userid'])->find();
             $data['publisher'] = $user['name'];
             $data['front_cover'] = $this->default_pic(); //生成随机封面
             isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";

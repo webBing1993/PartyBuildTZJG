@@ -71,7 +71,7 @@ class Learn extends Base{
         if(IS_POST) {
             $data = input('post.');
             $Model = new LearnModel();
-            $user = WechatUser::where('userid',$data['create_user'])->find();
+            $user = WechatUser::where('userid',$data['userid'])->find();
             $data['publisher'] = $user['name'];
             $data['front_cover'] = $this->default_pic(); //生成随机封面
             isset($data['time']) ? $data['time'] = time_format($data['time']) : $data['time'] = 0;
