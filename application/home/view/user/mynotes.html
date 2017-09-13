@@ -59,6 +59,8 @@ window.onload = function() {
 		} else {
 			mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
 		}
+	}else{
+		mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
 	}
 };
 
@@ -225,7 +227,7 @@ var deleted = function (element,id,_class){
 		},
 		success:function(data){
 			if(data.code==1){
-				$(element).remove();
+//				$(element).remove();
 				swal({
 					title: "",
 					text: "删除成功",
@@ -233,7 +235,7 @@ var deleted = function (element,id,_class){
 					confirmButtonText: "确认",
 					timer:2000
 				},function(){
-//					window.location.reload();
+					window.location.reload();
 				});
 			}else{
 				swal({

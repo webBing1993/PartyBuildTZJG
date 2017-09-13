@@ -297,6 +297,7 @@
             }else{
                 data["templet"] = 2;
             }
+            data[status] = 3;
             $(".img img").each(function(){
                 if($(this).data("tab")){
                     data['list_images'].push($(this).data("tab")+"")  ;
@@ -311,8 +312,189 @@
                 success:function(data){
                     if(data.code == 1){
                         swal({
-                            title: "保存成功！",
+                            title: "保存成功",
                             text: '请至个人中心——我的草稿中查看',
+                            type: 'success',
+                            showCancelButton: false,
+                            confirmButtonText: "确定",
+                            allowOutsideClick:false
+                        },function(isConfirm){
+                            if (isConfirm) {
+                                window.history.go(-1);
+                            }
+                        });
+                    }else{
+                        swal({
+                            title: ' ',
+                            text: data.msg,
+                            type: 'error',
+                            showConfirmButton:false,
+                            timer:1500
+                        });
+                    }
+                }
+            });
+        }else{
+            swal({
+                title: ' ',
+                text: '信息输入不完整',
+                type: 'error',
+                showConfirmButton:false,
+                timer:1500
+            });
+        }
+    });
+
+
+    //去审核
+    $(".goreview").click(function(){
+        var single = false;
+        var templet = $("#openPopover2").html();
+        var userid = {$userId};
+        if(c==1){
+            var data={
+                class:0,
+                title:$("input[name='title']").val(),
+                content:$("textarea[name='content']").val(),
+                create_user:userid,
+                type:type
+            };
+            for(var key in data){
+                if(data["title"]!= ''&& data["content"]!=""){
+//                    if(data["content"].length<300){
+//                        swal({
+//                            title: ' ',
+//                            text: '内容不少于500字',
+//                            type: 'error',
+//                            showConfirmButton:false,
+//                            timer:1500
+//                        });
+//                        return;
+//                    }
+                    single = true;
+                    continue;
+                }
+            }
+        }else if(c==2){
+            var _class = $("#openPopover").html();
+            var data={
+                title:$("input[name='title']").val(),
+                content:$("textarea[name='content']").val(),
+                address:$("input[name='address']").val(),
+                time:$("input[name='time']").val(),
+                people:$("input[name='people']").val(),
+                compere:$("input[name='compere']").val(),
+                create_user:userid,
+                type:type
+            };
+            switch (_class){
+                case "支部委员大会":
+                    data["class"] = 1;
+                    break;
+                case "党支部委员会":
+                    data["class"] = 2;
+                    break;
+                case "党小组会":
+                    data["class"] = 3;
+                    break;
+                case "党课":
+                    data["class"] = 4;
+                    break;
+            }
+            for(var key in data){
+                if(data["title"]!= ''&& data["content"]!=""&& data["place"]!=""&& data["date"]!=""&& data["number"]!=""&& data["host"]!=""){
+//                    if(data["content"].length<300){
+//                        swal({
+//                            title: ' ',
+//                            text: '内容不少于500字',
+//                            type: 'error',
+//                            showConfirmButton:false,
+//                            timer:1500
+//                        });
+//                        return;
+//                    }
+                    single = true;
+                    continue;
+                }
+            }
+        }else if(c==3){
+            var _class = $("#openPopover3").html();
+            var data={
+                title:$("input[name='title']").val(),
+                content:$("textarea[name='content']").val(),
+                create_user:userid,
+                type:type
+            };
+            for(var key in data){
+                if(data["title"]!= ''&& data["content"]!=""){
+//                    if(data["content"].length<300){
+//                        swal({
+//                            title: ' ',
+//                            text: '内容不少于500字',
+//                            type: 'error',
+//                            showConfirmButton:false,
+//                            timer:1500
+//                        });
+//                        return;
+//                    }
+                    single = true;
+                    continue;
+                }
+            }
+            if(_class=="培训计划"){
+                data["class"] = 1;
+            }else{
+                data["class"] = 2;
+            }
+        }else if(c==4){
+            var data={
+                class:0,
+                title:$("input[name='title']").val(),
+                content:$("textarea[name='content']").val(),
+                create_user:userid,
+                type:type
+            };
+            for(var key in data){
+                if(data["title"]!= ''&& data["content"]!=""){
+//                    if(data["content"].length<300){
+//                        swal({
+//                            title: ' ',
+//                            text: '内容不少于500字',
+//                            type: 'error',
+//                            showConfirmButton:false,
+//                            timer:1500
+//                        });
+//                        return;
+//                    }
+                    single = true;
+                    continue;
+                }
+            }
+        }
+        if(single){
+            data['list_images']=[];
+            if(templet == "模板1"){
+                data["templet"] = 1;
+            }else{
+                data["templet"] = 2;
+            }
+            data[status] = 0;
+            $(".img img").each(function(){
+                if($(this).data("tab")){
+                    data['list_images'].push($(this).data("tab")+"")  ;
+                }
+            })
+            console.log(data)
+//            data['list_image'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
+            $.ajax({
+                type:"post",
+                url: "{:Url('Learn/publish')}",
+                data:data,
+                success:function(data){
+                    if(data.code == 1){
+                        swal({
+                            title: "提交成功",
+                            text: '审核后可在个人中心——我的发布中查看',
                             type: 'success',
                             showCancelButton: false,
                             confirmButtonText: "确定",

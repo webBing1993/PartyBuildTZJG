@@ -91,6 +91,7 @@
             }else{
                 data["templet"] = 2;
             }
+            data["status"] = 3;
             $(".img img").each(function(){
                 if($(this).data("tab")){
                     data['list_images'].push($(this).data("tab")+"")  ;
@@ -105,8 +106,91 @@
                 success:function(data){
                     if(data.code == 1){
                         swal({
-                            title: " ",
-                            text: '恭喜您，保存成功！<br>请至个人中心——我的草稿中查看',
+                            title: "保存成功 ",
+                            text: '请至个人中心——我的草稿中查看',
+                            type: 'success',
+                            showCancelButton: false,
+                            confirmButtonText: "确定",
+                            allowOutsideClick:false
+                        },function(isConfirm){
+                            if (isConfirm) {
+                                window.history.go(-1);
+                            }
+                        });
+                    }else{
+                        swal({
+                            title: ' ',
+                            text: data.msg,
+                            type: 'error',
+                            showConfirmButton:false,
+                            timer:1500
+                        });
+                    }
+                }
+            });
+        }else{
+            swal({
+                title: ' ',
+                text: '信息输入不完整',
+                type: 'error',
+                showConfirmButton:false,
+                timer:1500
+            });
+        }
+    });
+
+
+    //去审核
+    $(".goreview").click(function(){
+        var single = false;
+        var templet = $("#openPopover").html();
+        var userid = {$userId};
+        var data={
+            title:$("input[name='title']").val(),
+            content:$("textarea[name='content']").val(),
+            create_user:userid,
+            type:type
+        };
+        for(var key in data){
+            if(data["title"]!= ''&& data["content"]!=""){
+//                    if(data["content"].length<200){
+//                        swal({
+//                            title: ' ',
+//                            text: '内容不少于200字',
+//                            type: 'error',
+//                            showConfirmButton:false,
+//                            timer:1500
+//                        });
+//                        return;
+//                    }
+                single = true;
+                continue;
+            }
+        }
+        if(single){
+            data['list_images']=[];
+            if(templet == "模板1"){
+                data["templet"] = 1;
+            }else{
+                data["templet"] = 2;
+            }
+            data["status"] = 0;
+            $(".img img").each(function(){
+                if($(this).data("tab")){
+                    data['list_images'].push($(this).data("tab")+"")  ;
+                }
+            })
+
+//            data['list_image'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
+            $.ajax({
+                type:"post",
+                url: "{:Url('Style/publish')}",
+                data:data,
+                success:function(data){
+                    if(data.code == 1){
+                        swal({
+                            title: "提交成功",
+                            text: '审核后可在个人中心——我的发布中查看',
                             type: 'success',
                             showCancelButton: false,
                             confirmButtonText: "确定",
