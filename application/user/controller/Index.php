@@ -32,12 +32,15 @@ class Index extends Controller
      */
     public function register($username, $password, $email, $mobile = '') {
         $UcenterMemberModel = new UcenterMember();
+        $WechatUser = new WechatUser();
+        $user = $WechatUser->where('userid',$username)->find();
+        $nickname = $user['name'];
         $data = [
             'username' => $username,
             'password' => $password,
             'email' => $email,
             'mobile' => $mobile,
-            'nickname' => $username,
+            'nickname' => $nickname,
         ];
         // 验证手机
         if (empty($data['mobile'])) unset($data['mobile']);
