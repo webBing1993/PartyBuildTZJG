@@ -75,21 +75,7 @@ function tabRecord(a,b){
 			$(b).eq(index).siblings(b).addClass('hidden');
 		},100)
 	}
-	//清除tab值
-	pushHistory();
-	window.addEventListener( "popstate", function( e ){
-		delCookie( 'tab' );
-		window.history.go( -1 );
-	}, false );
-}
-function pushHistory(){
-	var sta = {
-		title: "title"
-	};
-	if( window.history.state === null ){
-		window.history.pushState( sta, "title" );
-	}
-}
+
 function setCookie( name, value ){
 	var Days = 30;
 	var exp = new Date();

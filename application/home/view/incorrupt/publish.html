@@ -107,11 +107,10 @@
                             showCancelButton: false,
                             confirmButtonText: "确定",
                             allowOutsideClick:false
-                        },function(isConfirm){
-                            if (isConfirm) {
-                                window.history.go(-1);
-                            }
                         });
+                        setTimeout(function(){
+                            window.history.go(-1);
+                        },1500)
                     }else{
                         swal({
                             title: ' ',
@@ -190,11 +189,10 @@
                             showCancelButton: false,
                             confirmButtonText: "确定",
                             allowOutsideClick:false
-                        },function(isConfirm){
-                            if (isConfirm) {
-                                window.history.go(-1);
-                            }
                         });
+                        setTimeout(function(){
+                            window.history.go(-1);
+                        },1500)
                     }else{
                         swal({
                             title: ' ',
