@@ -54,7 +54,6 @@
                                 <th>发布人</th>
                                 <th>截止时间</th>
                                 <th>推送类型</th>
-                                <th>创建人</th>
                                 <th>创建时间</th>
                                 <th>是否推荐</th>
                                 <th>是否推送</th>
@@ -76,7 +75,6 @@
                                 <td>{$vo->publisher}</td>
                                 <td>{$vo.end_time}</td>
                                 <td>{$vo.type_text}</td>
-                                <td>{$vo->user->nickname}</td>
                                 <td>{$vo.create_time|time_format="Y-m-d"}</td>
                                 <td>{$vo.recommend_text}</td>
                                 {eq name="$vo.push" value="0"}
