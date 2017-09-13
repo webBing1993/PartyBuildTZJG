@@ -78,6 +78,7 @@ class Learn extends Base{
             isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";
             $res = $Model->create($data);
             if($res) {
+                get_score(2,$res->id,session('userId'));
                 return $this->success("添加成功");
             }else {
                 return $this->error("添加失败");
