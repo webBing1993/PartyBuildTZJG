@@ -11,12 +11,18 @@
         </div>
         <div class="list">
             <ul>
-                <a href="">
-                    <img src="/home/images/pioneer/banner.png">
-                    <p>电动汽车可以有，在浙江哪都能充电</p>
-                    <span>之图党支部</span>
-                    <span>2017-8-21</span>
+                {volist name="list" id="vo"}
+                {eq name="vo.templet" value="1"}
+                <a href="{:Url('Incorrupt/detail?id='.$vo['id'])}">
+                {else/}
+                <a href="{:Url('Incorrupt/detail2?id='.$vo['id'])}">
+                {/eq}
+                    <img src="{$vo.front_cover|get_cover='path'}">
+                    <p>{$vo.title}</p>
+                    <span>{$vo.publisher}</span>
+                    <span>{$vo.create_time|time_format='Y-m-d'}</span>
                 </a>
+                {/volist}
             </ul>
         </div>
     </div>
