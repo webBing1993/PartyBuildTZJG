@@ -19,10 +19,10 @@
         </li>
         <li>
             标题
-            <input style="text" placeholder="请输入标题">
+            <input style="text" placeholder="请输入标题" name="title">
         </li>
         <div class="content">
-            <textarea placeholder="请输入内容，不少于200字..."></textarea>
+            <textarea placeholder="请输入内容，不少于200字..." name="content"></textarea>
             <div class="imgs clear">
                 <div class="img fl hide"></div>
                 <div class="img fl hide"></div>
@@ -104,9 +104,9 @@
                 data["templet"] = 2;
             }
             if(_class == "四跑志愿活动"){
-                data["class"] = 1;
+                data["type"] = 1;
             }else{
-                data["class"] = 2;
+                data["type"] = 2;
             }
             $(".img img").each(function(){
                 if($(this).data("tab")){

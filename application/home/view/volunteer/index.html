@@ -57,12 +57,18 @@
                 <!--培训计划-->
                 <div class="list training">
                     <ul>
-                        <a href="">
-                            <img src="/home/images/pioneer/banner.png">
-                            <p>电动汽车可以有，在浙江哪都能充电</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
+                        {volist name="list.one" id="one"}
+                        {eq name="one.templet" value="1"}
+                        <a href="{:Url('Volunteer/detail?id='.$one['id'])}">
+                        {else/}
+                        <a href="{:Url('Volunteer/detail2?id='.$one['id'])}">
+                            {/eq}
+                            <img src="{$one.front_cover|get_cover='path'}">
+                            <p>{$one.title}</p>
+                            <span>{$one.publisher}</span>
+                            <span>{$one.create_time|time_format='Y-m-d'}</span>
                         </a>
+                        {/volist}
                     </ul>
                 </div>
             </div>
@@ -70,12 +76,18 @@
                 <!--理论研究-->
                 <div class="list theory">
                     <ul>
-                        <a href="">
-                            <img src="/home/images/pioneer/banner.png">
-                            <p>电动汽车可以有，在浙江哪都能充电</p>
-                            <span>之图党支部</span>
-                            <span>2017-8-21</span>
+                        {volist name="list.two" id="two"}
+                        {eq name="two.templet" value="1"}
+                        <a href="{:Url('Volunteer/detail?id='.$two['id'])}">
+                        {else/}
+                        <a href="{:Url('Volunteer/detail2?id='.$two['id'])}">
+                            {/eq}
+                            <img src="{$two.front_cover|get_cover='path'}">
+                            <p>{$two.title}</p>
+                            <span>{$two.publisher}</span>
+                            <span>{$two.create_time|time_format='Y-m-d'}</span>
                         </a>
+                        {/volist}
                     </ul>
                 </div>
             </div>
