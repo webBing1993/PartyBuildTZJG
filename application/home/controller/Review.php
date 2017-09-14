@@ -247,8 +247,13 @@ class Review extends Base{
             }
             // 发布人 
             if (empty($value['publisher'])){
-                $User = Member::where('uid',$value['create_user'])->find();
-                $list[$key]['publisher'] = $User['nickname'];
+                if (empty($value['create_user'])){
+                    $User = WechatUser::where('userid',$value['userid'])->find();
+                    $list[$key]['publisher'] = $User['name'];
+                }else{
+                    $User = Member::where('uid',$value['create_user'])->find();
+                    $list[$key]['publisher'] = $User['nickname'];
+                }
             }
         }
         if(!empty($list))

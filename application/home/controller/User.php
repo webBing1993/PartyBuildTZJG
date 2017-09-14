@@ -344,12 +344,12 @@ class User extends Base {
         $userid = session('userId');
         if ($status == 2){
             $map = array(
-                'create_user' => $userid,
+                'userid' => $userid,
                 'status' => ['in',[1,$status]],
             );
         }else{
             $map = array(
-                'create_user' => $userid,
+                'userid' => $userid,
                 'status' => ['eq',$status],
             );
         }
