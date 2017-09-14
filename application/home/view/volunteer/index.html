@@ -150,18 +150,18 @@
 
     //上拉加载更多
     function loadScroll(){
+        var type = parseInt(c) + 1;
         if(c==0){
-            var len = $(".training ul a").length .length;
+            var len = $(".training ul a").length;
         }else if(c==1){
-            var len = $(".theory ul a").length .length;
+            var len = $(".theory ul a").length;
         }
         $.ajax({
             type:"post",
             url: "{:Url('Volunteer/index')}",
             data:{
-
                 length:len,
-                type:c
+                type:type
             },
             beforeSend: function(XMLHttpRequest){
 
