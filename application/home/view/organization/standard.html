@@ -85,8 +85,12 @@
         var len = lists.length;
         for(var i = 0; i< len;i++){
             var list = lists[i];
+            if(list.templet==1){
+                html += '<a href="/home/Organization/detail/id/'+list.id+'.html">'
+            }else{
+                html += '<a href="/home/Organization/detail2/id/'+list.id+'.html">'
+            }
             html +=
-                    '<a>'+
                     '<p>'+list.time+'</p>'+
                     '<span>'+list.publisher+'</span>'+
                     '<span>'+list.time+'</span>'+
