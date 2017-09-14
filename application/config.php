@@ -77,10 +77,17 @@ return [
         'appsecret' => 'AseyEaENEPDzzz33YEj3SxhZvsOuGaUyKD3jkVSHqEk',
         'agentid' => 1000007
     ],
+    //作风建设
+    'style' => [
+        'appid' => 'wwbab5777aedaa7c19',
+        'appsecret' => 'K2N7ey3R2-ohVx9ooAWWE80eIJhMXS1QhTJZjJdZDYw',
+        'agentid' => 1000013
+    ],
     //通讯名录
     'mail' => [
         'appid' => 'wwbab5777aedaa7c19',
         'appsecret' => 'xfICmSbBsMcXBipeQaYueTPq2vNLwqqjcdxwepmkzIA',
+        'agentid' => 1000008
     ],
     //通知公告
     'notice' => [

@@ -12,7 +12,6 @@ class Push extends Model
 {
     public $insert = [
         'status' => 0,
-        'comments' => 0,
         'create_time' => NOW_TIME,
     ];
 }
