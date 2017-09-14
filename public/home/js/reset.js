@@ -60,9 +60,9 @@ function tabSwitch(a,b,fn,url){
 
 	})
 }
-function tabRecord(a,b){
+function tabRecord(a,b) {
 	var tab = getCookie('tab');
-	if(tab){
+	if (tab) {
 		var index = tab;
 		var box = $(b).parent();
 		var ww = $(b).parent().width();
@@ -70,11 +70,12 @@ function tabRecord(a,b){
 		$(a).eq(index).siblings(a).removeClass('active');
 		$(b).removeClass('hidden');
 		ww = ww * index;
-		box.css({left: -ww +'px'});
-		setTimeout(function(){
+		box.css({left: -ww + 'px'});
+		setTimeout(function () {
 			$(b).eq(index).siblings(b).addClass('hidden');
-		},100)
+		}, 100)
 	}
+}
 
 function setCookie( name, value ){
 	var Days = 30;
