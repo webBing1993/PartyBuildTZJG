@@ -9,6 +9,9 @@
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
 <div class="list">
+    {empty name="$list"}
+    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+    {else/}
     <ul>
         {volist name="list" id="vo"}
         {eq name="vo.templet" value="1"}
@@ -22,6 +25,7 @@
         </a>
         {/volist}
     </ul>
+    {/empty}
 </div>
         </div>
     </div>
@@ -58,7 +62,8 @@
             type:"post",
             url: "{:Url('Learn/listmore')}",
             data:{
-                length:len
+                length:len,
+                type:1
             },
             beforeSend: function(XMLHttpRequest){
 
@@ -86,12 +91,16 @@
         var len = lists.length;
         for(var i = 0; i< len;i++){
             var list = lists[i];
+            if(list.templet==1){
+                html += '<a href="/home/Learn/detail/id/'+list.id+'.html">'
+            }else{
+                html += '<a href="/home/Learn/detail2/id/'+list.id+'.html">'
+            }
             html +=
-        '<a>'+
-            '<p>'+list.title+'</p>'+
-            '<span>+list.publisher+</span>'+
-           '<span>+list.time+</span>'+
-            '</a>'
+                    '<p>'+list.title+'</p>'+
+                    '<span>+list.publisher+</span>'+
+                   '<span>+list.time+</span>'+
+                    '</a>'
         }
         $('.list ul').append(html);
     }

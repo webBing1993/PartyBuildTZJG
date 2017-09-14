@@ -139,7 +139,7 @@
     text-align: center;
 }
 
-.lists .list:last-child{
+.lists{
     margin-bottom: 0.6rem;
 }
 

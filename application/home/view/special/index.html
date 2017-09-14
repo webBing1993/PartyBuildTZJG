@@ -11,6 +11,9 @@
             <img src="/home/images/pioneer/banner.png">
         </div>
         <div class="list">
+            {empty name="$list"}
+            <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+            {else/}
             <ul>
                 {volist name="list" id="vo"}
                 {eq name="vo.templet" value="1"}
@@ -25,6 +28,7 @@
                 </a>
                 {/volist}
             </ul>
+            {/empty}
         </div>
     </div>
 </div>
@@ -89,8 +93,12 @@
         var len = lists.length;
         for(var i = 0; i< len;i++){
             var list = lists[i];
+            if(list.templet==1){
+                html += '<a href="/home/special/detail/id/'+list.id+'.html">'
+            }else{
+                html += '<a href="/home/special/detail2/id/'+list.id+'.html">'
+            }
             html +=
-                    '<a>'+
                     '<img src="/home/images/pioneer/banner.png">'+
                     '<p>'+list.title+'</p>'+
                     '<span>'+list.publisher+'</span>'+

@@ -33,6 +33,9 @@
     #refreshContainer{
         top:calc(50vw + 1.2rem);
     }
+    .default img{
+        top:30%;
+    }
 </style>
 
 {/block}
@@ -56,6 +59,9 @@
             <div id="item1mobile" class="mui-slider-item mui-control-content">
                 <!--培训计划-->
                 <div class="list training">
+                    {empty name="$list.one"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <ul>
                         {volist name="list.one" id="vo1"}
                         {eq name="vo1.templet" value="1"}
@@ -69,11 +75,15 @@
                         </a>
                         {/volist}
                     </ul>
+                    {/empty}
                 </div>
             </div>
             <div id="item2mobile" class="mui-slider-item mui-control-content">
                 <!--理论研究-->
                 <div class="list theory">
+                    {empty name="$list.two"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <ul>
                         {volist name="list.two" id="vo2"}
                         {eq name="vo2.templet" value="1"}
@@ -87,6 +97,7 @@
                         </a>
                         {/volist}
                     </ul>
+                    {/empty}
                 </div>
             </div>
         </div>
@@ -140,10 +151,11 @@
 
     //上拉加载更多
     function loadScroll(){
+        var cals = parseInt(c) + 1;
         if(c==0){
-            var len = $(".training ul a").length .length;
+            var len = $(".training ul a").length;
         }else if(c==1){
-            var len = $(".theory ul a").length .length;
+            var len = $(".theory ul a").length;
         }
         $.ajax({
             type:"post",
@@ -151,7 +163,8 @@
             data:{
 
                 length:len,
-                type:c
+                type:3,
+                calss:cals
             },
             beforeSend: function(XMLHttpRequest){
 
@@ -178,8 +191,12 @@
         var len = lists.length;
         for(var i = 0; i< len;i++){
             var list = lists[i];
+            if(list.templet==1){
+                html += '<a href="/home/Learn/detail/id/'+list.id+'.html">'
+            }else{
+                html += '<a href="/home/Learn/detail2/id/'+list.id+'.html">'
+            }
             html +=
-                    '<a>'+
                     '<p>'+list.title+'</p>'+
                     '<span>'+list.publisher+'</span>'+
                     '<span>'+list.time+'</span>'+

@@ -17,7 +17,7 @@
     <div class="mui-scroll">
         <!--轮播图-->
         <div class="mui-slider banner">
-            <div class="mui-slider-group mui-slider-loop">
+            <div class="mui-slider-group">
                 {volist name="detail.images" id="li"}
                 <!--支持循环，需要重复图片节点-->
                 <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
@@ -95,6 +95,11 @@
         }
     };
 
+
+    var gallery = mui('.mui-slider');
+    gallery.slider({
+        interval:2000//自动轮播周期，若为0则不自动播放，默认为0；
+    });
 
     //tab点击事件
     mui('#refreshContainer').on('tap', '.notvisitor', function(e) {

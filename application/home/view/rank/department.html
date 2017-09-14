@@ -9,7 +9,7 @@
     .top{height: 50vw;width: 100vw; background: -webkit-linear-gradient(left,#e4672d, #e9ad2c);border-bottom: 2.7vw solid #efeef3;}
     .top .top_top{width: 100%;height: 37vw;font-size: 13px;}
     .top .top_top img{width: 21vw;height: 21vw;border-radius: 50%;margin-top: 3vw;margin-left: 40vw;}
-    .top .top_top p{color: #fff;  font-size: 0.38rem; text-align: center;margin-top: 4vw;}
+    .top .top_top p{color: #fff;  font-size: 0.38rem; text-align: center;margin-top: -4vw;}
     .top .top_body{height: 10.6vw;width: 100%;position: relative;}
     .top .top_body ul li{height: 100%;text-align: center;}
     .top .top_body span{width: 0;height: 8.5vw;border-right: 1px solid #fff;position: absolute;left: 49.5%;top: 4px;}
@@ -44,11 +44,13 @@
     .foot .rank ul li .int{font-size: 12px;float: right;margin-right: 5.3vw;}
     #score{position:relative;top: -70%;right: -49%;color:#fff;}
     #score img{position: relative;top: 0;right:0;}
-    #score span{position: relative;top: 7.5vw;right:10vw;}
+    #score span{    position: relative;
+        top: 7.5vw;
+        right: 10vw;
+        font-size: 0.32rem;}
     .modal-content{background-color: rgba(240, 221, 145, 0.97);width: 95%;}
     #close{margin: 21.3vw auto 0 auto;display: block}
     #myModalLabel{text-align: center;font-size: 22px;}
-    .modal-dialog {margin-top: -2%;position: fixed;}
     #myModal{overflow-x: hidden;position: fixed;}
     .overHide{overflow: hidden;height: 100%;}
     .cc{ overflow-y:auto;}
@@ -72,6 +74,15 @@
         }
         h5{line-height: 40px;margin: 0}
     }
+    .h4, h4 {
+        font-size: 0.38rem;
+        line-height: 0.5rem;
+    }
+    b, strong {
+         font-weight: 700;
+        font-size: 0.42rem;
+     }
+
 </style>
 {/block}
 
@@ -105,7 +116,7 @@
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <img src="/home/images/close.png" alt="规则" data-dismiss="modal" aria-hidden="true" style="width:12vw;height:12vw" id="close">
+            <img src="/home/images/user/close.png" alt="规则" data-dismiss="modal" aria-hidden="true" style="width:12vw;height:12vw" id="close">
             <div class="modal-content" style="margin:6vw auto">
                 <div style="width: 0;height: 6.4vw;border-right: 2px solid rgba(237, 218, 145, 0.63);margin: -6.4vw auto 0;"></div>
                 <div class="modal-header">
@@ -115,7 +126,7 @@
                 </div>
                 <div class="modal-body">
                     <h4 style="text-indent: 2em;font-weight: normal">
-                        部门排行榜由部门中每个成员的个人积分累加得到。积分可以累积，并在周榜，季榜和总榜按部门积分的高低进行排名。
+                        暂无
                     </h4>
                 </div>
                 <!--<div class="modal-footer">-->
