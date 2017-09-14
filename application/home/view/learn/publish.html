@@ -204,8 +204,9 @@
                 time:$("input[name='time']").val(),
                 people:$("input[name='people']").val(),
                 compere:$("input[name='compere']").val(),
-                create_user:userid,
-                type:type
+                userid:userid,
+                type:type,
+                status:3
             };
             switch (_class){
                 case "支部委员大会":
@@ -244,7 +245,7 @@
                 content:$("textarea[name='content']").val(),
                 userid:userid,
                 type:type,
-                status:0
+                status:3
             };
             for(var key in data){
                 if(data["title"]!= ''&& data["content"]!=""){
@@ -272,8 +273,9 @@
                 class:0,
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
-                create_user:userid,
-                type:type
+                userid:userid,
+                type:type,
+                status:3
             };
             for(var key in data){
                 if(data["title"]!= ''&& data["content"]!=""){
@@ -357,8 +359,9 @@
                 class:0,
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
-                create_user:userid,
-                type:type
+                userid:userid,
+                type:type,
+                status:0
             };
             for(var key in data){
                 if(data["title"]!= ''&& data["content"]!=""){
@@ -385,8 +388,9 @@
                 time:$("input[name='time']").val(),
                 people:$("input[name='people']").val(),
                 compere:$("input[name='compere']").val(),
-                create_user:userid,
-                type:type
+                userid:userid,
+                type:type,
+                status:0
             };
             switch (_class){
                 case "支部委员大会":
@@ -423,8 +427,9 @@
             var data={
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
-                create_user:userid,
-                type:type
+                userid:userid,
+                type:type,
+                status:0
             };
             for(var key in data){
                 if(data["title"]!= ''&& data["content"]!=""){
@@ -452,8 +457,9 @@
                 class:0,
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
-                create_user:userid,
-                type:type
+                userid:userid,
+                type:type,
+                status:0
             };
             for(var key in data){
                 if(data["title"]!= ''&& data["content"]!=""){
