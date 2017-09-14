@@ -27,10 +27,10 @@
 {block name="page-header"}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>党建责任</h2>
+        <h2>两学一做</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="{:Url('Responsibility/index')}">管理主页</a>
+                <a href="{:Url('Learn/index')}">管理主页</a>
             </li>
             <li class="active">
                 <strong>{empty name="msg"}新增{else/}修改{/empty}</strong>
@@ -263,7 +263,7 @@
         if(type == 1){
             $("#one").hide();
             $("#two").hide();
-            $("#three").show();
+            $("#three").hide();
         }else if(type == 2){
             $("#one").show();
             $("#two").hide();
@@ -283,7 +283,7 @@
             if(val == 1){
                 $("#one").hide();
                 $("#two").hide();
-                $("#three").show();
+                $("#three").hide();
             }else if(val == 2){
                 $("#one").show();
                 $("#two").hide();
