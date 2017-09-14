@@ -89,8 +89,7 @@
                                 <th><input class="i-checks check-all" type="checkbox"></th>
                                 <th>ID</th>
                                 <th>主图文信息</th>
-                                <th>类型</th>
-                                <th>创建人</th>
+                                <th>发布人</th>
                                 <th>创建时间</th>
                                 <th>状态</th>
                             </tr>
@@ -101,8 +100,7 @@
                                 <td><input type="checkbox" class="i-checks" name="input[]"></td>
                                 <td>{$vo.id}</td>
                                 <td>{$vo.title}</td>
-                                <td>{$vo.type}</td>
-                                {neq name="vo.create_user" value=""}<td>{$vo.create_user}</td>{else/}<td>无</td>{/neq}
+                                {neq name="vo.publisher" value=""}<td>{$vo.publisher}</td>{else/}<td>{$vo->user->nickname}</td>{/neq}
                                 <td>{$vo.create_time|time_format}</td>
                                 <td>{$vo.status_text}</td>
                             </tr>
