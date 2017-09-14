@@ -233,8 +233,18 @@
     $(function(){
         //tab初始化和数据存储
         var co = getCookie("type");
-        if(co == 0 || co == 1 || co == 2){
+        if(co == 0 || co == 1 || co == 2 || co == 3 || co == 4){
             c = co;
+        }else{
+            c = 0;
+        }
+        if(c==4 || c==3){
+            var tabs = $(".tabs");
+            var ww = $('body').width();
+            var tw = $('.tabs' ).width() - ww;
+            tabs.animate({left:-tw+'px'}, 300);
+            $('.right').animate({right: -0.8*ww + 'px'}, 300);
+            $('.left').animate({left: 0}, 300);
         }
         $("#tab a").eq(c).addClass('mui-active');
         $(".mui-slider-group>div").eq(c).addClass('mui-active');
@@ -296,20 +306,20 @@
     function loadScroll(){
         var clas = parseInt(c) + 1;
        switch (c){
-           case 0:
-               len = $(".all ul a").length;
+           case "0":
+               var len = $(".all ul a").length;
                break;
-           case 1:
-               len = $(".list1 ul a").length;
+           case "1":
+               var len = $(".list1 ul a").length;
                break;
-           case 2:
-               len = $(".list2 ul a").length;
+           case "2":
+               var len = $(".list2 ul a").length;
                break;
-           case 3:
-               len = $(".list3 ul a").length;
+           case "3":
+               var len = $(".list3 ul a").length;
                break;
-           case 4:
-               len = $(".list4 ul a").length;
+           case "4":
+               var len = $(".list4 ul a").length;
                break;
        }
         $.ajax({
@@ -358,19 +368,19 @@
                     '</a>'
         }
        switch (type){
-           case 0:
+           case "0":
                $(".all ul").append(html);
                break;
-           case 1:
+           case "1":
                $(".list1 ul").append(html);
                break;
-           case 2:
+           case "2":
                $(".list2 ul").append(html);
                break;
-           case 3:
+           case "3":
                $(".list3 ul").append(html);
                break;
-           case 4:
+           case "4":
                $(".list4 ul").append(html);
                break;
        }
