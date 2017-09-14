@@ -58,7 +58,8 @@
         var data={
             title:$("input[name='title']").val(),
             content:$("textarea[name='content']").val(),
-            userid:userid
+            userid:userid,
+            status:3
         };
         for(var key in data){
             if(data["title"]!= ''&& data["content"]!=""){
@@ -139,7 +140,8 @@
         var data={
             title:$("input[name='title']").val(),
             content:$("textarea[name='content']").val(),
-            create_user:userid
+            create_user:userid,
+            status:0
         };
         for(var key in data){
             if(data["title"]!= ''&& data["content"]!=""){

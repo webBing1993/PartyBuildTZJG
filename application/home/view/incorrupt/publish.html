@@ -61,7 +61,8 @@
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
                 userid:userid,
-                type:type
+                type:type,
+                status:3
             };
             for(var key in data){
                 if(data["title"]!= ''&& data["content"]!=""){
@@ -142,8 +143,9 @@
         var data={
             title:$("input[name='title']").val(),
             content:$("textarea[name='content']").val(),
-            create_user:userid,
-            type:type
+            userid:userid,
+            type:type,
+            status:0
         };
         for(var key in data){
             if(data["title"]!= ''&& data["content"]!=""){
