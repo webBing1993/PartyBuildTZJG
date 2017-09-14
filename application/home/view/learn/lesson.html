@@ -73,6 +73,9 @@
         -webkit-overflow-scrolling: touch;
         width:100%;
     }
+    .default img{
+        top:30%;
+    }
 </style>
 {/block}
 
@@ -108,6 +111,9 @@
             <div id="item1mobile" class="mui-slider-item mui-control-content">
                 <!--全部-->
                 <div class="list all">
+                    {empty name="$list.all"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <ul>
                         {volist name="list.all" id="vo"}
                         {eq name="vo.templet" value="1"}
@@ -121,11 +127,15 @@
                         </a>
                         {/volist}
                     </ul>
+                    {/empty}
                 </div>
             </div>
             <div id="item2mobile" class="mui-slider-item mui-control-content">
                 <!--支部委员大会-->
                 <div class="list list1">
+                    {empty name="$list.one"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <ul>
                         {volist name="list.one" id="vo1"}
                         {eq name="vo1.templet" value="1"}
@@ -139,11 +149,15 @@
                         </a>
                         {/volist}
                     </ul>
+                    {/empty}
                 </div>
             </div>
             <div id="item3mobile" class="mui-slider-item mui-control-content">
                 <!--党支部委员会-->
                 <div class="list list2">
+                    {empty name="$list.two"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <ul>
                         {volist name="list.two" id="vo2"}
                         {eq name="vo2.templet" value="1"}
@@ -157,11 +171,15 @@
                         </a>
                         {/volist}
                     </ul>
+                    {/empty}
                 </div>
             </div>
             <div id="item4mobile" class="mui-slider-item mui-control-content">
                 <!--党小组会-->
                 <div class="list list3">
+                    {empty name="$list.three"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <ul>
                         {volist name="list.three" id="vo3"}
                         {eq name="vo3.templet" value="1"}
@@ -175,11 +193,15 @@
                         </a>
                         {/volist}
                     </ul>
+                    {/empty}
                 </div>
             </div>
             <div id="item5mobile" class="mui-slider-item mui-control-content">
                 <!--党课-->
                 <div class="list list4">
+                    {empty name="$list.four"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <ul>
                         {volist name="list.four" id="vo4"}
                         {eq name="vo4.templet" value="1"}
@@ -193,6 +215,7 @@
                         </a>
                         {/volist}
                     </ul>
+                    {/empty}
                 </div>
             </div>
         </div>

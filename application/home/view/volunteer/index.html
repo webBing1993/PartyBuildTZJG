@@ -56,6 +56,9 @@
             <div id="item1mobile" class="mui-slider-item mui-control-content">
                 <!--培训计划-->
                 <div class="list training">
+                    {empty name="$list.one"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <ul>
                         {volist name="list.one" id="one"}
                         {eq name="one.templet" value="1"}
@@ -70,11 +73,15 @@
                         </a>
                         {/volist}
                     </ul>
+                    {/empty}
                 </div>
             </div>
             <div id="item2mobile" class="mui-slider-item mui-control-content">
                 <!--理论研究-->
                 <div class="list theory">
+                    {empty name="$list.two"}
+                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                    {else/}
                     <ul>
                         {volist name="list.two" id="two"}
                         {eq name="two.templet" value="1"}
@@ -89,6 +96,7 @@
                         </a>
                         {/volist}
                     </ul>
+                    {/empty}
                 </div>
             </div>
         </div>
