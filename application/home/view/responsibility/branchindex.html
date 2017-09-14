@@ -166,7 +166,11 @@
         var len = lists.length;
         for(var i = 0; i< len;i++){
             var list = lists[i];
-            console.log(list.id)
+            if(list.templet==1){
+                html += '<a href="/home/responsibility/detail/id/'+list.id+'.html">'
+            }else{
+                html += '<a href="/home/responsibility/detail2/id/'+list.id+'.html">'
+            }
             html +=
                     '<a href="/home/responsibility/detail/id/'+list.id+'.html">'+
                     '<p>'+list.title+'</p>'+
