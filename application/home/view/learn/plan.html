@@ -151,10 +151,11 @@
 
     //上拉加载更多
     function loadScroll(){
+        var cals = parseInt(c) + 1;
         if(c==0){
-            var len = $(".training ul a").length .length;
+            var len = $(".training ul a").length;
         }else if(c==1){
-            var len = $(".theory ul a").length .length;
+            var len = $(".theory ul a").length;
         }
         $.ajax({
             type:"post",
@@ -162,7 +163,8 @@
             data:{
 
                 length:len,
-                type:c
+                type:3,
+                calss:cals
             },
             beforeSend: function(XMLHttpRequest){
 

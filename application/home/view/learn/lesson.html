@@ -294,6 +294,7 @@
 //    })
     //上拉加载更多
     function loadScroll(){
+        var clas = parseInt(c) + 1;
        switch (c){
            case 0:
                len = $(".all ul a").length;
@@ -316,7 +317,8 @@
             url: "{:Url('Learn/listmore')}",
             data:{
                 length:len,
-                type:c
+                type:2,
+                class:clas
             },
             beforeSend: function(XMLHttpRequest){
 
