@@ -62,9 +62,10 @@
         var len  = $(".list ul a").length;
         $.ajax({
             type:"post",
-            url: "{:Url('News/listmore')}",
+                url: "{:Url('Style/index')}",
             data:{
-                length:len
+                length:len,
+                type:type
             },
             beforeSend: function(XMLHttpRequest){
 
