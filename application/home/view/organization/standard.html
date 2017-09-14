@@ -62,7 +62,8 @@
             type:"post",
             url: "{:Url('Organization/listmore')}",
             data:{
-                length:len
+                length:len,
+                type:2
             },
             beforeSend: function(XMLHttpRequest){
 
@@ -95,7 +96,7 @@
                 html += '<a href="/home/Organization/detail2/id/'+list.id+'.html">'
             }
             html +=
-                    '<p>'+list.time+'</p>'+
+                    '<p>'+list.title+'</p>'+
                     '<span>'+list.publisher+'</span>'+
                     '<span>'+list.time+'</span>'+
                     '</a>'
