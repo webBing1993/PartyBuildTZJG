@@ -17,7 +17,7 @@
             <input style="text" placeholder="请输入标题" name="title">
         </li>
         <div class="content">
-            <textarea placeholder="请输入内容，不少于200字..." name="content"></textarea>
+            <textarea placeholder="请输入内容..." name="content"></textarea>
             <div class="imgs clear">
                 <div class="img fl hide"></div>
                 <div class="img fl hide"></div>
@@ -118,16 +118,6 @@
         };
         for(var key in data){
             if(data["title"]!= ''&& data["content"]!=""){
-//                    if(data["content"].length<300){
-//                        swal({
-//                            title: ' ',
-//                            text: '内容不少于500字',
-//                            type: 'error',
-//                            showConfirmButton:false,
-//                            timer:1500
-//                        });
-//                        return;
-//                    }
                 single = true;
                 continue;
             }
