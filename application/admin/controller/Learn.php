@@ -42,6 +42,9 @@ class Learn extends Admin {
     public function add() {
         if(IS_POST) {
             $data = input('post.');
+            if(empty($data['id'])) {
+                unset($data['id']);
+            }
             $Model = new LearnModel();
             $data['create_user'] = $_SESSION['think']['user_auth']['id'];
             if($data['time']) {
