@@ -36,6 +36,7 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+    $("title").text("信息录用");
     window.onload = function() {
         moveanyway("publish");
         if ($(".list ul a").length < 7) {
@@ -105,7 +106,7 @@
     }
 
     mui('#refreshContainer').on('tap', 'a', function(e) {
-        var url = this.getAttribute("href");
+        var url = this.getAttribute("href")+"?"+1;
         window.location.href = url;
     });
 </script>

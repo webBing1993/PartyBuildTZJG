@@ -38,6 +38,18 @@
 <script src="/home/js/reset.js"></script>
 <script>
     var type =  parseInt(window.location.href.split("/type/")[1]);
+    $(function(){
+        //模块标题
+        if(type==1){
+            $("title").text("方案部署");
+        }else if(type==2){
+            $("title").text("金点子");
+        }else if(type==3){
+            $("title").text("培树典型");
+        }else if(type==4){
+            $("title").text("党员清单");
+        }
+    });
     window.onload = function() {
         moveanyway();
         if ($(".list ul a").length < 7) {
@@ -108,7 +120,7 @@
     }
 
     mui('#refreshContainer').on('tap', 'a', function(e) {
-        var url = this.getAttribute("href");
+        var url = this.getAttribute("href")+"?"+type;
         window.location.href = url;
     });
 

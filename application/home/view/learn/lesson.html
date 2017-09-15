@@ -231,6 +231,7 @@
 <script>
     var c=0;
     $(function(){
+        $("title").text("三会一课");
         //tab初始化和数据存储
         var co = getCookie("type");
         if(co == 0 || co == 1 || co == 2 || co == 3 || co == 4){
@@ -388,7 +389,7 @@
 
     //触发点击事件
     mui('#refreshContainer').on('tap', 'a', function(e) {
-        var url = this.getAttribute("href");
+        var url = this.getAttribute("href")+"?"+2;
         window.location.href = url;
     });
 

@@ -87,6 +87,14 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+    var type =  parseInt(window.location.href.split("?")[1]);
+    if(type==1){
+        $("title").text("廉政责任");
+    }else if(type==2){
+        $("title").text("廉政教育");
+    }else if(type==3){
+        $("title").text("纪检报告");
+    }
     window.onload = function(){
         if($(".list").length<10){
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();

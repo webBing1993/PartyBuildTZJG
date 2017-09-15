@@ -39,6 +39,7 @@
 <script src="/home/js/reset.js"></script>
 <script>
     var type =  parseInt(window.location.href.split("/type/")[1]);
+    $("title").text("廉政教育");
     window.onload = function() {
         moveanyway("publish");
         if ($(".list ul a").length < 7) {
@@ -107,7 +108,7 @@
 
     //触发点击事件
     mui('#refreshContainer').on('tap', 'a', function(e) {
-        var url = this.getAttribute("href");
+        var url = this.getAttribute("href")+"?"+type;
         window.location.href = url;
     });
 
