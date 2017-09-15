@@ -25,7 +25,8 @@ class Responsibility extends Model {
     public function getIndex($type) {
         $map = array(
             'type' => $type,
-            'status' => 1
+            'status' => 1,
+            'class' => 0
         );
         $res = $this->where($map)->order('create_time desc')->limit(8)->select();
         return $res;
