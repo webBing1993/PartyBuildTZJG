@@ -33,7 +33,7 @@
 			<span>{$li.create_time}</span>
 			<span class="mui-icon mui-icon-forward"></span>
 			<i class="fail" data-id="{$li.id}" data-class="{$li.class}">删&nbsp;除</i>
-			<i class="pass" data-id="{$li.id}" data-class="{$li.class}">修&nbsp;改</i>
+			<i class="pass" data-id="{$li.id}" data-class="{$li.class}"  data-type="{$li.type}" data-style="{$li.class}">修&nbsp;改</i>
 		</a>
 		</li>
 		{/volist}
@@ -145,10 +145,10 @@ function addLists(data){
 				'<a href="' + link + '"  class="list clear" data-type="' + list.class + '">' +
 				'<img src="' + list.front_cover + '">' +
 				'<span>' + list.title + '</span>' +
-				'<span>' + class_name + ' 发布人：' + list.publisher + '</span>' +
+				 '<span>' + class_name + ' 发布人：' + list.publisher +'</span>' +
 				'<span>' + list.create_time + '</span>' +
 				'<span class="mui-icon mui-icon-forward"></span>' +
-				'<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">删&nbsp;除</i><i class="pass"  data-id="' + list.id + '" data-class="' + list.class + '">修&nbsp;改</i>' +
+				'<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">删&nbsp;除</i><i class="pass"  data-id="' + list.id + '" data-class="' + list.class + '" data-type="' + list.type + ' " data-style="' + list.class + '">修&nbsp;改</i>' +
 				'</a>' +
 				'</li>'
 	}
@@ -162,27 +162,29 @@ mui('#refreshContainer').on('tap', '.pass', function(e) {
 	var element = this.parentNode.parentNode;
 	var id = this.getAttribute("data-id");
 	var _class = this.getAttribute("data-class");
-	switch(_class){
-		case 1:  // 党建责任
-			window.location.href="/home/responsibility/publish/id/"+id;
+	var type = this.getAttribute("data-type");
+	var style = this.getAttribute("data-style");
+	switch (_class){
+		case "1":  // 党建责任
+			window.location.href="/home/responsibility/publish/type/"+type+"/style/"+style+"/id/"+id;
 			break;
-		case 2:  // 两学一做
-			window.location.href="/home/learn/publish/id/"+id;
+		case "2":  // 两学一做
+			window.location.href="/home/learn/publish/type/"+type+"/style/"+style+"/id/"+id;
 			break;
-		case 3:  // 组织建设
-			window.location.href="/home/organization/publish/id/"+id;
+		case "3":  // 组织建设
+			window.location.href="/home/organization/publish/type/"+type+"/style/"+style+"/id/"+id;
 			break;
-		case 4:  //特色创新
+		case "4":  //特色创新
 			window.location.href="/home/special/publish/id/"+id;
 			break;
-		case 5:  // 作风建设
-			window.location.href="/home/style/publish/id/"+id;
+		case "5":  // 作风建设
+			window.location.href="/home/style/publish/type/"+type+"/style/"+style+"/id/"+id;
 			break;
-		case 6:  // 志愿服务
-			window.location.href="/home/volunteer/publish/id/"+id;
+		case "6":  // 志愿服务
+			window.location.href="/home/volunteer/publish/type/"+type+"/style/"+style+"/id/"+id;
 			break;
 		default:  // 党风廉政
-			window.location.href="/home/incorrupt/publish/id/"+id;
+			window.location.href="/home/incorrupt/publish/type/"+type+"/style/"+style+"/id/"+id;
 	}
 })
 

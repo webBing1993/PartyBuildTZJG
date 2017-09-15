@@ -66,7 +66,7 @@ $(function(){
 function imgresize(){
     var font = parseInt($("html").css("font-size"))*2;
     setTimeout(function(){
-        var img = $('.img img' );
+        var img = $('.img img');
         img.each(function(){
             if($(this).width() == $(this).height()){
                 $(this).height('2rem');

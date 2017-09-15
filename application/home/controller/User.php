@@ -307,6 +307,9 @@ class User extends Base {
             return $rs;
         }else{
             $info = Db::name($table)->where($map)->find();
+            if(!empty($info['list_images'])){
+                $info['list_images'] = json_decode($info['list_images']);
+            }
             return $info;
         }
     }
@@ -368,6 +371,18 @@ class User extends Base {
             if (empty($value['publisher'])){
                 $User = WechatUser::where('userid',$value['create_user'])->find();
                 $list[$key]['publisher'] = $User['name'];
+            }
+            // class 值 判断
+            if (isset($value['class'])){
+                $list[$key]['style'] = $value['class'];
+            }else{
+                $list[$key]['style'] = 0;
+            }
+            // type 值 判断
+            if (isset($value['type'])){
+                $list[$key]['type'] = $value['type'];
+            }else{
+                $list[$key]['type'] = 0;
             }
         }
         if(!empty($list))

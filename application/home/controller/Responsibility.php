@@ -155,22 +155,37 @@ class Responsibility extends Base{
 
     /*党建责任发布*/
     public function publish(){
+        $Model = new ResponsibilityModel();
         if(IS_POST) {
             $data = input('post.');
-            $Model = new ResponsibilityModel();
-            $user = WechatUser::where('userid',$data['userid'])->find();
-            $data['publisher'] = $user['name'];
-            $data['front_cover'] = $this->default_pic(); //生成随机封面
             isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";
-            $res = $Model->create($data);
+            if (!empty($data['id'])){
+                // 修改
+                $res = $Model->save($data,['id' => $data['id']]);
+            }else{
+                // 添加
+                unset($data['id']);
+                $res = $Model->create($data);
+                $user = WechatUser::where('userid',$data['userid'])->find();
+                $data['publisher'] = $user['name'];
+                $data['front_cover'] = $this->default_pic(); //生成随机封面
+            }
             if($res) {
-                get_score(1,$res->id,session('userId'));
-                return $this->success("添加成功");
+                if ($data['status'] == 0){  // 去审核   统计积分
+                    get_score(1,$res->id,session('userId'));
+                }
+                return $this->success("操作成功");
             }else {
-                return $this->error("添加失败");
+                return $this->error("操作失败");
             }
         }else {
             $userId = session('userId');
+            empty(input('get.id')) ? $id = 0 : $id = input('get.id');
+            $msg = $Model->where('id',$id)->find();
+            if(!empty($msg)){
+                $msg['list_images'] = json_decode($msg['list_images']);
+            }
+            $this->assign('msg',$msg);
             $this->assign('userId',$userId);
             return $this->fetch();
         }
