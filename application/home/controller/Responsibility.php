@@ -165,10 +165,10 @@ class Responsibility extends Base{
             }else{
                 // 添加
                 unset($data['id']);
-                $res = $Model->create($data);
                 $user = WechatUser::where('userid',$data['userid'])->find();
                 $data['publisher'] = $user['name'];
                 $data['front_cover'] = $this->default_pic(); //生成随机封面
+                $res = $Model->create($data);
             }
             if($res) {
                 if ($data['status'] == 0){  // 去审核   统计积分
@@ -180,13 +180,13 @@ class Responsibility extends Base{
             }
         }else {
             $userId = session('userId');
+            $this->assign('userId',$userId);
             empty(input('get.id')) ? $id = 0 : $id = input('get.id');
             $msg = $Model->where('id',$id)->find();
             if(!empty($msg)){
                 $msg['list_images'] = json_decode($msg['list_images']);
             }
             $this->assign('msg',$msg);
-            $this->assign('userId',$userId);
             return $this->fetch();
         }
     }
