@@ -86,6 +86,9 @@
     var index =  parseInt(window.location.href.split("?")[1])?parseInt(window.location.href.split("?")[1]):null;
     $(function(){
         imgresize();
+        if($(".img img").length==3){
+            $(".add").hide();
+        }
         if(type==1){
             $("title").text("专题研究");
         }else if(type==2){

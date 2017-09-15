@@ -79,6 +79,7 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+    $("title").text("党建动态");
     window.onload = function(){
         if($(".list").length<7){
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();

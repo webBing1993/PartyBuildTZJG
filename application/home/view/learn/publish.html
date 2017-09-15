@@ -109,9 +109,9 @@
         <li class="type1">
             时间
             {empty name="msg"}
-            <input type="input" placeholder="请选择时间" onfocus="this.removeAttribute('placeholder')" name="time" id="date" readonly>
+            <input type="input" placeholder="请选择时间" name="time" id="date" readonly>
             {else/}
-            <input type="input" placeholder="{$msg.time|time_format='Y-m-d H:i'}" onfocus="this.removeAttribute('placeholder')" name="time" value="{$msg.time|time_format='Y-m-d H:i'}">
+            <input type="input" id="date" placeholder="请选择时间" name="time" value="{$msg.time|time_format='Y-m-d H:i'}" readonly>
             {/empty}
         </li>
         <li class="type1">
@@ -192,16 +192,6 @@
             $("title").text("方案部署");
         }else if(type==2){
             $("title").text("三会一课");
-            var dtpicker = new mui.DtPicker({
-                "type": "datetime",
-                "value": ""
-            })
-            document.querySelector('#date').addEventListener('tap',function () {
-                dtpicker.show(function(e) {
-                    document.getElementById('date').value = e.text;
-                })
-            })
-
         }else if(type==3){
             $("title").text("年度计划");
         } else if(type==4){
@@ -240,6 +230,20 @@
                 break;
         }
     });
+
+    window.onload = function(){
+        if(type==2) {
+            var dtpicker = new mui.DtPicker({
+                "type": "datetime",
+                "value": ""
+            })
+            document.querySelector('#date').addEventListener('tap', function () {
+                dtpicker.show(function (e) {
+                    document.getElementById('date').value = e.text;
+                })
+            })
+        }
+    }
     $("#popover ul li").click(function(){
         var select_it = $(this).text();
         $("#openPopover").html(select_it);
