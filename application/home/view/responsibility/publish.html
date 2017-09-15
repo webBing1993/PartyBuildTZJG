@@ -211,12 +211,13 @@
         var single = false;
         var templet = $("#openPopover").html();
         var userid = {$userId};
-        if(c==1){
+        if(type!==3){
             var data={
                 class:0,
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
                 userid:userid,
+                id:$("input[name='id']").val(),
                 type:type,
                 status:0
             };
@@ -226,12 +227,13 @@
                     continue;
                 }
             }
-        }else if(c==2){
+        }else if(type==3){
             var _class = $("#openPopover2").html();
             var data={
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
                 userid:userid,
+                id:$("input[name='id']").val(),
                 type:type,
                 status:0
             };

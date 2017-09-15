@@ -173,6 +173,7 @@
             title:$("input[name='title']").val(),
             content:$("textarea[name='content']").val(),
             userid:userid,
+            id:$("input[name='id']").val(),
             status:0
         };
         for(var key in data){
@@ -210,7 +211,6 @@
                     data['list_images'].push($(this).data("tab")+"")  ;
                 }
             })
-            console.log(data)
 //            data['list_image'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
             $.ajax({
                 type:"post",

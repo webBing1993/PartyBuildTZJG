@@ -66,6 +66,8 @@ class Incorrupt extends Base{
         $Model = new IncorruptModel();
         if(IS_POST) {
             $data = input('post.');
+            $user = WechatUser::where('userid',$data['userid'])->find();
+            $data['publisher'] = $user['name'];
             isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";
             if (!empty($data['id'])){
                 // 修改
@@ -73,15 +75,13 @@ class Incorrupt extends Base{
             }else{
                 // 添加
                 unset($data['id']);
-                $user = WechatUser::where('userid',$data['userid'])->find();
-                $data['publisher'] = $user['name'];
                 $data['front_cover'] = $this->default_pic(); //生成随机封面
                 $res = $Model->create($data);
-            }
-            if($res) {
                 if ($data['status'] == 0){  // 去审核   统计积分
                     get_score(7,$res->id,session('userId'));
                 }
+            }
+            if($res) {
                 return $this->success("操作成功");
             }else {
                 return $this->error("操作失败");
