@@ -50,7 +50,15 @@
     var type =  parseInt(window.location.href.split("?")[1]);
     $(function(){
 //模块标题
-        $('title' ).text('作风建设');
+        if(type==1){
+            $("title").text("方案部署");
+        }else if(type==2){
+            $("title").text("金点子");
+        }else if(type==3){
+            $("title").text("培树典型");
+        }else if(type==4){
+            $("title").text("党员清单");
+        }
     })
 
     $("#popover ul li").click(function(){

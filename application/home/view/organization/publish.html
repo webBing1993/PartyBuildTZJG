@@ -49,7 +49,11 @@
 <script>
     var type =  parseInt(window.location.href.split("/style/")[1]);
     $(function(){
-       $("title").text("组织建设");
+        if(type==1){
+            $("title").text("信息录用");
+        }else if(type==2){
+            $("title").text("规范化建设");
+        }
     });
 
     //保存

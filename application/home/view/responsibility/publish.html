@@ -86,7 +86,15 @@
     var index =  parseInt(window.location.href.split("?")[1])?parseInt(window.location.href.split("?")[1]):null;
     $(function(){
         imgresize();
-        $("title").text("党建责任");
+        if(type==1){
+            $("title").text("专题研究");
+        }else if(type==2){
+            $("title").text("责任清单");
+        }else if(type==3){
+            $("title").text("述职报告");
+        } else if(type==4){
+            $("title").text("工作计划");
+        }
         if(type==3){
             $(".type2").show();
         }
