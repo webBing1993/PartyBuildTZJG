@@ -158,16 +158,16 @@
                 data["templet"] = 2;
             }
             if(_class == "四跑志愿活动"){
- //             if(data["content"].length<800){
-//                        swal({
-//                            title: ' ',
-//                            text: '内容不少于800字',
-//                            type: 'error',
-//                            showConfirmButton:false,
-//                            timer:1500
-//                        });
-//                        return;
-//                    }
+              if(data["content"].length<800){
+                        swal({
+                            title: ' ',
+                            text: '内容不少于800字',
+                            type: 'error',
+                            showConfirmButton:false,
+                            timer:1500
+                        });
+                        return;
+                    }
                 data["type"] = 1;
             }else{
                 data["type"] = 2;
