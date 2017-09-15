@@ -148,7 +148,7 @@ function addLists(data){
 				 '<span>' + class_name + ' 发布人：' + list.publisher +'</span>' +
 				'<span>' + list.create_time + '</span>' +
 				'<span class="mui-icon mui-icon-forward"></span>' +
-				'<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">删&nbsp;除</i><i class="pass"  data-id="' + list.id + '" data-class="' + list.class + '" data-type="' + list.type + ' " data-style="' + list.style + '">修&nbsp;改</i>' +
+				'<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">删&nbsp;除</i><i class="pass"  data-id="' + list.id + '" data-class="'+ list.class +'" data-type="'+list.type+'" data-style="'+list.style+'">修&nbsp;改</i>' +
 				'</a>' +
 				'</li>'
 	}
@@ -164,6 +164,7 @@ mui('#refreshContainer').on('tap', '.pass', function(e) {
 	var _class = this.getAttribute("data-class");
 	var type = this.getAttribute("data-type");
 	var style = this.getAttribute("data-style");
+	console.log(type);
 	switch (_class){
 		case "1":  // 党建责任
 			window.location.href="/home/responsibility/publish/type/"+type+"/style/"+style+"/id/"+id;
@@ -172,7 +173,7 @@ mui('#refreshContainer').on('tap', '.pass', function(e) {
 			window.location.href="/home/learn/publish/type/"+type+"/style/"+style+"/id/"+id;
 			break;
 		case "3":  // 组织建设
-			window.location.href="/home/organization/publish/type/"+type+"/style/"+style+"/id/"+id;
+			window.location.href="/home/organization/publish/type/"+type+"/id/"+id;
 			break;
 		case "4":  //特色创新
 			window.location.href="/home/special/publish/id/"+id;
