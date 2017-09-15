@@ -33,7 +33,7 @@
 			<span>{$li.create_time}</span>
 			<span class="mui-icon mui-icon-forward"></span>
 			<i class="fail" data-id="{$li.id}" data-class="{$li.class}">删&nbsp;除</i>
-			<i class="pass" data-id="{$li.id}" data-class="{$li.class}"  data-type="{$li.type}" data-style="{$li.class}">修&nbsp;改</i>
+			<i class="pass" data-id="{$li.id}" data-class="{$li.class}"  data-type="{$li.type}" data-style="{$li.style}">修&nbsp;改</i>
 		</a>
 		</li>
 		{/volist}
@@ -148,7 +148,7 @@ function addLists(data){
 				 '<span>' + class_name + ' 发布人：' + list.publisher +'</span>' +
 				'<span>' + list.create_time + '</span>' +
 				'<span class="mui-icon mui-icon-forward"></span>' +
-				'<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">删&nbsp;除</i><i class="pass"  data-id="' + list.id + '" data-class="' + list.class + '" data-type="' + list.type + ' " data-style="' + list.class + '">修&nbsp;改</i>' +
+				'<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">删&nbsp;除</i><i class="pass"  data-id="' + list.id + '" data-class="' + list.class + '" data-type="' + list.type + ' " data-style="' + list.style + '">修&nbsp;改</i>' +
 				'</a>' +
 				'</li>'
 	}
