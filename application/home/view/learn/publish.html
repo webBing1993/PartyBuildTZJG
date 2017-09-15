@@ -168,7 +168,6 @@
 
     //保存
     $(".save").click(function(){
-        var single = false;
         var templet = $("#openPopover2").html();
         var userid = {$userId};
         if(c==1){
@@ -180,22 +179,6 @@
                 type:type,
                 status:3
             };
-            for(var key in data){
-                if(data["title"]!= ''&& data["content"]!=""){
-//                    if(data["content"].length<300){
-//                        swal({
-//                            title: ' ',
-//                            text: '内容不少于500字',
-//                            type: 'error',
-//                            showConfirmButton:false,
-//                            timer:1500
-//                        });
-//                        return;
-//                    }
-                    single = true;
-                    continue;
-                }
-            }
         }else if(c==2){
             var _class = $("#openPopover").html();
             var data={
@@ -223,22 +206,6 @@
                     data["class"] = 4;
                     break;
             }
-            for(var key in data){
-                if(data["title"]!= ''&& data["content"]!=""&& data["place"]!=""&& data["date"]!=""&& data["number"]!=""&& data["host"]!=""){
-//                    if(data["content"].length<300){
-//                        swal({
-//                            title: ' ',
-//                            text: '内容不少于500字',
-//                            type: 'error',
-//                            showConfirmButton:false,
-//                            timer:1500
-//                        });
-//                        return;
-//                    }
-                    single = true;
-                    continue;
-                }
-            }
         }else if(c==3){
             var _class = $("#openPopover3").html();
             var data={
@@ -248,22 +215,6 @@
                 type:type,
                 status:3
             };
-            for(var key in data){
-                if(data["title"]!= ''&& data["content"]!=""){
-//                    if(data["content"].length<300){
-//                        swal({
-//                            title: ' ',
-//                            text: '内容不少于500字',
-//                            type: 'error',
-//                            showConfirmButton:false,
-//                            timer:1500
-//                        });
-//                        return;
-//                    }
-                    single = true;
-                    continue;
-                }
-            }
             if(_class=="培训计划"){
                 data["class"] = 1;
             }else{
@@ -278,24 +229,7 @@
                 type:type,
                 status:3
             };
-            for(var key in data){
-                if(data["title"]!= ''&& data["content"]!=""){
-//                    if(data["content"].length<300){
-//                        swal({
-//                            title: ' ',
-//                            text: '内容不少于500字',
-//                            type: 'error',
-//                            showConfirmButton:false,
-//                            timer:1500
-//                        });
-//                        return;
-//                    }
-                    single = true;
-                    continue;
-                }
-            }
         }
-        if(single){
             data['list_images']=[];
             if(templet == "模板1"){
                 data["templet"] = 1;
@@ -338,15 +272,6 @@
                     }
                 }
             });
-        }else{
-            swal({
-                title: ' ',
-                text: '信息输入不完整',
-                type: 'error',
-                showConfirmButton:false,
-                timer:1500
-            });
-        }
     });
 
 

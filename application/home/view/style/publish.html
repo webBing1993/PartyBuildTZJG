@@ -61,7 +61,6 @@
 
     //保存
     $(".save").click(function(){
-        var single = false;
         var templet = $("#openPopover").html();
         var userid = {$userId};
         var data={
@@ -71,23 +70,6 @@
             type:type,
             status:3
         };
-        for(var key in data){
-            if(data["title"]!= ''&& data["content"]!=""){
-//                    if(data["content"].length<200){
-//                        swal({
-//                            title: ' ',
-//                            text: '内容不少于200字',
-//                            type: 'error',
-//                            showConfirmButton:false,
-//                            timer:1500
-//                        });
-//                        return;
-//                    }
-                single = true;
-                continue;
-            }
-        }
-        if(single){
             data['list_images']=[];
             if(templet == "模板1"){
                 data["templet"] = 1;
@@ -130,15 +112,6 @@
                     }
                 }
             });
-        }else{
-            swal({
-                title: ' ',
-                text: '信息输入不完整',
-                type: 'error',
-                showConfirmButton:false,
-                timer:1500
-            });
-        }
     });
 
 
