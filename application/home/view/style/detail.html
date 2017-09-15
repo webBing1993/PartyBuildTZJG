@@ -24,6 +24,9 @@
             </div>
             <div class="content">
                 <div class="article-content">{$detail.content}</div>
+                {volist name="detail.images" id="li"}
+                <img src="{$li|get_cover='path'}">
+                {/volist}
                 <div class="like">
                     <span class="read">{$detail.views}</span>
                     {eq name="visit" value="0"}
