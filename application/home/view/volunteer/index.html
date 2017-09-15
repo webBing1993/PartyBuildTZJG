@@ -111,6 +111,8 @@
 <script>
     var c = 0;
     $(function(){
+        //模块标题
+        $('title' ).text('志愿服务');
         //tab初始化和数据存储
         var co = getCookie("type");
         if(co == 0 || co == 1){
@@ -230,7 +232,7 @@
     });
 
     mui('#refreshContainer').on('tap', 'a', function(e) {
-        var url = this.getAttribute("href");
+        var url = this.getAttribute("href")+"?"+c;
         window.location.href = url;
     });
 

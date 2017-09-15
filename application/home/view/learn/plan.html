@@ -112,6 +112,7 @@
 <script>
     var c = 0;
     $(function(){
+        $("title").text("年度计划");
         //tab初始化和数据存储
         var co = getCookie("type");
         if(co == 0 || co == 1){
@@ -232,7 +233,7 @@
     });
 
     mui('#refreshContainer').on('tap', 'a', function(e) {
-        var url = this.getAttribute("href");
+        var url = this.getAttribute("href")+"?"+3;
         window.location.href = url;
     });
 

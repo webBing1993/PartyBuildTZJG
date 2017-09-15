@@ -42,6 +42,17 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+    var type =  parseInt(window.location.href.split("index/type/")[1]);
+    $(function(){
+        if(type==1){
+            $("title").text("专题研究");
+        }else if(type==2){
+            $("title").text("责任清单");
+        }else if(type==4){
+            $("title").text("工作计划");
+        }
+    });
+
     window.onload = function() {
         moveanyway("publish");
         if ($(".list ul a").length < 8) {
@@ -118,7 +129,7 @@
     }
 
     mui('#refreshContainer').on('tap', 'a', function(e) {
-        var url = this.getAttribute("href");
+        var url = this.getAttribute("href")+"?"+type;
         window.location.href = url;
     });
 

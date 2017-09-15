@@ -36,6 +36,7 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+    $("title").text("主题党日");
     window.onload = function() {
         moveanyway("publish");
         if ($(".list ul a").length < 7) {
@@ -108,7 +109,7 @@
 
     //触发点击事件
     mui('#refreshContainer').on('tap', 'a', function(e) {
-        var url = this.getAttribute("href");
+        var url = this.getAttribute("href")+"?"+4;
         window.location.href = url;
     });
 </script>

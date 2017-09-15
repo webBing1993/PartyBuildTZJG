@@ -79,6 +79,15 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+    var c =  parseInt(window.location.href.split("?")[1]);
+    $(function(){
+        if(c==0){
+            $("title").text("四跑志愿活动");
+        }else if(c==1){
+            $("#title").texxt("一条街三走进");
+        }
+
+    });
     window.onload = function(){
         if($(".list").length<7){
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
