@@ -336,10 +336,6 @@ class Review extends Base{
             'create_time' => time()
         );
         Db::name('review')->insert($data);
-        if ($msg['status'] == 1){
-            // 审核通过  存入 push表
-            Push::create(['class' => $msg['class'],'focus_main' => $msg['id'],'create_time' => time(),'create_user' => $userId,'status' =>0]);
-        }
         $res = $this->change_status($msg['class'],$msg['id'],$msg['status']);
         if ($res){
            return $this->success('审核成功');

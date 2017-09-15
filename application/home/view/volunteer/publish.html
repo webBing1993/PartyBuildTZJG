@@ -22,7 +22,7 @@
             <input style="text" placeholder="请输入标题" name="title">
         </li>
         <div class="content">
-            <textarea placeholder="请输入内容，不少于200字..." name="content"></textarea>
+            <textarea placeholder="请输入内容..." name="content"></textarea>
             <div class="imgs clear">
                 <div class="img fl hide"></div>
                 <div class="img fl hide"></div>
@@ -64,6 +64,7 @@
     $(function(){
         if(c==0){
             $("#openPopover2").html("四跑志愿活动");
+            $("textarea").attr("placeholder","请输入内容，不少于800字...");
         }else if(c==1){
             $("#openPopover2").html("一条街三走进");
         }
@@ -72,7 +73,6 @@
 
     //保存
     $(".save").click(function(){
-        var single = false;
         var templet = $("#openPopover").html();
         var _class = $("#openPopover2").html();
         var userid = {$userId};
@@ -82,23 +82,6 @@
             userid:userid,
             status:3
         };
-        for(var key in data){
-            if(data["title"]!= ''&& data["content"]!=""){
-//                    if(data["content"].length<200){
-//                        swal({
-//                            title: ' ',
-//                            text: '内容不少于200字',
-//                            type: 'error',
-//                            showConfirmButton:false,
-//                            timer:1500
-//                        });
-//                        return;
-//                    }
-                single = true;
-                continue;
-            }
-        }
-        if(single){
             data['list_images']=[];
             if(templet == "模板1"){
                 data["templet"] = 1;
@@ -145,15 +128,6 @@
                     }
                 }
             });
-        }else{
-            swal({
-                title: ' ',
-                text: '信息输入不完整',
-                type: 'error',
-                showConfirmButton:false,
-                timer:1500
-            });
-        }
     });
 
 
@@ -171,16 +145,7 @@
         };
         for(var key in data){
             if(data["title"]!= ''&& data["content"]!=""){
-//                    if(data["content"].length<200){
-//                        swal({
-//                            title: ' ',
-//                            text: '内容不少于200字',
-//                            type: 'error',
-//                            showConfirmButton:false,
-//                            timer:1500
-//                        });
-//                        return;
-//                    }
+
                 single = true;
                 continue;
             }
@@ -193,6 +158,16 @@
                 data["templet"] = 2;
             }
             if(_class == "四跑志愿活动"){
+              if(data["content"].length<800){
+                        swal({
+                            title: ' ',
+                            text: '内容不少于800字',
+                            type: 'error',
+                            showConfirmButton:false,
+                            timer:1500
+                        });
+                        return;
+                    }
                 data["type"] = 1;
             }else{
                 data["type"] = 2;
@@ -257,6 +232,9 @@
     $("#popover2 ul li").click(function(){
         var select_it = $(this).text();
         $("#openPopover2").html(select_it);
+        if(select_it=="四跑志愿活动"){
+            $("textarea").attr("placeholder","请输入内容，不少于800字...");
+        }
         mui('#popover2').popover("hide");
     })
 </script>

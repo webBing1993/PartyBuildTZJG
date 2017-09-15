@@ -17,7 +17,7 @@
             <input style="text" placeholder="请输入标题" name="title">
         </li>
         <div class="content">
-            <textarea placeholder="请输入内容，不少于200字..." name="content"></textarea>
+            <textarea placeholder="请输入内容..." name="content"></textarea>
             <div class="imgs clear">
                 <div class="img fl hide"></div>
                 <div class="img fl hide"></div>
@@ -50,7 +50,15 @@
     var type =  parseInt(window.location.href.split("?")[1]);
     $(function(){
 //模块标题
-        $('title' ).text('作风建设');
+        if(type==1){
+            $("title").text("方案部署");
+        }else if(type==2){
+            $("title").text("金点子");
+        }else if(type==3){
+            $("title").text("培树典型");
+        }else if(type==4){
+            $("title").text("党员清单");
+        }
     })
 
     $("#popover ul li").click(function(){
@@ -61,7 +69,6 @@
 
     //保存
     $(".save").click(function(){
-        var single = false;
         var templet = $("#openPopover").html();
         var userid = {$userId};
         var data={
@@ -71,23 +78,6 @@
             type:type,
             status:3
         };
-        for(var key in data){
-            if(data["title"]!= ''&& data["content"]!=""){
-//                    if(data["content"].length<200){
-//                        swal({
-//                            title: ' ',
-//                            text: '内容不少于200字',
-//                            type: 'error',
-//                            showConfirmButton:false,
-//                            timer:1500
-//                        });
-//                        return;
-//                    }
-                single = true;
-                continue;
-            }
-        }
-        if(single){
             data['list_images']=[];
             if(templet == "模板1"){
                 data["templet"] = 1;
@@ -130,15 +120,6 @@
                     }
                 }
             });
-        }else{
-            swal({
-                title: ' ',
-                text: '信息输入不完整',
-                type: 'error',
-                showConfirmButton:false,
-                timer:1500
-            });
-        }
     });
 
 
@@ -156,16 +137,6 @@
         };
         for(var key in data){
             if(data["title"]!= ''&& data["content"]!=""){
-//                    if(data["content"].length<200){
-//                        swal({
-//                            title: ' ',
-//                            text: '内容不少于200字',
-//                            type: 'error',
-//                            showConfirmButton:false,
-//                            timer:1500
-//                        });
-//                        return;
-//                    }
                 single = true;
                 continue;
             }

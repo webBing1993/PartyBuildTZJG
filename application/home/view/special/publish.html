@@ -17,7 +17,7 @@
             <input style="text" placeholder="请输入标题" name="title">
         </li>
         <div class="content">
-            <textarea placeholder="请输入内容，不少于200字..." name="content"></textarea>
+            <textarea placeholder="请输入内容..." name="content"></textarea>
             <div class="imgs clear">
                 <div class="img fl hide"></div>
                 <div class="img fl hide"></div>
@@ -53,7 +53,6 @@
 
     //保存
     $(".save").click(function(){
-        var single = false;
         var templet = $("#openPopover").html();
         var userid = {$userId};
         var data={
@@ -62,23 +61,6 @@
             userid:userid,
             status:3
         };
-        for(var key in data){
-            if(data["title"]!= ''&& data["content"]!=""){
-//                    if(data["content"].length<300){
-//                        swal({
-//                            title: ' ',
-//                            text: '内容不少于500字',
-//                            type: 'error',
-//                            showConfirmButton:false,
-//                            timer:1500
-//                        });
-//                        return;
-//                    }
-                single = true;
-                continue;
-            }
-        }
-        if(single){
             data['list_images']=[];
             if(templet == "模板1"){
                 data["templet"] = 1;
@@ -120,15 +102,6 @@
                     }
                 }
             });
-        }else{
-            swal({
-                title: ' ',
-                text: '信息输入不完整',
-                type: 'error',
-                showConfirmButton:false,
-                timer:1500
-            });
-        }
     });
 
 
@@ -145,16 +118,6 @@
         };
         for(var key in data){
             if(data["title"]!= ''&& data["content"]!=""){
-//                    if(data["content"].length<300){
-//                        swal({
-//                            title: ' ',
-//                            text: '内容不少于500字',
-//                            type: 'error',
-//                            showConfirmButton:false,
-//                            timer:1500
-//                        });
-//                        return;
-//                    }
                 single = true;
                 continue;
             }
