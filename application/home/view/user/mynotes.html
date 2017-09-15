@@ -164,7 +164,6 @@ mui('#refreshContainer').on('tap', '.pass', function(e) {
 	var _class = this.getAttribute("data-class");
 	var type = this.getAttribute("data-type");
 	var style = this.getAttribute("data-style");
-	console.log(type);
 	switch (_class){
 		case "1":  // 党建责任
 			window.location.href="/home/responsibility/publish/type/"+type+"/style/"+style+"/id/"+id;
@@ -185,7 +184,7 @@ mui('#refreshContainer').on('tap', '.pass', function(e) {
 			window.location.href="/home/volunteer/publish/type/"+type+"/style/"+style+"/id/"+id;
 			break;
 		default:  // 党风廉政
-			window.location.href="/home/incorrupt/publish/type/"+type+"/style/"+style+"/id/"+id;
+			window.location.href="/home/incorrupt/publish/type/"+type+"/id/"+id;
 	}
 })
 
