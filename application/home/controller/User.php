@@ -369,7 +369,7 @@ class User extends Base {
             }
             // 发布人
             if (empty($value['publisher'])){
-                $User = WechatUser::where('userid',$value['create_user'])->find();
+                $User = WechatUser::where('userid',$value['userid'])->find();
                 $list[$key]['publisher'] = $User['name'];
             }
             // class 值 判断
