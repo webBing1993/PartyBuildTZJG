@@ -68,23 +68,38 @@ class Learn extends Base{
     
     /* 发布 */
     public function publish(){
+        $Model = new LearnModel();
         if(IS_POST) {
             $data = input('post.');
-            $Model = new LearnModel();
-            $user = WechatUser::where('userid',$data['userid'])->find();
-            $data['publisher'] = $user['name'];
-            $data['front_cover'] = $this->default_pic(); //生成随机封面
             isset($data['time']) ? $data['time'] = time_format($data['time']) : $data['time'] = 0;
             isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";
-            $res = $Model->create($data);
+            if (!empty($data['id'])){
+                // 修改
+                $res = $Model->save($data,['id' => $data['id']]);
+            }else{
+                // 添加
+                unset($data['id']);
+                $user = WechatUser::where('userid',$data['userid'])->find();
+                $data['publisher'] = $user['name'];
+                $data['front_cover'] = $this->default_pic(); //生成随机封面
+                $res = $Model->create($data);
+            }
             if($res) {
-                get_score(2,$res->id,session('userId'));
-                return $this->success("添加成功");
+                if ($data['status'] == 0){  // 去审核   统计积分
+                    get_score(2,$res->id,session('userId'));
+                }
+                return $this->success("操作成功");
             }else {
-                return $this->error("添加失败");
+                return $this->error("操作失败");
             }
         }else {
             $userId = session("userId");
+            empty(input('get.id')) ? $id = 0 : $id = input('get.id');
+            $msg = $Model->where('id',$id)->find();
+            if(!empty($msg)){
+                $msg['list_images'] = json_decode($msg['list_images']);
+            }
+            $this->assign('msg',$msg);
             $this->assign('userId',$userId);
             return $this->fetch();
         }
