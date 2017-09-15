@@ -90,7 +90,7 @@
                 if($(this).data("tab")){
                     data['list_images'].push($(this).data("tab")+"")  ;
                 }
-            })
+            });
 //            data['list_image'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
             $.ajax({
                 type:"post",
@@ -158,6 +158,7 @@
                 single = true;
                 continue;
             }
+
         }
         if(single){
             data['list_images']=[];
@@ -170,7 +171,7 @@
                 if($(this).data("tab")){
                     data['list_images'].push($(this).data("tab")+"")  ;
                 }
-            })
+            });
 //            data['list_image'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
             $.ajax({
                 type:"post",
