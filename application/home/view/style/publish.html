@@ -49,6 +49,10 @@
 <script>
     var type =  parseInt(window.location.href.split("?")[1]);
     $(function(){
+        imgresize();
+        if($(".img img").length==3){
+            $(".add").hide();
+        }
 //模块标题
         if(type==1){
             $("title").text("方案部署");

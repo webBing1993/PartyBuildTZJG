@@ -49,6 +49,10 @@
 <script>
     $(function(){
     $("title").text("特色创新");
+        imgresize();
+        if($(".img img").length==3){
+            $(".add").hide();
+        }
     });
 
     //保存

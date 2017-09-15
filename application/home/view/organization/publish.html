@@ -49,6 +49,10 @@
 <script>
     var type =  parseInt(window.location.href.split("/style/")[1]);
     $(function(){
+        imgresize();
+        if($(".img img").length==3){
+            $(".add").hide();
+        }
         if(type==1){
             $("title").text("信息录用");
         }else if(type==2){

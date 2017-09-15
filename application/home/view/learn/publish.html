@@ -152,12 +152,12 @@
         <li class="type1">
             时间
             {empty name="msg"}
-            <input type="input" placeholder="请选择时间" onfocus="this.removeAttribute('placeholder')" name="time" id="date" readonly>
+            <input type="input" placeholder="请选择时间"  name="time" id="date" readonly>
             {else/}
                 {empty name="msg.time"}
-            <input type="input" placeholder="请选择时间" onfocus="this.removeAttribute('placeholder')" name="time" id="date" readonly>
+            <input type="input" placeholder="请选择时间" name="time" id="date" readonly>
                 {else/}
-            <input type="input" placeholder="{$msg.time|time_format='Y-m-d H:i'}" onfocus="this.removeAttribute('placeholder')" name="time" value="{$msg.time|time_format='Y-m-d H:i'}">
+            <input type="input" placeholder="请选择时间" name="time" value="{$msg.time|time_format='Y-m-d H:i'}" id="date" readonly>
                 {/empty}
             {/empty}
         </li>
@@ -235,6 +235,10 @@
     var c =  parseInt(window.location.href.split("style/")[1])?parseInt(window.location.href.split("style/")[1]):null;
     var index =  parseInt(window.location.href.split("?")[1])?parseInt(window.location.href.split("?")[1]):null;
     $(function(){
+        imgresize();
+        if($(".img img").length==3){
+            $(".add").hide();
+        }
         if(type==1){
             $("title").text("方案部署");
         }else if(type==2){
@@ -325,7 +329,7 @@
     $(".save").click(function(){
         var templet = $("#openPopover2").html();
         var userid = {$userId};
-        if(c==1){
+        if(type==1){
             var data={
                 class:0,
                 title:$("input[name='title']").val(),
@@ -335,7 +339,7 @@
                 type:type,
                 status:3
             };
-        }else if(c==2){
+        }else if(type==2){
             var _class = $("#openPopover").html();
             var data={
                 title:$("input[name='title']").val(),
@@ -363,7 +367,7 @@
                     data["class"] = 4;
                     break;
             }
-        }else if(c==3){
+        }else if(type==3){
             var _class = $("#openPopover3").html();
             var data={
                 title:$("input[name='title']").val(),
@@ -378,7 +382,7 @@
             }else{
                 data["class"] = 2;
             }
-        }else if(c==4){
+        }else if(type==4){
             var data={
                 class:0,
                 title:$("input[name='title']").val(),
@@ -438,7 +442,7 @@
         var single = false;
         var templet = $("#openPopover2").html();
         var userid = {$userId};
-        if(c==1){
+        if(type==1){
             var data={
                 class:0,
                 title:$("input[name='title']").val(),
@@ -453,7 +457,7 @@
                     continue;
                 }
             }
-        }else if(c==2){
+        }else if(type==2){
             var _class = $("#openPopover").html();
             var data={
                 title:$("input[name='title']").val(),
@@ -487,7 +491,7 @@
                     continue;
                 }
             }
-        }else if(c==3){
+        }else if(type==3){
             var _class = $("#openPopover3").html();
             var data={
                 title:$("input[name='title']").val(),
@@ -517,7 +521,7 @@
             }else{
                 data["class"] = 2;
             }
-        }else if(c==4){
+        }else if(type==4){
             var data={
                 class:0,
                 title:$("input[name='title']").val(),

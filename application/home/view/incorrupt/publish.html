@@ -49,6 +49,10 @@
 <script>
     var type =  parseInt(window.location.href.split("?")[1]);
     $(function(){
+        imgresize();
+        if($(".img img").length==3){
+            $(".add").hide();
+        }
         if(type==1){
             $("title").text("廉政责任");
         }else if(type==2){
