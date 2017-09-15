@@ -71,7 +71,7 @@ class Learn extends Base{
         $Model = new LearnModel();
         if(IS_POST) {
             $data = input('post.');
-            isset($data['time']) ? $data['time'] = time_format($data['time']) : $data['time'] = 0;
+            !empty($data['time']) ? $data['time'] = strtotime($data['time']) : $data['time'] = 0;
             isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";
             if (!empty($data['id'])){
                 // 修改
