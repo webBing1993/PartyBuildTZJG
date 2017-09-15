@@ -24,6 +24,9 @@
             </div>
             <div class="content">
                 <div class="article-content">{$detail.content}</div>
+                {volist name="detail.images" id="li"}
+                    <img src="{$li|get_cover='path'}">
+                {/volist}
                 <div class="like">
                     <span class="read">{$detail.views}</span>
                     {eq name="visit" value="0"}
@@ -84,7 +87,7 @@
         if(c==0){
             $("title").text("四跑志愿活动");
         }else if(c==1){
-            $("#title").texxt("一条街三走进");
+            $("#title").text("一条街三走进");
         }
 
     });
