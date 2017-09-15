@@ -127,8 +127,9 @@
             var data={
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
-                create_user:userid,
-                type:type
+                userid:userid,
+                type:type,
+                status:3
             };
             if(_class=="书记述职"){
                 data["class"] = 1;
@@ -242,8 +243,9 @@
             var data={
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
-                create_user:userid,
-                type:type
+                userid:userid,
+                type:type,
+                status:0
             };
             if(_class=="书记述职"){
                 data["class"] = 1;
