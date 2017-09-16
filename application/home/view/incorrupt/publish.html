@@ -65,7 +65,7 @@
 {block name="script"}
 <script src="/home/js/common/publish.js"></script>
 <script>
-    var type =  parseInt(window.location.href.split("?")[1]);
+    var type =  parseInt(window.location.href.split("/type/")[1]);
     $(function(){
         imgresize();
         if($(".img img").length==3){
