@@ -57,6 +57,9 @@ class Organization extends Base{
             if (!empty($data['id'])){
                 // 修改
                 $res = $Model->save($data,['id' => $data['id']]);
+                if ($data['status'] == 0){
+                    get_score(1,$data['id'],session('userId'));
+                }
             }else{
                 // 添加
                 unset($data['id']);
