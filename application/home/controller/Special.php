@@ -45,7 +45,7 @@ class Special extends Base{
                 // 修改
                 $res = $Model->save($data,['id' => $data['id']]);
                 if ($data['status'] == 0){
-                    get_score(1,$data['id'],session('userId'));
+                    get_score(4,$data['id'],session('userId'));
                 }
             }else{
                 // 添加
