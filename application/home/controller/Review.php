@@ -294,6 +294,10 @@ class Review extends Base{
                     $list['data'][$key]['username'] = $review['username'];
                     $list['data'][$key]['review_status'] = $review['status'];
                     $list['data'][$key]['review_time'] = date('Y-m-d',$review['create_time']);
+                }else{
+                    $list['data'][$key]['username'] = "*** 数据缺失 ***";
+                    $list['data'][$key]['review_status'] = 0;
+                    $list['data'][$key]['review_time'] = "0000-00-00";
                 }
             }
         }

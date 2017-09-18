@@ -55,21 +55,21 @@ class Learn extends Model {
             'class' => 2,
         );
         $two = $this->where($map2)->order("create_time desc")->limit(8)->select();
-        
+
         $map3 = array(
             'type' => 2,
             'status' => 1,
             'class' => 3,
         );
         $three = $this->where($map3)->order("create_time desc")->limit(8)->select();
-        
+
         $map4 = array(
             'type' => 2,
             'status' => 1,
             'class' => 4,
         );
         $four = $this->where($map4)->order("create_time desc")->limit(8)->select();
-        
+
         $data = array(
             'all' => $all,
             'one' => $one,

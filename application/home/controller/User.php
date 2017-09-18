@@ -141,6 +141,10 @@ class User extends Base {
                 $list['data'][$key]['username'] = $review['username'];
                 $list['data'][$key]['review_status'] = $review['status'];
                 $list['data'][$key]['review_time'] = date('Y-m-d',$review['create_time']);
+            }else{
+                $list['data'][$key]['username'] = "*** 数据缺失 ***";
+                $list['data'][$key]['review_status'] = 0;
+                $list['data'][$key]['review_time'] = "0000-00-00";
             }
         }
         $this->assign('list',$list['data']);
@@ -163,6 +167,10 @@ class User extends Base {
                     $list['data'][$key]['username'] = $review['username'];
                     $list['data'][$key]['review_status'] = $review['status'];
                     $list['data'][$key]['review_time'] = date('Y-m-d',$review['create_time']);
+                }else{
+                    $list['data'][$key]['username'] = "*** 数据缺失 ***";
+                    $list['data'][$key]['review_status'] = 0;
+                    $list['data'][$key]['review_time'] = "0000-00-00";
                 }
             }
         }
@@ -415,7 +423,7 @@ class User extends Base {
     /**
      * 积分明细
      */
-    public function item(){
+    public function myintegral(){
         return $this->fetch();
     }
 }

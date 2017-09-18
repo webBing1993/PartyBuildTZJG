@@ -305,8 +305,10 @@
                         '<span> '+list.review_time+'</span>'
                 if (list.review_status == 1){
                     html+='<i class="pass"></i>';
-                }else {
+                }else if (list.review_status == 2){
                     html+='<i class="refuse"></i>';
+                }else if (list.review_status == 0){
+                    html +='<i style="right: 0;width: 0.8rem;background: #ffff00;"></i>';
                 }
                         html +='</a>'+
                         '</li>';

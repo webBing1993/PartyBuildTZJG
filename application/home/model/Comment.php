@@ -38,8 +38,8 @@ class Comment extends Model {
         $comment = $this->where($map)->order('likes desc,create_time desc')->limit(7)->select();
         foreach ($comment as $value) {
             $user = WechatUser::where('userid',$value['uid'])->find();
-            $value['nickname'] = $user['name'];
-            $value['header'] = $user['avatar'];
+            $value['nickname'] = ($user['nickname']) ? $user['nickname'] : $user['name'];
+            $value['header'] =  ($user['header']) ? $user['header'] : $user['avatar'];
             $map1 = array(
                 'type' => 0,
                 'aid' => $value['id'],
