@@ -38,9 +38,9 @@ class Review extends Base{
                 $list3['data'][$key]['review_status'] = $review['status'];
                 $list3['data'][$key]['review_time'] = date('Y-m-d',$review['create_time']);
             }else{
-                $list3['data'][$key]['username'] = "****";
+                $list3['data'][$key]['username'] = "*** 数据缺失 ***";
                 $list3['data'][$key]['review_status'] = 0;
-                $list3['data'][$key]['review_time'] = "****-**-**";
+                $list3['data'][$key]['review_time'] = "0000-00-00";
             }
         }
         $this ->assign('list1',$list1['data']);
