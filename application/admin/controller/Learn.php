@@ -49,6 +49,8 @@ class Learn extends Admin {
             $data['create_user'] = $_SESSION['think']['user_auth']['id'];
             if($data['time']) {
                 $data['time'] = strtotime($data['time']);
+            }else {
+                $data['time'] = 0;
             }
             $res = $Model->validate(true)->save($data);
             if($res){
