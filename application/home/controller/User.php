@@ -95,9 +95,19 @@ class User extends Base {
         return $this->fetch();
     }
     /**
-     * 草稿 查看详情
+     * 草稿 查看详情  模板1
      */
     public function detail(){
+        $class = input('get.class');
+        $id = input('get.id');
+        $info = $this->get_detail($class,$id);
+        $this->assign('info',$info);
+        return  $this->fetch();
+    }
+    /**
+     * 草稿 查看详情  模板2
+     */
+    public function detail2(){
         $class = input('get.class');
         $id = input('get.id');
         $info = $this->get_detail($class,$id);
