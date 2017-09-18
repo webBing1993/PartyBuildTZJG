@@ -15,7 +15,7 @@
         </li>
         <li>
             模板
-            <a id="openPopover" href="#popover">模板1</a>
+            <a id="openPopover" href="#popover">普通型</a>
             <span class="triangle-down"></span>
         </li>
         {else/}
@@ -70,8 +70,8 @@
 
 <div id="popover" class="mui-popover" >
     <ul class="mui-table-view">
-        <li class="mui-table-view-cell"><a>模板1</a></li>
-        <li class="mui-table-view-cell"><a>模板2</a></li>
+        <li class="mui-table-view-cell"><a>普通型</a></li>
+        <li class="mui-table-view-cell"><a>轮播型</a></li>
     </ul>
 </div>
 
@@ -115,7 +115,7 @@
             status:3
         };
             data['list_images']=[];
-            if(templet == "模板1"){
+            if(templet == "普通型"){
                 data["templet"] = 1;
             }else{
                 data["templet"] = 2;
@@ -186,7 +186,7 @@
         }
         if(single){
             data['list_images']=[];
-            if(templet == "模板1"){
+            if(templet == "普通型"){
                 data["templet"] = 1;
             }else{
                 data["templet"] = 2;
