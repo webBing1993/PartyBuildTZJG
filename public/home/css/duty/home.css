@@ -36,7 +36,7 @@ html,body{
     clear: both;
 }
 .title{
-    height:calc((100vh - 100px) / 4);
+    height:calc((100vh -4vh) / 4);
     position: relative;
     width:100%;
     display: block;
