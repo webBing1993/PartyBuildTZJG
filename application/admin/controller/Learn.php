@@ -47,12 +47,17 @@ class Learn extends Admin {
             }
             $Model = new LearnModel();
             $data['create_user'] = $_SESSION['think']['user_auth']['id'];
-            if($data['time']) {
-                $data['time'] = strtotime($data['time']);
+            if($data['type'] == 2) {
+                if(empty($data['time'])) {
+                    return $this->error("时间不能为空");
+                }else {
+                    $data['time'] = strtotime($data['time']);
+                }
+                $res = $Model->validate('Learn.two')->save($data);
             }else {
                 $data['time'] = 0;
+                $res = $Model->validate('Learn.one')->save($data);
             }
-            $res = $Model->validate(true)->save($data);
             if($res){
                 get_score(2,$res,$_SESSION['think']['user_auth']['id']);
                 return $this->success("新增成功",Url("Learn/index"));
@@ -74,10 +79,16 @@ class Learn extends Admin {
         $Model = new LearnModel();
         if(IS_POST) {
             $data = input('post.');
-            if($data['time']) {
-                $data['time'] = strtotime($data['time']);
+            if($data['type'] == 2) {
+                if(empty($data['time'])) {
+                    return $this->error("时间不能为空");
+                }else {
+                    $data['time'] = strtotime($data['time']);
+                }
+                $res = $Model->validate('Learn.two')->save($data,['id'=>input('id')]);
+            }else {
+                $res = $Model->validate('Learn.one')->save($data,['id'=>input('id')]);
             }
-            $res = $Model->validate(true)->save($data,['id'=>input('id')]);
             if($res){
                 return $this->success("修改成功",Url("Learn/index"));
             }else{

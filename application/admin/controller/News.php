@@ -53,7 +53,7 @@ class News extends Admin
             if ($res){
                 return $this->success("操作成功",Url('News/index'));
             }else{
-                $this->error($noticeModel->getError());
+                $this->get_update_error_msg($noticeModel->getError());
             }
         }else {
             $info = $noticeModel->get_content(input('id'));
