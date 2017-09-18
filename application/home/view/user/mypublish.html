@@ -37,11 +37,14 @@
 				{default/}<p>[党风廉政]</p><p>审核人：{$ll.username}</p>
 				{/switch}
 				<span>{$ll.review_time}</span>
-				{eq name="ll.status" value="1"}
+				{eq name="ll.review_status" value="1"}
 				<i class="pass"></i>
 				{/eq}
-				{eq name="ll.status" value="2"}
+				{eq name="ll.review_status" value="2"}
 				<i class="refuse"></i>
+				{/eq}
+				{eq name="ll.review_status" value="0"}
+				<i style="right: 0;width: 0.8rem;background: #ffff00;"></i>
 				{/eq}
 			</a>
 		</li>
@@ -158,8 +161,10 @@ function addLists(data){
 				'<span> '+list.review_time+'</span>'
 		if (list.review_status == 1){
 			html+='<i class="pass"></i>';
-		}else {
+		}else if (list.review_status == 2){
 			html+='<i class="refuse"></i>';
+		}else if (list.review_status == 0){
+			html +='<i style="right: 0;width: 0.8rem;background: #ffff00;"></i>';
 		}
 		html +='</a>'+
 				'</li>';
