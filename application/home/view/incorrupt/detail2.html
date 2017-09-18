@@ -18,7 +18,7 @@
         <!--轮播图-->
         <div class="mui-slider banner">
             <div class="mui-slider-group">
-                {volist name="detail.list_images" id="li"}
+                {volist name="detail.images" id="li"}
                 <!--支持循环，需要重复图片节点-->
                 <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
                 {/volist}

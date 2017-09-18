@@ -9,6 +9,10 @@ a:active {
 body {
   background: #eeeeee;
 }
+html{
+  width: 100%;
+  overflow: hidden;
+}
 /*头部*/
 .banner {
   width: 100%;
