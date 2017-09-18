@@ -142,7 +142,7 @@ class Style extends Base{
             if($res) {
                 return $this->success("操作成功");
             }else {
-                return $this->error("操作失败");
+                return $this->error("未做修改，操作失败");
             }
         }else {
             $userId = session('userId');

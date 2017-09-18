@@ -410,7 +410,6 @@
                 url: "{:Url('Learn/publish')}",
                 data:data,
                 success:function(data){
-                    console.log(data)
                     if(data.code == 1){
                         swal({
                             title: "保存成功",
@@ -554,6 +553,7 @@
                     data['list_images'].push($(this).data("tab")+"")  ;
                 }
             })
+            console.log(data)
 //            data['list_image'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
             $.ajax({
                 type:"post",
