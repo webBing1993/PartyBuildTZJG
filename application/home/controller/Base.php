@@ -20,7 +20,7 @@ use think\Db;
 
 class Base extends Controller {
     public function _initialize(){
-        session('userId','18768112486');
+        session('userId','18857120253');
 //        session('header','/home/images/vistor.jpg');
 //        session('nickname','游客');
         session('requestUri', 'http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]);

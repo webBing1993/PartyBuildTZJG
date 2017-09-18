@@ -217,9 +217,7 @@ class User extends Admin
                 return $this->error("账号已存在，请更换账号名称！");
             }
         }
-        if(empty($email)) {
-            return $this->error("邮箱不能为空！");
-        }else{
+        if($email) {
             $s = UcenterMember::where('email',$email)->find();
             if($s){
                 return $this->error("邮箱已存在，请更改邮箱注册！");
@@ -236,7 +234,9 @@ class User extends Admin
         $uid = action('user/index/register', [$username, $password, $email]);
         //$uid = $UserApi->register($username, $password, $email);
         if(0 < $uid){   //注册成功
-            AuthGroupAccess::create(['uid'=>$uid, 'group_id'=>input('group_id')]);
+            if(input('group_id')) {
+                AuthGroupAccess::create(['uid'=>$uid, 'group_id'=>input('group_id')]);
+            }
             return $this->success('用户添加成功！');
         } else {
             return $this->error($uid);

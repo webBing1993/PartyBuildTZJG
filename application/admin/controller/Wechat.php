@@ -62,7 +62,7 @@ class Wechat extends Admin
 
         /* 同步部门 */
         $list = $Wechat->getDepartment();
-
+//
         /* 同步最顶级部门下面的用户 */
         foreach ($list['department'] as $key=>$value) {
             $users = $Wechat->getUserListInfo($list['department'][$key]['id']);
@@ -70,11 +70,20 @@ class Wechat extends Admin
                 $user['department'] = $user['department'][0];
                 $user['order'] = $user['order'][0];
                 $user['extattr'] = json_encode($user['extattr']);
-
                 if(WechatUser::get(['userid'=>$user['userid']])) {
                     WechatUser::where(['userid'=>$user['userid']])->update($user);
                 } else {
-                    WechatUser::create($user);
+                    $res = WechatUser::create($user);
+                    if($res) {
+                        $map = array(
+                            'username' => $user['userid'],
+                            'password' => '123456',
+                            'repassword' => '123456',
+                            'email' => $user['email'],
+                        );
+                        $UserController = new User();
+                        $UserController->add($map['username'],$map['password'],$map['repassword'],$map['email']);
+                    }
                 }
             }
         }

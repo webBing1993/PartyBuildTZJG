@@ -30,11 +30,15 @@ class Index extends Controller
      * @param  string $mobile   用户手机号码
      * @return integer          注册成功-用户信息，注册失败-错误编号
      */
-    public function register($username, $password, $email, $mobile = '') {
+    public function register($username, $password, $email='', $mobile = '') {
         $UcenterMemberModel = new UcenterMember();
         $WechatUser = new WechatUser();
         $user = $WechatUser->where('userid',$username)->find();
-        $nickname = $user['name'];
+        if($user) {
+            $nickname = $user['name'];
+        }else {
+            $nickname = $username;
+        }
         $data = [
             'username' => $username,
             'password' => $password,
