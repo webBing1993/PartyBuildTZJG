@@ -14,11 +14,26 @@
 </style>
 {/block}
 {block name="body"}
+
         <div class="article">
             <div class="title"><p>{$info.title}</p></div>
             <div class="note clear">
                 <span class="publish">{$info.publisher}</span>
                 <span class="time">{$info.create_time|time_format="Y-m-d"}</span>
+            </div>
+            <div class="message">
+                {notempty name="info.time"}
+                <div class="name limit">{$info.time|time_format='Y/m/d H:i'}</div>
+                {/notempty}
+                {notempty name="info.address"}
+                <div class="content" >{$info.address}</div>
+                {/notempty}
+                {notempty name="info.people"}
+                <div class="content" >{$info.people}</div>
+                {/notempty}
+                {notempty name="info.compere"}
+                <div class="content" >{$info.compere}</div>
+                {/notempty}
             </div>
             <div class="content">
                 {volist name="$info.list_images" id="img"}
@@ -32,4 +47,7 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script>
+    $("title").text("消息审核");
+</script>
 {/block}

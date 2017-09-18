@@ -18,7 +18,12 @@
 	{else/}
 	<ul>
 		{volist name="list" id="li"}
-		<li><a href="{:Url('User/detail?class='.$li['class'].'&id='.$li['id'])}" class="list clear" data-type="{$li.class}">
+		<li>
+			{eq name="li.templet" value="1"}
+			<a href="{:Url('User/detail?class='.$li['class'].'&id='.$li['id'])}" class="list clear" data-type="{$li.class}">
+			{else/}
+				<a href="{:Url('User/detail2?class='.$li['class'].'&id='.$li['id'])}" class="list clear" data-type="{$li.class}">
+			{/eq}
 			<img src="{$li.front_cover}">
 			<span>{$li.title}</span>
 			{switch name='$li.class'}
@@ -33,7 +38,7 @@
 			<span>{$li.create_time}</span>
 			<span class="mui-icon mui-icon-forward"></span>
 			<i class="fail" data-id="{$li.id}" data-class="{$li.class}">删&nbsp;除</i>
-			<i class="pass" data-id="{$li.id}" data-class="{$li.class}"  data-type="{$li.type}" data-style="{$li.class}">修&nbsp;改</i>
+			<i class="pass" data-id="{$li.id}" data-class="{$li.class}"  data-type="{$li.type}" data-style="{$li.style}">修&nbsp;改</i>
 		</a>
 		</li>
 		{/volist}
@@ -48,7 +53,7 @@
 <script>
 $(function(){
 	//模块标题
-	$('title' ).text('个人中心');
+	$('title' ).text('我的草稿');
 });
 
 window.onload = function() {
@@ -122,9 +127,14 @@ function addLists(data){
 	var html = '';
 	var lists = data.data;
 	var len = lists.length;
+	var link = '';
 	for(var i = 0; i< len;i++){
 		var list = lists[i];
-		var link = '/home/user/detail/class/'+list.class+'/id/'+list.id;
+		if(list.templet == 1){
+			link  = '/home/user/detail/class/'+list.class+'/id/'+list.id;
+		}else {
+			link  = '/home/user/detail2/class/'+list.class+'/id/'+list.id;
+		}
 		if(list.class == 1){
 			class_name = '[党建责任]';
 		}else if(list.class == 2){
@@ -148,7 +158,7 @@ function addLists(data){
 				 '<span>' + class_name + ' 发布人：' + list.publisher +'</span>' +
 				'<span>' + list.create_time + '</span>' +
 				'<span class="mui-icon mui-icon-forward"></span>' +
-				'<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">删&nbsp;除</i><i class="pass"  data-id="' + list.id + '" data-class="' + list.class + '" data-type="' + list.type + ' " data-style="' + list.class + '">修&nbsp;改</i>' +
+				'<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">删&nbsp;除</i><i class="pass"  data-id="' + list.id + '" data-class="'+ list.class +'" data-type="'+list.type+'" data-style="'+list.style+'">修&nbsp;改</i>' +
 				'</a>' +
 				'</li>'
 	}
@@ -172,19 +182,19 @@ mui('#refreshContainer').on('tap', '.pass', function(e) {
 			window.location.href="/home/learn/publish/type/"+type+"/style/"+style+"/id/"+id;
 			break;
 		case "3":  // 组织建设
-			window.location.href="/home/organization/publish/type/"+type+"/style/"+style+"/id/"+id;
+			window.location.href="/home/organization/publish/type/"+type+"/id/"+id;
 			break;
 		case "4":  //特色创新
 			window.location.href="/home/special/publish/id/"+id;
 			break;
 		case "5":  // 作风建设
-			window.location.href="/home/style/publish/type/"+type+"/style/"+style+"/id/"+id;
+			window.location.href="/home/style/publish/type/"+type+"/id/"+id;
 			break;
 		case "6":  // 志愿服务
-			window.location.href="/home/volunteer/publish/type/"+type+"/style/"+style+"/id/"+id;
+			window.location.href="/home/volunteer/publish/type/"+type+"/id/"+id;
 			break;
 		default:  // 党风廉政
-			window.location.href="/home/incorrupt/publish/type/"+type+"/style/"+style+"/id/"+id;
+			window.location.href="/home/incorrupt/publish/type/"+type+"/id/"+id;
 	}
 })
 

@@ -2,6 +2,7 @@
 
 {block name="style"}
 <link rel="stylesheet" href="/home/css/common/publish.css">
+<link rel="stylesheet" href="/home/css/common/mui.picker.min.css">
 <style>
     #popover,#popover .mui-table-view{
         height:40vw;
@@ -12,12 +13,69 @@
         margin:-5px -11px;
         text-align: center;
     }
+    .mui-dtpicker-header button {
+        font-size: 0.36rem;
+        padding: 0.13rem 0.26rem;
+    }
+    .mui-dtpicker-title h5 {
+        display: inline-block;
+        width: 20%;
+        margin: 0;
+        padding: 0.26rem;
+        text-align: center;
+        border-top: solid 1px #ddd;
+        background-color: #f0f0f0;
+        border-bottom: solid 1px #ccc;
+        font-size: 0.32rem;
+    }
+    .mui-dtpicker-body {
+        position: relative;
+        width: 100%;
+        height: 400px;
+    }
+    .mui-pciker-list, .mui-pciker-rule {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0 0 0;
+        width: 100%;
+        height: 0.64rem;
+        line-height: 0.64rem;
+        position: absolute;
+        left: 0;
+        top: 50%;
+    }
+    .mui-pciker-list li {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        text-align: center;
+        vertical-align: middle;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        font-size: 0.36rem;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        color: #888;
+        padding: 0 0.52rem;
+        white-space: nowrap;
+        -webkit-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        cursor: default;
+        visibility: hidden;
+    }
+    .mui-dtpicker {
+        position: fixed;
+        z-index: 999999;
+        border-top: solid 1px #ccc;
+        bottom: 0;
+        -webkit-transform: translateY(600px);
+    }
 </style>
 {/block}
 
 {block name="body"}
 <div class="list">
     <ul>
+        {empty name="msg"}
         <li class="type1">
             模块
             <a id="openPopover" href="#popover">支部委员大会</a>
@@ -28,19 +86,61 @@
             <a id="openPopover3" href="#popover3">培训计划</a>
             <span class="triangle-down"></span>
         </li>
-        {empty name="msg"}
         <li class="template">
             模板
-            <a id="openPopover2" href="#popover2">模板1</a>
+            <a id="openPopover2" href="#popover2">普通型</a>
             <span class="triangle-down"></span>
         </li>
         {else/}
+        {switch name="$msg.class"}{case value="1"}
+                <li class="type1">
+                模块
+                <a id="openPopover" href="#popover">支部委员大会</a>
+                <span class="triangle-down"></span>
+                </li>
+            {/case}
+            {case value="2"}
+            <li class="type1">
+                模块
+                <a id="openPopover" href="#popover">党支部委员会</a>
+                <span class="triangle-down"></span>
+            </li>
+            {/case}
+            {case value="3"}
+            <li class="type1">
+                模块
+                <a id="openPopover" href="#popover">党小组会</a>
+                <span class="triangle-down"></span>
+            </li>
+            {/case}
+            {case value="4"}
+            <li class="type1">
+                模块
+                <a id="openPopover" href="#popover">党课</a>
+                <span class="triangle-down"></span>
+            </li>
+            {/case}
+            {case value="5"}
+            <li class="type2">
+                模块
+                <a id="openPopover3" href="#popover3">培训计划</a>
+                <span class="triangle-down"></span>
+            </li>
+            {/case}
+            {case value="6"}
+            <li class="type2">
+                模块
+                <a id="openPopover3" href="#popover3">理论研究</a>
+                <span class="triangle-down"></span>
+            </li>
+            {/case}
+        {/switch}
         <li class="template">
             模板
             {eq name="$msg.templet" value="1"}
-            <a id="openPopover2" href="#popover2">模板1</a>
+            <a id="openPopover2" href="#popover2">普通型</a>
             {else/}
-            <a id="openPopover2" href="#popover2">模板2</a>
+            <a id="openPopover2" href="#popover2">轮播型</a>
             {/eq}
             <span class="triangle-down"></span>
         </li>
@@ -52,9 +152,13 @@
         <li class="type1">
             时间
             {empty name="msg"}
-            <input type="date" placeholder="请选择时间" onfocus="this.removeAttribute('placeholder')" name="time">
+            <input type="input" placeholder="请选择时间"  name="time" id="date" readonly>
             {else/}
-            <input type="date" placeholder="请选择时间" onfocus="this.removeAttribute('placeholder')" name="time" value="{$msg.time|time_format='Y-m-d H:i'}">
+                {empty name="msg.time"}
+            <input type="input" placeholder="请选择时间" name="time" id="date" readonly>
+                {else/}
+            <input type="input" placeholder="请选择时间" name="time" value="{$msg.time|time_format='Y-m-d H:i'}" id="date" readonly>
+                {/empty}
             {/empty}
         </li>
         <li class="type1">
@@ -110,8 +214,8 @@
 
 <div id="popover2" class="mui-popover" >
     <ul class="mui-table-view">
-        <li class="mui-table-view-cell"><a>模板1</a></li>
-        <li class="mui-table-view-cell"><a>模板2</a></li>
+        <li class="mui-table-view-cell"><a>普通型</a></li>
+        <li class="mui-table-view-cell"><a>轮播型</a></li>
     </ul>
 </div>
 
@@ -125,11 +229,16 @@
 
 {block name="script"}
 <script src="/home/js/common/publish.js"></script>
+<script src="/home/js/common/mui.picker.min.js"></script>
 <script>
     var type =  parseInt(window.location.href.split("publish/type/")[1]);
     var c =  parseInt(window.location.href.split("style/")[1])?parseInt(window.location.href.split("style/")[1]):null;
     var index =  parseInt(window.location.href.split("?")[1])?parseInt(window.location.href.split("?")[1]):null;
     $(function(){
+        imgresize();
+        if($(".img img").length==3){
+            $(".add").hide();
+        }
         if(type==1){
             $("title").text("方案部署");
         }else if(type==2){
@@ -172,6 +281,20 @@
                 break;
         }
     });
+
+    window.onload = function(){
+        if(type==2) {
+            var dtpicker = new mui.DtPicker({
+                "type": "datetime",
+                "value": ""
+            })
+            document.querySelector('#date').addEventListener('tap', function () {
+                dtpicker.show(function (e) {
+                    document.getElementById('date').value = e.text;
+                })
+            })
+        }
+    }
     $("#popover ul li").click(function(){
         var select_it = $(this).text();
         $("#openPopover").html(select_it);
@@ -206,7 +329,7 @@
     $(".save").click(function(){
         var templet = $("#openPopover2").html();
         var userid = {$userId};
-        if(c==1){
+        if(type==1){
             var data={
                 class:0,
                 title:$("input[name='title']").val(),
@@ -216,7 +339,7 @@
                 type:type,
                 status:3
             };
-        }else if(c==2){
+        }else if(type==2){
             var _class = $("#openPopover").html();
             var data={
                 title:$("input[name='title']").val(),
@@ -244,7 +367,7 @@
                     data["class"] = 4;
                     break;
             }
-        }else if(c==3){
+        }else if(type==3){
             var _class = $("#openPopover3").html();
             var data={
                 title:$("input[name='title']").val(),
@@ -259,7 +382,7 @@
             }else{
                 data["class"] = 2;
             }
-        }else if(c==4){
+        }else if(type==4){
             var data={
                 class:0,
                 title:$("input[name='title']").val(),
@@ -271,18 +394,16 @@
             };
         }
             data['list_images']=[];
-            if(templet == "模板1"){
+            if(templet == "普通型"){
                 data["templet"] = 1;
             }else{
                 data["templet"] = 2;
             }
-            data[status] = 3;
             $(".img img").each(function(){
                 if($(this).data("tab")){
                     data['list_images'].push($(this).data("tab")+"")  ;
                 }
             })
-                console.log(data)
 //            data['list_image'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
             $.ajax({
                 type:"post",
@@ -320,12 +441,13 @@
         var single = false;
         var templet = $("#openPopover2").html();
         var userid = {$userId};
-        if(c==1){
+        if(type==1){
             var data={
                 class:0,
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
                 userid:userid,
+                id:$("input[name='id']").val(),
                 type:type,
                 status:0
             };
@@ -335,7 +457,7 @@
                     continue;
                 }
             }
-        }else if(c==2){
+        }else if(type==2){
             var _class = $("#openPopover").html();
             var data={
                 title:$("input[name='title']").val(),
@@ -343,6 +465,7 @@
                 address:$("input[name='address']").val(),
                 time:$("input[name='time']").val(),
                 people:$("input[name='people']").val(),
+                id:$("input[name='id']").val(),
                 compere:$("input[name='compere']").val(),
                 userid:userid,
                 type:type,
@@ -369,12 +492,13 @@
                     continue;
                 }
             }
-        }else if(c==3){
+        }else if(type==3){
             var _class = $("#openPopover3").html();
             var data={
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
                 userid:userid,
+                id:$("input[name='id']").val(),
                 type:type,
                 status:0
             };
@@ -399,12 +523,13 @@
             }else{
                 data["class"] = 2;
             }
-        }else if(c==4){
+        }else if(type==4){
             var data={
                 class:0,
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
                 userid:userid,
+                id:$("input[name='id']").val(),
                 type:type,
                 status:0
             };
@@ -417,12 +542,11 @@
         }
         if(single){
             data['list_images']=[];
-            if(templet == "模板1"){
+            if(templet == "普通型"){
                 data["templet"] = 1;
             }else{
                 data["templet"] = 2;
             }
-            data[status] = 0;
             $(".img img").each(function(){
                 if($(this).data("tab")){
                     data['list_images'].push($(this).data("tab")+"")  ;

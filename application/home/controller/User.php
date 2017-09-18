@@ -95,9 +95,19 @@ class User extends Base {
         return $this->fetch();
     }
     /**
-     * 草稿 查看详情
+     * 草稿 查看详情  模板1
      */
     public function detail(){
+        $class = input('get.class');
+        $id = input('get.id');
+        $info = $this->get_detail($class,$id);
+        $this->assign('info',$info);
+        return  $this->fetch();
+    }
+    /**
+     * 草稿 查看详情  模板2
+     */
+    public function detail2(){
         $class = input('get.class');
         $id = input('get.id');
         $info = $this->get_detail($class,$id);
@@ -369,7 +379,7 @@ class User extends Base {
             }
             // 发布人
             if (empty($value['publisher'])){
-                $User = WechatUser::where('userid',$value['create_user'])->find();
+                $User = WechatUser::where('userid',$value['userid'])->find();
                 $list[$key]['publisher'] = $User['name'];
             }
             // class 值 判断

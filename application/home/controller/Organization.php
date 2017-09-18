@@ -48,22 +48,40 @@ class Organization extends Base{
 
     /* 发布 */
     public function publish(){
+        $Model = new OrganizationModel();
         if(IS_POST) {
             $data = input('post.');
-            $Model = new OrganizationModel();
             $user = WechatUser::where('userid',$data['userid'])->find();
             $data['publisher'] = $user['name'];
-            $data['front_cover'] = $this->default_pic(); //生成随机封面
             isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";
-            $res = $Model->create($data);
+            if (!empty($data['id'])){
+                // 修改
+                $res = $Model->save($data,['id' => $data['id']]);
+                if ($data['status'] == 0){
+                    get_score(3,$data['id'],session('userId'));
+                }
+            }else{
+                // 添加
+                unset($data['id']);
+                $data['front_cover'] = $this->default_pic(); //生成随机封面
+                $res = $Model->create($data);
+                if ($data['status'] == 0){  // 去审核   统计积分
+                    get_score(3,$res->id,session('userId'));
+                }
+            }
             if($res) {
-                get_score(3,$res->id,session('userId'));
-                return $this->success("添加成功");
+                return $this->success("操作成功");
             }else {
-                return $this->error("添加失败");
+                return $this->error("未做修改，操作失败");
             }
         }else {
             $userId = session("userId");
+            empty(input('get.id')) ? $id = 0 : $id = input('get.id');
+            $msg = $Model->where('id',$id)->find();
+            if(!empty($msg)){
+                $msg['list_images'] = json_decode($msg['list_images']);
+            }
+            $this->assign('msg',$msg);
             $this->assign('userId',$userId);
             return $this->fetch();
         }

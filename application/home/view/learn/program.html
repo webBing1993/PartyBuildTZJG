@@ -64,7 +64,8 @@
             url: "{:Url('Learn/listmore')}",
             data:{
                 length:len,
-                type:1
+                type:1,
+                class:0
             },
             beforeSend: function(XMLHttpRequest){
 
@@ -99,8 +100,8 @@
             }
             html +=
                     '<p>'+list.title+'</p>'+
-                    '<span>+list.publisher+</span>'+
-                   '<span>+list.time+</span>'+
+                    '<span>'+list.publisher+'</span>'+
+                   '<span>'+list.time+'</span>'+
                     '</a>'
         }
         $('.list ul').append(html);

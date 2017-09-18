@@ -37,6 +37,10 @@ class Review extends Base{
                 $list3['data'][$key]['username'] = $review['username'];
                 $list3['data'][$key]['review_status'] = $review['status'];
                 $list3['data'][$key]['review_time'] = date('Y-m-d',$review['create_time']);
+            }else{
+                $list3['data'][$key]['username'] = "*** 数据缺失 ***";
+                $list3['data'][$key]['review_status'] = 0;
+                $list3['data'][$key]['review_time'] = "0000-00-00";
             }
         }
         $this ->assign('list1',$list1['data']);
@@ -309,12 +313,24 @@ class Review extends Base{
         }
     }
     /*
-     * 审核 详细页
+     * 审核 详细页  模板1
      */
     public function detail(){
         $class = input('get.class');
         $id = input('get.id');
         $info = $this->get_detail($class,$id);
+        $this->assign('class',$class);
+        $this->assign('info',$info);
+        return  $this->fetch();
+    }
+    /*
+     * 审核 详细页  模板2
+     */
+    public function detail2(){
+        $class = input('get.class');
+        $id = input('get.id');
+        $info = $this->get_detail($class,$id);
+        $this->assign('class',$class);
         $this->assign('info',$info);
         return  $this->fetch();
     }
@@ -353,7 +369,7 @@ class Review extends Base{
         $username = $user['name'];
         $info = Push::where('id',$msg['id'])->find();
         if($msg['status'] == 1 ){  // 审核通过  推送消息
-            $this->push_detail($info['class'],$info['focus_main']);
+            $this->push_detail($info['class'],$info['focus_main'],$info['focus_vice']);
         }
         $res = Push::where('id',$msg['id'])->update(['status' => $msg['status']]);
         if ($res){
@@ -406,7 +422,7 @@ class Review extends Base{
      * 获取推送详情
      * 党建责任 responsibility  两学一做 learn 组织建设 organization 特色创新 special 作风建设 style 志愿服务 volunteer 党风廉政 incorrupt
      */
-    public function push_detail($type,$main){
+    public function push_detail($type,$main,$vice=''){
         switch ($type) {    //根据类别获取表明
             case 1:
                 $table = "responsibility";
@@ -497,25 +513,60 @@ class Review extends Base{
                 return $this->error("无该数据表");
         }
         //活动基本信息  主图文
-        $focus = Db::name($table)->where('id',$main)->find();
-        if (empty($focus)){
+        $focus1 = Db::name($table)->where('id',$main)->find();
+        if (empty($focus1)){
             $this ->error('该内容不存在或已删除!');
         }
-        $title = $focus['title'];
-        $str = strip_tags($focus['content']);
-        $des = mb_substr($str, 0, 40);
-        $content = str_replace("&nbsp;", "", $des);  //空格符替换成空
-        $url = Config::get('host_url')."/home/".$url."/id/" . $focus['id'] . ".html";
-        $img = Picture::get($focus['front_cover']);
-        $path = Config::get('host_url') . $img['path'];
-        $send = array(
-            "articles" => array(
-                "title" => $pre . $title,
-                "description" => $content,
-                "url" => $url,
-                "picurl" => $path,
-            )
+        $title1 = $focus1['title'];
+        $str1 = strip_tags($focus1['content']);
+        $des1 = mb_substr($str1, 0, 40);
+        $content1 = str_replace("&nbsp;", "", $des1);  //空格符替换成空
+        $url1 = Config::get('host_url')."/home/".$url."/id/" . $focus1['id'] . ".html";
+        $img1 = Picture::get($focus1['front_cover']);
+        $path1 = Config::get('host_url') . $img1['path'];
+        $information1 = array(
+            "title" => $pre . $title1,
+            "description" => $content1,
+            "url" => $url1,
+            "picurl" => $path1,
         );
+        $information = array();
+        if (!empty($vice)) {
+            //副图文信息
+            $vice = json_decode($vice);
+            $information2 = array();
+            foreach ($vice as $key => $value) {
+                $focus2 = Db::name($table)->where('id',$value)->find();
+                $title2 = $focus2['title'];
+                $str2 = strip_tags($focus2['content']);
+                $des2 = mb_substr($str2, 0, 41);
+                $content2 = str_replace("&nbsp;", "", $des2);  //空格符替换成空
+                $url2 = Config::get('host_url')."/home/".$url."/id/" . $focus2['id'] . ".html";
+                $img2 = Picture::get($focus2['front_cover']);
+                $path2 = Config::get('host_url') . $img2['path'];
+                $info = array(
+                    "title" =>$pre.$title2,
+                    "description" => $content2,
+                    "url" => $url2,
+                    "picurl" => $path2,
+                );
+                $information2[] = $info;
+            }
+            //数组合并，主图文放在首位
+            foreach ($information2 as $k => $v) {
+                $information[0] = $information1;
+                $information[$k + 1] = $v;
+            }
+        } else {
+            $information[0] = $information1;
+        }
+        //重组成article数据
+        $send = array();
+        $re[] = $information;
+        foreach ($re as $key => $value) {
+            $key = "articles";
+            $send[$key] = $value;
+        }
         //发送给服务号
         $message = array(
             'touser' =>'17557289172',

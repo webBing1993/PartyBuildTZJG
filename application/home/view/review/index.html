@@ -30,8 +30,12 @@
                     <ul>
                         {volist name="list1" id="li"}
                         <li>
+                            {eq name="li.templet" value="1"}
                             <a href="{:Url('Review/detail?class='.$li['class'].'&id='.$li['id'])}"  class="list clear" data-type="{$li.class}">
-                                <img src="{$li.front_cover}">
+                            {else/}
+                                <a href="{:Url('Review/detail2?class='.$li['class'].'&id='.$li['id'])}"  class="list clear" data-type="{$li.class}">
+                            {/eq}
+                                    <img src="{$li.front_cover}">
                                 <span>{$li.title}</span>
                                 {switch name='$li.class'}
                                 {case value='1'}<span>[党建责任] 发布人：{$li.publisher}</span>{/case}
@@ -44,7 +48,7 @@
                                 {/switch}
                                 <span>{$li.create_time}</span>
                                 <span class="mui-icon mui-icon-forward"></span>
-                                <i class="fail" data-id="{$li.id}" data-class="{$li.class}" >不通过</i><i class="pass" data-id="{$li.id}" data-class="{$li.class}" >通&nbsp;过</i>
+                                <i class="fail" data-id="{$li.id}" data-class="{$li.class}" data-type="1">不通过</i><i class="pass" data-id="{$li.id}" data-class="{$li.class}" data-type="1" >通&nbsp;过</i>
                             </a>
                         </li>
                         {/volist}
@@ -60,13 +64,18 @@
                 {else/}
                 <ul>
                     {volist name="list2" id="lo"}
-                    <li><a href="{:Url('Review/detail?class='.$lo['class'].'&id='.$lo['focus_main'])}" class="list clear" data-type="{$lo.class}">
+                    <li>
+                        {eq name="lo.templet" value="1"}
+                            <a href="{:Url('Review/detail?class='.$lo['class'].'&id='.$lo['focus_main'])}" class="list clear" data-type="{$lo.class}">
+                        {else/}
+                            <a href="{:Url('Review/detail2?class='.$lo['class'].'&id='.$lo['focus_main'])}" class="list clear" data-type="{$lo.class}">
+                        {/eq}
                         <img src="{$lo.front_cover}">
                         <span>{$lo.title}</span>
                         <span>{$lo.pre} 发布人：{$lo.publisher}</span>
                         <span>{$lo.create_time}</span>
                         <span class="mui-icon mui-icon-forward"></span>
-                        <i class="fail" data-id="{$lo.id}" data-class="{$lo.class}">不通过</i><i class="pass" data-id="{$lo.id}" data-class="{$lo.class}">通&nbsp;过</i>
+                        <i class="fail" data-id="{$lo.id}" data-class="{$lo.class}" data-type="2">不通过</i><i class="pass" data-id="{$lo.id}" data-class="{$lo.class}" data-type="2">通&nbsp;过</i>
                     </a>
                     </li>
                     {/volist}
@@ -96,11 +105,14 @@
                             {default/}<p>[党风廉政]</p><p>审核人：{$ll.username}</p>
                             {/switch}
                             <span>{$ll.review_time}</span>
-                            {eq name="ll.status" value="1"}
+                            {eq name="ll.review_status" value="1"}
                             <i class="pass"></i>
                             {/eq}
-                            {eq name="ll.status" value="2"}
+                            {eq name="ll.review_status" value="2"}
                             <i class="refuse"></i>
+                            {/eq}
+                            {eq name="ll.review_status" value="0"}
+                            <i style="right: 0;width: 0.8rem;background: #ffff00;"></i>
                             {/eq}
                         </a>
                         </li>
@@ -117,6 +129,7 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+    $("title").text("消息审核");
     var c =  parseInt(window.location.href.split("index/c/")[1]);
     $(function(){
         //tab初始化和数据存储
@@ -232,9 +245,14 @@
         var html = '';
         var lists = data.data;
         var len = lists.length;
+        var link ='';
         for(var i = 0; i< len;i++){
             var list = lists[i];
-            var link = '/home/review/detail/class/'+list.class+'/id/'+list.id;
+            if(list.templet == 1){
+                link = '/home/review/detail/class/'+list.class+'/id/'+list.id;
+            }else {
+                link = '/home/review/detail2/class/'+list.class+'/id/'+list.id;
+            }
             if(list.class == 1){
                 class_name = '[党建责任]';
             }else if(list.class == 2){
@@ -340,6 +358,7 @@
         var element = this.parentNode.parentNode;
         var id = this.getAttribute("data-id");
         var _class = this.getAttribute("data-class");
+        var _type = this.getAttribute("data-type");
         swal({
             title: "",
             text: "确定通过审核？",
@@ -350,7 +369,7 @@
             cancelButtonText: "取消",
             confirmButtonColor: "#ec6c62"
         }, function() {
-                pass(element,id,_class,1);
+                pass(element,id,_class,1,_type);
         });
     });
 
@@ -360,6 +379,7 @@
         var element = this.parentNode.parentNode;
         var id = this.getAttribute("data-id");
         var _class = this.getAttribute("data-class");
+        var _type = this.getAttribute("data-type");
         swal({
             title: "",
             text: "确定不通过审核？",
@@ -370,7 +390,7 @@
             cancelButtonText: "取消",
             confirmButtonColor: "#ec6c62"
         }, function() {
-            pass(element,id,_class,2);
+            pass(element,id,_class,2,_type);
         });
     });
 
@@ -382,6 +402,7 @@
         var element = this.parentNode.parentNode;
         var id = this.getAttribute("data-id");
         var _class = this.getAttribute("data-class");
+        var _type = this.getAttribute("data-type");
         swal({
             title: "",
             text: "确定通过审核？",
@@ -392,7 +413,7 @@
             cancelButtonText: "取消",
             confirmButtonColor: "#ec6c62"
         }, function() {
-            pass(element,id,_class,1);
+            pass(element,id,_class,1,_type);
         });
     });
 
@@ -402,9 +423,10 @@
         var element = this.parentNode.parentNode;
         var id = this.getAttribute("data-id");
         var _class = this.getAttribute("data-class");
+        var _type = this.getAttribute("data-type");
         swal({
             title: "",
-            text: "确定审核不通过？",
+            text: "确定不通过审核？",
             type: "warning",
             showCancelButton: true,
             closeOnConfirm: false,
@@ -412,7 +434,7 @@
             cancelButtonText: "取消",
             confirmButtonColor: "#ec6c62"
         }, function() {
-            pass(element,id,_class,-1);
+            pass(element,id,_class,-1,_type);
         });
     });
 
@@ -423,10 +445,10 @@
 
 
     //审核ajax
-    var  pass = function(element,id,_class,status){
-        if(status==1||status==2){
+    var  pass = function(element,id,_class,status,_type){
+        if(_type == 1){
             var url = "{:Url('Review/review')}";
-        }else if(status==1||status== -1){
+        }else{
             var url = "{:Url('Review/push')}";
         }
         $.ajax({
@@ -445,7 +467,6 @@
                 });
             },
             success:function(data){
-                console.log(data)
                     if(data.code==1){
 //                        $(element).remove();
                         swal({

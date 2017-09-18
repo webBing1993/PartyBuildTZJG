@@ -58,7 +58,7 @@
 <script>
 $(function(){
 	//模块标题
-	$('title' ).text('个人中心');
+	$('title' ).text('我的发布');
 });
 
 window.onload = function() {
@@ -68,10 +68,7 @@ window.onload = function() {
 		} else {
 			mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
 		}
-	}else{
-		mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
 	}
-
 
 }
 

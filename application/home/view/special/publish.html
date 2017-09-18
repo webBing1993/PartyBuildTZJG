@@ -7,18 +7,35 @@
 {block name="body"}
 <div class="list">
     <ul>
+        {empty name="msg"}
         <li>
             模板
-            <a id="openPopover" href="#popover">模板1</a>
+            <a id="openPopover" href="#popover">普通型</a>
             <span class="triangle-down"></span>
         </li>
+        {else/}
+        <li>
+            模板
+            {eq name="$msg.templet" value="1"}
+            <a id="openPopover" href="#popover">普通型</a>
+            {else/}
+            <a id="openPopover" href="#popover">轮播型</a>
+            {/eq}
+            <span class="triangle-down"></span>
+        </li>
+        {/empty}
         <li>
             标题
-            <input style="text" placeholder="请输入标题" name="title">
+            <input style="text" placeholder="请输入标题" name="title" value="{$msg.title || default=''}">
         </li>
         <div class="content">
-            <textarea placeholder="请输入内容..." name="content"></textarea>
+            <textarea placeholder="请输入内容..." name="content">{$msg.content || default=''}</textarea>
             <div class="imgs clear">
+                {notempty name="$msg"}
+                {volist name="msg.list_images" id="img"}
+                <div class="img fl "><img src="{$img|get_cover='path'}" alt="" data-tab="{$img}"></div>
+                {/volist}
+                {/notempty}
                 <div class="img fl hide"></div>
                 <div class="img fl hide"></div>
                 <div class="img fl hide"></div>
@@ -29,6 +46,7 @@
             </div>
             <div style="color: #666;font-size: 0.32rem">（您最多上传3张图片，图片小于3M）</div>
             <input type="file" class="hide" id="upimg" accept="image/jpg, image/png, image/gif, image/jpeg">
+            <input type="hidden" name="id" value="{$msg.id || default=''}">
         </div>
     </ul>
 </div>
@@ -38,8 +56,8 @@
 
 <div id="popover" class="mui-popover" >
     <ul class="mui-table-view">
-        <li class="mui-table-view-cell"><a>模板1</a></li>
-        <li class="mui-table-view-cell"><a>模板2</a></li>
+        <li class="mui-table-view-cell"><a>普通型</a></li>
+        <li class="mui-table-view-cell"><a>轮播型</a></li>
     </ul>
 </div>
 {/block}
@@ -49,6 +67,10 @@
 <script>
     $(function(){
     $("title").text("特色创新");
+        imgresize();
+        if($(".img img").length==3){
+            $(".add").hide();
+        }
     });
 
     //保存
@@ -58,11 +80,12 @@
         var data={
             title:$("input[name='title']").val(),
             content:$("textarea[name='content']").val(),
+            id:$("input[name='id']").val(),
             userid:userid,
             status:3
         };
             data['list_images']=[];
-            if(templet == "模板1"){
+            if(templet == "普通型"){
                 data["templet"] = 1;
             }else{
                 data["templet"] = 2;
@@ -114,6 +137,7 @@
             title:$("input[name='title']").val(),
             content:$("textarea[name='content']").val(),
             userid:userid,
+            id:$("input[name='id']").val(),
             status:0
         };
         for(var key in data){
@@ -125,7 +149,7 @@
         }
         if(single){
             data['list_images']=[];
-            if(templet == "模板1"){
+            if(templet == "普通型"){
                 data["templet"] = 1;
             }else{
                 data["templet"] = 2;
