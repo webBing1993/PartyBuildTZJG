@@ -2,7 +2,7 @@
 
 {block name="style"}
 <title>党建动态</title>
-<link rel="stylesheet" href="/home/css/details-template/detail.css">
+<link rel="stylesheet" href="/home/css/details-template/banner-detail.css">
 <style>
     .mui-pull-bottom-pocket {
         height: 0.8rem;
@@ -10,6 +10,9 @@
     }
     .comment{
         padding-bottom: 1rem;
+    }
+    .banner:after{
+        display: none;
     }
 </style>
 {/block}
@@ -55,5 +58,10 @@
 <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script>
     $("title").text("消息审核");
+
+    var gallery = mui('.mui-slider');
+    gallery.slider({
+        interval:2000//自动轮播周期，若为0则不自动播放，默认为0；
+    });
 </script>
 {/block}

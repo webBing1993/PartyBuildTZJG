@@ -64,10 +64,11 @@
                 {else/}
                 <ul>
                     {volist name="list2" id="lo"}
+                    <li>
                     {eq name="li.templet" value="1"}
-                    <a href="{:Url('Review/detail?class='.$li['class'].'&id='.$li['id'])}"  class="list clear" data-type="{$li.class}">
+                    <a href="{:Url('Review/detail?class='.$lo['class'].'&id='.$lo['id'])}"  class="list clear" data-type="{$lo.class}">
                         {else/}
-                        <a href="{:Url('Review/detail2?class='.$li['class'].'&id='.$li['id'])}"  class="list clear" data-type="{$li.class}">
+                        <a href="{:Url('Review/detail2?class='.$lo['class'].'&id='.$lo['id'])}"  class="list clear" data-type="{$lo.class}">
                             {/eq}
                         <img src="{$lo.front_cover}">
                         <span>{$lo.title}</span>
@@ -126,14 +127,14 @@
 <script src="/home/js/reset.js"></script>
 <script>
     $("title").text("消息审核");
-    var c =  parseInt(window.location.href.split("index/c/")[1]);
+    var c =  0;
     $(function(){
         //tab初始化和数据存储
         var co = getCookie("type");
         if(co == 0 || co == 1 || co== 2 ){
             c = co;
         }else{
-            c =  parseInt(window.location.href.split("index/c/")[1]);
+            c = 0;
         }
         $("#tab a").eq(c).addClass('mui-active');
         $(".mui-slider-group>div").eq(c).addClass('mui-active');

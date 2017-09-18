@@ -31,6 +31,14 @@
                 <span class="publish">{$detail.publisher}</span>
                 <span class="time">{$detail.create_time|time_format="Y-m-d"}</span>
             </div>
+            <div class="message">
+                {notempty name="detail.start_time"}
+                <div class="name limit">{$detail.start_time|time_format='Y/m/d H:i'}--{$detail.end_time|time_format='Y/m/d H:i'}</div>
+                {/notempty}
+                {notempty name="$detail.address"}
+                <div class="content" >{$detail.address}</div>
+                {/notempty}
+            </div>
             <div class="content">
                 <div class="article-content">{$detail.content}</div>
                 <div class="like">
