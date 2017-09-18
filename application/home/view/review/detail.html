@@ -14,6 +14,7 @@
 </style>
 {/block}
 {block name="body"}
+
         <div class="article">
             <div class="title"><p>{$info.title}</p></div>
             <div class="note clear">
@@ -21,11 +22,17 @@
                 <span class="time">{$info.create_time|time_format="Y-m-d"}</span>
             </div>
             <div class="message">
-                {notempty name="info.start_time"}
-                <div class="name limit">{$info.start_time|time_format='Y/m/d H:i'}--{$info.end_time|time_format='Y/m/d H:i'}</div>
+                {notempty name="info.time"}
+                <div class="name limit">{$info.time|time_format='Y/m/d H:i'}</div>
                 {/notempty}
                 {notempty name="info.address"}
                 <div class="content" >{$info.address}</div>
+                {/notempty}
+                {notempty name="info.people"}
+                <div class="content" >{$info.people}</div>
+                {/notempty}
+                {notempty name="info.compere"}
+                <div class="content" >{$info.compere}</div>
                 {/notempty}
             </div>
             <div class="content">

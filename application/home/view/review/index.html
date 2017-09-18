@@ -30,7 +30,11 @@
                     <ul>
                         {volist name="list1" id="li"}
                         <li>
+                            {eq name="li.templet" value="1"}
                             <a href="{:Url('Review/detail?class='.$li['class'].'&id='.$li['id'])}"  class="list clear" data-type="{$li.class}">
+                            {else/}
+                                <a href="{:Url('Review/detail2?class='.$li['class'].'&id='.$li['id'])}"  class="list clear" data-type="{$li.class}">
+                            {/eq}
                                     <img src="{$li.front_cover}">
                                 <span>{$li.title}</span>
                                 {switch name='$li.class'}
@@ -60,7 +64,11 @@
                 {else/}
                 <ul>
                     {volist name="list2" id="lo"}
-                    <li><a href="{:Url('Review/detail?class='.$lo['class'].'&id='.$lo['focus_main'])}" class="list clear" data-type="{$lo.class}">
+                    {eq name="li.templet" value="1"}
+                    <a href="{:Url('Review/detail?class='.$li['class'].'&id='.$li['id'])}"  class="list clear" data-type="{$li.class}">
+                        {else/}
+                        <a href="{:Url('Review/detail2?class='.$li['class'].'&id='.$li['id'])}"  class="list clear" data-type="{$li.class}">
+                            {/eq}
                         <img src="{$lo.front_cover}">
                         <span>{$lo.title}</span>
                         <span>{$lo.pre} 发布人：{$lo.publisher}</span>

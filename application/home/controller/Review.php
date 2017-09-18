@@ -313,12 +313,24 @@ class Review extends Base{
         }
     }
     /*
-     * 审核 详细页
+     * 审核 详细页  模板1
      */
     public function detail(){
         $class = input('get.class');
         $id = input('get.id');
         $info = $this->get_detail($class,$id);
+        $this->assign('class',$class);
+        $this->assign('info',$info);
+        return  $this->fetch();
+    }
+    /*
+     * 审核 详细页  模板2
+     */
+    public function detail2(){
+        $class = input('get.class');
+        $id = input('get.id');
+        $info = $this->get_detail($class,$id);
+        $this->assign('class',$class);
         $this->assign('info',$info);
         return  $this->fetch();
     }

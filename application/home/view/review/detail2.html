@@ -17,7 +17,7 @@
 <!--轮播图-->
 <div class="mui-slider banner">
     <div class="mui-slider-group">
-        {volist name="detail.images" id="li"}
+        {volist name="$info.list_images" id="li"}
         <!--支持循环，需要重复图片节点-->
         <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
         {/volist}
@@ -31,11 +31,17 @@
         <span class="time">{$info.create_time|time_format="Y-m-d"}</span>
     </div>
     <div class="message">
-        {notempty name="info.start_time"}
-        <div class="name limit">{$info.start_time|time_format='Y/m/d H:i'}--{$info.end_time|time_format='Y/m/d H:i'}</div>
+        {notempty name="info.time"}
+        <div class="name limit">{$info.time|time_format='Y/m/d H:i'}</div>
         {/notempty}
         {notempty name="info.address"}
         <div class="content" >{$info.address}</div>
+        {/notempty}
+        {notempty name="info.people"}
+        <div class="content" >{$info.people}</div>
+        {/notempty}
+        {notempty name="info.compere"}
+        <div class="content" >{$info.compere}</div>
         {/notempty}
     </div>
     <div class="content">
