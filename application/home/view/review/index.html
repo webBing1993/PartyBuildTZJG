@@ -65,11 +65,11 @@
                 <ul>
                     {volist name="list2" id="lo"}
                     <li>
-                    {eq name="li.templet" value="1"}
-                    <a href="{:Url('Review/detail?class='.$lo['class'].'&id='.$lo['id'])}"  class="list clear" data-type="{$lo.class}">
+                        {eq name="lo.templet" value="1"}
+                            <a href="{:Url('Review/detail?class='.$lo['class'].'&id='.$lo['focus_main'])}" class="list clear" data-type="{$lo.class}">
                         {else/}
-                        <a href="{:Url('Review/detail2?class='.$lo['class'].'&id='.$lo['id'])}"  class="list clear" data-type="{$lo.class}">
-                            {/eq}
+                            <a href="{:Url('Review/detail?class='.$lo['class'].'&id='.$lo['focus_main'])}" class="list clear" data-type="{$lo.class}">
+                        {/eq}
                         <img src="{$lo.front_cover}">
                         <span>{$lo.title}</span>
                         <span>{$lo.pre} 发布人：{$lo.publisher}</span>
@@ -127,14 +127,14 @@
 <script src="/home/js/reset.js"></script>
 <script>
     $("title").text("消息审核");
-    var c =  0;
+    var c =  parseInt(window.location.href.split("index/c/")[1]);
     $(function(){
         //tab初始化和数据存储
         var co = getCookie("type");
         if(co == 0 || co == 1 || co== 2 ){
             c = co;
         }else{
-            c = 0;
+            c =  parseInt(window.location.href.split("index/c/")[1]);
         }
         $("#tab a").eq(c).addClass('mui-active');
         $(".mui-slider-group>div").eq(c).addClass('mui-active');
