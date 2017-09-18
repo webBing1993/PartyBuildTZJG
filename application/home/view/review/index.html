@@ -68,7 +68,7 @@
                         {eq name="lo.templet" value="1"}
                             <a href="{:Url('Review/detail?class='.$lo['class'].'&id='.$lo['focus_main'])}" class="list clear" data-type="{$lo.class}">
                         {else/}
-                            <a href="{:Url('Review/detail?class='.$lo['class'].'&id='.$lo['focus_main'])}" class="list clear" data-type="{$lo.class}">
+                            <a href="{:Url('Review/detail2?class='.$lo['class'].'&id='.$lo['focus_main'])}" class="list clear" data-type="{$lo.class}">
                         {/eq}
                         <img src="{$lo.front_cover}">
                         <span>{$lo.title}</span>
@@ -242,9 +242,14 @@
         var html = '';
         var lists = data.data;
         var len = lists.length;
+        var link ='';
         for(var i = 0; i< len;i++){
             var list = lists[i];
-            var link = '/home/review/detail/class/'+list.class+'/id/'+list.id;
+            if(list.templet == 1){
+                link = '/home/review/detail/class/'+list.class+'/id/'+list.id;
+            }else {
+                link = '/home/review/detail2/class/'+list.class+'/id/'+list.id;
+            }
             if(list.class == 1){
                 class_name = '[党建责任]';
             }else if(list.class == 2){

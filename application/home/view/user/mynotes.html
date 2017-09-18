@@ -18,7 +18,12 @@
 	{else/}
 	<ul>
 		{volist name="list" id="li"}
-		<li><a href="{:Url('User/detail?class='.$li['class'].'&id='.$li['id'])}" class="list clear" data-type="{$li.class}">
+		<li>
+			{eq name="li.templet" value="1"}
+			<a href="{:Url('User/detail?class='.$li['class'].'&id='.$li['id'])}" class="list clear" data-type="{$li.class}">
+			{else/}
+				<a href="{:Url('User/detail2?class='.$li['class'].'&id='.$li['id'])}" class="list clear" data-type="{$li.class}">
+			{/eq}
 			<img src="{$li.front_cover}">
 			<span>{$li.title}</span>
 			{switch name='$li.class'}
@@ -122,9 +127,14 @@ function addLists(data){
 	var html = '';
 	var lists = data.data;
 	var len = lists.length;
+	var link = '';
 	for(var i = 0; i< len;i++){
 		var list = lists[i];
-		var link = '/home/user/detail/class/'+list.class+'/id/'+list.id;
+		if(list.templet == 1){
+			link  = '/home/user/detail/class/'+list.class+'/id/'+list.id;
+		}else {
+			link  = '/home/user/detail2/class/'+list.class+'/id/'+list.id;
+		}
 		if(list.class == 1){
 			class_name = '[党建责任]';
 		}else if(list.class == 2){
