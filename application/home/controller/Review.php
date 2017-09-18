@@ -525,12 +525,10 @@ class Review extends Base{
         $img1 = Picture::get($focus1['front_cover']);
         $path1 = Config::get('host_url') . $img1['path'];
         $information1 = array(
-            "articles" => array(
-                "title" => $pre . $title1,
-                "description" => $content1,
-                "url" => $url1,
-                "picurl" => $path1,
-            )
+            "title" => $pre . $title1,
+            "description" => $content1,
+            "url" => $url1,
+            "picurl" => $path1,
         );
         $information = array();
         if (!empty($vice)) {
