@@ -1,10 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{extend name="public/common"}
 
-</body>
-</html>
+{block name="style"}
+<style>
+    .loadingParent{
+       text-align: center;
+    }
+    .banner{
+        width:100%;
+        height:50vw;
+        background: url("/home/images/user/banner.png");
+        background-size: cover;
+    }
+    .point{
+        position: absolute;
+        left: 50%;
+        width: 3rem;
+        margin-left: -1.5rem;
+        top: 120px;
+        color: #fff;
+        font-size:20px;
+    }
+    .time{
+        left: 50%;
+        width: 3rem;
+        color: #fff;
+        font-size:16px;
+        margin: 0 auto;
+        text-align:center;
+        padding-right: 10px;
+    }
+</style>
+{/block}
+
+{block name="body"}
+<div class="banner">
+<div class="loadingParent">
+    <canvas id="canvasIndex2" width="450" height="300" amount="10000" vote="10000" tip="50">您的浏览器不支持canvas标签，建议使用chrome,firefox,ie10+</canvas>
+    <p class="point">我的积分</p>
+    <p class="time">时间：2018-09-18</p>
+</div>
+    </div>
+{/block}
+
+{block name="script"}
+<script type="text/javascript" src="/home/js/modernizr-2.6.2.min.js"></script>
+<script type="text/javascript" src="/home/js/cycle.js"></script>
+<script>
+    //圆环进度条
+    $(function(){
+        var w=$(".loadingParent").width();
+        var option={
+            percent:100 ,
+            w:400
+        }
+        $("#canvasIndex2").audios2(option);
+
+        var option2={
+            percent:23,   //百分比数值
+            w:400,          //宽度
+            oneCircle:"true"  //是否是整个圆  默认半圆
+        }
+
+    })
+</script>
+{/block}

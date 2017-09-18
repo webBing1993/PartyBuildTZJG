@@ -127,6 +127,9 @@ class Learn extends Base{
         }
         //详细信息
         $info = $Model::get($id);
+        if(!empty($info['list_images'])){
+            $info['images'] = json_decode($info['list_images']);
+        }
         //分享图片及链接及描述
         $image = Picture::where('id',$info['front_cover'])->find();
         $info['share_image'] = "http://".$_SERVER['SERVER_NAME'].$image['path'];
