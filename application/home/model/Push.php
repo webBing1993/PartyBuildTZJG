@@ -14,7 +14,7 @@ class Push extends Model {
     /*获取 push 表列表 */
     public function get_list($status=0,$len=0,$opt=false){
         $map = [
-            'status' => ['egt',$status]
+            'status' => ['eq',$status]
         ];
         $list = $this->where($map)->order('create_time desc')->limit($len,7)->select();
         if (empty($list)){
