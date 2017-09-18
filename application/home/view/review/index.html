@@ -31,7 +31,7 @@
                         {volist name="list1" id="li"}
                         <li>
                             <a href="{:Url('Review/detail?class='.$li['class'].'&id='.$li['id'])}"  class="list clear" data-type="{$li.class}">
-                                <img src="{$li.front_cover}">
+                                    <img src="{$li.front_cover}">
                                 <span>{$li.title}</span>
                                 {switch name='$li.class'}
                                 {case value='1'}<span>[党建责任] 发布人：{$li.publisher}</span>{/case}

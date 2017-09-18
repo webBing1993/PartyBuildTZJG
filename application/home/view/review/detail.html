@@ -20,6 +20,14 @@
                 <span class="publish">{$info.publisher}</span>
                 <span class="time">{$info.create_time|time_format="Y-m-d"}</span>
             </div>
+            <div class="message">
+                {notempty name="info.start_time"}
+                <div class="name limit">{$info.start_time|time_format='Y/m/d H:i'}--{$info.end_time|time_format='Y/m/d H:i'}</div>
+                {/notempty}
+                {notempty name="info.address"}
+                <div class="content" >{$info.address}</div>
+                {/notempty}
+            </div>
             <div class="content">
                 {volist name="$info.list_images" id="img"}
                 <img src="{$img|get_cover='path'}" alt="笔记图片" class="img" style="width:100%"><br>
