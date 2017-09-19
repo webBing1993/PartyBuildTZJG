@@ -32,10 +32,10 @@
   }
 }
 .tag {
-  height: 0.8rem;
+  height: 8vw;
   color: #666;
   text-align: center;
-  line-height: 0.6rem;
+  line-height: 8vw;
   font-size: 0.32rem;
 }
 body {

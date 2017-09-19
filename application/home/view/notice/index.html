@@ -18,9 +18,10 @@
     <div class="mui-scroll">
         <div class="mui-slider-group">
             <div id="item1mobile" class="mui-slider-item mui-control-content">
-                {empty name="banner1"}
+                {empty name="list1"}
                 <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                 {else/}
+                {notempty name="banner1"}
                 <div class="current_special">
                     {volist name="banner1" id="ba"}
                     <img src="{$ba.front_cover}" class="bac_img">
@@ -59,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-
+                {/notempty}
                 <!--通知列表-->
                 <div class="lists notice">
                     <div class="tag"> —— 精彩活动.寓教于乐 —— </div>
@@ -87,9 +88,10 @@
                 {/empty}
             </div>
             <div id="item2mobile" class="mui-slider-item mui-control-content">
-                {empty name="banner1"}
+                {empty name="list2"}
                 <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                 {else/}
+                {notempty name="banner2"}
                 <div class="current_special">
                     {volist name="banner2" id="bn"}
                     <img src="{$bn.front_cover}" class="bac_img">
@@ -128,7 +130,7 @@
                         </div>
                     </div>
                 </div>
-
+                {/notempty}
                 <!--党建动态-->
                 <div class="lists dynamic">
                     <div class="tag"> —— 精彩活动.寓教于乐 —— </div>

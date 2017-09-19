@@ -476,17 +476,17 @@
                             text: "审核成功",
                             type: "success",
                             confirmButtonText: "确认",
-                            timer:2000
-                        },function(){
-                            window.location.reload();
                         });
+                        setTimeout(function(){
+                            document.URL=location.href;
+                        },1500);
                     }else{
                         swal({
                             title: "",
                             text: data.msg,
                             type: "error",
                             confirmButtonText: "确认",
-                            timer:2000
+                            timer:1500
                         });
                     }
             }
