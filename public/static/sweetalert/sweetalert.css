@@ -138,6 +138,7 @@ body.stop-scrolling {
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
     line-height: 25px;
+    padding-top: 10px;
   }
     .sweet-alert input:focus {
       outline: none;

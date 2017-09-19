@@ -21,9 +21,3 @@
     height: 1.06rem;
 }
 
-@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation : portrait) {
-    .mui-popover{
-        width:360px;
-        left: 870px!important;
-    }
-}

@@ -62,6 +62,10 @@
 <script>
     $("title").text("消息审核");
 
+    if($(".message div").length==0){
+        $(".article .message").css("border","none");
+    }
+
     var mySwiper = new Swiper('.swiper-container', {
         autoplay: 3000,
         loop:true,
