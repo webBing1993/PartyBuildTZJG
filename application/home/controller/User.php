@@ -29,7 +29,7 @@ class User extends Base {
         $userId = session('userId');
         $user = WechatUser::where('userid',$userId)->find();
         // 积分明细 权限
-        $info = WechatUserTag::where(['userid' => $userId,'tagid' => ''])->find();
+        $info = WechatUserTag::where(['userid' => $userId,'tagid' => 1])->find();
         if (empty($info)){
             // 非考核 无权限
             $is = 0;

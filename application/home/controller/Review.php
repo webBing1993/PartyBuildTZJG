@@ -573,8 +573,8 @@ class Review extends Base{
         }
         //发送给服务号
         $message = array(
-            'touser' =>'17557289172',
-//                   "touser" => "@all",   //发送给全体，@all
+//            'touser' =>'17557289172',
+                   "touser" => "@all",   //发送给全体，@all
             "msgtype" => 'news',
             "agentid" =>$agentid,
             "news" => $send,

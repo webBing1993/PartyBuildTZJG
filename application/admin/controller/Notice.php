@@ -103,7 +103,7 @@ class Notice extends Admin
             $message = array(
                 "touser" => "@all",
                 "msgtype" => 'news',
-                "agentid" => '',  // 消息审核
+                "agentid" =>1000009,
                 "news" => ["articles" => $information],
                 "safe" => "0"
             );
@@ -112,7 +112,7 @@ class Notice extends Admin
             $message = array(
                 "totag" => 1,
                 "msgtype" => 'news',
-                "agentid" => '',  // 消息审核
+                "agentid" =>1000009,
                 "news" => ["articles" => $information],
                 "safe" => "0"
             );

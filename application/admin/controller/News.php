@@ -128,7 +128,7 @@ class News extends Admin
         $des1 = mb_substr($str1,0,40);
         $content1 = str_replace("&nbsp;","",$des1);  //空格符替换成空
         $pre = '【党建动态】';
-        $url1 = "http://".$_SERVER['HTTP_HOST']."/home/News/detail/id/".$info1['id'].".html";
+        $url1 = "http://".$_SERVER['HTTP_HOST']."/home/Notice/dynamicdetail/id/".$info1['id'].".html";
         $image1 = Picture::get($info1['front_cover']);
         $path1 = "http://".$_SERVER['HTTP_HOST'].$image1['path'];
         $information1 = array(
@@ -149,7 +149,7 @@ class News extends Admin
                 $des2 = mb_substr($str2,0,40);
                 $content2 = str_replace("&nbsp;","",$des2);  //空格符替换成空
                 $pre1 = '【党建动态】';
-                $url2 = "http://".$_SERVER['HTTP_HOST']."/home/News/detail/id/".$info2['id'].".html";
+                $url2 = "http://".$_SERVER['HTTP_HOST']."/home/Notice/dynamicdetail/id/".$info2['id'].".html";
                 $image2 = Picture::get($info2['front_cover']);
                 $path2 = "http://".$_SERVER['HTTP_HOST'].$image2['path'];
                 $information2[] = array(
@@ -176,11 +176,11 @@ class News extends Admin
         }
 
         //发送给企业号
-        $Wechat = new TPQYWechat(Config::get('party'));
+        $Wechat = new TPQYWechat(Config::get('notice'));
         $message = array(
-            "touser" => '',
+            "touser" => "@all",
             "msgtype" => 'news',
-            "agentid" => '',  // 通知公告
+            "agentid" => 1000009,  // 通知公告
             "news" => $send,
             "safe" => "0"
         );
