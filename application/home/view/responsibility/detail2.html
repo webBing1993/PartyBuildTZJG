@@ -16,11 +16,13 @@
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
         <!--轮播图-->
-        <div class="mui-slider banner">
-            <div class="mui-slider-group">
+        <div class="swiper-container banner">
+            <div class="swiper-wrapper">
                 {volist name="detail.images" id="li"}
-                <!--支持循环，需要重复图片节点-->
-                <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
+                <div class="swiper-slide">
+                    <!--支持循环，需要重复图片节点-->
+                    <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
+                </div>
                 {/volist}
             </div>
         </div>
@@ -107,9 +109,10 @@
         }
     };
 
-    var gallery = mui('.mui-slider');
-    gallery.slider({
-        interval:2000//自动轮播周期，若为0则不自动播放，默认为0；
+    var mySwiper = new Swiper('.swiper-container', {
+        autoplay: 3000,
+        loop:true,
+        autoplayDisableOnInteraction : false
     });
 
 

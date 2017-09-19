@@ -1,6 +1,7 @@
 {extend name="public/common"}
 
 {block name="style"}
+<link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
 <link rel="stylesheet" href="/home/css/details-template/banner-detail.css">
 <style>
     .mui-pull-bottom-pocket {
@@ -16,14 +17,16 @@
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
         <!--轮播图-->
-        <div class="mui-slider banner">
-            <div class="mui-slider-group">
-                {volist name="detail.images" id="li"}
-                <!--支持循环，需要重复图片节点-->
-                <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
-                {/volist}
-            </div>
-        </div>
+                <div class="swiper-container banner">
+                    <div class="swiper-wrapper">
+                        {volist name="detail.images" id="li"}
+                        <div class="swiper-slide">
+                        <!--支持循环，需要重复图片节点-->
+                        <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
+                            </div>
+                        {/volist}
+                    </div>
+                </div>
         <div class="view">
             <span class="read">{$detail.views}</span>
         </div>
@@ -87,11 +90,17 @@
 {/block}
 
 {block name="script"}
+<script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
 <script src="/home/js/reset.js"></script>
 <script>
     var c =  parseInt(window.location.href.split("?")[1]);
     $(function(){
         $("title").text("志愿服务");
+        var mySwiper = new Swiper('.swiper-container', {
+            autoplay: 3000,
+            loop:true,
+            autoplayDisableOnInteraction : false
+        });
 
     });
     window.onload = function(){
@@ -101,13 +110,6 @@
             mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
         }
     };
-
-
-    var gallery = mui('.mui-slider');
-    gallery.slider({
-        interval:2000//自动轮播周期，若为0则不自动播放，默认为0；
-    });
-
     //tab点击事件
     mui('#refreshContainer').on('tap', '.notvisitor', function(e) {
         var type = this.getAttribute("data-type");
