@@ -1,6 +1,7 @@
 {extend name="public/common"}
 
 {block name="style"}
+<link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
 <link rel="stylesheet" href="/home/css/details-template/banner-detail.css">
 <style>
     .mui-pull-bottom-pocket {
@@ -89,6 +90,7 @@
 {/block}
 
 {block name="script"}
+<script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
 <script src="/home/js/reset.js"></script>
 <script>
     var type =  parseInt(window.location.href.split("?")[1]);
