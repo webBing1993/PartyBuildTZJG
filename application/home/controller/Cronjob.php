@@ -28,7 +28,7 @@ class Cronjob extends Controller {
             $res = NoticeMinus::where(['notice_id' => $value['id']])->find();
             if (!$res){  // 未执行过扣分 
                 // 获取  需要考核的人员
-                $People = WechatUserTag::where(['tagid' => ''])->select();
+                $People = WechatUserTag::where(['tagid' => 1])->select();
                 // 未读人员  名单
                 foreach($People as $val){
                     $read = Browse::where(['type' => 1,'aid' => $value['id'],'uid' => $val['userid']])->find();

@@ -57,7 +57,7 @@ class Notice extends Base{
         $id = input('id');
         $info = $this->content(1,$id);
         // 是否 超级管理员
-        $limit = WechatUserTag::where(['tagid' => '', 'userid' => $userId])->find();
+        $limit = WechatUserTag::where(['tagid' => 3, 'userid' => $userId])->find();
         if ($limit){// 超级管理员
              // 判断 是否  到  截止时间
             if ($info['end_time'] > time()){
@@ -71,7 +71,7 @@ class Notice extends Base{
             $info['limit'] = 0; // 普通
         }
         // 获取  需要考核的人员
-        $People = WechatUserTag::where(['tagid' => ''])->select();
+        $People = WechatUserTag::where(['tagid' => 1])->select();
         $people = array();
         // 未读人员  名单
         foreach($People as $value){
@@ -92,15 +92,14 @@ class Notice extends Base{
     public function remind(){
         $id = input('id');
         // 获取  需要考核的人员
-        $People = WechatUserTag::where(['tagid' => ''])->select();
+        $People = WechatUserTag::where(['tagid' => 1])->select();
         $people = array();
         // 未读人员  名单
         foreach($People as $value){
             $read = Browse::where(['type' =>1,'aid' => $id,'uid' => $value['userid']])->find();
             if (!$read){
                 // 未读
-                $name = WechatUser::where(['userid' => $value['userid']])->value('name');
-                array_push($people,$name);
+                array_push($people,$value['userid']);
             }
         }
         $Notice = NoticeModel::where(['id' => $id])->field('title,end_time')->find();
@@ -109,7 +108,7 @@ class Notice extends Base{
         $message = array(
             'touser' => implode('|',$people),
             "msgtype" => 'text',
-            "agentid" => '', // 个人中心
+            "agentid" => 1000011, // 个人中心
             "text" => array(
                 "content" => $content
             ),
