@@ -126,13 +126,13 @@
     window.onload = function() {
         moveanyway("publish");
         if(c==0){
-            if ($(".training ul a").length < 7) {
+            if ($(".training ul a").length < 8) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(c==1){
-            if ($(".theory ul a").length <7) {
+            if ($(".theory ul a").length <8) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -174,7 +174,7 @@
                 if(data.code == 1){
                     addLists(data,c);
                     var dataLen =data.data.length;
-                    if(data.data.length == 7){
+                    if(data.data.length == 8){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                     }else{
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
@@ -217,13 +217,13 @@
         c = this.getAttribute("data-index");
         mui('#refreshContainer').pullRefresh().refresh(true);
         if(c==0){
-            if($(".training ul a").length<7){
+            if($(".training ul a").length<8){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }else if(c==1){
-            if($(".theory ul a").length<7){
+            if($(".theory ul a").length<8){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();

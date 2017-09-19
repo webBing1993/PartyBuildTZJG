@@ -42,7 +42,7 @@
     $("title").text("廉政教育");
     window.onload = function() {
         moveanyway("publish");
-        if ($(".list ul a").length < 7) {
+        if ($(".list ul a").length < 8) {
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
         } else {
             mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -76,7 +76,7 @@
                 if(data.code == 1){
                     addLists(data);
                     var dataLen =data.data.length;
-                    if(data.data.length == 7){
+                    if(data.data.length == 8){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                     }else{
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
