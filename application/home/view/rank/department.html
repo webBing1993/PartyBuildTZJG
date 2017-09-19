@@ -105,6 +105,10 @@
             margin: 30px auto;
         }
     }
+    body.modal-open {
+        position: fixed;
+        width: 100%;
+    }
 </style>
 {/block}
 
@@ -248,15 +252,22 @@ $(function(){
     });
     $('#score span,#score img').click(function () {
         $('#myModal').show();
+        var ModalHelper = (function(bodyCls) {
+            var scrollTop;
+            return {
+                afterOpen: function() {
+                    scrollTop = document.scrollingElement.scrollTop;
+                    document.body.classList.add(bodyCls);
+                    document.body.style.top = -scrollTop + 'px';
+                },
+                beforeClose: function() {
+                    document.body.classList.remove(bodyCls);
+                    // scrollTop lost after set position:fixed, restore it back.
+                    document.scrollingElement.scrollTop = scrollTop;
+                }
+            };
+        })('modal-open');
     });
 });
-
-document.getElementById("myModal").addEventListener('touchmove', function (e) {
-    event.preventDefault();
-});
-document.getElementById("modalBody").addEventListener('touchmove', function (e) {
-    event.stopPropagation();
-},true);
-
 </script>
 {/block}
