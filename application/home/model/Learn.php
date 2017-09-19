@@ -129,6 +129,9 @@ class Learn extends Model {
             'class' => $class,
             'status' => 1
         );
+        if($type == 2) {
+            unset($map['class']);
+        }
         $res = $this->where($map)->order('create_time desc')->limit($length,8)->select();
         foreach ($res as $value) {
             $value['time'] = date("Y-m-d",$value['create_time']);
