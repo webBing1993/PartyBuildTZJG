@@ -71,6 +71,7 @@
 
             },
             success:function(data){
+                console.log(data)
                 if(data.code == 1){
                     addLists(data);
                     var dataLen =data.data.length;
@@ -99,7 +100,6 @@
                 html += '<a href="/home/Learn/detail2/id/'+list.id+'.html">'
             }
             html +=
-                    '<a>'+
                     '<p>'+list.title+'</p>'+
                     '<span>'+list.publisher+'</span>'+
                     '<span>'+list.time+'</span>'+
