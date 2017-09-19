@@ -103,12 +103,10 @@
         .modal-dialog {
             width: auto;
             margin: 30px auto;
+
         }
     }
-    body.modal-open {
-        position: fixed;
-        width: 100%;
-    }
+    .modal-open{overflow:hidden;position:fixed;}
 </style>
 {/block}
 
@@ -219,55 +217,49 @@
 {block name="script"}
 <script type="text/javascript">
 //切换
-$(function(){
+$(function() {
     //模块标题
-    $('title' ).text('支部排行榜');
-    $("#title").find("li").each(function(){
-        $(this).on('click',function(){
+    $('title').text('支部排行榜');
+    $("#title").find("li").each(function () {
+        $(this).on('click', function () {
             $(this).addClass("active").siblings().removeClass();
             var name = $(this).attr("name");
-            $("#body").find(".rank").each(function(){
+            $("#body").find(".rank").each(function () {
                 var age = $(this).attr("age");
-                if(name == age) {
+                if (name == age) {
                     $(this).show().siblings().hide();
                 }
             });
-            $('.department' ).each(function(){
-                var _this =$(this);
-                var ww = $('body' ).width();
+            $('.department').each(function () {
+                var _this = $(this);
+                var ww = $('body').width();
                 var h = _this.height();
-                if(h > (0.18*ww ) && ww < 900){
-                    _this.css({'height':0.16*ww + 'px','line-height':0.08*ww + 'px'});
+                if (h > (0.18 * ww ) && ww < 900) {
+                    _this.css({'height': 0.16 * ww + 'px', 'line-height': 0.08 * ww + 'px'});
                 }
             })
         });
     });
-    $('.department' ).each(function(){
-        var _this =$(this);
-        var ww = $('body' ).width();
+    $('.department').each(function () {
+        var _this = $(this);
+        var ww = $('body').width();
         var h = _this.height();
-        if(h > (0.18*ww ) && ww < 900){
-            _this.css({'height':0.16*ww + 'px','line-height':0.08*ww + 'px'});
+        if (h > (0.18 * ww ) && ww < 900) {
+            _this.css({'height': 0.16 * ww + 'px', 'line-height': 0.08 * ww + 'px'});
         }
     });
     $('#score span,#score img').click(function () {
         $('#myModal').show();
-        var ModalHelper = (function(bodyCls) {
-            var scrollTop;
-            return {
-                afterOpen: function() {
-                    scrollTop = document.scrollingElement.scrollTop;
-                    document.body.classList.add(bodyCls);
-                    document.body.style.top = -scrollTop + 'px';
-                },
-                beforeClose: function() {
-                    document.body.classList.remove(bodyCls);
-                    // scrollTop lost after set position:fixed, restore it back.
-                    document.scrollingElement.scrollTop = scrollTop;
-                }
-            };
-        })('modal-open');
+        $("html").addClass("modal-open");
     });
-});
+    $(".modal").click(function(){
+        $("html").removeClass("modal-open");
+    })
+    $(".modal-content").on("click",function(e){
+        e.stopPropagation();
+    })
+
+})
+
 </script>
 {/block}
