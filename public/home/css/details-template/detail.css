@@ -172,7 +172,7 @@
 }
 .comment .lists .list {
     width: 100%;
-    min-height: 100px;
+    min-height:80px;
     border-bottom: 1px solid #f1f1f1;
     position: relative;
     overflow: hidden;

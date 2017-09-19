@@ -117,7 +117,7 @@
         $("title").text("主题党日");
     }
     window.onload = function(){
-        if($(".list").length<8){
+        if($(".list").length<7){
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
         }else{
             mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -265,7 +265,7 @@
                 if(data.code == 1){
                     addComment(data);
                     var dataLen =data.data.length;
-                    if(data.data.length == 8){
+                    if(data.data.length == 7){
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
                     }else{
                         mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
