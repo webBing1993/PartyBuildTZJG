@@ -13,7 +13,7 @@
     .top .top_body{height: 10.6vw;width: 100%;position: relative;}
     .top .top_body ul li{height: 100%;text-align: center;}
     .top .top_body span{width: 0;height: 8.5vw;border-right: 1px solid #fff;position: absolute;left: 49.5%;top: 4px;}
-    .top .top_body p{font-size: 0.32rem;color: #fff;margin-bottom: 3px;line-height: 4vw;display: inline-block;padding-right: 40px;padding-left: 40px;}
+    .top .top_body p{font-size: 0.32rem;color: #fff;margin-bottom: 3px;line-height: 4vw;display: inline-block;}
     .top .top_body a{position: absolute;right: 0;top: 0;width: 50%;height: 100%;z-index: 1;}
     #score img{width:5.3vw;height:5.3vw}
     #score span{line-height: 8vw}
@@ -103,12 +103,10 @@
         .modal-dialog {
             width: auto;
             margin: 30px auto;
+
         }
     }
-    body.modal-open {
-        position: fixed;
-        width: 100%;
-    }
+    .modal-open{overflow:hidden;position:fixed;}
 </style>
 {/block}
 
@@ -132,7 +130,7 @@
         <div class="top_body">
             <ul>
                 <li>
-                    <p>部门所有积分</p>
+                    <p>部门所有积分：</p>
                     {eq name="visit" value="1"}<p>无</p>{else/}<p>{$score}</p>{/eq}
                 </li>
             </ul>
@@ -171,7 +169,7 @@
                         <span>“作风建设年”活动有部署、有方案（2分）</span><br>
                         <span>开展“解放思想，担当有为”主题大讨论和“金点子”征集活动(2分)</span><br>
                         <span>挖掘培树“大抓项目年”和“作风建设年”活动中涌现出的先进典型（2分）</span><br>
-                        <span> “五查五看”，党员责任和整改清单（2分）</span><br>
+                        <span>“五查五看”，党员责任和整改清单（2分）</span><br>
                         <p>4、志愿服务</p>
                         <span>“四跑”志愿服务方案和总结800字（2分）</span><br>
                         <span>志愿服务一条街和三走进有照片（4分）</span><br>
@@ -219,55 +217,49 @@
 {block name="script"}
 <script type="text/javascript">
 //切换
-$(function(){
+$(function() {
     //模块标题
-    $('title' ).text('支部排行榜');
-    $("#title").find("li").each(function(){
-        $(this).on('click',function(){
+    $('title').text('支部排行榜');
+    $("#title").find("li").each(function () {
+        $(this).on('click', function () {
             $(this).addClass("active").siblings().removeClass();
             var name = $(this).attr("name");
-            $("#body").find(".rank").each(function(){
+            $("#body").find(".rank").each(function () {
                 var age = $(this).attr("age");
-                if(name == age) {
+                if (name == age) {
                     $(this).show().siblings().hide();
                 }
             });
-            $('.department' ).each(function(){
-                var _this =$(this);
-                var ww = $('body' ).width();
+            $('.department').each(function () {
+                var _this = $(this);
+                var ww = $('body').width();
                 var h = _this.height();
-                if(h > (0.18*ww ) && ww < 900){
-                    _this.css({'height':0.16*ww + 'px','line-height':0.08*ww + 'px'});
+                if (h > (0.18 * ww ) && ww < 900) {
+                    _this.css({'height': 0.16 * ww + 'px', 'line-height': 0.08 * ww + 'px'});
                 }
             })
         });
     });
-    $('.department' ).each(function(){
-        var _this =$(this);
-        var ww = $('body' ).width();
+    $('.department').each(function () {
+        var _this = $(this);
+        var ww = $('body').width();
         var h = _this.height();
-        if(h > (0.18*ww ) && ww < 900){
-            _this.css({'height':0.16*ww + 'px','line-height':0.08*ww + 'px'});
+        if (h > (0.18 * ww ) && ww < 900) {
+            _this.css({'height': 0.16 * ww + 'px', 'line-height': 0.08 * ww + 'px'});
         }
     });
     $('#score span,#score img').click(function () {
         $('#myModal').show();
-        var ModalHelper = (function(bodyCls) {
-            var scrollTop;
-            return {
-                afterOpen: function() {
-                    scrollTop = document.scrollingElement.scrollTop;
-                    document.body.classList.add(bodyCls);
-                    document.body.style.top = -scrollTop + 'px';
-                },
-                beforeClose: function() {
-                    document.body.classList.remove(bodyCls);
-                    // scrollTop lost after set position:fixed, restore it back.
-                    document.scrollingElement.scrollTop = scrollTop;
-                }
-            };
-        })('modal-open');
+        $("html").addClass("modal-open");
     });
-});
+    $(".modal").click(function(){
+        $("html").removeClass("modal-open");
+    })
+    $(".modal-content").on("click",function(e){
+        e.stopPropagation();
+    })
+
+})
+
 </script>
 {/block}
