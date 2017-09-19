@@ -121,7 +121,6 @@
     };
     //发送评论
     var send = function(e,type,id){
-        $(".bottom").hide();
         swal({
                     title: "",
                     text: "请输入评论内容！",
@@ -135,10 +134,6 @@
                 },
                 function(inputValue){
                     if (inputValue === false) {
-                        $(".bottom").show();
-                        setTimeout(function(){
-                            $("input").blur();
-                        },0)
                         return false
                     }else if (inputValue === "")
                     {
@@ -191,10 +186,6 @@
                             }
                         });
                     }
-                    $(".bottom").show();
-                    setTimeout(function(){
-                        $("input").blur();
-                    },0)
                 });
     };
 

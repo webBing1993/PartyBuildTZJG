@@ -232,10 +232,6 @@
                 },
                 function(inputValue){
                     if (inputValue === false) {
-                        $(".bottom").show();
-                        setTimeout(function(){
-                            $("input").blur();
-                        },0)
                         return false
                     }else if (inputValue === "")
                     {
@@ -292,10 +288,6 @@
                             }
                         });
                     }
-                    $(".bottom").show();
-                    setTimeout(function(){
-                        $("input").blur();
-                    },0)
                 });
     };
 
