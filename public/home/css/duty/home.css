@@ -9,6 +9,23 @@ html,body{
     padding: 0.5rem 0;
     overflow: hidden;
 }
+/* iphone4 */
+
+@media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2){
+    .content{
+        padding:0;
+    }
+
+}
+
+/* iphone5 */
+
+@media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2){
+    .content{
+        padding:0;
+    }
+
+}
 .title:nth-child(even) img{
     right: 0;
 }
