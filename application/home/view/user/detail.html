@@ -1,7 +1,6 @@
 {extend name="public/common"}
 
 {block name="style"}
-<title>党建动态</title>
 <link rel="stylesheet" href="/home/css/details-template/detail.css">
 <style>
     .mui-pull-bottom-pocket {
@@ -53,6 +52,7 @@
 <script src="/home/js/reset.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script>
+    $('title' ).text('我的草稿');
     if($(".message div").length==0){
         $(".article .message").css("border","none");
     }
