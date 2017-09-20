@@ -207,14 +207,23 @@ class User extends Admin
         }
     }
 
-    public function add($username = '', $password = '', $repassword = '', $email = '') {
+    public function add($username = '', $password = '', $repassword = '', $email = '',$group_id='') {
         //检查用户名
         if(empty($username)){
             return $this->error("账号不能为空！");
         }else{
             $exsit = UcenterMember::where('username',$username)->find();
             if($exsit){
-                return $this->error("账号已存在，请更换账号名称！");
+                if ($group_id){
+                    $res = AuthGroupAccess::where(['uid' => $exsit['id'],'group_id'=>$group_id])->find();
+                    if ($res){
+                        // 同步添加  账号存在  权限表 有重复  正常报错
+                        return $this->error("账号已存在，请更换账号名称！");
+                    }
+                }else{
+                    // 手动添加  账号存在  正常报错
+                    return $this->error("账号已存在，请更换账号名称！");
+                }
             }
         }
         if($email) {
@@ -230,16 +239,33 @@ class User extends Admin
         if (strlen($password) < 6 || strlen($password) > 50) {
             return $this->error('密码至少6位数');
         }
-        /* 调用注册接口注册用户 */
-        $uid = action('user/index/register', [$username, $password, $email]);
-        //$uid = $UserApi->register($username, $password, $email);
-        if(0 < $uid){   //注册成功
+        $exsit = UcenterMember::where('username',$username)->find();
+        if($exsit){
+            // 已经存在  不再注册
             if(input('group_id')) {
-                AuthGroupAccess::create(['uid'=>$uid, 'group_id'=>input('group_id')]);
+                AuthGroupAccess::create(['uid'=>$exsit['id'], 'group_id'=>input('group_id')]);
+            }else{
+                if($group_id) {
+                    AuthGroupAccess::create(['uid'=>$exsit['id'], 'group_id'=>$group_id]);
+                }
             }
             return $this->success('用户添加成功！');
-        } else {
-            return $this->error($uid);
+        }else{
+            /* 调用注册接口注册用户 */
+            $uid = action('user/index/register', [$username, $password, $email]);
+            //$uid = $UserApi->register($username, $password, $email);
+            if(0 < $uid){   //注册成功
+                if(input('group_id')) {
+                    AuthGroupAccess::create(['uid'=>$uid, 'group_id'=>input('group_id')]);
+                }else{
+                    if($group_id) {
+                        AuthGroupAccess::create(['uid'=>$uid, 'group_id'=>$group_id]);
+                    }
+                }
+                return $this->success('用户添加成功！');
+            } else {
+                return $this->error($uid);
+            }
         }
     }
 

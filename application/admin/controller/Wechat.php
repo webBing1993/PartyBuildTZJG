@@ -73,17 +73,7 @@ class Wechat extends Admin
                 if(WechatUser::get(['userid'=>$user['userid']])) {
                     WechatUser::where(['userid'=>$user['userid']])->update($user);
                 } else {
-                    $res = WechatUser::create($user);
-                    if($res) {
-                        $map = array(
-                            'username' => $user['userid'],
-                            'password' => '123456',
-                            'repassword' => '123456',
-                            'email' => $user['email'],
-                        );
-                        $UserController = new User();
-                        $UserController->add($map['username'],$map['password'],$map['repassword'],$map['email']);
-                    }
+                    WechatUser::create($user);
                 }
             }
         }
@@ -114,12 +104,12 @@ class Wechat extends Admin
         /* 同步部门-用户关系表 */
         WechatDepartmentUser::where('1=1')->delete();
         foreach ($list['department'] as $key=>$value) {
-            $users = $Wechat->getUserListInfo($value['id']);
+            $users = $Wechat->getUserList($value['id']);
             foreach ($users['userlist'] as $user) {
                 $data = array(
                     'departmentid'=>$value['id'],
                     'userid'=>$user['userid'],
-                    'order' => $user['order'][0],
+                    'order' => 0,
                 );
                 if(empty(WechatDepartmentUser::where($data)->find())){
                     WechatDepartmentUser::create($data);
@@ -143,6 +133,7 @@ class Wechat extends Admin
      * 同步标签
      */
     public function synchronizeTag(){
+        ini_set('max_execution_time', '60');
         $Wechat = new QYWechat(Config::get('mail'));
         if($Wechat->errCode != 40001) {
             return $this->error("同步出错");
@@ -169,7 +160,18 @@ class Wechat extends Admin
                     foreach ($info['userlist'] as $val){
                         $data = ['tagid' => $value['tagid'],'userid' => $val['userid']];
                         if(empty(WechatUserTag::where($data)->find())){
-                            WechatUserTag::create($data);
+                            $res = WechatUserTag::create($data);
+                            if($res) {
+                                $map = array(
+                                    'username' => $val['userid'],
+                                    'password' => '123456',
+                                    'repassword' => '123456',
+                                    'email' => '',
+                                    'group_id' => $value['tagid']
+                                );
+                                $UserController = new User();
+                                $UserController->add($map['username'],$map['password'],$map['repassword'],$map['email'],$map['group_id']);
+                            }
                         }
                     }
                 };
@@ -177,7 +179,18 @@ class Wechat extends Admin
                 foreach ($users['userlist'] as $user) {
                     $data = ['tagid'=>$value['tagid'], 'userid'=>$user['userid']];
                     if(empty(WechatUserTag::where($data)->find())){
-                        WechatUserTag::create($data);
+                        $res = WechatUserTag::create($data);
+                        if($res) {
+                            $map = array(
+                                'username' => $user['userid'],
+                                'password' => '123456',
+                                'repassword' => '123456',
+                                'email' => '',
+                                'group_id' => $value['tagid']
+                            );
+                            $UserController = new User();
+                            $UserController->add($map['username'],$map['password'],$map['repassword'],$map['email'],$map['group_id']);
+                        }
                     }
                 }
             }
