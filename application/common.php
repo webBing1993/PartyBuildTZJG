@@ -256,7 +256,7 @@ function get_score($class,$aid,$userid){
                         $counts = \think\Db::name('score')->where($maps)->whereTime('create_time','y')->count();  // 获取已发布个数
                         if ($counts < 1){
                             // 可以积分
-                            \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 1,'create_time' => time()]);
+                            \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 1,'create_time' => time()]);
                         }
                         break;
                     case 4:   // 主题党日
