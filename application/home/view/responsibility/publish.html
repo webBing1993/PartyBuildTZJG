@@ -155,7 +155,7 @@
   //保存
     $(".save").click(function(){
         var templet = $("#openPopover").html();
-        var userid = {$userId};
+        var userid = "{$userId}";
         var data = {};
         if(type!==3){
             var data={
@@ -230,7 +230,7 @@
     $(".goreview").click(function(){
         var single = false;
         var templet = $("#openPopover").html();
-        var userid = {$userId};
+        var userid = "{$userId}";
         if(type!==3){
             var data={
                 class:0,

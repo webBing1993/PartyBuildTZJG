@@ -117,7 +117,7 @@
     $(".save").click(function(){
         var templet = $("#openPopover").html();
         var _class = $("#openPopover2").html();
-        var userid = {$userId};
+        var userid = "{$userId}";
         var data={
             title:$("input[name='title']").val(),
             content:$("textarea[name='content']").val(),
@@ -180,7 +180,7 @@
         var single = false;
         var templet = $("#openPopover").html();
         var _class = $("#openPopover2").html();
-        var userid = {$userId};
+        var userid = "{$userId}";
         var data={
             title:$("input[name='title']").val(),
             content:$("textarea[name='content']").val(),

@@ -85,7 +85,7 @@
     $(".save").click(function(){
         var single = false;
         var templet = $("#openPopover").html();
-        var userid = {$userId};
+        var userid = "{$userId}";
             var data={
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
@@ -141,7 +141,7 @@
     $(".goreview").click(function(){
         var single = false;
         var templet = $("#openPopover").html();
-        var userid = {$userId};
+        var userid = "{$userId}";
         var data={
             title:$("input[name='title']").val(),
             content:$("textarea[name='content']").val(),
