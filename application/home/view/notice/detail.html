@@ -5,12 +5,11 @@
 <link rel="stylesheet" href="/home/css/details-template/detail.css">
 <style>
     #publish{
-        position: absolute;
-        z-index:99;
-        right: 0;
-        bottom: 2rem;
-        width:0.6rem;
-        height:0.6rem;
+        color: #093;
+        font-size: 0.36rem;
+        margin-top: 0.2rem;
+        margin-bottom: 0.1rem;
+        display: inline-block;
     }
     .mui-table-view li{
         color: #333;
@@ -64,6 +63,9 @@
             </div>
             <div class="content">
             <div class=" article-content"><p>{$info.content}</p></div>
+                {eq name="info.limit" value="1"}
+                <span id="publish">未读名单</span>
+                {/eq}
                 <div class="like">
                     <span class="read">{$info.views}</span>
                     {eq name="visit" value="0"}
@@ -107,9 +109,6 @@
 
     </div>
 </div>
-{neq name="info.limit" value="0"}
-<img src="/home/images/detail/love.png" id="publish">
-{/neq}
 {eq name="visit" value="0"}
 <div class="bottom clear" onclick="send(this,1,{$info['id']})">
     <div class="myword fl">
@@ -139,7 +138,7 @@
         </li>
         {else/}
         <li class="mui-table-view-cell">
-            <span>已截止</span>
+            <span style="color: #999;border: 1px solid #999;">已截止</span>
         </li>
         {/eq}
     </ul>
