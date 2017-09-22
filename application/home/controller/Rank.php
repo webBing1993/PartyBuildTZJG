@@ -45,8 +45,8 @@ class Rank extends Base {
             for ($k = 0;$k < count($list)-$i;$k++){
                 if ($list[$k]['score'] < $list[$k+1]['score']){
                     $temp = $list[$k+1];
-                    $list[$k] = $temp;
                     $list[$k+1] = $list[$k];
+                    $list[$k] = $temp;
                 }
             }
         }
