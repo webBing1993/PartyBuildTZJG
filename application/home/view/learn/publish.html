@@ -194,6 +194,7 @@
     var c =  parseInt(window.location.href.split("style/")[1])?parseInt(window.location.href.split("style/")[1]):null;
     var index =  parseInt(window.location.href.split("?")[1])?parseInt(window.location.href.split("?")[1]):null;
     $(function(){
+        alert(type)
         imgresize();
         if($(".img img").length==3){
             $(".add").hide();
@@ -228,12 +229,22 @@
                 break;
             case 3:
                 $(".type1").hide();
-                if(index==0){
-                    $("#openPopover3").html("培训计划");
-                }else if(index==1){
-                    $("#openPopover3").html("理论研究");
-                    $("textarea").attr("placeholder","请输入内容，不少于1500字...");
-                }
+                    if(index>=0){
+                        if(index==0){
+                            $("#openPopover3").html("培训计划");
+                        }else if(index==1){
+                            $("#openPopover3").html("理论研究");
+                            $("textarea").attr("placeholder","请输入内容，不少于1500字...");
+                        }
+                    }else{
+                        if(c==1){
+                            $("#openPopover3").html("培训计划");
+                        }else if(c==2){
+                            $("#openPopover3").html("理论研究");
+                            $("textarea").attr("placeholder","请输入内容，不少于1500字...");
+                        }
+                    }
+
                 break;
             case 4:
                 $(".type1").hide();

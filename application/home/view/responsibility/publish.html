@@ -110,14 +110,27 @@
         if(type==3){
             $(".type2").show();
         }
-        if(c==1){
-            $("#openPopover2").html("书记述职");
-            $("textarea").attr("placeholder","请输入内容，不少于1000字...");
 
-        }else if(c==2){
-            $("#openPopover2").html("支部书记述职");
-            $("textarea").attr("placeholder","请输入内容，不少于500字...");
-        }
+       if(index>=0){
+           if(index==0){
+               $("#openPopover2").html("书记述职");
+               $("textarea").attr("placeholder","请输入内容，不少于1000字...");
+
+           }else if(index==1){
+               $("#openPopover2").html("支部书记述职");
+               $("textarea").attr("placeholder","请输入内容，不少于500字...");
+           }
+       }else{
+           if(c==1){
+               $("#openPopover2").html("书记述职");
+               $("textarea").attr("placeholder","请输入内容，不少于1000字...");
+
+           }else if(c==2){
+               $("#openPopover2").html("支部书记述职");
+               $("textarea").attr("placeholder","请输入内容，不少于500字...");
+           }
+       }
+
     })
 
     $("#popover ul li").click(function(){

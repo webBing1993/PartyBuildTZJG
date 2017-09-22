@@ -87,18 +87,29 @@
 <script src="/home/js/common/publish.js"></script>
 <script>
     var c =  parseInt(window.location.href.split("?")[1]);
+    var style =  parseInt(window.location.href.split("type/")[1]);
     $("title").text("志愿服务");
     $(function(){
         imgresize();
         if($(".img img").length==3){
             $(".add").hide();
         }
-        if(c==0){
-            $("#openPopover2").html("四跑志愿活动");
-            $("textarea").attr("placeholder","请输入内容，不少于800字...");
-        }else if(c==1){
-            $("#openPopover2").html("一条街三走进");
+        if(c>=0){
+            if(c==0){
+                $("#openPopover2").html("四跑志愿活动");
+                $("textarea").attr("placeholder","请输入内容，不少于800字...");
+            }else if(c==1){
+                $("#openPopover2").html("一条街三走进");
+            }
+        }else{
+            if(style==1){
+                $("#openPopover2").html("四跑志愿活动");
+                $("textarea").attr("placeholder","请输入内容，不少于800字...");
+            }else if(style==2){
+                $("#openPopover2").html("一条街三走进");
+            }
         }
+
 
     });
 
