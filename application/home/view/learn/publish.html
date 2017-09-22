@@ -194,7 +194,6 @@
     var c =  parseInt(window.location.href.split("style/")[1])?parseInt(window.location.href.split("style/")[1]):null;
     var index =  parseInt(window.location.href.split("?")[1])?parseInt(window.location.href.split("?")[1]):null;
     $(function(){
-        alert(type)
         imgresize();
         if($(".img img").length==3){
             $(".add").hide();
@@ -354,9 +353,9 @@
                 status:3
             };
             if(_class=="培训计划"){
-                data["class"] = 1;
+                data["class"] = 5;
             }else{
-                data["class"] = 2;
+                data["class"] = 6;
             }
         }else if(type==4){
             var data={
