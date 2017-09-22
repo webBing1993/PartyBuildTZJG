@@ -63,9 +63,9 @@
             </div>
             <div class="content">
             <div class=" article-content"><p>{$info.content}</p></div>
-                {eq name="info.limit" value="1"}
+                {neq name="info.limit" value="0"}
                 <span id="publish">未读名单</span>
-                {/eq}
+                {/neq}
                 <div class="like">
                     <span class="read">{$info.views}</span>
                     {eq name="visit" value="0"}
