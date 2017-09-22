@@ -232,6 +232,7 @@
                     $("#openPopover3").html("培训计划");
                 }else if(index==1){
                     $("#openPopover3").html("理论研究");
+                    $("textarea").attr("placeholder","请输入内容，不少于1500字...");
                 }
                 break;
             case 4:
@@ -267,6 +268,11 @@
     $("#popover3 ul li").click(function(){
         var select_it = $(this).text();
         $("#openPopover3").html(select_it);
+        if(select_it=="培训计划"){
+            $("textarea").attr("placeholder","请输入内容...");
+        }else{
+            $("textarea").attr("placeholder","请输入内容，不少于1500字...");
+        }
         mui('#popover3').popover("hide");
     });
 
@@ -481,6 +487,16 @@
                 data["class"] = 1;
             }else{
                 data["class"] = 2;
+                    if(data["content"].length<1500){
+                        swal({
+                            title: ' ',
+                            text: '内容不少于1500字',
+                            type: 'error',
+                            showConfirmButton:false,
+                            timer:1500
+                        });
+                        return;
+                    }
             }
         }else if(type==4){
             var data={

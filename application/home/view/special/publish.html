@@ -29,7 +29,7 @@
             <input style="text" placeholder="请输入标题" name="title" value="{$msg.title || default=''}">
         </li>
         <div class="content">
-            <textarea placeholder="请输入内容..." name="content">{$msg.content || default=''}</textarea>
+            <textarea placeholder="请输入内容，不少于1000字..." name="content">{$msg.content || default=''}</textarea>
             <div class="imgs clear">
                 {notempty name="$msg"}
                 {volist name="msg.list_images" id="img"}
@@ -142,6 +142,16 @@
         };
         for(var key in data){
             if(data["title"]!= ''&& data["content"]!=""){
+                if(data["content"].length<1000){
+                    swal({
+                        title: ' ',
+                        text: '内容不少于1000字',
+                        type: 'error',
+                        showConfirmButton:false,
+                        timer:1500
+                    });
+                    return;
+                }
                 single = true;
                 continue;
             }

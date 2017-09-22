@@ -92,7 +92,7 @@
 <script>
     var type =  parseInt(window.location.href.split("publish/type/")[1]);
     var c =  parseInt(window.location.href.split("style/")[1])?parseInt(window.location.href.split("style/")[1]):null;
-    var index =  parseInt(window.location.href.split("?")[1])?parseInt(window.location.href.split("?")[1]):null;
+    var index =  parseInt(window.location.href.split("?")[1]);
     $(function(){
         imgresize();
         if($(".img img").length==3){
@@ -112,8 +112,11 @@
         }
         if(index==0){
             $("#openPopover2").html("书记述职");
+            $("textarea").attr("placeholder","请输入内容，不少于1000字...");
+
         }else if(index==1){
             $("#openPopover2").html("支部书记述职");
+            $("textarea").attr("placeholder","请输入内容，不少于500字...");
         }
     })
 
@@ -126,6 +129,11 @@
     $("#popover2 ul li").click(function(){
         var select_it = $(this).text();
         $("#openPopover2").html(select_it);
+        if(select_it=="书记述职"){
+            $("textarea").attr("placeholder","请输入内容，不少于1000字...");
+        }else{
+            $("textarea").attr("placeholder","请输入内容，不少于500字...");
+        }
         mui('#popover2').popover("hide");
     });
 
@@ -238,8 +246,28 @@
             };
             if(_class=="书记述职"){
                 data["class"] = 1;
+                 if(data["content"].length<1000){
+                        swal({
+                            title: ' ',
+                            text: '内容不少于1000字',
+                            type: 'error',
+                            showConfirmButton:false,
+                            timer:1500
+                        });
+                        return;
+                    }
             }else{
                 data["class"] = 2;
+                if(data["content"].length<500){
+                    swal({
+                        title: ' ',
+                        text: '内容不少于500字',
+                        type: 'error',
+                        showConfirmButton:false,
+                        timer:1500
+                    });
+                    return;
+                }
             }
             for(var key in data){
                 if(data["title"]!= ''&& data["content"]!=""){
