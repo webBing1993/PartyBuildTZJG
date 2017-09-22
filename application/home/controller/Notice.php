@@ -79,6 +79,9 @@ class Notice extends Base{
             if (!$read){
                 // 未读
                 $name = WechatUser::where(['userid' => $value['userid']])->value('name');
+                if (empty($name)){
+                    $name = "暂无";
+                }
                 array_push($people,$name);
             }
         }

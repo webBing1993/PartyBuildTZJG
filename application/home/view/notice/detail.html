@@ -107,9 +107,9 @@
 
     </div>
 </div>
-{eq name="info.limit" value="1"}
+{neq name="info.limit" value="0"}
 <img src="/home/images/detail/love.png" id="publish">
-{/eq}
+{/neq}
 {eq name="visit" value="0"}
 <div class="bottom clear" onclick="send(this,1,{$info['id']})">
     <div class="myword fl">
