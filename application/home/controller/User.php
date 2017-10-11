@@ -424,6 +424,7 @@ class User extends Base {
      * 积分明细
      */
     public function myintegral(){
+
         return $this->fetch();
     }
 }
