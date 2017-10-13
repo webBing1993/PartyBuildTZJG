@@ -424,7 +424,152 @@ class User extends Base {
      * 积分明细
      */
     public function myintegral(){
+        $this->anonymous();
+        $userId = session('userId');
+        $User = WechatUser::where('userid',$userId)->find();
+        if (empty($User)){
+            $score = 0;
+        }else{
+            $score1 = $User['score_efficiency'];  // 机关效能积分
+            $score2 = $User['score_form'];  // 四种形态积分
+            $score3 = $User['score_satisfaction'];  // 满意度测评积分
+            $Arr = Db::name('score')->where('userid', $userId)->whereTime('create_time', 'y')->select();
+            $score4 = 0;
+            foreach ($Arr as $val) {
+                $score4 += ($val['score_up'] / $val['score_down']);
+            }
+            $score = $score1 + $score2 + $score3 + $score4;  // 总分
+        }
+        $msg = Db::name('score')->where(['userid' => $userId])->order('id desc')->select();
+        foreach($msg as $key => $value){
+            $msg[$key]['score'] = $value['score_up'] / $value['score_down'];
+            $msg[$key]['create_time'] = date('Y-m-d',$value['create_time']);
+            switch ($value['class']){
+                case 1: // 党建责任
+                    $table = "responsibility";
+                    $info = Db::name($table)->where(['id' => $value['aid']])->find();
+                    $msg[$key]['title'] = $info['title'];
+                    switch ($value['type']){
+                        case 1:
+                            $msg[$key]['str'] = "党建责任-专题研究";
+                            break;
+                        case 2:
+                            $msg[$key]['str'] = "党建责任-责任清单";
+                            break;
+                        case 4:
+                            $msg[$key]['str'] = "党建责任-工作计划";
+                            break;
+                        case 5:
+                            $msg[$key]['str'] = "党建责任-书记述职";
+                            break;
+                        case 6:
+                            $msg[$key]['str'] = "党建责任-支部书记述职";
+                            break;
+                    }
+                    break;
+                case 2: // 两学一做
+                    $table = "learn";
+                    $info = Db::name($table)->where(['id' => $value['aid']])->find();
+                    $msg[$key]['title'] = $info['title'];
+                    switch ($value['type']){
+                        case 1:
+                            $msg[$key]['str'] = "两学一做-方案部署";
+                            break;
+                        case 4:
+                            $msg[$key]['str'] = "两学一做-主题党日";
+                            break;
+                        case 5:
+                            $msg[$key]['str'] = "两学一做-培训计划";
+                            break;
+                        case 6:
+                            $msg[$key]['str'] = "两学一做-理论研究";
+                            break;
+                        case 7:
+                            $msg[$key]['str'] = "两学一做-支部委员大会";
+                            break;
+                        case 8:
+                            $msg[$key]['str'] = "两学一做-党支部委员会";
+                            break;
+                        case 9:
+                            $msg[$key]['str'] = "两学一做-党小组会";
+                            break;
+                        case 10:
+                            $msg[$key]['str'] = "两学一做-党课";
+                            break;
+                    }
+                    break;
+                case 3: // 组织建设
+                    $table = "organization";
+                    $info = Db::name($table)->where(['id' => $value['aid']])->find();
+                    $msg[$key]['title'] = $info['title'];
+                    switch ($value['type']){
+                        case 1:
+                            $msg[$key]['str'] = "组织建设-规范性建设";
+                            break;
+                        case 2:
+                            $msg[$key]['str'] = "组织建设-信息录用";
+                            break;
+                    }
+                    break;
+                case 4: // 特色创新
+                    $table = "special";
+                    $info = Db::name($table)->where(['id' => $value['aid']])->find();
+                    $msg[$key]['title'] = $info['title'];
+                    $msg[$key]['str'] = "特色创新";
+                    break;
+                case 5: // 作风建设
+                    $table = "style";
+                    $info = Db::name($table)->where(['id' => $value['aid']])->find();
+                    $msg[$key]['title'] = $info['title'];
+                    switch ($value['type']){
+                        case 1:
+                            $msg[$key]['str'] = "作风建设-方案部署";
+                            break;
+                        case 2:
+                            $msg[$key]['str'] = "作风建设-金点子";
+                            break;
+                        case 3:
+                            $msg[$key]['str'] = "作风建设-培树典型";
+                            break;
+                        case 4:
+                            $msg[$key]['str'] = "作风建设-党员清单";
+                            break;
+                    }
+                    break;
+                case 6: // 志愿服务
+                    $table = "volunteer";
+                    $info = Db::name($table)->where(['id' => $value['aid']])->find();
+                    $msg[$key]['title'] = $info['title'];
+                    switch ($value['type']){
+                        case 1:
+                            $msg[$key]['str'] = "志愿服务-四跑志愿活动";
+                            break;
+                        case 2:
+                            $msg[$key]['str'] = "志愿服务-一条街三走进";
+                            break;
+                    }
+                    break;
+                default:  // 党风廉政
+                    $table = "incorrupt";
+                    $info = Db::name($table)->where(['id' => $value['aid']])->find();
+                    $msg[$key]['title'] = $info['title'];
+                    switch ($value['type']){
+                        case 1:
+                            $msg[$key]['str'] = "党风廉政-廉政责任";
+                            break;
+                        case 2:
+                            $msg[$key]['str'] = "党风廉政-廉政教育";
+                            break;
+                        case 3:
+                            $msg[$key]['str'] = "党风廉政-纪检报告";
+                            break;
+                    }
 
+            }
+        }
+        $this->assign('score',$score);
+        $this->assign('msg',$msg);
+        $this->assign('time',date('Y-m-d',time()));
         return $this->fetch();
     }
 }

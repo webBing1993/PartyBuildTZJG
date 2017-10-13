@@ -10,8 +10,8 @@
     <canvas id="myCanvas" width="400" height="300"></canvas>
     <canvas id="dashed" width="400" height="300"></canvas>
     <p class="point">我的积分</p>
-    <p class="num">120</p>
-    <p class="time">时间：2018-09-18</p>
+    <p class="num">{$score}</p>
+    <p class="time">时间：{$time}</p>
 </div>
     <p class="rule">积分规则</p>
     </div>
@@ -21,21 +21,23 @@
 <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
     <div class="mui-scroll">
         <ul>
+            {volist name="$msg" id="ms"}
             <li>
                 <p class="title">
-                    <span>党建责任-专题研究</span>
+                    <span>{$ms.str}</span>
                 </p>
                 <p class="content">
-                   我是标题，标题包体包提包提包体标题
+                    {$ms.title}
                 </p>
                 <p class="time">
-                    2017-10-12
+                    {$ms.create_time}
                 </p>
                 <p class="point">
                     <img src="/home/images/user/point.png">
-                    <span>+ 2</span>
+                    <span>+ {$ms.score}</span>
                 </p>
             </li>
+            {/volist}
         </ul>
 
     </div>
