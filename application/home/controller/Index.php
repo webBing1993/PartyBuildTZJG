@@ -28,8 +28,8 @@ class Index extends Controller {
      */
     public function login(){
         // 获取用户信息
-        $Wechat = new TPQYWechat(config('work'));
-        $result = $Wechat->getUserId(input('code'), config('work.agentid'));
+        $Wechat = new TPQYWechat(config('responsibility'));
+        $result = $Wechat->getUserId(input('code'), config('responsibility.agentid'));
         if(empty($result['UserId'])) {
             session('userId', 'visitor');//游客userid为0
             session('name', '游客');

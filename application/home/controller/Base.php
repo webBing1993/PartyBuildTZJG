@@ -36,10 +36,10 @@ class Base extends Controller {
             session('header','/home/images/vistor.jpg');
         }else{
             //微信认证
-            $Wechat = new TPQYWechat(Config::get('work'));
+            $Wechat = new TPQYWechat(Config::get('responsibility'));
             // 1用户认证是否登陆
             if(empty($userId)) {
-                $redirect_uri = Config::get("work.login");
+                $redirect_uri = Config::get("responsibility.login");
                 $url = $Wechat->getOauthRedirect($redirect_uri);
                 $this->redirect($url);
             }
@@ -56,7 +56,7 @@ class Base extends Controller {
      * 微信官方认证URL
      */
     public function oauth(){
-        $Wechat = new TPQYWechat(Config::get('party'));
+        $Wechat = new TPQYWechat(Config::get('responsibility'));
         $Wechat->valid();
     }
 
@@ -77,7 +77,7 @@ class Base extends Controller {
      * 获取企业号签名
      */
     public function jssdk(){
-        $Wechat = new TPQYWechat(Config::get('party'));
+        $Wechat = new TPQYWechat(Config::get('responsibility'));
         $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         $jsSign = $Wechat->getJsSign($url);
         $this->assign("jsSign", $jsSign);
