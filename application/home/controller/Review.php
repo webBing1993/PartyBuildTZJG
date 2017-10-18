@@ -342,6 +342,7 @@ class Review extends Base{
      * 发布审核  去审核
      */
     public function review(){
+        $this->anonymous();
         $userId = session('userId');
         $user = WechatUser::where('userid', $userId)->find();
         $username = $user['name'];
