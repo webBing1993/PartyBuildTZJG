@@ -461,13 +461,6 @@
              class:_class,
             status:status
             },
-            beforeSend: function(XMLHttpRequest){
-                swal({
-                    title: ' ',
-                    text: '审核中...',
-                    showConfirmButton:false
-                });
-            },
             success:function(data){
                     if(data.code==1){
 //                        $(element).remove();
@@ -489,6 +482,15 @@
                             timer:1500
                         });
                     }
+            },
+            error:function(data){
+                swal({
+                    title: "",
+                    text: data.msg,
+                    type: "error",
+                    confirmButtonText: "确认",
+                    timer:1500
+                });
             }
         })
     }
