@@ -167,16 +167,9 @@
 <script src="/home/js/reset.js"></script>
 <script>
     var win_w = $(window).width();
-    var c = 0;
+    var c =parseInt(window.location.href.split("index/c/")[1])-1;
     $(function(){
         $("title").text("通知公告");
-        //tab初始化和数据存储
-        var co = getCookie("type");
-        if(co == 0 || co == 1 ){
-            c = co;
-        }else{
-            c =  0;
-        }
         $("#tab a").eq(c).addClass('mui-active');
         $(".mui-slider-group>div").eq(c).addClass('mui-active');
     })
@@ -296,7 +289,6 @@
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }
-        setCookie('type',c);
     })
 
 
