@@ -50,9 +50,9 @@ class Notice extends Base{
      */
     public function detail(){
         //判断是否是游客
-        $this ->anonymous();
+        $this->anonymous();
         //获取jssdk
-        $this ->jssdk();
+        $this->jssdk();
         $userId = session('userId');
         $id = input('id');
         $info = $this->content(1,$id);
@@ -129,9 +129,9 @@ class Notice extends Base{
      */
     public function dynamicdetail(){
         //判断是否是游客
-        $this ->anonymous();
+        $this->anonymous();
         //获取jssdk
-        $this ->jssdk();
+        $this->jssdk();
         $id = input('id');
         $this->assign('new',$this->content(2,$id));
         return $this->fetch();
