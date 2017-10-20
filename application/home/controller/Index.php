@@ -48,33 +48,33 @@ class Index extends Controller {
             if(isset($userInfo['extattr']['attrs'])) {
                 $data['extattr'] = json_encode($userInfo['extattr']['attrs']);
 
-                foreach ($userInfo['extattr']['attrs'] as $attrs) {
-                    switch ($attrs['name']){
-                        case "出生年月":
-                            $data['birthday'] = $attrs['value'];
-                            break;
-                        case "民族":
-                            $data['nation'] = $attrs['value'];
-                            break;
-                        case "学历":
-                            $data['education'] = $attrs['value'];
-                            break;
-                        case "入党时间":
-                            $data['partytime'] = $attrs['value'];
-                            break;
-                        case "工作时间":
-                            $data['worktime'] = $attrs['value'];
-                            break;
-                        case "所在支部":
-                            $data['branch'] = $attrs['value'];
-                            break;
-                        case "虚拟网":
-                            $data['virtualnet'] = $attrs['value'];
-                            break;
-                        default:
-                            break;
-                    }
-                }
+//                foreach ($userInfo['extattr']['attrs'] as $attrs) {
+//                    switch ($attrs['name']){
+//                        case "出生年月":
+//                            $data['birthday'] = $attrs['value'];
+//                            break;
+//                        case "民族":
+//                            $data['nation'] = $attrs['value'];
+//                            break;
+//                        case "学历":
+//                            $data['education'] = $attrs['value'];
+//                            break;
+//                        case "入党时间":
+//                            $data['partytime'] = $attrs['value'];
+//                            break;
+//                        case "工作时间":
+//                            $data['worktime'] = $attrs['value'];
+//                            break;
+//                        case "所在支部":
+//                            $data['branch'] = $attrs['value'];
+//                            break;
+//                        case "虚拟网":
+//                            $data['virtualnet'] = $attrs['value'];
+//                            break;
+//                        default:
+//                            break;
+//                    }
+//                }
             }
 
             $wechatUser = new WechatUser();
@@ -98,7 +98,13 @@ class Index extends Controller {
      * 微信公众号跳转
      */
     public function jump() {
-        $url = "https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzAwNjA1MDE1OQ==&scene=124#wechat_redirect";
+        $url = "https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA5MzgwODg4Nw==&scene=123#wechat_redirect";
         $this->redirect($url);
+    }
+    
+    public function reset() {
+        $Wechat = new TPQYWechat(config('responsibility'));
+        $res = $Wechat->resetAuth(config('responsibility.appid'),config('responsibility.agentid'));
+        dump($res);
     }
 }

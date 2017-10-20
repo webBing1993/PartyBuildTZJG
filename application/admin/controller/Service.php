@@ -71,11 +71,11 @@ class Service extends Controller
 
     }
 //
-//    // 企业号验证
-//    public function oauth() {
-//        $weObj = new TPQYWechat(Config::get('party'));
-//        $weObj->valid();
-//    }
+    // 企业号验证
+    public function oauth() {
+        $weObj = new TPQYWechat(Config::get('responsibility'));
+        $weObj->valid();
+    }
 //
 //    // 创建订阅号菜单
 //    public function menu() {
