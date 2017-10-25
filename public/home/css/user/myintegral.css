@@ -23,8 +23,8 @@
 .banner .num{
     position: absolute;
     left: 50%;
-    width: 3rem;
-    margin-left: -1.5rem;
+    width: 6rem;
+    margin-left: -3rem;
     top: 32vw;
     color: #fff;
     font-size: 1.6rem;
@@ -84,18 +84,15 @@
     line-height: 1.5rem;
     padding: 0 0.2rem;
 }
-#refreshContainer{
-    margin-top: 100vw;
-}
-#refreshContainer ul li{
+ ul li{
     border-bottom: 1px solid #f1f1f1;
     padding: 0.2rem 0.3rem;
 }
-#refreshContainer ul li .title{
+ ul li .title{
     font-size: 0.48rem;
     color: #000;
 }
-#refreshContainer ul li .content{
+ ul li .content{
     font-size: 0.42rem;
     color: #333;
     margin-left: 0.85rem;
@@ -107,24 +104,24 @@
     -webkit-box-orient:vertical;
     -webkit-line-clamp:2;
 }
-#refreshContainer ul li .time{
+ ul li .time{
     font-size: 0.42rem;
     color: #999;
     margin-left: 0.85rem;
     margin-top: 0.2rem;
 }
-#refreshContainer ul li .point{
+ ul li .point{
     position: absolute;
-    right:0.2rem;
-    top:1.2rem;
+    right: 0.2rem;
+    margin-top: -1.5rem;
 }
-#refreshContainer ul li .point img{
+ ul li .point img{
     width:0.6rem;
 }
-#refreshContainer ul li .point span{
+ ul li .point span{
     color: #f00;
 }
-#refreshContainer ul li .title span{
+ ul li .title span{
     font-size: 0.48rem;
     color: #000;
     position: relative;
@@ -132,7 +129,7 @@
     left:0;
 }
 
-#refreshContainer ul li p.title:before{
+ ul li p.title:before{
     display: inline-block;
     content: '';
     background: url(/home/images/user/leftquote.png);
@@ -141,7 +138,7 @@
     height: 0.5rem;
     margin-right: 0.2rem;
 }
-#refreshContainer ul li p.title:after{
+ ul li p.title:after{
     display: inline-block;
     content: '';
     background: url(/home/images/user/rightquote.png);
@@ -150,3 +147,64 @@
     height: 0.5rem;
     margin-left: 0.2rem;
 }
+
+
+.modal-content{background-color:#fff;width: 95%;
+    height:70vh;overflow: scroll;}
+#close{margin: 21.3vw auto 0 auto;display: block}
+#myModalLabel{text-align: center;font-size: 22px;}
+#myModal{overflow-x: hidden;position: fixed;}
+.overHide{overflow: hidden;height: 100%;}
+.cc{ overflow-y:auto;}
+@media screen and (max-width: 320px){
+    #score span{
+        right: 12vw;
+    }
+    .foot{
+        margin-top: 4px;
+    }
+}
+@media screen and (min-width: 760px){
+    #score span{
+        right: 8.5vw;
+    }
+    h5{line-height: 36px;margin: 0}
+}
+@media screen and (min-width: 1000px){
+    #score span{
+        right: 6vw;
+    }
+    h5{line-height: 40px;margin: 0}
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation : portrait) {
+    #score span{
+        right: 9vw;
+    }
+}
+.h4, h4 {
+    font-size: 0.38rem;
+    line-height: 0.5rem;
+}
+b, strong {
+    font-weight: 700;
+    font-size: 0.42rem;
+}
+.modal-body h4 p{
+    font-size: 0.36rem;
+    color: #333;
+}
+.modal-body h4 span{
+    font-size: 0.32rem;
+    color: #666;
+    padding-left: 0.5rem;
+    display: inline-block;
+}
+@media (min-width: 768px) {
+    .modal-dialog {
+        width: auto;
+        margin: 30px auto;
+
+    }
+}
+.modal-open{overflow:hidden;position:fixed;}
