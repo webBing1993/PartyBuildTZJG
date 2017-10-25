@@ -36,6 +36,22 @@
                 </p>
             </li>
             {/volist}
+            {volist name="$handle" id="han"}
+            <li>
+                <p class="title">
+                    <span>{$han.str}</span>
+                </p>
+                <p class="content">
+                </p>
+                <p class="time">
+                    {$han.create_time}
+                </p>
+                <p class="point">
+                    <img src="/home/images/user/point.png">
+                    <span>{$han.score}</span>
+                </p>
+            </li>
+            {/volist}
         </ul>
 
 
@@ -98,15 +114,6 @@
 
 {block name="script"}
 <script>
-
-    window.onload = function() {
-        if ($("ul li").length < 100) {
-            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
-        } else {
-            mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
-        }
-    }
-
     var width = $(window).width();
     $("#myCanvas").css("width",width);
     $("#dashed").css("width",width);
@@ -132,72 +139,6 @@
     ctx.setLineDash([5, 10]);
     ctx.arc(centerX, centerY, 130, startingAngle, endingAngle);
     ctx.stroke();
-
-
-
-    //初始化下拉加载
-    mui.init({
-        pullRefresh: {
-            container: '#refreshContainer',
-            up: {
-                callback: loadScroll
-            }
-        }
-    });
-
-
-    //上拉加载更多
-    function loadScroll(){
-        var len  = $("#refreshContainer ul li").length;
-        $.ajax({
-            type:"post",
-            url: "{:Url('User/myintegral')}",
-            data:{
-                length:len
-            },
-            beforeSend: function(XMLHttpRequest){
-
-            },
-            success:function(data){
-                console.log(data)
-                if(data.code == 1){
-                    addLists(data);
-                    var dataLen =data.data.length;
-                    if(data.data.length == 8){
-                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
-                    }else{
-                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
-                    }
-                }else{
-                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
-                }
-            }
-        })
-    }
-
-    //加载更多列表
-    function addLists(data){
-        var html = '';
-        var lists = data.data;
-        var len = lists.length;
-        for(var i = 0; i< len;i++){
-            var list = lists[i];
-            html +=
-                '<li>'+
-                '<p class="title">'+
-                '<span>'+list.title+'</span>'+
-                '</p>'+
-                '<p class="content">'+list.content+'</p>'+
-                '<p class="time">'+list.time+'</p>'+
-                '<p class="point">'+
-                '<img src="/home/images/user/point.png">'+
-                '<span>+'+list.points+'</span>'+
-                '</p>'+
-                '</li>'
-        }
-        $('ul').append(html);
-    }
-
 
     mui('#refreshContainer').on('tap', '.rule', function(e) {
         $('#myModal').show();

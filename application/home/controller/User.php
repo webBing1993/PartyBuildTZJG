@@ -567,6 +567,30 @@ class User extends Base {
 
             }
         }
+        // 人工干预  分数
+        $hander = Db::name('handle')->where(['userid' => $userId])->order('create_time desc')->select();
+        foreach($hander as $key => $value){
+            $hander[$key]['create_time'] = date('Y-m-d',$value['create_time']);
+            if ($value['type'] == 1){
+                // 减
+                $paly = '-';
+            }else{
+                // 加
+                $paly = '+';
+            }
+            switch ($value['class']){
+                case 1:  // 机关效能
+                    $hander[$key]['str'] = "机关效能-人工干预";
+                    break;
+                case 2:  // 四种形态
+                    $hander[$key]['str'] = "四种形态-人工干预";
+                    break;
+                default:  // 满意度测评
+                    $hander[$key]['str'] = "满意度测评-人工干预";
+            }
+            $hander[$key]['score'] = $paly." 1";
+        }
+        $this->assign('handle',$hander);
         $this->assign('score',$score);
         $this->assign('msg',$msg);
         $this->assign('time',date('Y-m-d',time()));
