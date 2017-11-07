@@ -49,6 +49,31 @@
         }else if(type==4){
             $("title").text("党员清单");
         }
+
+       function IsPC() {
+               var userAgentInfo = navigator.userAgent;
+               var Agents = ["Android", "iPhone",
+                   "SymbianOS", "Windows Phone",
+                   "iPad", "iPod"];
+               var flag = true;
+               for (var v = 0; v < Agents.length; v++) {
+                   if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                       flag = false;
+                       break;
+                   }
+               }
+               return flag;
+           }
+
+           flag = IsPC();
+           if(flag){
+               $("#refreshContainer").css({"width":"640px","left":"30%"});
+               $(".list ul a p").css({"margin-bottom":"0.5rem"});
+                $(".default img").css("width","60px");
+           }
+
+
+
     });
     window.onload = function() {
         moveanyway();

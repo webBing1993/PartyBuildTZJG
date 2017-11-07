@@ -119,7 +119,7 @@
 
 /*article content */
 .article-content p,.article-content p span,.article-content{
-    font-size: 0.38rem!important;
+    font-size: 0.38rem;
     color: #333;
 }
 .article .content * {

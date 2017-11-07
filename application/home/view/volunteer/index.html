@@ -4,6 +4,9 @@
 <link rel="stylesheet" href="/home/css/list/graphic-list.css">
 <title>志愿服务</title>
 <style>
+html,body{
+height:100%;
+}
     .banner{
         height:50vw;
     }
@@ -113,6 +116,39 @@
     $(function(){
         //模块标题
         $('title' ).text('志愿服务');
+
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        flag = IsPC();
+        if(flag){
+            $(".banner").css({"width":"640px","height":"320px","margin":"0 auto"})
+            $("#tab a").css("font-size","18px");
+            $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"})
+            $("#tab").css({"margin-top":"320px","width":"640px","position":"static","top":"0","margin":"0 auto"})
+            $("#refreshContainer").css({"top":"380px","width":"640px","left":"50%","margin-left":"-320px"});
+            $(".list ul a").css("padding","10px 15px");
+            $(".list ul a img").css({"width":"90px","height":"60px"});
+            $(".list ul a p").css("font-size","16px");
+            $(".list ul a span").css("font-size","14px");
+            $(".list ul a span:nth-child(3)").css("bottom","10px");
+            $(".list ul a span:nth-child(4)").css("bottom","10px");
+            $(".default img").css("width","60px");
+
+        }
+
         //tab初始化和数据存储
         var co = getCookie("type");
         if(co == 0 || co == 1){
