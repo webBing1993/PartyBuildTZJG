@@ -89,6 +89,37 @@
 <script>
     var type =  parseInt(window.location.href.split("index/type/")[1]);
     $(function(){
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        flag = IsPC();
+        if(flag){
+            $(".banner").css({"width":"640px","height":"320px","margin":"0 auto"});
+            $(".search").css({"width":"640px","left":"50%","margin-left":"-320px"});
+            $("#tab a").css("font-size","18px");
+            $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"})
+            $("#tab").css({"width":"640px","left":"50%","margin-left":"-320px"})
+            $("#refreshContainer").css({"top":"0","width":"640px","left":"50%","margin-left":"-320px"});
+            $(".list ul a").css("padding","10px 15px");
+            $(".list ul a img").css({"width":"90px","height":"60px"});
+            $(".list ul a p").css({"font-size":"16px","margin-bottom":"30px"});
+            $(".list ul a span").css("font-size","14px");
+            $(".list ul a span:nth-child(3)").css("bottom","10px");
+            $(".list ul a span:nth-child(4)").css("bottom","10px");
+            $(".default img").css("width","60px");
+        }
         $("title").text("述职报告");
         //tab初始化和数据存储
         var co = getCookie("type");
@@ -171,16 +202,30 @@
         var len = lists.length;
         for(var i = 0; i< len;i++){
             var list = lists[i];
-            if(list.templet==1){
-                html += '<a href="/home/responsibility/detail/id/'+list.id+'.html">'
+            if(flag) {
+                if (list.templet == 1) {
+                    html += '<a href="/home/responsibility/detail/id/' + list.id + '.html">'
+                } else {
+                    html += '<a href="/home/responsibility/detail2/id/' + list.id + '.html">'
+                }
+                html +=
+                        '<p style="margin-bottom: 30px;font-size: 16px;">' + list.title + '</p>' +
+                        '<span style="font-size: 14px;">' + list.publisher + '</span>' +
+                        '<span style="font-size: 14px;">' + list.time + '</span>' +
+                        '</a>'
             }else{
-                html += '<a href="/home/responsibility/detail2/id/'+list.id+'.html">'
+                if (list.templet == 1) {
+                    html += '<a href="/home/responsibility/detail/id/' + list.id + '.html">'
+                } else {
+                    html += '<a href="/home/responsibility/detail2/id/' + list.id + '.html">'
+                }
+                html +=
+                        '<p>' + list.title + '</p>' +
+                        '<span>' + list.publisher + '</span>' +
+                        '<span>' + list.time + '</span>' +
+                        '</a>'
+
             }
-            html +=
-                    '<p>'+list.title+'</p>'+
-                    '<span>'+list.publisher+'</span>'+
-                    '<span>'+list.time+'</span>'+
-                    '</a>'
         }
         if(type==0){
             if(index==1){
