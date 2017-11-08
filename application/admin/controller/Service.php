@@ -21,7 +21,7 @@ class Service extends Controller
 
     // 服务号接收的应用
     public function event() {
-        $Wechat = new TPQYWechat(Config::get('work'));
+        $Wechat = new TPQYWechat(Config::get('responsibility'));
         $res = $Wechat->valid();
 //        Log::record("回调：".$res);
 
@@ -34,7 +34,7 @@ class Service extends Controller
                 $event = $Wechat->getRev()->getRevEvent();
                 switch ($event['event']) {
                     case 'subscribe':
-                        $replyText = "您好！欢迎关注新市大脚掌！";
+                        $replyText = "您好！欢迎关注台州红云党建！";
                         $Wechat->text($replyText)->reply();
 //                        $newsData = array(
 //                            '0'=> array(

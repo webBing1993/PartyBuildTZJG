@@ -41,8 +41,8 @@ return [
     //党建责任
     'responsibility' => array(
         'login' => 'http://tzsz.0571ztnet.com/home/index/login',
-        'token' => '',
-        'encodingaeskey' => '',
+        'token' => 'bRmYcj9jXnOTVY5t3X6gzpz3IilCo65',
+        'encodingaeskey' => 'bjsJ0SS3krTw2ds3CQ4RxQ2nrHVR79sn9DuS91DuEfw',
         'appid' => 'wwbab5777aedaa7c19',
         'appsecret' => 'Og0bm6Hvbhbq5-fLzVnRub1RuPsUvG5VcI6Rxxq1aqk',
         'agentid' => 1000002
