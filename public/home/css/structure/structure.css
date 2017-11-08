@@ -306,13 +306,6 @@ body {
   transform: rotate(0deg);
   -webkit-transform: rotate(0deg);
 }
-  .listbox .summary {
-    left: 0;
-  }
-.listbox .town {
-  left: 100vw;
-}
-
 .listbox .shouldKnow {
   left: 200vw;
 }

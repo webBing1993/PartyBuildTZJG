@@ -15945,9 +15945,11 @@ $(function(){
 	flag = IsPC();
 	if(flag){
 		$(".d_lists").css({"width":"640px"});
-		$(".d_list").css("padding","15px");
-		$(".d_lists .title").css({"width":"640px","left":"50%","margin-left":"-320px","top":"0"})
+		$(".d_list").css({"padding":"15px","width":"640px","position":"relative","left":"100%"});
+		$(".d_lists .title").css({"width":"640px","left":"50%","margin-left":"-320px","top":"0"});
+		$(".d_list>.d_tel>.d_tel_icon").css({"width":"30px","background-size":"30px 30px"});
 		$(".d_lists").css("margin-top","200px");
+		$(".d_list>.d_tel").css({"position":"static"})
 	}
 });
 </script>

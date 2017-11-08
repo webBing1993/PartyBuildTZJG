@@ -2,23 +2,61 @@
 
 {block name="style"}
 <link rel="stylesheet" href="/home/css/structure/structure.css">
+<style>
+	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+		color: #FF9800;
+	}
+	#tab{
+		width: 100vw;
+		height: 1.16rem;
+		background: #fff;
+		border-bottom: 0.16rem solid #f1f1f1;
+		border-top: 0.16rem solid #f1f1f1;
+		line-height: 1.16rem;
+	}
+	#tab .tab {
+		display: block;
+		width: 50vw;
+		line-height: 0.84rem;
+		color: #999;
+		font-size: 0.4rem;
+		text-align: center;
+		float: left;
+	}
+	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active span{
+		display: inline-block;
+	}
+	#refreshContainer{
+		top:calc(50vw + 1.16rem);
+	}
+</style>
 {/block}
 
 {block name="body"}
 <div class="banner">
 	<img src="/home/images/banner/1.jpg" alt="组织架构banner" class="banner-img">
 </div>
-<div class="tabs">
-	<span class="tab active"><span>组织介绍</span></span>
-	<span class="tab"><span>组织架构</span></span>
+<div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+	<a class="mui-control-item" href="#item1mobile" data-index="0">
+		<span>组织介绍</span>
+	</a>
+	<a class="mui-control-item" href="#item2mobile" data-index="1">
+		<span> 组织架构</span>
+	</a>
 </div>
+
+
+		<div class="mui-slider-group">
 <div class="listbox">
+	<div id="item1mobile" class="mui-slider-item mui-control-content">
 	<div class="box summary active">
 		<div class="box_ ">
 			<p>	台州市直党委共68个，其中机关党委36个，事业党委11个，企业党委11个.部门党委7个；党总支部共46个，其中工委直属总支部4个，党委下属总支42个；党支部共746个，其中工委直属支部45个，直属总支下属支部10个，党委下属支部691个。党员共14175名，其中工委直属党员882名，党委、总支下属党员13293名。</p>
 		</div>
 	</div>
-	<div class="town box hidden">
+		</div>
+	<div id="item2mobile" class="mui-slider-item mui-control-content">
+	<div class="town box">
 		<!--小镇党委-->
 		<div class="box_ or">
 			<div class="lists">
@@ -3850,6 +3888,10 @@
 		<!--/小镇党委-->
 	</div>
 </div>
+		</div>
+</div>
+	</div>
+</div>
 
 {/block}
 
@@ -3857,8 +3899,6 @@
 <script src="/home/js/reset.js"></script>
 <script>
 $('title' ).text('通讯名录');
-$(function(){
-
 	function IsPC() {
 		var userAgentInfo = navigator.userAgent;
 		var Agents = ["Android", "iPhone",
@@ -3877,11 +3917,13 @@ $(function(){
 	flag = IsPC();
 	if(flag){
 		$(".banner").css({"width":"640px","height":"320px","margin":"0 auto"})
-		$(".tabs").css({"width":"640px","position":"relative","left":"50%","margin-left":"-320px"});
-		$(".tabs .tab").css({"width":"320px","margin":"0 auto"});
-//		$(".listbox").css({"width":"640px","margin-left":"-320px"	});
-//		$(".listbox .box").css("width","640px");
-//		$(".listbox .box .box_").css({"width":"600px"})
+		$("#tab").css({"width":"640px","position":"relative","left":"50%","margin-left":"-320px"});
+		$("#tab .tab").css({"width":"320px","margin":"0 auto"});
+		$(".listbox").css({"width":"640px","left":"50%","margin-left":"-320px"});
+		$(".listbox .box").css("width","640px");
+		$(".listbox .box.summary .box_").css({"width":"560px","padding":"100px 15px","margin":"20px"})
+		$(".listbox .box .box_").css({"padding":"100px 15px","margin":"20px"})
+
 	}
 
 
@@ -3898,13 +3940,14 @@ $(function(){
 		$(this ).attr('href', href);
 	})
 	$(function(){
-		//标题
-		//tab值记录
-		tabRecord('.tab' ,'.box');
-		//tab切换
-		tabSwitch('.tab' ,'.box');
-		//上拉加载
-	});
+		var co = getCookie("type");
+		if(co == 0 || co == 1){
+			c = co;
+		}else{
+			c =  0;
+		}
+		$("#tab a").eq(c).addClass('mui-active');
+		$(".mui-slider-group .listbox>div").eq(c).addClass('mui-active');
 });
 function slide(){
 	$('.lists .first-tri' ).on('click',function(){
@@ -3945,5 +3988,11 @@ function slide(){
 		detail.toggleClass('down');
 	});
 }
+
+
+mui('#tab').on('tap', 'a', function(e) {
+	c = this.getAttribute("data-index");
+	setCookie('type',c);
+});
 </script>
 {/block}
