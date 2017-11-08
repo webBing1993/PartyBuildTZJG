@@ -134,6 +134,39 @@
     $("title").text("消息审核");
     var c =  0;
     $(function(){
+            function IsPC() {
+                var userAgentInfo = navigator.userAgent;
+                var Agents = ["Android", "iPhone",
+                    "SymbianOS", "Windows Phone",
+                    "iPad", "iPod"];
+                var flag = true;
+                for (var v = 0; v < Agents.length; v++) {
+                    if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                        flag = false;
+                        break;
+                    }
+                }
+                return flag;
+            }
+
+            flag = IsPC();
+            if(flag){
+                $("#tab").css({"width":"640px","left":"50%","margin-left":"-320px"});
+                $("#refreshContainer").css({"width":"640px","left":"50%","margin-left":"-320px"})
+                $("ul li a img").css({"width":"90px","height":"60px","margin-top":"15px"});
+                $("ul li a span:nth-child(2)").css({"font-size":"16px","margin-left":"100px"});
+                $("ul li a span:nth-child(4").css({"font-size":"14px","bottom":"15px","right":"40%"})
+                $("ul li a span:nth-child(3)").css({"left":"100px","font-size":"14px"})
+                 $(".default img").css("width","60px");
+                $(".list li a, .Audited li a").css({"height":"90px"});
+                $(".Audited ul li a p:nth-child(3)").css("bottom","30px")
+                $(".Audited ul li p").css({"font-size":"12px","margin-left":"100px"});
+                $(".mui-icon-forward").css({"top":"40px","height":"10px","width":"10px"});
+                $(".mui-icon").css("font-size","14px");
+                $(".Audited ul li a span:nth-child(2)").css({"font-size":"14px","width":"440px","margin-top":"5px"});
+                $(".Audited ul li a span:nth-child(5)").css({"font-size":"12px","bottom":"15px"})
+
+            }
         //tab初始化和数据存储
         var co = getCookie("type");
         if(co == 0 || co == 1 || co== 2 ){
@@ -145,6 +178,9 @@
         $(".mui-slider-group>div").eq(c).addClass('mui-active');
     })
     window.onload = function() {
+     if(flag){
+               $(".mui-pull .mui-pull-caption").css("font-size","15px");
+           }
         skidding();
         if(c==0){
             if ($(".publish ul li").length < 7) {
@@ -270,41 +306,43 @@
             }else if(list.class == 7){
                 class_name = '[党风廉政]';
             }
+
+            if(flag){
             if(type==0) {
                 html +=
                         '<li>' +
-                        '<a href="' + link + '"  class="list clear" data-type="' + list.class + '">' +
-                        '<img src="' + list.front_cover + '">' +
-                        '<span>' + list.title + '</span>' +
-                        '<span>' + class_name + ' 发布人：' + list.publisher + '</span>' +
-                        '<span>' + list.create_time + '</span>' +
-                        '<span class="mui-icon mui-icon-forward"></span>' +
+                        '<a href="' + link + '"  class="list clear" data-type="' + list.class + '" style="height:90px;">' +
+                        '<img src="' + list.front_cover + '" style="width:90px;height:60px;margin-top:15px">' +
+                        '<span style="font-size:16px;margin-left:100px;">' + list.title + '</span>' +
+                        '<span style="left:100px;font-size:14px;">' + class_name + ' 发布人：' + list.publisher + '</span>' +
+                        '<span style="font-size: 14px;bottom: 15px;right: 40%;">' + list.create_time + '</span>' +
+                        '<span class="mui-icon mui-icon-forward" style="top: 40px; height: 10px;width: 10px;font-size: 14px;"></span>' +
                         '<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">不通过</i><i class="pass"  data-id="' + list.id + '" data-class="' + list.class + '">通&nbsp;过</i>' +
                         '</a>' +
                         '</li>'
             }else if(type==1){
                 html +=
                         '<li>' +
-                        '<a href="' + link + '"  class="list clear" data-type="' + list.class + '">' +
-                        '<img src="' + list.front_cover + '">' +
-                        '<span>' + list.title + '</span>' +
-                        '<span>' + list.pre + ' 发布人：' + list.publisher + '</span>' +
-                        '<span>' + list.create_time + '</span>' +
-                        '<span class="mui-icon mui-icon-forward"></span>' +
+                        '<a href="' + link + '"  class="list clear" data-type="' + list.class + '" style="height:90px;">' +
+                        '<img src="' + list.front_cover + '" style="width:90px;height:60px;margin-top:15px">' +
+                        '<span style="font-size:16px;margin-left:100px;">' + list.title + '</span>' +
+                        '<span style="left:100px;font-size:14px;">' + list.pre + ' 发布人：' + list.publisher + '</span>' +
+                        '<span style="font-size: 14px;bottom: 15px;right: 40%;">' + list.create_time + '</span>' +
+                        '<span class="mui-icon mui-icon-forward" style="top: 40px; height: 10px;width: 10px;font-size: 14px;"></span>' +
                         '<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">不通过</i><i class="pass"  data-id="' + list.id + '" data-class="' + list.class + '">通&nbsp;过</i>' +
                         '</a>' +
                         '</li>'
             }else{
                 html +=
                         '<li>'+
-                        '<a href="#" class="list clear" data-type="' + list.class + '">'+
-                        '<img src="'+list.front_cover+'">'+
-                        '<span>'+ list.title + '</span>'+
-                        '<p>'+ class_name+ '</p>'+
-                        '<p>'+
+                        '<a href="#" class="list clear" data-type="' + list.class + '" style="height:90px;">'+
+                        '<img src="'+list.front_cover+'" style="width:90px;height:60px;margin-top:15px">'+
+                        '<span style="font-size:14px;margin-left:100px;width:440px;margin-top:5px">'+ list.title + '</span>'+
+                        '<p style="margin-left:100px;font-size:12px;bottom:30px;">'+ class_name+ '</p>'+
+                        '<p style="font-size:12px;margin-left:100px">'+
                         '	审核人：  '+list.username+''+
                         '</p>'+
-                        '<span> '+list.review_time+'</span>'
+                        '<span style="font-size:12px;bottom:15px"> '+list.review_time+'</span>'
                 if (list.review_status == 1){
                     html+='<i class="pass"></i>';
                 }else if (list.review_status == 2){
@@ -314,6 +352,56 @@
                 }
                         html +='</a>'+
                         '</li>';
+            }
+            }else{
+             if(type==0) {
+                            html +=
+                                    '<li>' +
+                                    '<a href="' + link + '"  class="list clear" data-type="' + list.class + '">' +
+                                    '<img src="' + list.front_cover + '">' +
+                                    '<span>' + list.title + '</span>' +
+                                    '<span>' + class_name + ' 发布人：' + list.publisher + '</span>' +
+                                    '<span>' + list.create_time + '</span>' +
+                                    '<span class="mui-icon mui-icon-forward"></span>' +
+                                    '<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">不通过</i><i class="pass"  data-id="' + list.id + '" data-class="' + list.class + '">通&nbsp;过</i>' +
+                                    '</a>' +
+                                    '</li>'
+                        }else if(type==1){
+                            html +=
+                                    '<li>' +
+                                    '<a href="' + link + '"  class="list clear" data-type="' + list.class + '">' +
+                                    '<img src="' + list.front_cover + '">' +
+                                    '<span>' + list.title + '</span>' +
+                                    '<span>' + list.pre + ' 发布人：' + list.publisher + '</span>' +
+                                    '<span>' + list.create_time + '</span>' +
+                                    '<span class="mui-icon mui-icon-forward"></span>' +
+                                    '<i class="fail" data-id="' + list.id + '" data-class="' + list.class + '">不通过</i><i class="pass"  data-id="' + list.id + '" data-class="' + list.class + '">通&nbsp;过</i>' +
+                                    '</a>' +
+                                    '</li>'
+                        }else{
+                            html +=
+                                    '<li>'+
+                                    '<a href="#" class="list clear" data-type="' + list.class + '">'+
+                                    '<img src="'+list.front_cover+'">'+
+                                    '<span>'+ list.title + '</span>'+
+                                    '<p>'+ class_name+ '</p>'+
+                                    '<p>'+
+                                    '	审核人：  '+list.username+''+
+                                    '</p>'+
+                                    '<span> '+list.review_time+'</span>'
+                            if (list.review_status == 1){
+                                html+='<i class="pass"></i>';
+                            }else if (list.review_status == 2){
+                                html+='<i class="refuse"></i>';
+                            }else if (list.review_status == 0){
+                                html +='<i style="right: 0;width: 0.8rem;background: #ffff00;"></i>';
+                            }
+                                    html +='</a>'+
+                                    '</li>';
+                        }
+
+
+
             }
         }
         if(type==0){

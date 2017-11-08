@@ -52,5 +52,33 @@
     if($(".message div").length==0){
         $(".article .message").css("border","none");
     }
+
+
+    $(function(){
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        flag = IsPC();
+        if(flag){
+           $(".article").css({"width":"640px","margin":"0 auto"});
+            $(".article .title p").css("font-size","17px");
+            $(".article .note").css("font-size","14px");
+            $(".comment .sum").css({"font-size":"14px","height":"30px","line-height":"30px"});
+            $(".article-content p, .article-content p span, .article-content").css("font-size","16px")
+
+        }
+    });
 </script>
 {/block}
