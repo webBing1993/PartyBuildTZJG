@@ -146,6 +146,7 @@ height:100%;
             $(".list ul a span:nth-child(3)").css("bottom","10px");
             $(".list ul a span:nth-child(4)").css("bottom","10px");
             $(".default img").css("width","60px");
+            $(".manager.after").css({"left":"50%","margin-left":"320px"});
         }
 
         //tab初始化和数据存储
@@ -159,6 +160,9 @@ height:100%;
         $(".mui-slider-group>div").eq(c).addClass('mui-active');
     })
     window.onload = function() {
+     if(flag){
+                    $(".mui-pull .mui-pull-caption").css("font-size","15px");
+                }
         moveanyway("publish");
         if(c==0){
             if ($(".training ul a").length < 8) {
@@ -225,7 +229,20 @@ height:100%;
         var len = lists.length;
         for(var i = 0; i< len;i++){
             var list = lists[i];
+            if(flag){
             if(list.templet==1){
+                html += '<a href="/home/volunteer/detail/id/'+list.id+'.html">'
+            }else{
+                html += '<a href="/home/volunteer/detail2/id/'+list.id+'.html">'
+            }
+            html +=
+                    '<img src="'+list.path+'">'+
+                    '<p style="font-size:16px;">'+list.title+'</p>'+
+                    '<span style="font-size:14px;bottom:10px;">'+list.publisher+'</span>'+
+                    '<span style="font-size:14px;bottom:10px">'+list.time+'</span>'+
+                    '</a>'
+            }else{
+              if(list.templet==1){
                 html += '<a href="/home/volunteer/detail/id/'+list.id+'.html">'
             }else{
                 html += '<a href="/home/volunteer/detail2/id/'+list.id+'.html">'
@@ -236,6 +253,8 @@ height:100%;
                     '<span>'+list.publisher+'</span>'+
                     '<span>'+list.time+'</span>'+
                     '</a>'
+
+            }
         }
         if(type==0){
             $('.training ul').append(html);

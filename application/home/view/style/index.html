@@ -68,14 +68,20 @@
            flag = IsPC();
            if(flag){
                $("#refreshContainer").css({"width":"640px","left":"50%","margin-left":"-320px"});
-               $(".list ul a p").css({"margin-bottom":"0.5rem"});
+               $(".list ul a p").css({"margin-bottom":"0.5rem","font-size":"16px"});
+               $(".list ul a span").css({"font-size":"14px"});
                 $(".default img").css("width","60px");
+                  $(".manager.after").css({"left":"50%","margin-left":"320px"});
            }
 
 
 
     });
     window.onload = function() {
+
+     if(flag){
+                    $(".mui-pull .mui-pull-caption").css("font-size","15px");
+                }
         moveanyway();
         if ($(".list ul a").length < 8) {
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
@@ -130,16 +136,29 @@
         var len = lists.length;
         for(var i = 0; i< len;i++){
             var list = lists[i];
+            if(flag){
             if(list.templet==1){
                 html += '<a href="/home/style/detail/id/'+list.id+'.html">'
             }else{
                 html += '<a href="/home/style/detail2/id/'+list.id+'.html">'
             }
             html +=
-                    '<p>'+list.title+'</p>'+
-                    '<span>'+list.publisher+'</span>'+
-                    '<span>'+list.time+'</span>'+
+                    '<p style="margin-bottom:0.5rem;font-size:16px">'+list.title+'</p>'+
+                    '<span style="font-size:14px;">'+list.publisher+'</span>'+
+                    '<span style="font-size:14px">'+list.time+'</span>'+
                     '</a>'
+                    }else{
+                    if(list.templet==1){
+                                    html += '<a href="/home/style/detail/id/'+list.id+'.html">'
+                                }else{
+                                    html += '<a href="/home/style/detail2/id/'+list.id+'.html">'
+                                }
+                                html +=
+                                        '<p>'+list.title+'</p>'+
+                                        '<span>'+list.publisher+'</span>'+
+                                        '<span>'+list.time+'</span>'+
+                                        '</a>'
+                    }
         }
         $('.list ul').append(html);
     }

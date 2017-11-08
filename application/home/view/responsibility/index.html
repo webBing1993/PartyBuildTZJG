@@ -74,6 +74,7 @@
                     $(".list ul a span:nth-child(3)").css("bottom","10px");
                     $(".list ul a span:nth-child(4)").css("bottom","10px");
                     $(".default img").css("width","60px");
+                    $(".manager.after").css({"left":"50%","margin-left":"320px"});
                 }
         if(type==1){
             $("title").text("专题研究");
@@ -85,7 +86,10 @@
     });
 
     window.onload = function() {
-        moveanyway("publish");
+     if(flag){
+                $(".mui-pull .mui-pull-caption").css("font-size","15px");
+            }
+            moveanyway("publish");
         if ($(".list ul a").length < 8) {
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
         } else {
@@ -148,8 +152,8 @@
             }
             html +=
                     '<p style="margin-bottom:30px;font-size:16px">'+list.title+'</p>'+
-                    '<span style="style="margin-bottom:30px;font-size:16px"">'+list.publisher+'</span>'+
-                    '<span>'+list.time+'</span>'+
+                    '<span style="style="margin-bottom:30px;font-size:14px"">'+list.publisher+'</span>'+
+                    '<span style="font-size:14px">'+list.time+'</span>'+
                     '</a>'
             }else{
               if(list.templet==1){

@@ -119,6 +119,7 @@
             $(".list ul a span:nth-child(3)").css("bottom","10px");
             $(".list ul a span:nth-child(4)").css("bottom","10px");
             $(".default img").css("width","60px");
+            $(".manager.after").css({"left":"50%","margin-left":"320px"});
         }
         $("title").text("述职报告");
         //tab初始化和数据存储
@@ -133,6 +134,9 @@
     })
 
     window.onload = function() {
+        if(flag){
+            $(".mui-pull .mui-pull-caption").css("font-size","15px");
+        }
         moveanyway("publish");
         if(c==0){
             if ($(".secretary ul a").length < 8) {
