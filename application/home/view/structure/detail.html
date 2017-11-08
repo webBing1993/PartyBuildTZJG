@@ -15927,7 +15927,28 @@ for(var i = 0 ; i < len ;i++){
 }
 
 $(function(){
+	function IsPC() {
+		var userAgentInfo = navigator.userAgent;
+		var Agents = ["Android", "iPhone",
+			"SymbianOS", "Windows Phone",
+			"iPad", "iPod"];
+		var flag = true;
+		for (var v = 0; v < Agents.length; v++) {
+			if (userAgentInfo.indexOf(Agents[v]) > 0) {
+				flag = false;
+				break;
+			}
+		}
+		return flag;
+	}
 
+	flag = IsPC();
+	if(flag){
+		$(".d_lists").css({"width":"640px"});
+		$(".d_list").css("padding","15px");
+		$(".d_lists .title").css({"width":"640px","left":"50%","margin-left":"-320px","top":"0"})
+		$(".d_lists").css("margin-top","200px");
+	}
 });
 </script>
 {/block}

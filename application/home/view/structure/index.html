@@ -3858,6 +3858,33 @@
 <script>
 $('title' ).text('通讯名录');
 $(function(){
+
+	function IsPC() {
+		var userAgentInfo = navigator.userAgent;
+		var Agents = ["Android", "iPhone",
+			"SymbianOS", "Windows Phone",
+			"iPad", "iPod"];
+		var flag = true;
+		for (var v = 0; v < Agents.length; v++) {
+			if (userAgentInfo.indexOf(Agents[v]) > 0) {
+				flag = false;
+				break;
+			}
+		}
+		return flag;
+	}
+
+	flag = IsPC();
+	if(flag){
+		$(".banner").css({"width":"640px","height":"320px","margin":"0 auto"})
+		$(".tabs").css({"width":"640px","position":"relative","left":"50%","margin-left":"-320px"});
+		$(".tabs .tab").css({"width":"320px","margin":"0 auto"});
+//		$(".listbox").css({"width":"640px","margin-left":"-320px"	});
+//		$(".listbox .box").css("width","640px");
+//		$(".listbox .box .box_").css({"width":"600px"})
+	}
+
+
 	//组织架构切换
 	slide();
 	$('.name2' ).each(function(){

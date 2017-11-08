@@ -316,22 +316,22 @@
             if(flag) {
                 html += '<div class="list clear">' +
                         '<div class="fl">' +
-                        '<img src="' + list.header + '" alt="用户" class="user">' +
-                        '</div>' +
-                        '<div class="fl mid">' +
-                        '<div class="name limit">' + list.nickname + '</div>' +
-                        '<div class="content" >' + list.content + '</div>' +
-                        '<div class="time">' + list.time + '</div>' +
-                        '</div>';
-            }else{
-                html += '<div class="list clear">' +
-                        '<div class="fl">' +
                         '<img src="' + list.header + '" alt="用户" class="user" style="width:60px;height:60px;">' +
                         '</div>' +
                         '<div class="fl mid">' +
                         '<div class="name limit" style="margin-left:0;font-size:16px">' + list.nickname + '</div>' +
                         '<div class="content" style="padding-left:0;font-size:15px;margin-top:5px;margin-bottom:5px">' + list.content + '</div>' +
                         '<div class="time"  style="margin-left:0;font-size:14px;line-height:20px">' + list.time + '</div>' +
+                        '</div>';
+            }else{
+                html += '<div class="list clear">' +
+                        '<div class="fl">' +
+                        '<img src="' + list.header + '" alt="用户" class="user">' +
+                        '</div>' +
+                        '<div class="fl mid">' +
+                        '<div class="name limit">' + list.nickname + '</div>' +
+                        '<div class="content" >' + list.content + '</div>' +
+                        '<div class="time">' + list.time + '</div>' +
                         '</div>';
             }
             if ({$visit} == 0){
