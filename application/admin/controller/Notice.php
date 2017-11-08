@@ -84,7 +84,7 @@ class Notice extends Admin
         if (empty($id)){
             return $this->error('系统错误,参数不存在');
         }
-        $info = NoticeModel::where(['id' => $id,'status' => 0])->find();
+        $info = NoticeModel::where(['id' => $id])->find();
         $str = strip_tags($info['content']);
         $des = mb_substr($str,0,40);
         $content = str_replace("&nbsp;","",$des);  //空格符替换成空
@@ -98,30 +98,34 @@ class Notice extends Admin
             'url'  => $url,
             'picurl' => $path
         );
+        $send = array(
+          "articles" => array(
+              0 => $information
+          )
+        );
         if ($info['type'] == 1){
             // 所有人
             $message = array(
-                "touser" => "@all",
+//                "touser" => "@all",
                 "msgtype" => 'news',
                 "agentid" =>1000009,
-                "news" => ["articles" => $information],
-                "safe" => "0"
+                "news" => $send,
             );
         }else{
             // 指定对象  标签
             $message = array(
-                "totag" => 1,
+//                "totag" => 1,
                 "msgtype" => 'news',
                 "agentid" =>1000009,
-                "news" => ["articles" => $information],
+                "news" => $send,
                 "safe" => "0"
             );
         }
         //发送给企业号
         $Wechat = new TPQYWechat(Config::get('notice'));
-        $msg = $Wechat->sendMessage($message);  // 推送至审核
+        $msg = $Wechat->sendMessage($message);
         
-        if($msg['errcode'] == 0){
+        if($msg['errcode'] === 0){
             //保存到推送列表
             $result = NoticeModel::where('id',$id)->update(['push' => 1]);
             if($result){
