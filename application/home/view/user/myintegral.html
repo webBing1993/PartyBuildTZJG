@@ -18,7 +18,7 @@
 <div class="line">
     <span>积分明细</span>
 </div>
-        <ul>
+        <ul class="in-points">
             {volist name="$msg" id="ms"}
             <li>
                 <p class="title">
@@ -133,11 +133,33 @@
         flag = IsPC();
         if(flag){
             $(".banner").css({"width":"460px","margin":"0 auto","height":"320px"});
-            $("#myCanvas").css({"height":"180px","width":"220px"});
-            $("#dashed").css({"height":"250px","width":"320px"})
-
+            $("#myCanvas").css({"height":"210px","width":"300px"});
+            $("#dashed").css({"height":"250px","width":"320px"});
+            $(".banner .point").css({"top":"50px"});
+            $(".banner .point").css({"top":"50px","font-size":"20px"});
+            $(".banner .num").css({"top":"90px","font-size":"32px"});
+            $(".banner .time").css({"top":"140px","font-size":"18px"});
+            $(".rule").css({"width":"280px","height":"40px","line-height":"40px","top":"0"});
+            $(".line").css({"width":"640px","margin":"0 auto"});
+            $(".line span").css("font-size","18px");
+            $(".in-points").css({"width":"640px","margin":"0 auto"});
+            $("ul li .title span").css("font-size","18px");
+            $("ul li .content").css("font-size","16px");
+            $("ul li .time").css("font-size","14px");
+            $("ul li .point").css({"right":"50%","margin-right":"-320px"});
+            $(".modal-content").css({"width":"600px","height":"540px"});
+            $("#close").css("margin","0 auto 0 auto");
+            $(".modal-open").css({"postion":"static","overflow":"hidden"})
+        }else{
+            $(".modal-open").css({"postion":"fixed","overflow":"hidden"})
         }
     });
+
+    window.onload = function(){
+        if(flag){
+            $(".modal-open").css({"postion":"static","overflow":"hidden"})
+        }
+    }
 
     var width = $(window).width();
     $("#myCanvas").css("width",width);
