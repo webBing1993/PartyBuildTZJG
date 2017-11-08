@@ -114,6 +114,31 @@
 
 {block name="script"}
 <script>
+    $(function(){
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        flag = IsPC();
+        if(flag){
+            $(".banner").css({"width":"460px","margin":"0 auto","height":"320px"});
+            $("#myCanvas").css({"height":"180px","width":"220px"});
+            $("#dashed").css({"height":"250px","width":"320px"})
+
+        }
+    });
+
     var width = $(window).width();
     $("#myCanvas").css("width",width);
     $("#dashed").css("width",width);
