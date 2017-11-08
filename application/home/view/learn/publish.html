@@ -194,6 +194,28 @@
     var c =  parseInt(window.location.href.split("style/")[1]);
     var index =  parseInt(window.location.href.split("?")[1]);
     $(function(){
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        flag = IsPC();
+        if(flag){
+            $(".list").css({"width":"640px","margin":"0 auto"});
+            $(".list ul li").css("position","relative");
+            $(".list ul textarea").css("height","300px");
+            $(".goreview+p").css({"width":"640px","margin":"0 auto"});
+        }
         imgresize();
         if($(".img img").length==3){
             $(".add").hide();

@@ -251,19 +251,20 @@
         flag = IsPC();
         if(flag){
             $(".default img").css("width","60px");
-            $("#refreshContainer").css({"width":"640px","top":"320px"});
+            $("#refreshContainer").css({"width":"640px","top":"320px","left":"50%","margin-left":"-320px"});
             $(".list ul a img").css({"width":"90px","height":"60px","margin-right":"10px"});
             $(".banner").css({"width":"640px","height":"230px","margin":"0 auto"});
             $(".banner img").css({"width":"640px","height":"230px","margin":"0 auto"});
             $("#tab a").css({"padding":"0 30px"});
-            $("#tab").css("width","800px");
+            $("#tab").css("width","940px");
             $(".nav .arr").css("width","60px")
-            $(".nav").css({"width":"640px"});
+            $(".nav").css({"width":"640px","left":"50%","margin-left":"-320px"});
             $(".list ul a").css("padding","10px 15px");
-            $(".list ul a p").css({"font-size":"14px"});
-            $(".list ul a span").css({"font-size":"12px"});
+            $(".list ul a p").css({"font-size":"16px","margin-bottom":"0.5rem"});
+            $(".list ul a span").css({"font-size":"14px"});
             $(".list ul a span:nth-child(3)").css("bottom","10px");
             $(".list ul a span:nth-child(4)").css({"bottom":"10px","right":"15px"});
+            $(".manager.after").css({"left":"50%","margin-left":"320px"});
         }
 
         //tab初始化和数据存储
@@ -275,7 +276,11 @@
         }
         if(c==4 || c==3){
             var tabs = $(".tabs");
-            var ww = $('body').width();
+            if(flag){
+                var ww = 640;
+            }else{
+                var ww = $('body').width();
+            }
             var tw = $('.tabs' ).width() - ww;
             tabs.animate({left:-tw+'px'}, 300);
             $('.right').animate({right: -0.8*ww + 'px'}, 300);
@@ -285,6 +290,9 @@
         $(".mui-slider-group>div").eq(c).addClass('mui-active');
     })
     window.onload = function() {
+        if(flag){
+            $(".mui-pull .mui-pull-caption").css("font-size","15px");
+        }
         moveanyway("publish");
         tabmove();
         if(c==0){
@@ -516,14 +524,22 @@
 
         });
         mui('.nav').on('tap', '.right', function(e) {
-            var ww = $('body').width();
+            if(flag){
+                var ww = 640;
+            }else{
+                var ww = $('body').width();
+            }
             var tw = $('.tabs' ).width() - ww;
             tabs.animate({left:-tw+'px'}, 300);
             $('.right').animate({right: -0.8*ww + 'px'}, 300);
             $('.left').animate({left: 0}, 300);
         });
         mui('.nav').on('tap', '.left', function(e) {
-            var ww = $('body').width();
+            if(flag){
+                var ww = 640;
+            }else{
+                var ww = $('body').width();
+            }
             tabs.animate({left: 0}, 300);
             $('.right').animate({right: 0}, 300);
             $('.left').animate({left: -0.8*ww + 'px'}, 300);

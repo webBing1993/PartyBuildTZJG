@@ -112,6 +112,38 @@
 <script>
     var c = 0;
     $(function(){
+
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        flag = IsPC();
+        if(flag){
+            $(".banner").css({"width":"640px","height":"320px","margin":"0 auto"})
+            $("#tab a").css("font-size","18px");
+            $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"})
+            $("#tab").css({"margin-top":"320px","width":"640px","position":"static","top":"0","margin":"0 auto"})
+            $("#refreshContainer").css({"top":"380px","width":"640px","left":"50%","margin-left":"-320px"});
+            $(".list ul a").css("padding","10px 15px");
+            $(".list ul a img").css({"width":"90px","height":"60px"});
+            $(".list ul a p").css("font-size","16px");
+            $(".list ul a span").css("font-size","14px");
+            $(".list ul a span:nth-child(3)").css("bottom","10px");
+            $(".list ul a span:nth-child(4)").css("bottom","10px");
+            $(".default img").css("width","60px");
+            $(".manager.after").css({"left":"50%","margin-left":"320px"});
+        }
         $("title").text("年度计划");
         //tab初始化和数据存储
         var co = getCookie("type");
@@ -124,6 +156,9 @@
         $(".mui-slider-group>div").eq(c).addClass('mui-active');
     })
     window.onload = function() {
+        if(flag){
+            $(".mui-pull .mui-pull-caption").css("font-size","15px");
+        }
         moveanyway("publish");
         if(c==0){
             if ($(".training ul a").length < 8) {
@@ -192,16 +227,29 @@
         var len = lists.length;
         for(var i = 0; i< len;i++){
             var list = lists[i];
-            if(list.templet==1){
-                html += '<a href="/home/Learn/detail/id/'+list.id+'.html">'
+            if(flag) {
+                if (list.templet == 1) {
+                    html += '<a href="/home/Learn/detail/id/' + list.id + '.html">'
+                } else {
+                    html += '<a href="/home/Learn/detail2/id/' + list.id + '.html">'
+                }
+                html +=
+                        '<p style="margin-bottom: 0.5rem;font-size: 16px">' + list.title + '</p>' +
+                        '<span style="font-size: 14px">' + list.publisher + '</span>' +
+                        '<span style="font-size: 14px">' + list.time + '</span>' +
+                        '</a>'
             }else{
-                html += '<a href="/home/Learn/detail2/id/'+list.id+'.html">'
+                if (list.templet == 1) {
+                    html += '<a href="/home/Learn/detail/id/' + list.id + '.html">'
+                } else {
+                    html += '<a href="/home/Learn/detail2/id/' + list.id + '.html">'
+                }
+                html +=
+                        '<p>' + list.title + '</p>' +
+                        '<span>' + list.publisher + '</span>' +
+                        '<span>' + list.time + '</span>' +
+                        '</a>'
             }
-            html +=
-                    '<p>'+list.title+'</p>'+
-                    '<span>'+list.publisher+'</span>'+
-                    '<span>'+list.time+'</span>'+
-                    '</a>'
         }
         if(type==0){
             $('.training ul').append(html);

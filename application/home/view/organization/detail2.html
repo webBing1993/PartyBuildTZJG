@@ -100,6 +100,9 @@
         $("title").text("规范化建设");
     }
     window.onload = function(){
+        if(flag){
+            $(".mui-pull .mui-pull-caption").css("font-size","15px");
+        }
         if($(".list").length< 7){
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
         }else{
@@ -136,7 +139,10 @@
             $(".comment .lists .list .fl img").css({"width":"60px","height":"60px"});
             $(".comment .lists .list .mid .name").css({"margin-left":"0","font-size":"16px"});
             $(".comment .lists .list .mid .content").css({"padding-left":"0","font-size":"14px","margin-top":"5px","margin-bottom":"5px"})
-            $(".comment .lists .list .mid .time").css({"margin-left":"0","font-size":"14px","line-height":"20px"})
+            $(".comment .lists .list .mid .time").css({"margin-left":"0","font-size":"14px","line-height":"20px"});
+            $(".bottom").css({"width":"640px","height":"70px","padding":"15px","left":"50%","margin-left":"-320px"});
+            $(".bottom .myword input").css({"width":"600px","height":"30px","font-size":"14px","margin-top":"5px"});
+            $(".lists").css("padding-bottom","10px");
         }
     });
 

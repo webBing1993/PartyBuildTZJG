@@ -206,6 +206,9 @@
     })
 
     window.onload = function() {
+      if(flag){
+                $(".mui-pull .mui-pull-caption").css("font-size","15px");
+            }
         if(c==0){
             if ($(".notice a").length < 10) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();

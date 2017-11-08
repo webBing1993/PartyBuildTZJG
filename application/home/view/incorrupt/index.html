@@ -54,8 +54,11 @@ function IsPC() {
     flag = IsPC();
     if(flag){
         $("#refreshContainer").css({"width":"640px","left":"30%"});
-        $(".list ul a p").css({"margin-bottom":"0.5rem"});
+        $(".list ul a p").css({"margin-bottom":"0.5rem","font-size":"16px"});
+         $(".list ul a span").css({"font-size":"14px"});
+         $(".mui-pull .mui-pull-caption").css("font-size","15px");
          $(".default img").css("width","60px");
+         $(".manager.after").css({"left":"50%","margin-left":"320px"});
     }
 })
 
@@ -66,6 +69,9 @@ function IsPC() {
         $("title").text("纪检报告");
     }
     window.onload = function() {
+      if(flag){
+             $(".mui-pull .mui-pull-caption").css("font-size","15px");
+        }
         moveanyway("publish");
         if ($(".list ul a").length < 8) {
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
@@ -127,9 +133,9 @@ function IsPC() {
             }
         if(flag){
             html +=
-                '<p style="margin-bottom:0.5rem">'+list.title+'</p>'+
-                '<span>'+list.publisher+'</span>'+
-                '<span>'+list.time+'</span>'+
+                '<p style="margin-bottom:0.5rem;font-size:16px;">'+list.title+'</p>'+
+                '<span style="font-size:14px;">'+list.publisher+'</span>'+
+                '<span style="font-size:14px;">'+list.time+'</span>'+
                 '</a>'
             }else{
               html +=
