@@ -4,7 +4,8 @@
 <style>
     .shadow{width: 100%;height: 100%;position: absolute;left: 0;top: 0;background: rgba(0,0,0,0.4);z-index: 88;}
     input[name='jg'],input[name='xt'],input[name='my']{width:40px;text-align: center;margin:0 10px;}
-    .minus,.add,.add1{cursor: pointer;display: inline-block;
+    input[name='up'],input[name='float'],input[name='low']{width:40px;text-align: center;margin:0 10px;}
+    .minus,.add,.add1,.down b{cursor: pointer;display: inline-block;
         width: 20px;
         text-align: center;}
 </style>
@@ -51,6 +52,9 @@
                                 <th>机关效能</th>
                                 <th>四种形态</th>
                                 <th>满意度测评</th>
+                                <th>被上级机关查处通报(- 4)</th>
+                                <th>被市级查处通报(- 2)</th>
+                                <th>反馈本单位处理(- 1)</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -63,6 +67,9 @@
                                 <td><span class="minus" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.efficiency}" name="jg" readonly><span class="add" style="font-size: 20px"><b>+</b></span></td>
                                 <td><span class="minus" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.form}" name="xt" readonly><span class="add" style="font-size: 20px"><b>+</b></span></td>
                                 <td><span class="minus" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.satisfaction}" name="my" readonly><span class="add1" style="font-size: 20px"><b>+</b></span></td>
+                                <td><span class="down" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.up}" name="up" readonly></td>
+                                <td><span class="down" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.float}" name="float" readonly></td>
+                                <td><span class="down" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.low}" name="low" readonly></td>
                             </tr>
                             {/volist}
                             </tbody>
@@ -118,6 +125,33 @@
     });
 
     var reload = false;
+    $(".down").click(function(){
+        if(!reload) {
+            reload = true;
+            var id = $(this).data("id");
+            var val = $(this).parent().children("input").val();
+            var name = $(this).parent().children("input").prop("name");
+            var num;
+            if (name == "up") {
+                var _class = 4;
+                num = 4;
+            } else if (name == "float") {
+                var _class = 5;
+                num = 2;
+            } else {
+                var _class = 6;
+                num = 1;
+            }
+            changeNum(1, id, _class);
+            var vals;
+            if(val == 0){
+                vals = 0;
+            }else{
+                vals = parseInt(val.split("-")[1]);
+            }
+            $(this).parent().children("input").val(-(vals + num));
+        }
+    });
     $(".minus").click(function(){
         if(!reload) {
             reload = true;
