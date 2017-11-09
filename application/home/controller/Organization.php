@@ -32,6 +32,23 @@ class Organization extends Base{
         return $this->fetch();
     }
 
+    /* 离退休党员台账资料 */
+    public function retirement(){
+        $Model = new OrganizationModel();
+        $list = $Model->getInformation();
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+
+
+    /* 党费收缴 */
+    public function fee(){
+        $Model = new OrganizationModel();
+        $list = $Model->getInformation();
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+
     /**
      * 加载更多
      */

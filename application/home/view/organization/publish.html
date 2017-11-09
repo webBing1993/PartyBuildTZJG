@@ -7,6 +7,16 @@
 {block name="body"}
 <div class="list">
     <ul>
+
+
+        <li class="showup" style="display: none;">
+            模块
+            <a id="openPopover2" href="#popover2">阵地建设</a>
+            <span class="triangle-down"></span>
+        </li>
+
+
+
         {empty name="msg"}
         <li>
             模板
@@ -60,6 +70,15 @@
         <li class="mui-table-view-cell"><a>轮播型</a></li>
     </ul>
 </div>
+
+
+<div id="popover2" class="mui-popover" >
+    <ul class="mui-table-view">
+        <li class="mui-table-view-cell"><a>阵地建设</a></li>
+        <li class="mui-table-view-cell"><a>按期换届</a></li>
+        <li class="mui-table-view-cell"><a>主题党日</a></li>
+    </ul>
+</div>
 {/block}
 
 {block name="script"}
@@ -95,8 +114,13 @@
         }
         if(type==1){
             $("title").text("规范化建设");
+            $(".showup").show();
         }else if(type==2){
             $("title").text("信息录用");
+        }else if(type==3){
+            $("title").text("离退休党员台账资料");
+        }else if(type==4){
+            $("title").text("党费收缴");
         }
     });
 
@@ -104,14 +128,37 @@
     $(".save").click(function(){
         var templet = $("#openPopover").html();
         var userid = "{$userId}";
-        var data={
-            title:$("input[name='title']").val(),
-            content:$("textarea[name='content']").val(),
-            userid:userid,
-            id:$("input[name='id']").val(),
-            type:type,
-            status:3
-        };
+        if(type==1){
+            var _class = $("#openPopover2").html();
+            var data={
+                title:$("input[name='title']").val(),
+                content:$("textarea[name='content']").val(),
+                userid:userid,
+                id:$("input[name='id']").val(),
+                type:type,
+                status:0
+            };
+            switch (_class){
+                case "阵地建设":
+                    data["class"] = 1;
+                    break;
+                case "按期换届":
+                    data["class"] = 2;
+                    break;
+                case "主题党日":
+                    data["class"] = 3;
+                    break;
+            }
+        }else{
+            var data={
+                title:$("input[name='title']").val(),
+                content:$("textarea[name='content']").val(),
+                userid:userid,
+                id:$("input[name='id']").val(),
+                type:type,
+                status:3
+            };
+        }
             data['list_images']=[];
             if(templet == "普通型"){
                 data["templet"] = 1;
@@ -161,14 +208,37 @@
         var single = false;
         var templet = $("#openPopover").html();
         var userid = "{$userId}";
-        var data={
-            title:$("input[name='title']").val(),
-            content:$("textarea[name='content']").val(),
-            userid:userid,
-            id:$("input[name='id']").val(),
-            type:type,
-            status:0
-        };
+        if(type==1){
+            var _class = $("#openPopover2").html();
+            var data={
+                title:$("input[name='title']").val(),
+                content:$("textarea[name='content']").val(),
+                userid:userid,
+                id:$("input[name='id']").val(),
+                type:type,
+                status:0
+            };
+            switch (_class){
+                case "阵地建设":
+                    data["class"] = 1;
+                    break;
+                case "按期换届":
+                    data["class"] = 2;
+                    break;
+                case "主题党日":
+                    data["class"] = 3;
+                    break;
+            }
+        }else{
+            var data={
+                title:$("input[name='title']").val(),
+                content:$("textarea[name='content']").val(),
+                userid:userid,
+                id:$("input[name='id']").val(),
+                type:type,
+                status:0
+            };
+        }
         for(var key in data){
             if(data["title"]!= ''&& data["content"]!=""){
                 single = true;
@@ -233,6 +303,12 @@
         var select_it = $(this).text();
         $("#openPopover").html(select_it);
         mui('#popover').popover("hide");
+    })
+
+    $("#popover2 ul li").click(function(){
+        var select_it = $(this).text();
+        $("#openPopover2").html(select_it);
+        mui('#popover2').popover("hide");
     })
 
 </script>

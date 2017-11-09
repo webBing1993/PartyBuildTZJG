@@ -1,8 +1,39 @@
 {extend name="public/common"}
 
 {block name="style"}
-<link rel="stylesheet" href="/home/css/notice/index.css">
 <link rel="stylesheet" href="/home/css/notice/navbar.css">
+<link rel="stylesheet" href="/home/css/list/graphic-list.css">
+<style>
+    #tab{
+        background: url(/home/images/notice/topback.png);
+        width: 100%;
+        height: 17vw;
+        background-size: cover;
+        position: fixed;
+        z-index: 99;
+        top: 0;
+    }
+    #tab a{
+        margin-top: 2vw;
+        line-height:10vw;
+        color: #ddd;
+        border-radius: 5px;
+    }
+    .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+        color: #fff!important;
+        font-size: 0.42rem!important;
+    }
+    .mui-segmented-control .mui-control-item{
+        display: inline-block;
+        width:30%;
+        font-size: 0.36rem;
+        height:10vw;
+    }
+    #refreshContainer{
+        margin-top: 17vw;
+    }
+</style>
+
 {/block}
 
 {block name="body"}
@@ -21,69 +52,18 @@
                 {empty name="list1"}
                 <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                 {else/}
-                {notempty name="banner1"}
-                <div class="current_special">
-                    {volist name="banner1" id="ba"}
-                    <img src="{$ba.front_cover}" class="bac_img">
-                    {/volist}
-                    <div class="fuzzy">
-                        <div class="spe_title"></div>
-                        <div class="shadow_box">
-                            {volist name="banner1" id="ba"}
-                            <div class="content">
-                                <a href="{:Url('detail','id='.$ba['id'])}">
-                                    <div class="roll_box">
-                                        <div class="s_tag">通知公告</div>
-                                        <img class="s_img" src="{$ba.front_cover}">
-                                        <div class="s_title">{$ba.title}</div>
-                                        <div class="sent_detail">
-                                            <span class="tissue">{$ba.publisher}</span>
-                                            <span class="time">{$ba.create_time}</span>
-                                        </div>
-                                        <div class="footer">
-                                            <div class="scan">
-                                                <img src="/home/images/notice/scan2.png">
-                                                <span>{$ba.views}</span>
-                                            </div>
-                                            <div class="talk">
-                                                <img src="/home/images/notice/talk2.png">
-                                                <span>{$ba.comments}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            {/volist}
-                        </div>
-                        <div class="change">
-                            <img src="/home/images/notice/change.png">换一个
-                        </div>
-                    </div>
-                </div>
-                {/notempty}
                 <!--通知列表-->
-                <div class="lists notice">
-                    <div class="tag"> —— 精彩活动.寓教于乐 —— </div>
-                    {volist name="list1" id="lo"}
-                    <a href="{:Url('Notice/detail?id='.$lo['id'])}" class="list">
-                        <img src="{$lo.front_cover}" alt="图片" class="img">
-                        <div class="s_title">{$lo.title}</div>
-                        <div class="sent_detail">
-                            <span class="tissue">{$lo.publisher}</span>
-                            <span class="time">{$lo.create_time}</span>
-                        </div>
-                        <div class="footer">
-                            <div class="scan">
-                                <img src="/home/images/notice/scan2.png">
-                                <span>{$lo.views}</span>
-                            </div>
-                            <div class="talk">
-                                <img src="/home/images/notice/talk2.png">
-                                <span>{$lo.comments}</span>
-                            </div>
-                        </div>
-                    </a>
-                    {/volist}
+                <div class="list notice">
+                    <ul>
+                        {volist name="list1" id="lo"}
+                        <a href="{:Url('Notice/detail?id='.$lo['id'])}">
+                            <img src="{$lo.front_cover}" alt="图片" class="img">
+                                <p>{$lo.title}</p>
+                                <span>{$lo.publisher}</span>
+                                <span>{$lo.create_time}</span>
+                            </a>
+                            {/volist}
+                    </ul>
                 </div>
                 {/empty}
             </div>
@@ -91,69 +71,20 @@
                 {empty name="list2"}
                 <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                 {else/}
-                {notempty name="banner2"}
-                <div class="current_special">
-                    {volist name="banner2" id="bn"}
-                    <img src="{$bn.front_cover}" class="bac_img">
-                    {/volist}
-                    <div class="fuzzy">
-                        <div class="spe_title"></div>
-                        <div class="shadow_box">
-                            {volist name="banner2" id="bn"}
-                            <div class="content">
-                                <a href="{:Url('dynamicdetail','id='.$bn['id'])}">
-                                    <div class="roll_box">
-                                        <div class="s_tag">党建动态</div>
-                                        <img class="s_img" src="{$bn.front_cover}">
-                                        <div class="s_title">{$bn.title}</div>
-                                        <div class="sent_detail">
-                                            <span class="tissue">{$bn.publisher}</span>
-                                            <span class="time">{$bn.create_time}</span>
-                                        </div>
-                                        <div class="footer">
-                                            <div class="scan">
-                                                <img src="/home/images/notice/scan2.png">
-                                                <span>{$bn.views}</span>
-                                            </div>
-                                            <div class="talk">
-                                                <img src="/home/images/notice/talk2.png">
-                                                <span>{$bn.comments}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            {/volist}
-                        </div>
-                        <div class="change">
-                            <img src="/home/images/notice/change.png">换一个
-                        </div>
-                    </div>
-                </div>
-                {/notempty}
                 <!--党建动态-->
-                <div class="lists dynamic">
-                    <div class="tag"> —— 精彩活动.寓教于乐 —— </div>
-                    {volist name="list2" id="li"}
-                    <a href="{:Url('dynamicdetail','id='.$li['id'])}" class="list">
-                        <img src="{$li.front_cover}" alt="图片" class="img">
-                        <div class="s_title">{$li.title}</div>
-                        <div class="sent_detail">
-                            <span class="tissue">{$li.publisher}</span>
-                            <span class="time">{$li.create_time}</span>
-                        </div>
-                        <div class="footer">
-                            <div class="scan">
-                                <img src="/home/images/notice/scan2.png">
-                                <span>{$li.views}</span>
-                            </div>
-                            <div class="talk">
-                                <img src="/home/images/notice/talk2.png">
-                                <span>{$li.comments}</span>
-                            </div>
-                        </div>
-                    </a>
-                    {/volist}
+                <div class="list dynamic">
+
+
+                    <ul>
+                        {volist name="list2" id="li"}
+                        <a href="{:Url('dynamicdetail','id='.$li['id'])}">
+                            <img src="{$li.front_cover}" alt="图片" class="img">
+                            <p>{$li.title}</p>
+                            <span>{$li.publisher}</span>
+                            <span>{$li.create_time}</span>
+                        </a>
+                        {/volist}
+                    </ul>
                 </div>
                 {/empty}
             </div>
@@ -272,34 +203,23 @@
             var list = lists[i];
             if (type == 0 ){
                 html +=
-                        '<a href="/home/Notice/detail/id/'+list.id+'" class="list">'
+                        '<a href="/home/Notice/detail/id/'+list.id+'">'
             }else if(type==1){
                 html +=
-                        '<a href="/home/Notice/dynamicdetail/id/'+list.id+'" class="list">'
+                        '<a href="/home/Notice/dynamicdetail/id/'+list.id+'">'
             }
            html+=
-                        '<img src="'+list.front_cover+'" alt="图片" class="img">'+
-                        '<div class="s_title">'+list.title+'</div>'+
-                        '<div class="sent_detail">'+
-                        '<span class="tissue">'+list.publisher+'</span>'+
-                        '<span class="time">'+list.create_time+'</span>'+
-                        '</div>'+
-                        '<div class="footer">'+
-                        '<div class="scan">'+
-                        '<img src="/home/images/notice/scan2.png">'+
-                        '<span>'+list.views+'</span>'+
-                        '</div>'+
-                        '<div class="talk">'+
-                        '<img src="/home/images/notice/talk2.png">'+
-                        '<span>'+list.comments+'</span>'+
-                        '</div>'+
-                        '</div>'+
-                        '</a>';
+
+                    '<img src="'+list.front_cover+'" alt="图片" class="img">'+
+                    '<p>'+list.title+'</p>'+
+                    '<span>'+list.publisher+'</span>'+
+                    '<span>'+list.create_time+'</span>'+
+                    '</a>';
             }
         if (type == 0) {
-            $(".notice").append(html);
+            $(".notice ul").append(html);
         } else if (type == 1) {
-            $(".dynamic").append(html);
+            $(".dynamic ul").append(html);
         }
     }
 
@@ -332,70 +252,5 @@
         window.location.href = url;
     })
 
-    var isActice;
-    mui('#refreshContainer').on('tap', '.change', function(e) {
-        event.preventDefault();
-        event.stopPropagation();
-       if(!isActice) {
-           isActice = true;
-           if(c==0){
-               var content = $("#item1mobile").find('.shadow_box').find('.content');
-               var bac_img = $("#item1mobile").find('.current_special').find('.bac_img');
-           }else if(c==1){
-               var content = $("#item2mobile").find('.shadow_box').find('.content');
-               var bac_img = $("#item2mobile").find('.current_special').find('.bac_img');
-           }
-           var len = content.length;
-           if (len >=1) {
-               content.each(function (i,n) {
-                  $(this).css('z-index',len-i);
-                   var tIndex =  $(this).css('z-index');
-                   if (tIndex == len) {
-                       var tCon = $(this);
-                       var back = setTimeout(function () {
-                           tCon.insertAfter(content.eq(len - 1));
-                           tCon.removeClass('niceIn');
-                           tCon.animate({"left": 0}, 0);
-                           listIndex();
-                           isActice = false;
-                       }, 600);
-                       tCon.addClass('niceIn');
-                       tCon.animate({"left": -win_w}, 600);
-                       back;
-                   }
-               });
-               bac_img.each(function (i,n) {
-                   $(this).css('z-index',len-i);
-                   var tIndex =  $(this).css('z-index');
-                   if (tIndex == len) {
-                       var tImg = $(this);
-                       var back = setTimeout(function () {
-                           tImg.insertAfter(bac_img.eq(len - 1));
-                           tImg.fadeIn(0);
-                           listIndex();
-                       }, 600);
-                       tImg.fadeOut(600);
-                   }
-               });
-               listIndex();
-           }
-       }
-        })
-
-    function listIndex(){
-        var bac_img = $('.current_special').find('.bac_img');
-        var content = $('.shadow_box').find('.content');
-        var len = bac_img.length;
-        var zIndex = len;
-        var zIndex2 = len;
-        bac_img.each(function(){
-            $(this).css('z-index',zIndex);
-            zIndex--;
-        });
-        content.each(function(){
-            $(this).css('z-index',zIndex2);
-            zIndex2--;
-        });
-    }
 </script>
 {/block}

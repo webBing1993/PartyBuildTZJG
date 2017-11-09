@@ -39,6 +39,7 @@ window.alert = function (message) {
 		return wAlert(message);
 	}
 };
+
 function tabSwitch(a,b,fn,url){
 	$(a).off('click').on('click',function(){
 		var this_ = this ;

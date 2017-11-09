@@ -1,0 +1,156 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/list/title-pos-time.css">
+<title>党费收缴</title>
+{/block}
+
+{block name="body"}
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+        <div class="list">
+            {empty name="$list"}
+            <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+            {else/}
+            <ul>
+                {volist name="list" id="vo"}
+                {eq name="vo.templet" value="1"}
+                <a href="{:Url('Organization/detail?id='.$vo['id'])}">
+                    {else/}
+                    <a href="{:Url('Organization/detail2?id='.$vo['id'])}">
+                        {/eq}
+                        <p>{$vo.title}</p>
+                        <span>{$vo.publisher}</span>
+                        <span>{$vo.create_time|time_format="Y-m-d"}</span>
+                    </a>
+                    {/volist}
+            </ul>
+            {/empty}
+        </div>
+    </div>
+</div>
+<!--[悬浮按钮]-->
+<a href="{:Url('organization/publish?type=4')}" class="after manager" id="publish"></a>
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script>
+    $("title").text("党费收缴");
+    window.onload = function() {
+        if(flag){
+            $(".mui-pull .mui-pull-caption").css("font-size","15px");
+        }
+        moveanyway("publish");
+        if ($(".list ul a").length < 8) {
+            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+        } else {
+            mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+        }
+    };
+
+    $(function(){
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        flag = IsPC();
+        if(flag){
+            $("#refreshContainer").css({"width":"640px","left":"50%","margin-left":"-320px"});
+            $(".list ul a p").css({"margin-bottom":"0.5rem","font-size":"16px"});
+            $(".list ul a span").css({"font-size":"14px"});
+            $(".default img").css("width","60px");
+            $(".manager.after").css({"left":"50%","margin-left":"320px"});
+        }
+    });
+
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
+        }
+    });
+
+    //上拉加载更多
+    function loadScroll(){
+        var len  = $(".list ul a").length;
+        $.ajax({
+            type:"post",
+            url: "{:Url('Organization/listmore')}",
+            data:{
+                length:len,
+                type:2
+            },
+            beforeSend: function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                if(data.code == 1){
+                    addLists(data);
+                    var dataLen =data.data.length;
+                    if(data.data.length == 8){
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                    }else{
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                    }
+                }else{
+                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                }
+            }
+        })
+    }
+
+    function addLists(data){
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++){
+            var list = lists[i];
+            if(flag) {
+                if (list.templet == 1) {
+                    html += '<a href="/home/Organization/detail/id/' + list.id + '.html">'
+                } else {
+                    html += '<a href="/home/Organization/detail2/id/' + list.id + '.html">'
+                }
+                html +=
+                        '<p style="margin-bottom: 0.5rem;font-size: 16px">' + list.title + '</p>' +
+                        '<span style="font-size: 14px">' + list.publisher + '</span>' +
+                        '<span style="font-size: 14px">' + list.time + '</span>' +
+                        '</a>'
+            }else{
+                if (list.templet == 1) {
+                    html += '<a href="/home/Organization/detail/id/' + list.id + '.html">'
+                } else {
+                    html += '<a href="/home/Organization/detail2/id/' + list.id + '.html">'
+                }
+                html +=
+                        '<p>' + list.title + '</p>' +
+                        '<span>' + list.publisher + '</span>' +
+                        '<span>' + list.time + '</span>' +
+                        '</a>'
+
+            }
+        }
+        $('.list ul').append(html);
+    }
+
+    mui('#refreshContainer').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href")+"?"+4;
+        window.location.href = url;
+    });
+</script>
+{/block}
