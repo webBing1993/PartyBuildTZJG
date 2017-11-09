@@ -80,13 +80,13 @@
 {/block}
 
 {block name="body"}
-<div class="scrollDiy">
-<div class="banner">
-    <img src="/home/images/learn/learn.png" alt="固定banner" class="banner-img">
-</div>
-<div class="nav">
-    <img src="/home/images/learn/toleft.png" alt="toleft" class="left arr">
-    <img src="/home/images/learn/toright.png" alt="toright" class="right arr">
+<div class="main">
+    <div class="banner">
+        <img src="/home/images/learn/learn.png" alt="固定banner" class="banner-img">
+    </div>
+    <div class="nav">
+        <img src="/home/images/learn/toleft.png" alt="toleft" class="left arr">
+        <img src="/home/images/learn/toright.png" alt="toright" class="right arr">
         <div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted tabs">
             <a class="mui-control-item active" href="#item1mobile" data-tab="0">
                 <span>全部</span>
@@ -104,126 +104,126 @@
                 <span>党课</span>
             </a>
         </div>
-</div>
-<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-    <div class="mui-scroll">
-        <div class="mui-slider-group">
-            <div id="item1mobile" class="mui-slider-item mui-control-content">
-                <!--全部-->
-                <div class="list all">
-                    {empty name="$list.all"}
-                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-                    {else/}
-                    <ul>
-                        {volist name="list.all" id="vo"}
-                        {eq name="vo.templet" value="1"}
-                        <a href="{:Url('Learn/detail?id='.$vo['id'])}">
+    </div>
+    <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+        <div class="mui-scroll">
+            <div class="mui-slider-group">
+                <div id="item1mobile" class="mui-slider-item mui-control-content">
+                    <!--全部-->
+                    <div class="list all">
+                        {empty name="$list.all"}
+                        <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                         {else/}
-                        <a href="{:Url('Learn/detail2?id='.$vo['id'])}">
-                        {/eq}
-                            <p>{$vo.title}</p>
-                            <span>{$vo.publisher}</span>
-                            <span>{$vo.create_time|time_format="Y-m-d"}</span>
-                        </a>
-                        {/volist}
-                    </ul>
-                    {/empty}
+                        <ul>
+                            {volist name="list.all" id="vo"}
+                            {eq name="vo.templet" value="1"}
+                            <a href="{:Url('Learn/detail?id='.$vo['id'])}">
+                                {else/}
+                                <a href="{:Url('Learn/detail2?id='.$vo['id'])}">
+                                    {/eq}
+                                    <p>{$vo.title}</p>
+                                    <span>{$vo.publisher}</span>
+                                    <span>{$vo.create_time|time_format="Y-m-d"}</span>
+                                </a>
+                                {/volist}
+                        </ul>
+                        {/empty}
+                    </div>
                 </div>
-            </div>
-            <div id="item2mobile" class="mui-slider-item mui-control-content">
-                <!--支部委员大会-->
-                <div class="list list1">
-                    {empty name="$list.one"}
-                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-                    {else/}
-                    <ul>
-                        {volist name="list.one" id="vo1"}
-                        {eq name="vo1.templet" value="1"}
-                        <a href="{:Url('Learn/detail?id='.$vo1['id'])}">
+                <div id="item2mobile" class="mui-slider-item mui-control-content">
+                    <!--支部委员大会-->
+                    <div class="list list1">
+                        {empty name="$list.one"}
+                        <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                         {else/}
-                        <a href="{:Url('Learn/detail2?id='.$vo1['id'])}">
-                        {/eq}
-                            <p>{$vo1.title}</p>
-                            <span>{$vo1.publisher}</span>
-                            <span>{$vo1.create_time|time_format="Y-m-d"}</span>
-                        </a>
-                        {/volist}
-                    </ul>
-                    {/empty}
+                        <ul>
+                            {volist name="list.one" id="vo1"}
+                            {eq name="vo1.templet" value="1"}
+                            <a href="{:Url('Learn/detail?id='.$vo1['id'])}">
+                                {else/}
+                                <a href="{:Url('Learn/detail2?id='.$vo1['id'])}">
+                                    {/eq}
+                                    <p>{$vo1.title}</p>
+                                    <span>{$vo1.publisher}</span>
+                                    <span>{$vo1.create_time|time_format="Y-m-d"}</span>
+                                </a>
+                                {/volist}
+                        </ul>
+                        {/empty}
+                    </div>
                 </div>
-            </div>
-            <div id="item3mobile" class="mui-slider-item mui-control-content">
-                <!--党支部委员会-->
-                <div class="list list2">
-                    {empty name="$list.two"}
-                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-                    {else/}
-                    <ul>
-                        {volist name="list.two" id="vo2"}
-                        {eq name="vo2.templet" value="1"}
-                        <a href="{:Url('Learn/detail?id='.$vo2['id'])}">
+                <div id="item3mobile" class="mui-slider-item mui-control-content">
+                    <!--党支部委员会-->
+                    <div class="list list2">
+                        {empty name="$list.two"}
+                        <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                         {else/}
-                        <a href="{:Url('Learn/detail2?id='.$vo2['id'])}">
-                        {/eq}
-                            <p>{$vo2.title}</p>
-                            <span>{$vo2.publisher}</span>
-                            <span>{$vo2.create_time|time_format="Y-m-d"}</span>
-                        </a>
-                        {/volist}
-                    </ul>
-                    {/empty}
+                        <ul>
+                            {volist name="list.two" id="vo2"}
+                            {eq name="vo2.templet" value="1"}
+                            <a href="{:Url('Learn/detail?id='.$vo2['id'])}">
+                                {else/}
+                                <a href="{:Url('Learn/detail2?id='.$vo2['id'])}">
+                                    {/eq}
+                                    <p>{$vo2.title}</p>
+                                    <span>{$vo2.publisher}</span>
+                                    <span>{$vo2.create_time|time_format="Y-m-d"}</span>
+                                </a>
+                                {/volist}
+                        </ul>
+                        {/empty}
+                    </div>
                 </div>
-            </div>
-            <div id="item4mobile" class="mui-slider-item mui-control-content">
-                <!--党小组会-->
-                <div class="list list3">
-                    {empty name="$list.three"}
-                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-                    {else/}
-                    <ul>
-                        {volist name="list.three" id="vo3"}
-                        {eq name="vo3.templet" value="1"}
-                        <a href="{:Url('Learn/detail?id='.$vo3['id'])}">
+                <div id="item4mobile" class="mui-slider-item mui-control-content">
+                    <!--党小组会-->
+                    <div class="list list3">
+                        {empty name="$list.three"}
+                        <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                         {else/}
-                        <a href="{:Url('Learn/detail2?id='.$vo3['id'])}">
-                        {/eq}
-                            <p>{$vo3.title}</p>
-                            <span>{$vo3.publisher}</span>
-                            <span>{$vo3.create_time|time_format="Y-m-d"}</span>
-                        </a>
-                        {/volist}
-                    </ul>
-                    {/empty}
+                        <ul>
+                            {volist name="list.three" id="vo3"}
+                            {eq name="vo3.templet" value="1"}
+                            <a href="{:Url('Learn/detail?id='.$vo3['id'])}">
+                                {else/}
+                                <a href="{:Url('Learn/detail2?id='.$vo3['id'])}">
+                                    {/eq}
+                                    <p>{$vo3.title}</p>
+                                    <span>{$vo3.publisher}</span>
+                                    <span>{$vo3.create_time|time_format="Y-m-d"}</span>
+                                </a>
+                                {/volist}
+                        </ul>
+                        {/empty}
+                    </div>
                 </div>
-            </div>
-            <div id="item5mobile" class="mui-slider-item mui-control-content">
-                <!--党课-->
-                <div class="list list4">
-                    {empty name="$list.four"}
-                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-                    {else/}
-                    <ul>
-                        {volist name="list.four" id="vo4"}
-                        {eq name="vo4.templet" value="1"}
-                        <a href="{:Url('Learn/detail?id='.$vo4['id'])}">
+                <div id="item5mobile" class="mui-slider-item mui-control-content">
+                    <!--党课-->
+                    <div class="list list4">
+                        {empty name="$list.four"}
+                        <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                         {else/}
-                        <a href="{:Url('Learn/detail2?id='.$vo4['id'])}">
-                        {/eq}
-                            <p>{$vo4.title}</p>
-                            <span>{$vo4.publisher}</span>
-                            <span>{$vo4.create_time|time_format="Y-m-d"}</span>
-                        </a>
-                        {/volist}
-                    </ul>
-                    {/empty}
+                        <ul>
+                            {volist name="list.four" id="vo4"}
+                            {eq name="vo4.templet" value="1"}
+                            <a href="{:Url('Learn/detail?id='.$vo4['id'])}">
+                                {else/}
+                                <a href="{:Url('Learn/detail2?id='.$vo4['id'])}">
+                                    {/eq}
+                                    <p>{$vo4.title}</p>
+                                    <span>{$vo4.publisher}</span>
+                                    <span>{$vo4.create_time|time_format="Y-m-d"}</span>
+                                </a>
+                                {/volist}
+                        </ul>
+                        {/empty}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <!--[悬浮按钮]-->
+    <span href="{:Url('learn/publish?type=2&style=2')}" class="after manager" id="publish"></span>
 </div>
-    </div>
-<!--[悬浮按钮]-->
-<span href="{:Url('learn/publish?type=2&style=2')}" class="after manager" id="publish"></span>
 {/block}
 
 {block name="script"}
@@ -251,20 +251,21 @@
         flag = IsPC();
         if(flag){
             $(".default img").css("width","60px");
-            $("#refreshContainer").css({"width":"640px","top":"320px","left":"50%","margin-left":"-320px"});
+            $(".main").css({"width":"640px","left":"50%","margin-left":"-320px","position":"relative","height":"90vh","margin-top":"5vh"});
+            $("#refreshContainer").css("top","calc(230px + 1rem)");
             $(".list ul a img").css({"width":"90px","height":"60px","margin-right":"10px"});
-            $(".banner").css({"width":"640px","height":"230px","margin":"0 auto"});
+            $(".banner").css({"width":"640px","height":"230px"});
             $(".banner img").css({"width":"640px","height":"230px","margin":"0 auto"});
             $("#tab a").css({"padding":"0 30px"});
             $("#tab").css("width","940px");
-            $(".nav .arr").css("width","60px")
+            $(".nav .arr").css("width","60px");
             $(".nav").css({"width":"640px","left":"50%","margin-left":"-320px"});
             $(".list ul a").css("padding","10px 15px");
             $(".list ul a p").css({"font-size":"16px","margin-bottom":"0.5rem"});
             $(".list ul a span").css({"font-size":"14px"});
             $(".list ul a span:nth-child(3)").css("bottom","10px");
             $(".list ul a span:nth-child(4)").css({"bottom":"10px","right":"15px"});
-            $(".manager.after").css({"left":"50%","margin-left":"320px"});
+//            $(".manager.after").css({"left":"50%","margin-left":"320px"});
         }
 
         //tab初始化和数据存储
