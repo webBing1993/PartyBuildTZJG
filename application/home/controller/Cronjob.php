@@ -44,12 +44,5 @@ class Cronjob extends Controller {
                 }
             }
         }
-        // 年初积分  加满
-        if (date('m-d H:i',time()) == "01-01 00:00"){
-            $list = WechatUserTag::where('tagid',1)->select();
-            foreach($list as $value){
-                WechatUser::where('userid',$value['userid'])->update(['score_efficiency' => 2,'score_form' => 2,'score_satisfaction' => 40]);
-            }
-        }
     }
 }

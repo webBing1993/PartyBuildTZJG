@@ -33,7 +33,7 @@ class Notice extends Model
         if (empty($id)){
             $list = null;
         }else{
-            $list = $this->where(['id' => $id ,'status' => 0])->find();
+            $list = $this->where(['id' => $id])->find();
         }
         return $list;
     }
