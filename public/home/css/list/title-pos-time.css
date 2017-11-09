@@ -1,5 +1,9 @@
 html,body{
     height:100%;
+    background-color: #f1f1f1;
+}
+#refreshContainer {
+    background-color: #fff;
 }
 
 .list ul a{
@@ -37,8 +41,8 @@ html,body{
 /*suspension button*/
 .manager.after {
     position: absolute;
-    bottom:68px;
-    right:10px;
+    bottom: 16vw;
+    right: 2.7vw;
     content: '';
     width: 1.33rem;
     height: 1.33rem;

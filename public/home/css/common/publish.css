@@ -1,6 +1,12 @@
 body,html{
     overflow-x: hidden;
 }
+body {
+    background-color: #f1f1f1;
+}
+.main {
+    background-color: #fff;
+}
 .list ul li{
     height:1.2rem;
     border-bottom: 1px solid #f1f1f1;
@@ -124,6 +130,8 @@ textarea{
     align-items: center;
     justify-content: center;
     position: relative;
+    background: url("/home/images/common/add.png") no-repeat;
+    background-size: 2rem 2rem;
 }
 .imgs.clear{
     display: flex;
