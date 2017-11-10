@@ -67,7 +67,29 @@ function imgresize(){
     var font = parseInt($("html").css("font-size"))*2;
     setTimeout(function(){
         var img = $('.img img');
+        var img2 = $('.img2 img');
+        var img3 = $('.img3 img');
         img.each(function(){
+            if($(this).width() == $(this).height()){
+                $(this).height('2rem');
+                $(this).width('2rem');
+            }else if($(this).width() > $(this).height()){
+                $(this).height('2rem' ).css({'left':-$(this).width()/2+font/2});
+            }else{
+                $(this).width('2rem').css({'top':-$(this).height()/2+font/2});
+            }
+        });
+        img2.each(function(){
+            if($(this).width() == $(this).height()){
+                $(this).height('2rem');
+                $(this).width('2rem');
+            }else if($(this).width() > $(this).height()){
+                $(this).height('2rem' ).css({'left':-$(this).width()/2+font/2});
+            }else{
+                $(this).width('2rem').css({'top':-$(this).height()/2+font/2});
+            }
+        });
+        img3.each(function(){
             if($(this).width() == $(this).height()){
                 $(this).height('2rem');
                 $(this).width('2rem');

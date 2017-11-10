@@ -100,7 +100,7 @@ textarea{
     padding-bottom: 0.5rem;
     border: 1px solid #f1f1f1;
 }
-.content .img {
+.content .img,.content .img2,.content .img3 {
     display: inline-block;
     position: relative;
     width: 2rem;
@@ -112,13 +112,13 @@ textarea{
     border: 2px solid #d9d9d9;
     box-sizing: content-box;
 }
-.content .img img {
+.content .img img,.content .img2 img,.content .img3 img{
     position: absolute;
     top: 0;
     left: 0;
 }
 
-.content .add {
+.content .add,.content .add2,.content .add3{
     width: 2rem;
     height: 2rem;
     margin-left: 0.2rem;
