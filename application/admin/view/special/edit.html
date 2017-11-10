@@ -105,6 +105,42 @@
                                 {/empty}
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>表彰照片:</label>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="imggroup">
+                                    {eq name="$msg" value=""}
+                                    <img src="" alt='图片' class='thumbnail imgbox'>
+                                    {else/}
+                                    <img src="{$msg.commend_img|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
+                                    {/eq}
+                                    <input type="file" class="imgfile"  accept="image/jpg, image/png, image/gif, image/jpeg">
+                                    <input type="hidden" name="commend_img" class="img"  value="{$msg.commend_img||default=''}" required="">
+                                </div>
+                                <b>推荐尺寸：500*400px</b>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>交流凭证:</label>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="imggroup">
+                                    {eq name="$msg" value=""}
+                                    <img src="" alt='图片' class='thumbnail imgbox'>
+                                    {else/}
+                                    <img src="{$msg.voucher_img|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
+                                    {/eq}
+                                    <input type="file" class="imgfile"  accept="image/jpg, image/png, image/gif, image/jpeg">
+                                    <input type="hidden" name="voucher_img" class="img"  value="{$msg.voucher_img||default=''}" required="">
+                                </div>
+                                <b>推荐尺寸：500*400px</b>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
                         <input type="hidden" name="id" value="{$msg.id || default=''}">
                         <div class="form-group">
                             <div class="col-lg-11 col-lg-offset-1">
@@ -189,6 +225,8 @@
             var data = {
                 id:$("input[name='id']").val(),
                 front_cover:$("input[name='front_cover']").val(),
+                commend_img:$("input[name='commend_img']").val(),
+                voucher_img:$("input[name='voucher_img']").val(),
                 title:$("input[name='title']").val(),
                 content:ue.getContent(),
                 publisher:$("input[name='publisher']").val(),

@@ -41,6 +41,8 @@ class Special extends Base{
             $user = WechatUser::where('userid',$data['userid'])->find();
             $data['publisher'] = $user['name'];
             isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";
+            isset($data["commend_img"]) ? $data["commend_img"] = json_encode($data["commend_img"]) : $data["commend_img"] = "";
+            isset($data["voucher_img"]) ? $data["voucher_img"] = json_encode($data["voucher_img"]) : $data["voucher_img"] = "";
             if (!empty($data['id'])){
                 // 修改
                 $res = $Model->save($data,['id' => $data['id']]);
@@ -67,6 +69,8 @@ class Special extends Base{
             $msg = $Model->where('id',$id)->find();
             if(!empty($msg)){
                 $msg['list_images'] = json_decode($msg['list_images']);
+                $msg['commend_img'] = json_decode($msg['commend_img']);
+                $msg['voucher_img'] = json_decode($msg['voucher_img']);
             }
             $this->assign('msg',$msg);
             $this->assign('userId',$userId);
