@@ -30,20 +30,22 @@
 	<!--</div>-->
 	<!--&lt;!&ndash;/一组&ndash;&gt;-->
 <!--</div>-->
-<ul class="d_lists">
-	<!--<li class="d_list">-->
+<div class="main">
+	<ul class="d_lists">
+		<!--<li class="d_list">-->
 		<!--<div class="d_img_box">-->
-			<!--<div class="d_img" style="background-color: #ef6776">-->
-				<!--陈-->
-			<!--</div>-->
+		<!--<div class="d_img" style="background-color: #ef6776">-->
+		<!--陈-->
+		<!--</div>-->
 		<!--</div>-->
 		<!--<div class="d_name">陈叔叔</div>-->
 		<!--<a class="d_tel" href="tel:15824167420" >-->
-			<!--<span class="d_tel_icon"></span>-->
-			<!--15824167420-->
+		<!--<span class="d_tel_icon"></span>-->
+		<!--15824167420-->
 		<!--</a>-->
-	<!--</li>-->
-</ul>
+		<!--</li>-->
+	</ul>
+</div>
 {/block}
 
 {block name="script"}
@@ -15902,6 +15904,7 @@ for(var i = 0 ; i < len ;i++){
 		var detail3 = party.detail3;
 		var len3 = detail3.length;
 		var html = '';
+		html += '<div class="title">'+party3+'</div>';
 		for(var j = 0; j < len3 ; j++){
 			var party4 = detail3[j];
 			var detail4 = party4.detail4;
@@ -15918,7 +15921,6 @@ for(var i = 0 ; i < len ;i++){
 				html+=	'</li>';
 			}
 		}
-		html += '<div class="title">'+party3+'</div>'
 		$('.d_lists' ).append(html);
 		break;
 	}else{
@@ -15944,11 +15946,11 @@ $(function(){
 
 	flag = IsPC();
 	if(flag){
-		$(".d_lists").css({"width":"640px"});
-		$(".d_list").css({"padding":"15px","width":"640px","position":"relative","left":"100%"});
-		$(".d_lists .title").css({"width":"640px","left":"50%","margin-left":"-320px","top":"0"});
+		$(".main").css({"width":"640px","left":"50%","height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
+		$(".d_list").css({"padding":"15px","width":"640px","position":"relative","left":"0"});
+		$(".d_lists .title").css({"width":"640px","left":"50%","margin-left":"-320px","top":"0","margin-top":"3vw"});
 		$(".d_list>.d_tel>.d_tel_icon").css({"width":"30px","background-size":"30px 30px"});
-		$(".d_lists").css("margin-top","200px");
+		$(".d_lists").css({"padding-top":"8vw","margin-top":"0"});
 		$(".d_list>.d_tel").css({"position":"static"})
 	}
 });
