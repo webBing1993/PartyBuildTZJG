@@ -87,6 +87,12 @@
         }
     });
 
+    mui("#refreshContainer").on("touchstart","a",function(){
+        $(this).css("backgroundColor","rgba(0,0,0,.1)");
+    }).on("touchend","a", function () {
+        $(this).css("backgroundColor","#fff");
+    });
+
     //上拉加载更多
     function loadScroll(){
         var len  = $(".list ul a").length;

@@ -159,6 +159,12 @@ mui('#refreshContainer').on('tap', 'a', function(e) {
 	window.location.href = url;
 });
 
+mui("#refreshContainer").on("touchstart","a",function(){
+	$(this).css("backgroundColor","rgba(0,0,0,.1)");
+}).on("touchend","a", function () {
+	$(this).css("backgroundColor","#fff");
+});
+
 function addLists(data){
 	var html = '';
 	var lists = data.data;

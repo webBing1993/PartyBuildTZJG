@@ -538,6 +538,11 @@
         window.location.href = url;
     });
 
+    mui("#refreshContainer").on("touchstart","a",function(){
+        $(this).css("backgroundColor","rgba(0,0,0,.1)");
+    }).on("touchend","a", function () {
+        $(this).css("backgroundColor","#fff");
+    });
 
     //审核ajax
     var  pass = function(element,id,_class,status,_type){
