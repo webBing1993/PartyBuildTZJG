@@ -43,44 +43,45 @@
 </style>
 {/block}
 {block name="body"}
-<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-    <div class="mui-scroll">
-        <div class="banner">
-            <img src="{$info.front_cover|get_cover='path'}" alt="支部活动banner" class="banner-img">
-        </div>
-        <div class="article">
+<div class="main">
+    <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+        <div class="mui-scroll">
+            <div class="banner">
+                <img src="{$info.front_cover|get_cover='path'}" alt="支部活动banner" class="banner-img">
+            </div>
+            <div class="article">
                 <div class="title"><p>{$info.title}</p></div>
                 <div class="note clear">
                     <span class="publish">{$info.publisher}</span>
                     <span class="time">   {$info.create_time|time_format='Y-m-d'}</span>
                 </div>
-            <div class="message">
-                {notempty name="info.start_time"}
-                <div class="name limit">{$info.start_time|time_format='Y/m/d H:i'}</div>
-                {/notempty}
-                {notempty name="info.address"}
-                <div class="content" >{$info.address}</div>
-                {/notempty}
-            </div>
-            <div class="content">
-            <div class=" article-content"><p>{$info.content}</p></div>
-                {neq name="info.limit" value="0"}
-                <span id="publish">未读名单</span>
-                {/neq}
-                <div class="like">
-                    <span class="read">{$info.views}</span>
-                    {eq name="visit" value="0"}
-                    {eq name="info.is_like" value="1"}
-                    <span class="isgood good_ notvisitor" data-type="1" data-id="{$info.id}">{$info.likes}</span>
-                    {else/}
-                    <span class="isgood good notvisitor" data-type="1" data-id="{$info.id}">{$info.likes}</span>
-                    {/eq}
-                    {else/}
-                    <span class="isgood good">{$info.likes}</span>
-                    {/eq}
+                <div class="message">
+                    {notempty name="info.start_time"}
+                    <div class="name limit">{$info.start_time|time_format='Y/m/d H:i'}</div>
+                    {/notempty}
+                    {notempty name="info.address"}
+                    <div class="content" >{$info.address}</div>
+                    {/notempty}
+                </div>
+                <div class="content">
+                    <div class=" article-content"><p>{$info.content}</p></div>
+                    {neq name="info.limit" value="0"}
+                    <span id="publish">未读名单</span>
+                    {/neq}
+                    <div class="like">
+                        <span class="read">{$info.views}</span>
+                        {eq name="visit" value="0"}
+                        {eq name="info.is_like" value="1"}
+                        <span class="isgood good_ notvisitor" data-type="1" data-id="{$info.id}">{$info.likes}</span>
+                        {else/}
+                        <span class="isgood good notvisitor" data-type="1" data-id="{$info.id}">{$info.likes}</span>
+                        {/eq}
+                        {else/}
+                        <span class="isgood good">{$info.likes}</span>
+                        {/eq}
+                    </div>
                 </div>
             </div>
-        </div>
             <div class="comment">
                 <div class="sum">共<span>{$info.comments}</span>条评论</div>
                 <div class="lists">
@@ -108,41 +109,42 @@
                 </div>
             </div>
 
+        </div>
     </div>
-</div>
-{eq name="visit" value="0"}
-<div class="bottom clear" onclick="send(this,1,{$info['id']})">
-    <div class="myword fl">
-        <input type="text" placeholder="说说你的感想！" disabled>
+    {eq name="visit" value="0"}
+    <div class="bottom clear" onclick="send(this,1,{$info['id']})">
+        <div class="myword fl">
+            <input type="text" placeholder="说说你的感想！" disabled>
+        </div>
     </div>
-</div>
-{/eq}
+    {/eq}
 
-<div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action ">
-    <!-- 可选择菜单 -->
-    <ul class="mui-table-view">
-        <li class="mui-table-view-cell" style="position: fixed;top: 0;z-index: 990;width: 100%">
-           未阅读管理员名单
-        </li>
-        <div class="mui-scroll-wrapper" style="margin-top: 1rem">
-            <div class="mui-scroll">
-        <li class="mui-table-view-cell" style="overflow: scroll">
-            {$info.people}
-        </li>
+    <div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action ">
+        <!-- 可选择菜单 -->
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell" style="position: fixed;top: 0;z-index: 990;width: 100%">
+                未阅读管理员名单
+            </li>
+            <div class="mui-scroll-wrapper" style="margin-top: 1rem">
+                <div class="mui-scroll">
+                    <li class="mui-table-view-cell" style="overflow: scroll">
+                        {$info.people}
+                    </li>
                 </div>
             </div>
-    </ul>
-    <ul class="mui-table-view">
-        {eq name="info.limit" value="2"}
-        <li class="mui-table-view-cell">
-           <span onclick="">一键提醒</span>
-        </li>
-        {else/}
-        <li class="mui-table-view-cell">
-            <span style="color: #999;border: 1px solid #999;">已截止</span>
-        </li>
-        {/eq}
-    </ul>
+        </ul>
+        <ul class="mui-table-view">
+            {eq name="info.limit" value="2"}
+            <li class="mui-table-view-cell">
+                <span onclick="">一键提醒</span>
+            </li>
+            {else/}
+            <li class="mui-table-view-cell">
+                <span style="color: #999;border: 1px solid #999;">已截止</span>
+            </li>
+            {/eq}
+        </ul>
+    </div>
 </div>
 {/block}
 
@@ -159,7 +161,7 @@
         indicators: false, //是否显示滚动条
         deceleration:0.0006, //阻尼系数,系数越小滑动越灵敏
         bounce: true //是否启用回弹
-    }
+    };
 
     $(function(){
         function IsPC() {
@@ -179,7 +181,7 @@
 
         flag = IsPC();
         if(flag){
-            $("#refreshContainer").css({"width":"640px","left":"50%","margin-left":"-320px"});
+            $(".main").css({"width":"640px","left":"50%","margin-left":"-320px","position":"relative","margin-top":"5vh","height":"90vh"});
             $(".article .title p").css("font-size","17px");
             $(".article .note").css("font-size","14px");
             $(".comment .sum").css({"font-size":"14px","height":"30px","line-height":"30px"});
@@ -196,7 +198,7 @@
             $(".lists").css("padding-bottom","10px");
         }
 
-    })
+    });
 
 
     mui('.mui-scroll-wrapper').scroll({
