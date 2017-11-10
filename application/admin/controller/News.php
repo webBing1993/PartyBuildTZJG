@@ -93,7 +93,7 @@ class News extends Admin
                 'id' => array('neq',$id),
                 'status' => 0
             );
-            $infoes = NewsModel::where($info)->whereTime('create_time','w')->select();
+            $infoes = NewsModel::where($info)->whereTime('create_time','m')->select();
             return $this->success($infoes);
         }else{
             //新闻消息列表
@@ -103,7 +103,7 @@ class News extends Admin
             ));
             $this->assign('list',$list);
             //主图文本周内的新闻消息
-            $infoes = NewsModel::where(['status' => 0])->whereTime('create_time','w')->select();
+            $infoes = NewsModel::where(['status' => 0])->whereTime('create_time','m')->select();
             $this->assign('info',$infoes);
             return $this->fetch();
         }

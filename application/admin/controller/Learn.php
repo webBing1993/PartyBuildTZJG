@@ -140,7 +140,7 @@ class Learn extends Admin {
                 'id' => array('neq',$id),
                 'status' => 1,
             );
-            $infoes = $Model::where($info)->whereTime('create_time','w')->select();
+            $infoes = $Model::where($info)->whereTime('create_time','m')->select();
             foreach ($infoes as $value) {
                 switch ($value['type']) {
                     case 1:
@@ -181,7 +181,7 @@ class Learn extends Admin {
             $info = array(
                 'status' => 1,
             );
-            $infoes = $Model::where($info)->whereTime('create_time','w')->select();
+            $infoes = $Model::where($info)->whereTime('create_time','m')->select();
             foreach ($infoes as $value) {
                 switch ($value['type']) {
                     case 1:
