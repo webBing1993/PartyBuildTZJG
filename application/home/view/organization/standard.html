@@ -6,6 +6,31 @@
 {/block}
 
 {block name="body"}
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+        <div class="list">
+            {empty name="$list"}
+            <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+            {else/}
+            <ul>
+                {volist name="list" id="vo"}
+                {eq name="vo.templet" value="1"}
+                <a href="{:Url('Organization/detail?id='.$vo['id'])}">
+                {else/}
+                <a href="{:Url('Organization/detail2?id='.$vo['id'])}">
+                {/eq}
+                    <p>【阵地建设】{$vo.title}</p>
+                    <span>{$vo.publisher}</span>
+                    <span>{$vo.create_time|time_format="Y-m-d"}</span>
+                </a>
+                {/volist}
+            </ul>
+            {/empty}
+        </div>
+    </div>
+</div>
+<!--[悬浮按钮]-->
+<a href="{:Url('organization/publish?type=1')}" class="after manager" id="publish"></a>
 <div class="main">
     <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
         <div class="mui-scroll">
@@ -129,7 +154,7 @@
                     html += '<a href="/home/Organization/detail2/id/' + list.id + '.html">'
                 }
                 html +=
-                        '<p style="font-size: 16px;margin-bottom: 0.5rem">' + list.title + '</p>' +
+                        '<p style="font-size: 16px;margin-bottom: 0.5rem">【阵地建设】' + list.title + '</p>' +
                         '<span style="font-size: 14px;">' + list.publisher + '</span>' +
                         '<span style="font-size: 14px">' + list.time + '</span>' +
                         '</a>'
@@ -140,7 +165,7 @@
                     html += '<a href="/home/Organization/detail2/id/' + list.id + '.html">'
                 }
                 html +=
-                        '<p>' + list.title + '</p>' +
+                        '<p>【阵地建设】' + list.title + '</p>' +
                         '<span>' + list.publisher + '</span>' +
                         '<span>' + list.time + '</span>' +
                         '</a>'

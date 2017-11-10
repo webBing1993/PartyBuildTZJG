@@ -122,12 +122,12 @@ body {
 
 /*article content */
 .article-content p,.article-content p span,.article-content{
-    font-size: 0.38rem;
+    font-size: 0.4rem;
     color: #333;
 }
 .article .content * {
     max-width: 100%!important;
-    line-height: 0.5rem!important;
+    line-height: 0.7rem!important;
 }
 .article .content {
     width: 100%;
