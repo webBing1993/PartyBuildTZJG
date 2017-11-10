@@ -193,7 +193,19 @@
                     data['list_images'].push($(this).data("tab")+"")  ;
                 }
             })
+            if( data["templet"] == 2){
+                if(data['list_images'].length==0){
+                    swal({
+                        title: ' ',
+                        text: '请至少上传一张图片',
+                        type: 'error',
+                        showConfirmButton:false,
+                        timer:1500
+                    });
+                    return false;
+                }
 
+            }
 //            data['list_image'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
             $.ajax({
                 type:"post",
