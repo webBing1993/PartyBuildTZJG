@@ -15,33 +15,33 @@
 {/block}
 {block name="body"}
 
-        <div class="article">
-            <div class="title"><p>{$info.title}</p></div>
-            <div class="note clear">
-                <span class="publish">{$info.publisher}</span>
-                <span class="time">{$info.create_time|time_format="Y-m-d"}</span>
-            </div>
-            <div class="message">
-                {notempty name="info.time"}
-                <div class="name limit">{$info.time|time_format='Y/m/d H:i'}</div>
-                {/notempty}
-                {notempty name="info.address"}
-                <div class="content" >{$info.address}</div>
-                {/notempty}
-                {notempty name="info.people"}
-                <div class="content" >{$info.people}</div>
-                {/notempty}
-                {notempty name="info.compere"}
-                <div class="content" >{$info.compere}</div>
-                {/notempty}
-            </div>
-            <div class="content">
-                {volist name="$info.list_images" id="img"}
-                <img src="{$img|get_cover='path'}" alt="笔记图片" class="img" style="width:100%"><br>
-                {/volist}
-                <div class="article-content">{$info.content}</div>
-            </div>
+    <div class="article">
+        <div class="title"><p>{$info.title}</p></div>
+        <div class="note clear">
+            <span class="publish">{$info.publisher}</span>
+            <span class="time">{$info.create_time|time_format="Y-m-d"}</span>
         </div>
+        <div class="message">
+            {notempty name="info.time"}
+            <div class="name limit">{$info.time|time_format='Y/m/d H:i'}</div>
+            {/notempty}
+            {notempty name="info.address"}
+            <div class="content" >{$info.address}</div>
+            {/notempty}
+            {notempty name="info.people"}
+            <div class="content" >{$info.people}</div>
+            {/notempty}
+            {notempty name="info.compere"}
+            <div class="content" >{$info.compere}</div>
+            {/notempty}
+        </div>
+        <div class="content">
+            {volist name="$info.list_images" id="img"}
+            <img src="{$img|get_cover='path'}" alt="笔记图片" class="img" style="width:100%"><br>
+            {/volist}
+            <div class="article-content">{$info.content}</div>
+        </div>
+    </div>
 {/block}
 
 {block name="script"}
@@ -72,7 +72,7 @@
 
         flag = IsPC();
         if(flag){
-           $(".article").css({"width":"640px","margin":"0 auto"});
+            $(".article").css({"backgroundColor":"#fff","width":"640px","left":"50%","margin-left":"-320px","margin-top":"5vh","height":"90vh","position":"relative"});
             $(".article .title p").css("font-size","17px");
             $(".article .note").css("font-size","14px");
             $(".comment .sum").css({"font-size":"14px","height":"30px","line-height":"30px"});
