@@ -142,6 +142,8 @@
             status:3
         };
             data['list_images']=[];
+            data['commend_img']=[];
+            data['voucher_img']=[];
             if(templet == "普通型"){
                 data["templet"] = 1;
             }else{
@@ -150,7 +152,17 @@
             data["status"] = 3;
             $(".img img").each(function(){
                 if($(this).data("tab")){
-                    data['list_images'].push($(this).data("tab")+"")  ;
+                    data['list_images'].push($(this).data("tab")+"");
+                }
+            });
+            $(".img2 img").each(function(){
+                if($(this).data("tab")){
+                    data['commend_img'].push($(this).data("tab")+"");
+                }
+            });
+            $(".img3 img").each(function(){
+                if($(this).data("tab")){
+                    data['voucher_img'].push($(this).data("tab")+"");
                 }
             });
 //            data['list_image'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
@@ -332,6 +344,8 @@
         }
         if(single){
             data['list_images']=[];
+            data['commend_img']=[];
+            data['voucher_img']=[];
             if(templet == "普通型"){
                 data["templet"] = 1;
             }else{
@@ -342,6 +356,18 @@
                     data['list_images'].push($(this).data("tab")+"")  ;
                 }
             });
+
+            $(".img2 img").each(function(){
+                if($(this).data("tab")){
+                    data['commend_img'].push($(this).data("tab")+"")  ;
+                }
+            });
+            $(".img3 img").each(function(){
+                if($(this).data("tab")){
+                    data['voucher_img'].push($(this).data("tab")+"")  ;
+                }
+            });
+            console.log(data)
 //            data['list_image'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
             $.ajax({
                 type:"post",
