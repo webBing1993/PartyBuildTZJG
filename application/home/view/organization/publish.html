@@ -143,8 +143,7 @@
                 content:$("textarea[name='content']").val(),
                 userid:userid,
                 id:$("input[name='id']").val(),
-                type:type,
-                status:3
+                type:type
             };
             switch (_class){
                 case "阵地建设":
@@ -163,8 +162,7 @@
                 content:$("textarea[name='content']").val(),
                 userid:userid,
                 id:$("input[name='id']").val(),
-                type:type,
-                status:3
+                type:type
             };
         }
             data['list_images']=[];
@@ -173,7 +171,7 @@
             }else{
                 data["templet"] = 2;
             }
-            data[status] = 3;
+            data["status"] = 3;
             $(".img img").each(function(){
                 if($(this).data("tab")){
                     data['list_images'].push($(this).data("tab")+"")  ;
@@ -223,8 +221,7 @@
                 content:$("textarea[name='content']").val(),
                 userid:userid,
                 id:$("input[name='id']").val(),
-                type:type,
-                status:0
+                type:type
             };
             switch (_class){
                 case "阵地建设":
@@ -243,8 +240,7 @@
                 content:$("textarea[name='content']").val(),
                 userid:userid,
                 id:$("input[name='id']").val(),
-                type:type,
-                status:0
+                type:type
             };
         }
         for(var key in data){
@@ -260,7 +256,7 @@
             }else{
                 data["templet"] = 2;
             }
-            data[status] = 0;
+            data["status"] = 0;
             $(".img img").each(function(){
                 if($(this).data("tab")){
                     data['list_images'].push($(this).data("tab")+"")  ;
