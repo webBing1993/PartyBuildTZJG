@@ -19,6 +19,7 @@
 </style>
 {/block}
 {block name="body"}
+    <div class="main">
         <div class="article">
             <div class="title"><p>{$info.title}</p></div>
             <div class="note clear">
@@ -46,6 +47,7 @@
                 <div class="article-content">{$info.content}</div>
             </div>
         </div>
+    </div>
 {/block}
 
 {block name="script"}
@@ -75,6 +77,7 @@
 
         flag = IsPC();
         if(flag){
+            $(".main").css({"width":"640px","left":"50%","min-height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
             $(".article").css({"width":"640px","margin":"0 auto"});
             $(".article .title p").css("font-size","17px");
             $(".article .note").css("font-size","14px");

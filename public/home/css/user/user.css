@@ -7,11 +7,14 @@ a:active {
   background: #eeeeee!important;
 }
 body {
-  background: #eeeeee;
+  background: #f1f1f1;
 }
 html{
   width: 100%;
   overflow: hidden;
+}
+.main {
+  background-color: #fff;
 }
 /*头部*/
 .banner {

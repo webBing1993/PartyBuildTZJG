@@ -5,111 +5,116 @@
 {/block}
 
 {block name="body"}
-<div class="banner">
-<div class="loadingParent">
-    <canvas id="myCanvas" width="400" height="300"></canvas>
-    <canvas id="dashed" width="400" height="300"></canvas>
-    <p class="point">我的积分</p>
-    <p class="num">{$score}</p>
-    <p class="time">时间：{$time}</p>
-</div>
-    <p class="rule" data-toggle="modal" data-target="#myModal">积分规则</p>
-    </div>
-<div class="line">
-    <span>积分明细</span>
-</div>
-        <ul class="in-points">
-            {volist name="$msg" id="ms"}
-            <li>
-                <p class="title">
-                    <span>{$ms.str}</span>
-                </p>
-                <p class="content">
-                    {$ms.title}
-                </p>
-                <p class="time">
-                    {$ms.create_time}
-                </p>
-                <p class="point">
-                    <img src="/home/images/user/point.png">
-                    <span>+ {$ms.score}</span>
-                </p>
-            </li>
-            {/volist}
-            {volist name="$handle" id="han"}
-            <li>
-                <p class="title">
-                    <span>{$han.str}</span>
-                </p>
-                <p class="content">
-                </p>
-                <p class="time">
-                    {$han.create_time}
-                </p>
-                <p class="point">
-                    <img src="/home/images/user/point.png">
-                    <span>{$han.score}</span>
-                </p>
-            </li>
-            {/volist}
-        </ul>
 
-
-<!-- 模态框（Modal） -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <img src="/home/images/user/close.png" alt="规则" data-dismiss="modal" aria-hidden="true" style="width:12vw;height:12vw" id="close">
-        <div class="modal-content" style="margin:6vw auto" id="modalBody">
-            <div style="width: 0;height: 6.4vw;border-right: 2px solid rgba(237, 218, 145, 0.63);margin: -6.4vw auto 0;"></div>
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">
-                    <b>积分规则</b>
-                </h4>
-            </div>
-            <div class="modal-body">
-                <h4 style="font-weight: normal">
-                    <p>1、党建责任</p>
-                    <span>党委（党组）听取汇报和专题研究，2次/年（2分）</span><br>
-                    <span>书记责任清单（2分）</span><br>
-                    <span>书记述职1000字以上（1分）</span><br>
-                    <span>支部书记述职500字以上（1分）</span><br>
-                    <span>党建年度工作计划和党建工作要点文件（2分）</span>
-                    <p>2、两学一做</p>
-                    <span>方案（1分）、部署会议记录（1分）</span><br>
-                    <span>支部党员大会,1次每季度(1分)</span><br>
-                    <span>支部委员会，1次每月（1分）</span><br>
-                    <span>党小组会，1次每月（1分）</span><br>
-                    <span>领导干部交流发言（1分）</span><br>
-                    <span>领导干部讲党课（2分）</span><br>
-                    <span>全年学习计划和培训计划(1分)、理论研究1500字（1分）</span><br>
-                    <span>主题党日（2分）</span><br>
-                    <p>3、作风建设</p>
-                    <span>“作风建设年”活动有部署、有方案（2分）</span><br>
-                    <span>开展“解放思想，担当有为”主题大讨论和“金点子”征集活动(2分)</span><br>
-                    <span>挖掘培树“大抓项目年”和“作风建设年”活动中涌现出的先进典型（2分）</span><br>
-                    <span>“五查五看”，党员责任和整改清单（2分）</span><br>
-                    <p>4、志愿服务</p>
-                    <span>“四跑”志愿服务方案和总结800字（2分）</span><br>
-                    <span>志愿服务一条街和三走进有照片（4分）</span><br>
-                    <p>5、组织建设</p>
-                    <span>党支部规范化建设台帐资料（4分）</span><br>
-                    <span>阵地、党费、换届组织本单位党员干部关注“台州红云”订阅号，被《台州机关党建》简报或“台州红云”微平台录用信息4条以上（2分）</span><br>
-                    <p>6、党风廉政</p>
-                    <span>落实主体责任（2分）</span><br>
-                    <span>廉政教育（2分）</span><br>
-                    <span>落实机关纪检工作情况报告制度（2分）</span><br>
-                    <p>7、特色创新</p>
-                    <span>特色工作或党建创新理论文章1000字以上（10分）</span><br>
-                </h4>
-
-            </div>
-            <!--<div class="modal-footer">-->
-            <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
-            <!--</div>-->
+<div class="main">
+    <div class="banner">
+        <div class="loadingParent">
+            <canvas id="myCanvas" width="400" height="300"></canvas>
+            <canvas id="dashed" width="400" height="300"></canvas>
+            <p class="point">我的积分</p>
+            <p class="num">{$score}</p>
+            <p class="time">时间：{$time}</p>
         </div>
+        <p class="rule" data-toggle="modal" data-target="#myModal">积分规则</p>
     </div>
-</div><!-- /.modal -->
+    <div class="line">
+        <span>积分明细</span>
+    </div>
+    <ul class="in-points">
+        {volist name="$msg" id="ms"}
+        <li>
+            <p class="title">
+                <span>{$ms.str}</span>
+            </p>
+            <p class="content">
+                {$ms.title}
+            </p>
+            <p class="time">
+                {$ms.create_time}
+            </p>
+            <p class="point">
+                <img src="/home/images/user/point.png">
+                <span>+ {$ms.score}</span>
+            </p>
+        </li>
+        {/volist}
+        {volist name="$handle" id="han"}
+        <li>
+            <p class="title">
+                <span>{$han.str}</span>
+            </p>
+            <p class="content">
+            </p>
+            <p class="time">
+                {$han.create_time}
+            </p>
+            <p class="point">
+                <img src="/home/images/user/point.png">
+                <span>{$han.score}</span>
+            </p>
+        </li>
+        {/volist}
+    </ul>
+
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <img src="/home/images/user/close.png" alt="规则" data-dismiss="modal" aria-hidden="true" style="width:12vw;height:12vw" id="close">
+            <div class="modal-content" style="margin:6vw auto" id="modalBody">
+                <div style="width: 0;height: 6.4vw;border-right: 2px solid rgba(237, 218, 145, 0.63);margin: -6.4vw auto 0;"></div>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">
+                        <b>积分规则</b>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <h4 style="font-weight: normal">
+                        <p>1、党建责任</p>
+                        <span>党委（党组）听取汇报和专题研究，2次/年（2分）</span><br>
+                        <span>书记责任清单（2分）</span><br>
+                        <span>书记述职1000字以上（1分）</span><br>
+                        <span>支部书记述职500字以上（1分）</span><br>
+                        <span>党建年度工作计划和党建工作要点文件（2分）</span>
+                        <p>2、两学一做</p>
+                        <span>方案（1分）、部署会议记录（1分）</span><br>
+                        <span>支部党员大会,1次每季度(1分)</span><br>
+                        <span>支部委员会，1次每月（1分）</span><br>
+                        <span>党小组会，1次每月（1分）</span><br>
+                        <span>领导干部交流发言（1分）</span><br>
+                        <span>领导干部讲党课（2分）</span><br>
+                        <span>全年学习计划和培训计划(1分)、理论研究1500字（1分）</span><br>
+                        <span>主题党日（2分）</span><br>
+                        <p>3、作风建设</p>
+                        <span>“作风建设年”活动有部署、有方案（2分）</span><br>
+                        <span>开展“解放思想，担当有为”主题大讨论和“金点子”征集活动(2分)</span><br>
+                        <span>挖掘培树“大抓项目年”和“作风建设年”活动中涌现出的先进典型（2分）</span><br>
+                        <span>“五查五看”，党员责任和整改清单（2分）</span><br>
+                        <p>4、志愿服务</p>
+                        <span>“四跑”志愿服务方案和总结800字（2分）</span><br>
+                        <span>志愿服务一条街和三走进有照片（4分）</span><br>
+                        <p>5、组织建设</p>
+                        <span>党支部规范化建设台帐资料（4分）</span><br>
+                        <span>阵地、党费、换届组织本单位党员干部关注“台州红云”订阅号，被《台州机关党建》简报或“台州红云”微平台录用信息4条以上（2分）</span><br>
+                        <p>6、党风廉政</p>
+                        <span>落实主体责任（2分）</span><br>
+                        <span>廉政教育（2分）</span><br>
+                        <span>落实机关纪检工作情况报告制度（2分）</span><br>
+                        <p>7、特色创新</p>
+                        <span>特色工作或党建创新理论文章1000字以上（10分）</span><br>
+                    </h4>
+
+                </div>
+                <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div><!-- /.modal -->
+
+</div>
+
 {/block}
 
 {block name="script"}
@@ -132,7 +137,8 @@
 
         flag = IsPC();
         if(flag){
-            $(".banner").css({"width":"460px","margin":"0 auto","height":"320px"});
+            $(".main").css({"width":"640px","left":"50%","min-height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
+            $(".banner").css({"width":"640px","margin":"0 auto","height":"320px"});
             $("#myCanvas").css({"height":"210px","width":"300px"});
             $("#dashed").css({"height":"250px","width":"320px"});
             $(".banner .point").css({"top":"50px"});
@@ -148,7 +154,8 @@
             $("ul li .time").css("font-size","14px");
             $("ul li .point").css({"right":"50%","margin-right":"-320px"});
             $(".modal-content").css({"width":"600px","height":"540px"});
-            $("#close").css("margin","0 auto 0 auto");
+            $(".modal-dialog").css("margin-top","80px");
+            $("#close").css({"margin":"0 auto 0 auto","width":"80px","height":"80px"});
             $(".modal-open").css({"postion":"static","overflow":"hidden"})
         }else{
             $(".modal-open").css({"postion":"fixed","overflow":"hidden"})

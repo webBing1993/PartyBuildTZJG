@@ -1,3 +1,9 @@
+body {
+    background-color: #f1f1f1;
+}
+.main {
+    background-color: #fff;
+}
 .loadingParent{
     text-align: center;
 }
