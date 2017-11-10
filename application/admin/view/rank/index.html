@@ -8,7 +8,14 @@
     .minus,.add,.add1,.down b{cursor: pointer;display: inline-block;
         width: 20px;
         text-align: center;}
+    .table tr th,.table tr td{
+        text-align: center;
+    }
+    .table tr th:nth-child(2),.table tr td:nth-child(2){
+        text-align: left;
+    }
 </style>
+
 {/block}
 
 {block name="page-header"}
@@ -45,16 +52,16 @@
                         <div  style="padding-right:17px">
                         <table class="table table-striped">
                             <tr>
-                                <th>排名</th>
-                                <th>名称</th>
-                                <th>总分</th>
-                                <th>发布积分</th>
-                                <th>机关效能</th>
-                                <th>四种形态</th>
-                                <th>满意度测评</th>
-                                <th>被上级机关查处通报(- 4)</th>
-                                <th>被市级查处通报(- 2)</th>
-                                <th>反馈本单位处理(- 1)</th>
+                                <th width="3%">排名</th>
+                                <th width="15%">名称</th>
+                                <th width="5%">总分</th>
+                                <th width="5%">发布积分</th>
+                                <th width="6%">机关效能</th>
+                                <th width="6%">四种形态</th>
+                                <th width="6%">满意度测评</th>
+                                <th width="8%">被上级机关查处通报(- 4)</th>
+                                <th width="8%">被市级查处通报(- 2)</th>
+                                <th width="8%">反馈本单位处理(- 1)</th>
                             </tr>
                             </table>
                         </div>
@@ -63,16 +70,16 @@
                             <tbody>
                             {volist name="list" id="vo"}
                             <tr>
-                                <td>{$i}</td>
-                                <td>{$vo.name}</td>
-                                <td>{$vo.score}</td>
-                                <td>{$vo.push}</td>
-                                <td><span class="minus" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.efficiency}" name="jg" readonly><span class="add" style="font-size: 20px"><b>+</b></span></td>
-                                <td><span class="minus" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.form}" name="xt" readonly><span class="add" style="font-size: 20px"><b>+</b></span></td>
-                                <td><span class="minus" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.satisfaction}" name="my" readonly><span class="add1" style="font-size: 20px"><b>+</b></span></td>
-                                <td><span class="down" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.up}" name="up" readonly></td>
-                                <td><span class="down" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.float}" name="float" readonly></td>
-                                <td><span class="down" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.low}" name="low" readonly></td>
+                                <td width="3%">{$i}</td>
+                                <td width="15%">{$vo.name}</td>
+                                <td width="5%">{$vo.score}</td>
+                                <td width="5%">{$vo.push}</td>
+                                <td width="6%"><span class="minus" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.efficiency}" name="jg" readonly><span class="add" style="font-size: 20px"><b>+</b></span></td>
+                                <td width="6%"><span class="minus" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.form}" name="xt" readonly><span class="add" style="font-size: 20px"><b>+</b></span></td>
+                                <td width="6%"><span class="minus" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.satisfaction}" name="my" readonly><span class="add1" style="font-size: 20px"><b>+</b></span></td>
+                                <td width="8%"><span class="down" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.up}" name="up" readonly></td>
+                                <td width="8%"><span class="down" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.float}" name="float" readonly></td>
+                                <td width="8%"><span class="down" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.low}" name="low" readonly></td>
                             </tr>
                             {/volist}
                             </tbody>
