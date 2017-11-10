@@ -49,8 +49,8 @@
                 <div style="color: #333;font-size: 0.38rem;margin-left: 0.2rem">请在下方添加表彰照片<span style="font-size:0.32rem;color: #999;;">（最多上传3张图片，图片小于3M）</span>:</div>
                 <div class="imgs clear">
                     {notempty name="$msg"}
-                    {volist name="msg.list_images" id="img"}
-                    <div class="img2 fl "><img src="{$img|get_cover='path'}" alt="" data-tab="{$img}"></div>
+                    {volist name="msg.commend_img" id="img2"}
+                    <div class="img2 fl "><img src="{$img2|get_cover='path'}" alt="" data-tab="{$img2}"></div>
                     {/volist}
                     {/notempty}
                     <div class="img2 fl hide"></div>
@@ -66,8 +66,8 @@
                 <div style="color: #333;font-size: 0.38rem;margin-left: 0.2rem">请在下方添加交流凭证<span style="font-size:0.32rem;color: #999;;">（最多上传3张图片，图片小于3M）</span>:</div>
                 <div class="imgs clear">
                     {notempty name="$msg"}
-                    {volist name="msg.list_images" id="img"}
-                    <div class="img3 fl "><img src="{$img|get_cover='path'}" alt="" data-tab="{$img}"></div>
+                    {volist name="msg.voucher_img" id="img3"}
+                    <div class="img3 fl "><img src="{$img3|get_cover='path'}" alt="" data-tab="{$img3}"></div>
                     {/volist}
                     {/notempty}
                     <div class="img3 fl hide"></div>
