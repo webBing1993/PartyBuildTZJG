@@ -4,11 +4,12 @@
   font-weight: 600;
 }
 body {
-  background: #fff;
-  padding: 13px;
+  background: #f1f1f1;
 }
 .listbox{
-  margin-top: 30%;
+  background-color: #fff;
+  padding: 30% 3.2vw 3.2vw;
+  height: 100vh;
 }
 .list {
   background: #ffffff;

@@ -95,6 +95,10 @@ a:active {
 }
 body {
   overflow-x: hidden;
+  background-color: #f1f1f1;
+}
+.main {
+  background-color: #fff;
 }
 .banner {
   width: 100vw;
@@ -406,7 +410,7 @@ body {
     color: #29adf0;
     font-size: 0.32rem;
     position: absolute;
-    right: 1rem;
+    right: 2.7vw;
   }
   .d_list>.d_tel>.d_tel_icon{
     width:26.67vw;

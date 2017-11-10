@@ -3,6 +3,12 @@
 {block name="style"}
 <title>作风建设</title>
 <style>
+    body {
+        background-color: #f1f1f1;
+    }
+    .main {
+        background-color: #fff;
+    }
     .bg_img{
         margin:0 0.32rem;
     }
@@ -23,19 +29,21 @@
 {/block}
 
 {block name="body"}
-<div class="bg_img">
-    <a href="{:Url('Style/index?type=1')}">
-        <img src="/home/images/style/style1.png">
-    </a>
-    <a href="{:Url('Style/index?type=2')}">
-        <img src="/home/images/style/style2.png">
-    </a>
-    <a href="{:Url('Style/index?type=3')}">
-        <img src="/home/images/style/style3.png">
-    </a>
-    <a href="{:Url('Style/index?type=4')}">
-        <img src="/home/images/style/style4.png">
-    </a>
+<div class="main">
+    <div class="bg_img">
+        <a href="{:Url('Style/index?type=1')}">
+            <img src="/home/images/style/style1.png">
+        </a>
+        <a href="{:Url('Style/index?type=2')}">
+            <img src="/home/images/style/style2.png">
+        </a>
+        <a href="{:Url('Style/index?type=3')}">
+            <img src="/home/images/style/style3.png">
+        </a>
+        <a href="{:Url('Style/index?type=4')}">
+            <img src="/home/images/style/style4.png">
+        </a>
+    </div>
 </div>
 {/block}
 
@@ -59,7 +67,7 @@
 
     var flag = IsPC();
     if(flag){
-        $(".bg_img").css({"width":"640px","margin":"0 auto"});
+        $(".main").css({"width":"640px","left":"50%","height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
     }
 </script>
 
