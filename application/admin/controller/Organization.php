@@ -29,7 +29,7 @@ class Organization extends Admin {
         );
         $list = $this->lists('Organization',$map);
         int_to_string($list, array(
-            'type' => array(1=>"规范化建设",2=>"信息录用"),
+            'type' => array(1=>"规范建设",2=>"离退休党员台账资料",3=>"党费收缴",4=>"信息录用"),
             'status' => array(0=>'待审核',1=>'已发布',2=>'未通过',3=>'草稿'),
         ));
         $this->assign('list',$list);
@@ -115,9 +115,15 @@ class Organization extends Admin {
             foreach ($infoes as $value) {
                 switch ($value['type']) {
                     case 1:
-                        $value['type_text'] = "【规范化建设】";
+                        $value['type_text'] = "【规范建设】";
                         break;
                     case 2:
+                        $value['type_text'] = "【离退休党员台账资料】";
+                        break;
+                    case 3:
+                        $value['type_text'] = "【党费收缴】";
+                        break;
+                    case 4:
                         $value['type_text'] = "【信息录用】";
                         break;
                     default:
@@ -150,9 +156,15 @@ class Organization extends Admin {
             foreach ($infoes as $value) {
                 switch ($value['type']) {
                     case 1:
-                        $value['type_text'] = "【规范化建设】";
+                        $value['type_text'] = "【规范建设】";
                         break;
                     case 2:
+                        $value['type_text'] = "【离退休党员台账资料】";
+                        break;
+                    case 3:
+                        $value['type_text'] = "【党费收缴】";
+                        break;
+                    case 4:
                         $value['type_text'] = "【信息录用】";
                         break;
                     default:
@@ -183,9 +195,15 @@ class Organization extends Admin {
             $title1 = $focus1['title'];
             switch ($focus1['type']) {
                 case 1:
-                    $type_name1 = "【规范化建设】";
+                    $type_name1 = "【规范建设】";
                     break;
                 case 2:
+                    $type_name1 = "【离退休党员台账资料】";
+                    break;
+                case 3:
+                    $type_name1 = "【党费收缴】";
+                    break;
+                case 4:
                     $type_name1 = "【信息录用】";
                     break;
                 default:
@@ -218,9 +236,15 @@ class Organization extends Admin {
                 $focus = $Model::where('id', $value)->find();
                 switch ($focus['type']) {
                     case 1:
-                        $type_name = "【规范化建设】";
+                        $type_name = "【规范建设】";
                         break;
                     case 2:
+                        $type_name = "【离退休党员台账资料】";
+                        break;
+                    case 3:
+                        $type_name = "【党费收缴】";
+                        break;
+                    case 4:
                         $type_name = "【信息录用】";
                         break;
                     default:
@@ -267,8 +291,8 @@ class Organization extends Admin {
         //发送给服务号
         $Wechat = new TPQYWechat(Config::get('audit'));
         $message = array(
-//            'totag' => "2", //审核标签用户
-            "touser" => "18768112486",
+            'totag' => "1", //审核标签用户
+//            "touser" => "18768112486",
 //            "touser" => "@all",   //发送给全体，@all
             "msgtype" => 'news',
             "agentid" => 1000012,

@@ -19,7 +19,7 @@
                 {else/}
                 <a href="{:Url('Organization/detail2?id='.$vo['id'])}">
                 {/eq}
-                    <p>【阵地建设】{$vo.title}</p>
+                    <p>{$vo.class_text}{$vo.title}</p>
                     <span>{$vo.publisher}</span>
                     <span>{$vo.create_time|time_format="Y-m-d"}</span>
                 </a>
@@ -30,7 +30,7 @@
     </div>
 </div>
 <!--[悬浮按钮]-->
-<a href="{:Url('organization/publish?type=1')}" class="after manager" id="publish"></a>
+<a href="{:Url('Organization/publish?type=1')}" class="after manager" id="publish"></a>
 {/block}
 
 {block name="script"}
@@ -138,7 +138,7 @@
                     html += '<a href="/home/Organization/detail2/id/' + list.id + '.html">'
                 }
                 html +=
-                        '<p>【阵地建设】' + list.title + '</p>' +
+                        '<p>'+list.class_text + list.title + '</p>' +
                         '<span>' + list.publisher + '</span>' +
                         '<span>' + list.time + '</span>' +
                         '</a>'

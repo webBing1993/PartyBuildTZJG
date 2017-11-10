@@ -21,11 +21,51 @@ class Organization extends Model {
     ];
 
     /**
-     * 规范化建设
+     * 规范建设
      */
     public function getStandard() {
         $map = array(
             'type' => 1,
+            'status' => 1
+        );
+        $res = $this->where($map)->order('create_time desc')->limit(8)->select();
+        foreach ($res as $value) {
+            switch ($value['class']) {
+                case 1:
+                    $value['class_text'] = "【阵地建设】";
+                    break;
+                case 2:
+                    $value['class_text'] = "【按期换届】";
+                    break;
+                case 3:
+                    $value['class_text'] = "【主题党日】";
+                    break;
+                default:
+                    $value['class_text'] = "【无】";
+                    break;
+            }
+        }
+        return $res;
+    }
+
+    /**
+     * 获取离退休
+     */
+    public function getRetirement() {
+        $map = array(
+            'type' => 2,
+            'status' => 1
+        );
+        $res = $this->where($map)->order('create_time desc')->limit(8)->select();
+        return $res;
+    }
+
+    /**
+     * 获取党费收缴
+     */
+    public function getFee() {
+        $map = array(
+            'type' => 3,
             'status' => 1
         );
         $res = $this->where($map)->order('create_time desc')->limit(8)->select();
@@ -37,7 +77,7 @@ class Organization extends Model {
      */
     public function getInformation(){
         $map = array(
-            'type' => 2,
+            'type' => 4,
             'status' => 1
         );
         $res = $this->where($map)->order('create_time desc')->limit(8)->select();
@@ -57,6 +97,20 @@ class Organization extends Model {
         $res = $this->where($map)->order('create_time desc')->limit($length,8)->select();
         foreach ($res as $value) {
             $value['time'] = date("Y-m-d",$value['create_time']);
+            switch ($value['class']) {
+                case 1:
+                    $value['class_text'] = "【阵地建设】";
+                    break;
+                case 2:
+                    $value['class_text'] = "【按期换届】";
+                    break;
+                case 3:
+                    $value['class_text'] = "【主题党日】";
+                    break;
+                default:
+                    $value['class_text'] = "【无】";
+                    break;
+            }
         }
         return $res;
     }

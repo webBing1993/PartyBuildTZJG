@@ -16,7 +16,10 @@ use app\home\model\WechatUser;
 
 class Organization extends Base{
 
-    /* 规范化建设 */
+    /**
+     * 规范化建设
+     * type:1
+     */
     public function standard(){
         $Model = new OrganizationModel();
         $list = $Model->getStandard();
@@ -24,25 +27,33 @@ class Organization extends Base{
         return $this->fetch();
     }
 
-    /* 信息录用 */
-    public function information(){
-        $Model = new OrganizationModel();
-        $list = $Model->getInformation();
-        $this->assign('list',$list);
-        return $this->fetch();
-    }
-
-    /* 离退休党员台账资料 */
+    /**
+     * 离退休党员台账资料
+     *type:2
+     */
     public function retirement(){
         $Model = new OrganizationModel();
-        $list = $Model->getInformation();
+        $list = $Model->getRetirement();
         $this->assign('list',$list);
         return $this->fetch();
     }
 
-
-    /* 党费收缴 */
+    /**
+     * 党费收缴
+     * type:3
+     */
     public function fee(){
+        $Model = new OrganizationModel();
+        $list = $Model->getFee();
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+
+    /**
+     * 信息录用
+     * type:4
+     */
+    public function information(){
         $Model = new OrganizationModel();
         $list = $Model->getInformation();
         $this->assign('list',$list);
