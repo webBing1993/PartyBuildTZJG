@@ -6,84 +6,90 @@
 {/block}
 
 {block name="body"}
-<div class="search">
-    <input type="search" placeholder="请输入支部名称或发布人名称" id="search">
-    <span class="mui-icon mui-icon-search"></span>
-</div>
-<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-    <div class="mui-scroll">
-        <div class="list">
-            {empty name="$list"}
-            <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-            {else/}
-            <ul class="search-result">
-            </ul>
-            <ul class="all">
-                {volist name="list" id="vo"}
-                {eq name="vo.templet" value="1"}
-                <a href="{:Url('Responsibility/detail?id='.$vo['id'])}">
+<div class="main">
+    <div class="search">
+        <input type="search" placeholder="请输入支部名称或发布人名称" id="search">
+        <span class="mui-icon mui-icon-search"></span>
+    </div>
+    <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+        <div class="mui-scroll">
+            <div class="list">
+                {empty name="$list"}
+                <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                 {else/}
-                <a href="{:Url('Responsibility/detail2?id='.$vo['id'])}">
-                {/eq}
-                    <p>{$vo.title}</p>
-                    <span>{$vo.publisher}</span>
-                    <span>{$vo.create_time|time_format='Y-m-d'}</span>
-                </a>
-                {/volist}
-            </ul>
-            {/empty}
+                <ul class="search-result">
+                </ul>
+                <ul class="all">
+                    {volist name="list" id="vo"}
+                    {eq name="vo.templet" value="1"}
+                    <a href="{:Url('Responsibility/detail?id='.$vo['id'])}">
+                        {else/}
+                        <a href="{:Url('Responsibility/detail2?id='.$vo['id'])}">
+                            {/eq}
+                            <p>{$vo.title}</p>
+                            <span>{$vo.publisher}</span>
+                            <span>{$vo.create_time|time_format='Y-m-d'}</span>
+                        </a>
+                        {/volist}
+                </ul>
+                {/empty}
+            </div>
         </div>
     </div>
+    <!--[悬浮按钮]-->
+    <a href="{:Url('responsibility/publish?type='.$type.'&style=1')}" class="after manager" id="publish"></a>
 </div>
-<!--[悬浮按钮]-->
-<a href="{:Url('responsibility/publish?type='.$type.'&style=1')}" class="after manager" id="publish"></a>
 {/block}
 
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
-    var type =  parseInt(window.location.href.split("index/type/")[1]);
-    $(function(){
-     function IsPC() {
-                    var userAgentInfo = navigator.userAgent;
-                    var Agents = ["Android", "iPhone",
-                        "SymbianOS", "Windows Phone",
-                        "iPad", "iPod"];
-                    var flag = true;
-                    for (var v = 0; v < Agents.length; v++) {
-                        if (userAgentInfo.indexOf(Agents[v]) > 0) {
-                            flag = false;
-                            break;
-                        }
-                    }
-                    return flag;
-                }
 
-                flag = IsPC();
-                if(flag){
-                    $(".banner").css({"width":"640px","height":"320px","margin":"0 auto"});
-                    $(".search").css({"width":"640px","left":"50%","margin-left":"-320px"});
-                    $("#tab a").css("font-size","18px");
-                    $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"})
-                    $("#tab").css({"margin-top":"320px","width":"640px","position":"static","top":"0","margin":"0 auto"})
-                    $("#refreshContainer").css({"top":"0","width":"640px","left":"50%","margin-left":"-320px"});
-                    $(".list ul a").css("padding","10px 15px");
-                    $(".list ul a img").css({"width":"90px","height":"60px"});
-                    $(".list ul a p").css({"font-size":"16px","margin-bottom":"30px"});
-                    $(".list ul a span").css("font-size","14px");
-                    $(".list ul a span:nth-child(3)").css("bottom","10px");
-                    $(".list ul a span:nth-child(4)").css("bottom","10px");
-                    $(".default img").css("width","60px");
-                    $(".manager.after").css({"left":"50%","margin-left":"320px"});
+    $(function(){
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
                 }
-        if(type==1){
-            $("title").text("专题研究");
-        }else if(type==2){
-            $("title").text("责任清单");
-        }else if(type==4){
-            $("title").text("工作计划");
+            }
+            return flag;
         }
+
+        flag = IsPC();
+        if(flag){
+            $(".main").css({"width":"640px","left":"50%","height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
+            $(".banner").css({"width":"640px","height":"320px","margin":"0 auto"});
+            $(".search").css({"width":"640px","left":"50%","margin-left":"-320px"});
+            $("#tab a").css("font-size","18px");
+            $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"});
+            $("#tab").css({"margin-top":"320px","width":"640px","position":"static","top":"0","margin":"0 auto"});
+            $(".list ul a").css("padding","10px 15px");
+            $(".list ul a img").css({"width":"90px","height":"60px"});
+            $(".list ul a p").css({"font-size":"16px","margin-bottom":"30px"});
+            $(".list ul a span").css("font-size","14px");
+            $(".list ul a span:nth-child(3)").css("bottom","10px");
+            $(".list ul a span:nth-child(4)").css("bottom","10px");
+            $(".default").css({"height":"90vh","margin-top":"-1.2rem"});
+            $(".default img").css("width","60px");
+        }
+
     });
+
+
+    var type =  parseInt(window.location.href.split("index/type/")[1]);
+    if(type==1){
+        $("title").text("专题研究");
+    }else if(type==2){
+        $("title").text("责任清单");
+    }else if(type==4){
+        $("title").text("工作计划");
+    }
 
     window.onload = function() {
      if(flag){
@@ -95,7 +101,7 @@
         } else {
             mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
         }
-    }
+    };
 
     //初始化下拉加载
     mui.init({
@@ -138,7 +144,6 @@
     }
 
     function addLists(data,type){
-        console.log(data)
         var html = '';
         var lists = data.data;
         var len = lists.length;

@@ -14,74 +14,76 @@
 {/block}
 
 {block name="body"}
-<div class="search">
-    <input placeholder="请输入支部名称或发布人名称" id="search" type="search">
-    <span class="mui-icon mui-icon-search"></span>
-</div>
-<div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-    <a class="mui-control-item" href="#item1mobile" data-index="0">
-        <span>书记述职</span>
-    </a>
-    <a class="mui-control-item" href="#item2mobile" data-index="1">
-        <span>支部书记述职</span>
-    </a>
-</div>
-<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-    <div class="mui-scroll">
-        <div class="mui-slider-group">
-            <div id="item1mobile" class="mui-slider-item mui-control-content">
-                <!--书记述职-->
-                <div class="list secretary">
-                    {empty name="$list.one"}
-                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-                    {else/}
-                    <ul class="search-result-one">
-                    </ul>
-                    <ul class="secretary-all">
-                        {volist name="$list.one" id="vo1"}
-                        {eq name="vo1.templet" value="1"}
-                        <a href="{:Url('Responsibility/detail?id='.$vo1['id'])}">
+<div class="main">
+    <div class="search">
+        <input placeholder="请输入支部名称或发布人名称" id="search" type="search">
+        <span class="mui-icon mui-icon-search"></span>
+    </div>
+    <div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+        <a class="mui-control-item" href="#item1mobile" data-index="0">
+            <span>书记述职</span>
+        </a>
+        <a class="mui-control-item" href="#item2mobile" data-index="1">
+            <span>支部书记述职</span>
+        </a>
+    </div>
+    <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+        <div class="mui-scroll">
+            <div class="mui-slider-group">
+                <div id="item1mobile" class="mui-slider-item mui-control-content">
+                    <!--书记述职-->
+                    <div class="list secretary">
+                        {empty name="$list.one"}
+                        <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                         {else/}
-                        <a href="{:Url('Responsibility/detail2?id='.$vo1['id'])}">
-                        {/eq}
-                            <p>{$vo1.title}</p>
-                            <span>{$vo1.publisher}</span>
-                            <span>{$vo1.create_time|time_format='Y-m-d'}</span>
-                        </a>
-                        {/volist}
-                    </ul>
-                    {/empty}
+                        <ul class="search-result-one">
+                        </ul>
+                        <ul class="secretary-all">
+                            {volist name="$list.one" id="vo1"}
+                            {eq name="vo1.templet" value="1"}
+                            <a href="{:Url('Responsibility/detail?id='.$vo1['id'])}">
+                                {else/}
+                                <a href="{:Url('Responsibility/detail2?id='.$vo1['id'])}">
+                                    {/eq}
+                                    <p>{$vo1.title}</p>
+                                    <span>{$vo1.publisher}</span>
+                                    <span>{$vo1.create_time|time_format='Y-m-d'}</span>
+                                </a>
+                                {/volist}
+                        </ul>
+                        {/empty}
+                    </div>
                 </div>
-            </div>
-            <div id="item2mobile" class="mui-slider-item mui-control-content">
-                <!--支部书记述职-->
-                <div class="list branch-secretary">
-                    {empty name="$list.two"}
-                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-                    {else/}
-                    <ul class="search-result-two">
-                    </ul>
-                    <ul class="branch-secretary-all">
-                        {volist name="$list.two" id="vo2"}
-                        {eq name="vo2.templet" value="1"}
-                        <a href="{:Url('Responsibility/detail?id='.$vo2['id'])}">
+                <div id="item2mobile" class="mui-slider-item mui-control-content">
+                    <!--支部书记述职-->
+                    <div class="list branch-secretary">
+                        {empty name="$list.two"}
+                        <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                         {else/}
-                        <a href="{:Url('Responsibility/detail2?id='.$vo2['id'])}">
-                        {/eq}
-                            <p>{$vo2.title}</p>
-                            <span>{$vo2.publisher}</span>
-                            <span>{$vo2.create_time|time_format='Y-m-d'}</span>
-                        </a>
-                        {/volist}
-                    </ul>
-                    {/empty}
+                        <ul class="search-result-two">
+                        </ul>
+                        <ul class="branch-secretary-all">
+                            {volist name="$list.two" id="vo2"}
+                            {eq name="vo2.templet" value="1"}
+                            <a href="{:Url('Responsibility/detail?id='.$vo2['id'])}">
+                                {else/}
+                                <a href="{:Url('Responsibility/detail2?id='.$vo2['id'])}">
+                                    {/eq}
+                                    <p>{$vo2.title}</p>
+                                    <span>{$vo2.publisher}</span>
+                                    <span>{$vo2.create_time|time_format='Y-m-d'}</span>
+                                </a>
+                                {/volist}
+                        </ul>
+                        {/empty}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <!--[悬浮按钮]-->
+    <span href="{:Url('responsibility/publish?type='.$type.'&style=2')}" class="after manager" id="publish"></span>
 </div>
-<!--[悬浮按钮]-->
-<span href="{:Url('responsibility/publish?type='.$type.'&style=2')}" class="after manager" id="publish"></span>
 {/block}
 
 {block name="script"}
@@ -106,11 +108,11 @@
 
         flag = IsPC();
         if(flag){
-            $(".banner").css({"width":"640px","height":"320px","margin":"0 auto"});
+            $(".main").css({"width":"640px","left":"50%","height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
             $(".search").css({"width":"640px","left":"50%","margin-left":"-320px"});
             $("#tab a").css("font-size","18px");
-            $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"})
-            $("#tab").css({"width":"640px","left":"50%","margin-left":"-320px"})
+            $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"});
+            $("#tab").css({"width":"640px","left":"50%","margin-left":"-320px","top":"0"});
             $("#refreshContainer").css({"top":"0","width":"640px","left":"50%","margin-left":"-320px"});
             $(".list ul a").css("padding","10px 15px");
             $(".list ul a img").css({"width":"90px","height":"60px"});
@@ -119,7 +121,6 @@
             $(".list ul a span:nth-child(3)").css("bottom","10px");
             $(".list ul a span:nth-child(4)").css("bottom","10px");
             $(".default img").css("width","60px");
-            $(".manager.after").css({"left":"50%","margin-left":"320px"});
         }
         $("title").text("述职报告");
         //tab初始化和数据存储
@@ -131,7 +132,7 @@
         }
         $("#tab a").eq(c).addClass('mui-active');
         $(".mui-slider-group>div").eq(c).addClass('mui-active');
-    })
+    });
 
     window.onload = function() {
         if(flag){

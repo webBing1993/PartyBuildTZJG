@@ -1,5 +1,5 @@
 html,body{
-    background: #fcfcfc;
+    background: #f1f1f1;
 }
 .images{
     display: inline-block;
@@ -8,6 +8,7 @@ html,body{
     height: 100vh;
     padding: 0.5rem 0;
     overflow: hidden;
+    background-color: #fff;
 }
 /* iphone4 */
 
@@ -36,7 +37,7 @@ html,body{
     width: 2vw;
     background: #fff;
     position: absolute;
-    margin-left: 59vw;
+    left: 59%;
     z-index: 99;
 }
 .title:nth-child(odd) .title_box:after{
@@ -46,7 +47,7 @@ html,body{
     width: 2vw;
     background: #fff;
     position: absolute;
-    left: 39vw;
+    left: 39%;
     z-index: 102;
 }
 .title:nth-child(odd) img{
