@@ -5,35 +5,37 @@
 <title>特色创新</title>
 {/block}
 {block name="body"}
-<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-    <div class="mui-scroll">
-        <div class="banner">
-            <img src="/home/images/pioneer/special.jpg">
-        </div>
-        <div class="list">
-            {empty name="$list"}
-            <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-            {else/}
-            <ul>
-                {volist name="list" id="vo"}
-                {eq name="vo.templet" value="1"}
-                <a href="{:Url('Special/detail?id='.$vo['id'])}">
+<div class="main">
+    <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+        <div class="mui-scroll">
+            <div class="banner">
+                <img src="/home/images/pioneer/special.jpg">
+            </div>
+            <div class="list">
+                {empty name="$list"}
+                <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                 {else/}
-                <a href="{:Url('Special/detail2?id='.$vo['id'])}">
-                {/eq}
-                    <img src="{$vo.front_cover|get_cover='path'}">
-                    <p>{$vo.title}</p>
-                    <span>{$vo.publisher}</span>
-                    <span>{$vo.create_time|time_format='Y-m-d'}</span>
-                </a>
-                {/volist}
-            </ul>
-            {/empty}
+                <ul>
+                    {volist name="list" id="vo"}
+                    {eq name="vo.templet" value="1"}
+                    <a href="{:Url('Special/detail?id='.$vo['id'])}">
+                        {else/}
+                        <a href="{:Url('Special/detail2?id='.$vo['id'])}">
+                            {/eq}
+                            <img src="{$vo.front_cover|get_cover='path'}">
+                            <p>{$vo.title}</p>
+                            <span>{$vo.publisher}</span>
+                            <span>{$vo.create_time|time_format='Y-m-d'}</span>
+                        </a>
+                        {/volist}
+                </ul>
+                {/empty}
+            </div>
         </div>
     </div>
+    <!--[悬浮按钮]-->
+    <a href="{:Url('Special/publish')}" class="after manager" id="publish"></a>
 </div>
-<!--[悬浮按钮]-->
-<a href="{:Url('Special/publish')}" class="after manager" id="publish"></a>
 {/block}
 
 {block name="script"}
@@ -70,11 +72,11 @@
 
             flag = IsPC();
             if(flag){
-                $(".banner").css({"width":"640px","height":"320px","margin":"0 auto"})
+                $(".banner").css({"width":"640px","height":"320px","margin":"0 auto"});
                 $("#tab a").css("font-size","18px");
-                $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"})
+                $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"});
                 $("#tab").css({"margin-top":"320px","width":"640px","position":"static","top":"0","margin":"0 auto"})
-                $("#refreshContainer").css({"top":"0","width":"640px","left":"50%","margin-left":"-320px"});
+                $(".main").css({"width":"640px","left":"50%","height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
                 $(".list ul a").css("padding","10px 15px");
                 $(".list ul a img").css({"width":"90px","height":"60px"});
                 $(".list ul a p").css("font-size","16px");
@@ -82,9 +84,8 @@
                 $(".list ul a span:nth-child(3)").css("bottom","10px");
                 $(".list ul a span:nth-child(4)").css("bottom","10px");
                 $(".default img").css("width","60px");
-                  $(".manager.after").css({"left":"50%","margin-left":"320px"});
             }
-            })
+            });
 
     //初始化下拉加载
     mui.init({
