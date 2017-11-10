@@ -6,31 +6,33 @@
 {/block}
 
 {block name="body"}
-<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-    <div class="mui-scroll">
-<div class="list">
-    {empty name="$list"}
-    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-    {else/}
-    <ul>
-        {volist name="list" id="vo"}
-        {eq name="vo.templet" value="1"}
-        <a href="{:Url('Learn/detail?id='.$vo['id'])}">
-        {else/}
-        <a href="{:Url('Learn/detail2?id='.$vo['id'])}">
-        {/eq}
-            <p>{$vo.title}</p>
-            <span>{$vo.publisher}</span>
-            <span>{$vo.create_time|time_format='Y-m-d'}</span>
-        </a>
-        {/volist}
-    </ul>
-    {/empty}
-</div>
+<div class="main">
+    <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+        <div class="mui-scroll">
+            <div class="list">
+                {empty name="$list"}
+                <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                {else/}
+                <ul>
+                    {volist name="list" id="vo"}
+                    {eq name="vo.templet" value="1"}
+                    <a href="{:Url('Learn/detail?id='.$vo['id'])}">
+                        {else/}
+                        <a href="{:Url('Learn/detail2?id='.$vo['id'])}">
+                            {/eq}
+                            <p>{$vo.title}</p>
+                            <span>{$vo.publisher}</span>
+                            <span>{$vo.create_time|time_format='Y-m-d'}</span>
+                        </a>
+                        {/volist}
+                </ul>
+                {/empty}
+            </div>
         </div>
     </div>
-<!--[悬浮按钮]-->
-<a href="{:Url('Learn/publish?type=1&style=1')}" class="after manager" id="publish"></a>
+    <!--[悬浮按钮]-->
+    <a href="{:Url('Learn/publish?type=1&style=1')}" class="after manager" id="publish"></a>
+</div>
 {/block}
 
 {block name="script"}
@@ -67,14 +69,13 @@
 
         flag = IsPC();
         if(flag){
-            $("#refreshContainer").css({"width":"640px","left":"30%"});
+            $(".main").css({"width":"640px","left":"50%","height":"90vh","position":"relative","margin-left":"-320px","margin-top":"5vh"});
             $(".list ul a p").css({"margin-bottom":"0.5rem","font-size":"16px"});
             $(".list ul a span").css({"font-size":"14px"});
             $(".mui-pull .mui-pull-caption").css("font-size","15px");
             $(".default img").css("width","60px");
-            $(".manager.after").css({"left":"50%","margin-left":"320px"});
         }
-    })
+    });
 
     //初始化下拉加载
     mui.init({
