@@ -198,7 +198,6 @@ function get_score($class,$aid,$userid){
                         }
                         break;
                     case 2:  // 责任清单
-                    case 4:   // 工作计划
                         if ($count < 1){
                             // 可以积分
                             \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 2,'score_down' => 1,'create_time' => time()]);
@@ -230,7 +229,7 @@ function get_score($class,$aid,$userid){
             case 2:  // 两学一做
                 $table = "learn";
                 $info = \think\Db::name($table)->where(['id' => $aid])->find();
-                $map = ['class' => $class,'type' => $info['type'],'userid' => $userid];  // 1方案部署，2三会一课，3年度计划，4主题党日
+                $map = ['class' => $class,'type' => $info['type'],'userid' => $userid];  // 1方案部署，2三会一课，3年度计划，4支部活动
                 $count = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();  // 获取已发布个数
                 switch ($info['type']){
                     case 1:  // 方案部署
@@ -259,10 +258,16 @@ function get_score($class,$aid,$userid){
                             \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 1,'create_time' => time()]);
                         }
                         break;
-                    case 4:   // 主题党日
-                        if ($count < 1){
+                    case 4:   // 支部活动
+                        $month_first = mktime(0,0,0,date('m'),1,date('Y'));
+                        $month_final = mktime(23,59,59,date('m'),date('t'),date('Y'));
+                        $map = ['class' => $class,'type' => $info['type'],'userid' => $userid,'create_time' => ['between',[$month_first,$month_final]]];  // 每月
+                        $count = \think\Db::name('score')->where($map)->count();  // 获取已发布个数
+                        $mapp = ['class' => $class,'type' => $info['type'],'userid' => $userid];
+                        $counts = \think\Db::name('score')->where($mapp)->whereTime('create_time','y')->count();  // 获取已发布个数
+                        if ($count < 1 && $counts < 10){
                             // 可以积分
-                            \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 2,'score_down' => 1,'create_time' => time()]);
+                            \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 5,'create_time' => time()]);
                         }
                         break;
                     case 2:  // 三会一课  1支部委员大会 2党支部委员会 3党小组会 4党课
@@ -288,7 +293,9 @@ function get_score($class,$aid,$userid){
                                 $endThismonth=mktime(23,59,59,date('m'),date('t'),date('Y'));
                                 $map = ['class' => $class,'type' => $type,'userid' => $userid,'create_time' => ['between',[$beginThismonth,$endThismonth]]];  // 每月
                                 $count = \think\Db::name('score')->where($map)->count();  // 获取已发布个数
-                                if ($count < 1){
+                                $mapp = $map = ['class' => $class,'type' => $type,'userid' => $userid];
+                                $counts = \think\Db::name('score')->where($mapp)->whereTime('create_time','y')->count();
+                                if ($count < 1 && $counts < 10){
                                     // 可以积分
                                     \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 10,'create_time' => time()]);
                                 }
@@ -300,7 +307,9 @@ function get_score($class,$aid,$userid){
                                 $endThismonth=mktime(23,59,59,date('m'),date('t'),date('Y'));
                                 $map = ['class' => $class,'type' => $type,'userid' => $userid,'create_time' => ['between',[$beginThismonth,$endThismonth]]];  // 每月
                                 $count = \think\Db::name('score')->where($map)->count();  // 获取已发布个数
-                                if ($count < 1){
+                                $mapp = $map = ['class' => $class,'type' => $type,'userid' => $userid];
+                                $counts = \think\Db::name('score')->where($mapp)->whereTime('create_time','y')->count();
+                                if ($count < 1 && $counts < 10){
                                     // 可以积分
                                     \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 10,'create_time' => time()]);
                                 }
@@ -310,7 +319,7 @@ function get_score($class,$aid,$userid){
                                 $type = 10;
                                 $map = ['class' => $class,'type' => $type,'userid' => $userid];
                                 $count = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();  // 获取已发布个数
-                                if ($count < 3){
+                                if ($count < 1){
                                     // 可以积分
                                     \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 1,'create_time' => time()]);
                                 }
@@ -323,16 +332,58 @@ function get_score($class,$aid,$userid){
             case 3:  // 组织建设
                 $table = "organization";
                 $info = \think\Db::name($table)->where(['id' => $aid])->find();
-                $map = ['class' => $class,'type' => $info['type'],'userid' => $userid]; // 1规范化建设，2信息录用
+                $map = ['class' => $class,'type' => $info['type'],'userid' => $userid]; // 1规范建设，2离退休党员台账资料,3党费收缴,4信息录用
                 switch ($info['type']){
                     case 1:  // 规范性建设
-                        $count = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();  // 获取已发布个数
-                        if ($count < 1){
-                            // 可以积分
-                            \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 4,'score_down' => 1,'create_time' => time()]);
+                        switch ($info['class']){
+                            case 1: // 阵地建设
+                                $type = 5;
+                                $mapp = ['class' => $class,'type' => $type,'userid' => $userid];
+                                $count = \think\Db::name('score')->where($mapp)->whereTime('create_time','y')->count();  // 获取已发布个数
+                                if ($count < 1){
+                                    // 可以积分
+                                    \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 2,'create_time' => time()]);
+                                }
+                                break;
+                            case 2: // 按期换届
+                                $type = 6;
+                                $mapp = ['class' => $class,'type' => $type,'userid' => $userid];
+                                $count = \think\Db::name('score')->where($mapp)->whereTime('create_time','y')->count();  // 获取已发布个数
+                                if ($count < 1){
+                                    // 可以积分
+                                    \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 2,'create_time' => time()]);
+                                }
+                                break;
+                            case 3: // 主题党日
+                                $type = 7;
+                                $beginThismonth=mktime(0,0,0,date('m'),1,date('Y'));
+                                $endThismonth=mktime(23,59,59,date('m'),date('t'),date('Y'));
+                                $mapp = ['class' => $class,'type' => $type,'userid' => $userid,'create_time' => ['between',[$beginThismonth,$endThismonth]]];  // 每月
+                                $map = ['class' => $class,'type' => $type,'userid' => $userid];
+                                $count = \think\Db::name('score')->where($mapp)->count();  // 获取已发布个数
+                                $counts = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();
+                                if ($count < 1 && $counts < 10){
+                                    // 可以积分
+                                    \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 10,'create_time' => time()]);
+                                }
+                                break;
                         }
                         break;
-                    default:  // 信息录用
+                    case 2:  // 台账资料
+                        $count = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();  // 获取已发布个数
+                        if ($count < 1) {
+                            // 可以积分
+                            \think\Db::name('score')->insert(['class' => $class, 'type' => $info['type'], 'aid' => $aid, 'userid' => $userid, 'score_up' => 3, 'score_down' => 1, 'create_time' => time()]);
+                        }
+                        break;
+                    case 3:
+                        $count = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();  // 获取已发布个数
+                        if ($count < 1) {
+                            // 可以积分
+                            \think\Db::name('score')->insert(['class' => $class, 'type' => $info['type'], 'aid' => $aid, 'userid' => $userid, 'score_up' => 1, 'score_down' => 1, 'create_time' => time()]);
+                        }
+                        break;
+                    case 4:  // 信息录用
                         $count = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();  // 获取已发布个数
                         if ($count < 4){
                             // 可以积分
