@@ -14,78 +14,80 @@
 </style>
 {/block}
 {block name="body"}
-<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-    <div class="mui-scroll">
-        <!--轮播图-->
-                <div class="swiper-container banner">
-                    <div class="swiper-wrapper">
-                        {volist name="detail.images" id="li"}
-                        <div class="swiper-slide">
+<div class="main">
+    <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+        <div class="mui-scroll">
+            <!--轮播图-->
+            <div class="swiper-container banner">
+                <div class="swiper-wrapper">
+                    {volist name="detail.images" id="li"}
+                    <div class="swiper-slide">
                         <!--支持循环，需要重复图片节点-->
                         <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
-                            </div>
-                        {/volist}
                     </div>
-                </div>
-        <div class="view">
-            <span class="read">{$detail.views}</span>
-        </div>
-        <div class="article">
-            <div class="title"><p>{$detail.title}</p></div>
-            <div class="note clear">
-                <span class="publish">{$detail.publisher}</span>
-                <span class="time">{$detail.create_time|time_format="Y-m-d"}</span>
-            </div>
-            <div class="content">
-                <div class="article-content">{$detail.content}</div>
-                <div class="like">
-                    {eq name="visit" value="0"}
-                    {eq name="detail.is_like" value="1"}
-                    <span class="isgood good_ notvisitor"  data-type="8" data-id="{$detail.id}">{$detail.likes}</span>
-                    {else/}
-                    <span class="isgood good notvisitor"  data-type="8" data-id="{$detail.id}">{$detail.likes}</span>
-                    {/eq}
-                    {else/}
-                    <span class="isgood good">{$detail.likes}</span>
-                    {/eq}
+                    {/volist}
                 </div>
             </div>
-        </div>
-        <div class="comment">
-            <div class="sum">共<span>{$detail.comments}</span>条评论</div>
-            <div class="lists">
-                {volist name="comment" id="co"}
-                <div class="list clear">
-                    <div class="fl">
-                        <img src="{$co.header}" alt="用户" class="user">
-                    </div>
-                    <div class="fl mid">
-                        <div class="name limit">{$co.nickname}</div>
-                        <div class="content" >{$co.content}</div>
-                        <div class="time">{$co.create_time|time_format="Y-m-d"}</div>
-                    </div>
-                    {eq name="visit" value="0"}
-                    {eq name="co.is_like" value="1"}
-                    <div class="fr isgood good_ notvisitor"  data-type="0" data-id="{$co.id}">{$co.likes}</div>
-                    {else/}
-                    <div class="fr isgood good notvisitor"  data-type="0" data-id="{$co.id}">{$co.likes}</div>
-                    {/eq}
-                    {else/}
-                    <div class="fr isgood good">{$co.likes}</div>
-                    {/eq}
+            <div class="view">
+                <span class="read">{$detail.views}</span>
+            </div>
+            <div class="article">
+                <div class="title"><p>{$detail.title}</p></div>
+                <div class="note clear">
+                    <span class="publish">{$detail.publisher}</span>
+                    <span class="time">{$detail.create_time|time_format="Y-m-d"}</span>
                 </div>
-                {/volist}
+                <div class="content">
+                    <div class="article-content">{$detail.content}</div>
+                    <div class="like">
+                        {eq name="visit" value="0"}
+                        {eq name="detail.is_like" value="1"}
+                        <span class="isgood good_ notvisitor"  data-type="8" data-id="{$detail.id}">{$detail.likes}</span>
+                        {else/}
+                        <span class="isgood good notvisitor"  data-type="8" data-id="{$detail.id}">{$detail.likes}</span>
+                        {/eq}
+                        {else/}
+                        <span class="isgood good">{$detail.likes}</span>
+                        {/eq}
+                    </div>
+                </div>
+            </div>
+            <div class="comment">
+                <div class="sum">共<span>{$detail.comments}</span>条评论</div>
+                <div class="lists">
+                    {volist name="comment" id="co"}
+                    <div class="list clear">
+                        <div class="fl">
+                            <img src="{$co.header}" alt="用户" class="user">
+                        </div>
+                        <div class="fl mid">
+                            <div class="name limit">{$co.nickname}</div>
+                            <div class="content" >{$co.content}</div>
+                            <div class="time">{$co.create_time|time_format="Y-m-d"}</div>
+                        </div>
+                        {eq name="visit" value="0"}
+                        {eq name="co.is_like" value="1"}
+                        <div class="fr isgood good_ notvisitor"  data-type="0" data-id="{$co.id}">{$co.likes}</div>
+                        {else/}
+                        <div class="fr isgood good notvisitor"  data-type="0" data-id="{$co.id}">{$co.likes}</div>
+                        {/eq}
+                        {else/}
+                        <div class="fr isgood good">{$co.likes}</div>
+                        {/eq}
+                    </div>
+                    {/volist}
+                </div>
             </div>
         </div>
     </div>
-</div>
-{eq name="visit" value="0"}
-<div class="bottom clear" onclick="send(this,8,{$detail['id']})">
-    <div class="myword fl">
-        <input type="text" placeholder="说说你的感想！" id="send" disabled>
+    {eq name="visit" value="0"}
+    <div class="bottom clear" onclick="send(this,8,{$detail['id']})">
+        <div class="myword fl">
+            <input type="text" placeholder="说说你的感想！" id="send" disabled>
+        </div>
     </div>
+    {/eq}
 </div>
-{/eq}
 
 {/block}
 
@@ -119,12 +121,12 @@
 
             flag = IsPC();
             if(flag){
-                $("#refreshContainer").css({"width":"640px","left":"50%","margin-left":"-320px"});
+                $(".main").css({"width":"640px","left":"50%","min-height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
                 $(".article .title p").css("font-size","17px");
                 $(".article .note").css("font-size","14px");
                 $(".comment .sum").css({"font-size":"14px","height":"30px","line-height":"30px"});
-                $(".article-content p, .article-content p span, .article-content").css("font-size","16px")
-                $(".banner").css({"width":"680px","height":"320px","margin":"0 auto"});
+                $(".article-content p, .article-content p span, .article-content").css("font-size","16px");
+                $(".banner").css({"width":"640px","height":"320px","margin":"0 auto"});
                 $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"});
                 $(".article").css("padding-top","15px");
                 $(".comment .lists .list .fl img").css({"width":"60px","height":"60px"});
@@ -310,22 +312,22 @@
             if(flag) {
                 html += '<div class="list clear">' +
                         '<div class="fl">' +
-                        '<img src="' + list.header + '" alt="用户" class="user">' +
-                        '</div>' +
-                        '<div class="fl mid">' +
-                        '<div class="name limit">' + list.nickname + '</div>' +
-                        '<div class="content" >' + list.content + '</div>' +
-                        '<div class="time">' + list.time + '</div>' +
-                        '</div>';
-            }else{
-                html += '<div class="list clear">' +
-                        '<div class="fl">' +
                         '<img src="' + list.header + '" alt="用户" class="user" style="width:60px;height:60px;">' +
                         '</div>' +
                         '<div class="fl mid">' +
                         '<div class="name limit" style="margin-left:0;font-size:16px">' + list.nickname + '</div>' +
                         '<div class="content" style="padding-left:0;font-size:15px;margin-top:5px;margin-bottom:5px">' + list.content + '</div>' +
                         '<div class="time"  style="margin-left:0;font-size:14px;line-height:20px">' + list.time + '</div>' +
+                        '</div>';
+            }else{
+                html += '<div class="list clear">' +
+                        '<div class="fl">' +
+                        '<img src="' + list.header + '" alt="用户" class="user">' +
+                        '</div>' +
+                        '<div class="fl mid">' +
+                        '<div class="name limit">' + list.nickname + '</div>' +
+                        '<div class="content" >' + list.content + '</div>' +
+                        '<div class="time">' + list.time + '</div>' +
                         '</div>';
             }
             if ({$visit} == 0){

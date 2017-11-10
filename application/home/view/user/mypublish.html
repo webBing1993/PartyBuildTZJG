@@ -15,45 +15,47 @@
 	<img src="/home/images/common/nomessage.png" alt="暂无消息">
 </div>
 {else/}
-<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-	<div class="mui-scroll">
-<div class="Audited">
-	{empty name="list"}
-	<div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-	{else/}
-	<ul>
-		{volist name="list" id="ll"}
-		<li>
-			<a href="#" class="list clear" data-type="{$ll.class}">
-				<img src="{$ll.front_cover}">
-				<span>{$ll.title}</span>
-				{switch name='ll.class'}
-				{case value='1'}<p>[党建责任]</p><p>审核人：{$ll.username}</p>{/case}
-				{case value='2'}<p>[两学一做]</p><p>审核人：{$ll.username}</p>{/case}
-				{case value='3'}<p>[组织建设]</p><p>审核人：{$ll.username}</p>{/case}
-				{case value='4'}<p>[特色创新]</p><p>审核人：{$ll.username}</p>{/case}
-				{case value='5'}<p>[作风建设]</p><p>审核人：{$ll.username}</p>{/case}
-				{case value='6'}<p>[志愿服务]</p><p>审核人：{$ll.username}</p>{/case}
-				{default/}<p>[党风廉政]</p><p>审核人：{$ll.username}</p>
-				{/switch}
-				<span>{$ll.review_time}</span>
-				{eq name="ll.review_status" value="1"}
-				<i class="pass"></i>
-				{/eq}
-				{eq name="ll.review_status" value="2"}
-				<i class="refuse"></i>
-				{/eq}
-				{eq name="ll.review_status" value="0"}
-				<i style="right: 0;width: 0.8rem;background: #ffff00;"></i>
-				{/eq}
-			</a>
-		</li>
-		{/volist}
-	</ul>
-	{/empty}
-</div>
+<div class="main">
+	<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+		<div class="mui-scroll">
+			<div class="Audited">
+				{empty name="list"}
+				<div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+				{else/}
+				<ul>
+					{volist name="list" id="ll"}
+					<li>
+						<a href="#" class="list clear" data-type="{$ll.class}">
+							<img src="{$ll.front_cover}">
+							<span>{$ll.title}</span>
+							{switch name='ll.class'}
+							{case value='1'}<p>[党建责任]</p><p>审核人：{$ll.username}</p>{/case}
+							{case value='2'}<p>[两学一做]</p><p>审核人：{$ll.username}</p>{/case}
+							{case value='3'}<p>[组织建设]</p><p>审核人：{$ll.username}</p>{/case}
+							{case value='4'}<p>[特色创新]</p><p>审核人：{$ll.username}</p>{/case}
+							{case value='5'}<p>[作风建设]</p><p>审核人：{$ll.username}</p>{/case}
+							{case value='6'}<p>[志愿服务]</p><p>审核人：{$ll.username}</p>{/case}
+							{default/}<p>[党风廉政]</p><p>审核人：{$ll.username}</p>
+							{/switch}
+							<span>{$ll.review_time}</span>
+							{eq name="ll.review_status" value="1"}
+							<i class="pass"></i>
+							{/eq}
+							{eq name="ll.review_status" value="2"}
+							<i class="refuse"></i>
+							{/eq}
+							{eq name="ll.review_status" value="0"}
+							<i style="right: 0;width: 0.8rem;background: #ffff00;"></i>
+							{/eq}
+						</a>
+					</li>
+					{/volist}
+				</ul>
+				{/empty}
+			</div>
 		</div>
 	</div>
+</div>
 {/empty}
 {/block}
 
@@ -79,7 +81,7 @@ $(function(){
 	flag = IsPC();
 	if(flag){
 		$("#tab").css({"width":"640px","left":"50%","margin-left":"-320px"});
-		$("#refreshContainer").css({"width":"640px","left":"50%","margin-left":"-320px"})
+		$(".main").css({"width":"640px","left":"50%","min-height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
 		$("ul li a img").css({"width":"90px","height":"60px","margin-top":"15px"});
 		$("ul li a span:nth-child(2)").css({"font-size":"16px","margin-left":"100px"});
 		$("ul li a span:nth-child(4").css({"font-size":"14px","bottom":"15px","right":"40%"})

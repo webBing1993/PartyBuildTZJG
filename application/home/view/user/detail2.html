@@ -17,40 +17,42 @@
 </style>
 {/block}
 {block name="body"}
-<!--轮播图-->
-<div class="swiper-container banner">
-    <div class="swiper-wrapper">
-        {volist name="$info.list_images" id="li"}
-        <div class="swiper-slide">
-            <!--支持循环，需要重复图片节点-->
-            <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
+<div class="main">
+    <!--轮播图-->
+    <div class="swiper-container banner">
+        <div class="swiper-wrapper">
+            {volist name="$info.list_images" id="li"}
+            <div class="swiper-slide">
+                <!--支持循环，需要重复图片节点-->
+                <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
+            </div>
+            {/volist}
         </div>
-        {/volist}
     </div>
-</div>
 
-<div class="article">
-    <div class="title"><p>{$info.title}</p></div>
-    <div class="note clear">
-        <span class="publish">{$info.publisher}</span>
-        <span class="time">{$info.create_time|time_format="Y-m-d"}</span>
-    </div>
-    <div class="message">
-        {notempty name="info.time"}
-        <div class="name limit">{$info.time|time_format='Y/m/d H:i'}</div>
-        {/notempty}
-        {notempty name="info.address"}
-        <div class="content" >{$info.address}</div>
-        {/notempty}
-        {notempty name="info.people"}
-        <div class="content" >{$info.people}</div>
-        {/notempty}
-        {notempty name="info.compere"}
-        <div class="content" >{$info.compere}</div>
-        {/notempty}
-    </div>
-    <div class="content">
-        <div class="article-content">{$info.content}</div>
+    <div class="article">
+        <div class="title"><p>{$info.title}</p></div>
+        <div class="note clear">
+            <span class="publish">{$info.publisher}</span>
+            <span class="time">{$info.create_time|time_format="Y-m-d"}</span>
+        </div>
+        <div class="message">
+            {notempty name="info.time"}
+            <div class="name limit">{$info.time|time_format='Y/m/d H:i'}</div>
+            {/notempty}
+            {notempty name="info.address"}
+            <div class="content" >{$info.address}</div>
+            {/notempty}
+            {notempty name="info.people"}
+            <div class="content" >{$info.people}</div>
+            {/notempty}
+            {notempty name="info.compere"}
+            <div class="content" >{$info.compere}</div>
+            {/notempty}
+        </div>
+        <div class="content">
+            <div class="article-content">{$info.content}</div>
+        </div>
     </div>
 </div>
 {/block}
@@ -89,6 +91,7 @@
 
         flag = IsPC();
         if(flag){
+            $(".main").css({"width":"640px","left":"50%","min-height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
             $(".banner").css({"width":"640px","margin":"0 auto","height":"230px"});
             $(".banner img").css({"width":"640px","margin":"0 auto","height":"230px"})
             $(".article").css({"width":"640px","margin":"0 auto"});

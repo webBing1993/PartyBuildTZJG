@@ -5,7 +5,13 @@
 <title>志愿服务</title>
 <style>
 html,body{
-height:100%;
+    height:100%;
+    }
+body {
+    background-color: #f1f1f1;
+}
+.main {
+    background-color: #fff;
 }
     .banner{
         height:50vw;
@@ -41,72 +47,74 @@ height:100%;
 {/block}
 
 {block name="body"}
-<div class="banner">
-    <img src="/home/images/volunteer/volunteer.png">
-</div>
-<div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-    <a class="mui-control-item" href="#item1mobile" data-index="0">
-        <span>四跑志愿活动</span>
-    </a>
-    <a class="mui-control-item" href="#item2mobile" data-index="1">
-        <span>一条街三走进</span>
-    </a>
-</div>
-<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-    <div class="mui-scroll">
+<div class="main">
+    <div class="banner">
+        <img src="/home/images/volunteer/volunteer.png">
+    </div>
+    <div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+        <a class="mui-control-item" href="#item1mobile" data-index="0">
+            <span>四跑志愿活动</span>
+        </a>
+        <a class="mui-control-item" href="#item2mobile" data-index="1">
+            <span>一条街三走进</span>
+        </a>
+    </div>
+    <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+        <div class="mui-scroll">
 
-        <div class="mui-slider-group">
-            <div id="item1mobile" class="mui-slider-item mui-control-content">
-                <!--培训计划-->
-                <div class="list training">
-                    {empty name="$list.one"}
-                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-                    {else/}
-                    <ul>
-                        {volist name="list.one" id="one"}
-                        {eq name="one.templet" value="1"}
-                        <a href="{:Url('Volunteer/detail?id='.$one['id'])}">
+            <div class="mui-slider-group">
+                <div id="item1mobile" class="mui-slider-item mui-control-content">
+                    <!--培训计划-->
+                    <div class="list training">
+                        {empty name="$list.one"}
+                        <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                         {else/}
-                        <a href="{:Url('Volunteer/detail2?id='.$one['id'])}">
-                            {/eq}
-                            <img src="{$one.front_cover|get_cover='path'}">
-                            <p>{$one.title}</p>
-                            <span>{$one.publisher}</span>
-                            <span>{$one.create_time|time_format='Y-m-d'}</span>
-                        </a>
-                        {/volist}
-                    </ul>
-                    {/empty}
+                        <ul>
+                            {volist name="list.one" id="one"}
+                            {eq name="one.templet" value="1"}
+                            <a href="{:Url('Volunteer/detail?id='.$one['id'])}">
+                                {else/}
+                                <a href="{:Url('Volunteer/detail2?id='.$one['id'])}">
+                                    {/eq}
+                                    <img src="{$one.front_cover|get_cover='path'}">
+                                    <p>{$one.title}</p>
+                                    <span>{$one.publisher}</span>
+                                    <span>{$one.create_time|time_format='Y-m-d'}</span>
+                                </a>
+                                {/volist}
+                        </ul>
+                        {/empty}
+                    </div>
                 </div>
-            </div>
-            <div id="item2mobile" class="mui-slider-item mui-control-content">
-                <!--理论研究-->
-                <div class="list theory">
-                    {empty name="$list.two"}
-                    <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-                    {else/}
-                    <ul>
-                        {volist name="list.two" id="two"}
-                        {eq name="two.templet" value="1"}
-                        <a href="{:Url('Volunteer/detail?id='.$two['id'])}">
+                <div id="item2mobile" class="mui-slider-item mui-control-content">
+                    <!--理论研究-->
+                    <div class="list theory">
+                        {empty name="$list.two"}
+                        <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                         {else/}
-                        <a href="{:Url('Volunteer/detail2?id='.$two['id'])}">
-                            {/eq}
-                            <img src="{$two.front_cover|get_cover='path'}">
-                            <p>{$two.title}</p>
-                            <span>{$two.publisher}</span>
-                            <span>{$two.create_time|time_format='Y-m-d'}</span>
-                        </a>
-                        {/volist}
-                    </ul>
-                    {/empty}
+                        <ul>
+                            {volist name="list.two" id="two"}
+                            {eq name="two.templet" value="1"}
+                            <a href="{:Url('Volunteer/detail?id='.$two['id'])}">
+                                {else/}
+                                <a href="{:Url('Volunteer/detail2?id='.$two['id'])}">
+                                    {/eq}
+                                    <img src="{$two.front_cover|get_cover='path'}">
+                                    <p>{$two.title}</p>
+                                    <span>{$two.publisher}</span>
+                                    <span>{$two.create_time|time_format='Y-m-d'}</span>
+                                </a>
+                                {/volist}
+                        </ul>
+                        {/empty}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <!--[悬浮按钮]-->
+    <span href="{:Url('volunteer/publish')}" class="after manager" id="publish"></span>
 </div>
-<!--[悬浮按钮]-->
-<span href="{:Url('volunteer/publish')}" class="after manager" id="publish"></span>
 {/block}
 
 {block name="script"}
@@ -138,7 +146,8 @@ height:100%;
             $("#tab a").css("font-size","18px");
             $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"})
             $("#tab").css({"margin-top":"320px","width":"640px","position":"static","top":"0","margin":"0 auto"})
-            $("#refreshContainer").css({"top":"380px","width":"640px","left":"50%","margin-left":"-320px"});
+            $(".main").css({"width":"640px","left":"50%","min-height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
+            $("#refreshContainer").css("top","320px");
             $(".list ul a").css("padding","10px 15px");
             $(".list ul a img").css({"width":"90px","height":"60px"});
             $(".list ul a p").css("font-size","16px");
@@ -146,7 +155,6 @@ height:100%;
             $(".list ul a span:nth-child(3)").css("bottom","10px");
             $(".list ul a span:nth-child(4)").css("bottom","10px");
             $(".default img").css("width","60px");
-            $(".manager.after").css({"left":"50%","margin-left":"320px"});
         }
 
         //tab初始化和数据存储
@@ -158,7 +166,7 @@ height:100%;
         }
         $("#tab a").eq(c).addClass('mui-active');
         $(".mui-slider-group>div").eq(c).addClass('mui-active');
-    })
+    });
     window.onload = function() {
      if(flag){
                     $(".mui-pull .mui-pull-caption").css("font-size","15px");

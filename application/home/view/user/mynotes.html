@@ -10,43 +10,45 @@
 {/block}
 
 {block name="body"}
-<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-	<div class="mui-scroll">
-<div class="list push">
-	{empty name="list"}
-	<div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-	{else/}
-	<ul>
-		{volist name="list" id="li"}
-		<li>
-			{eq name="li.templet" value="1"}
-			<a href="{:Url('User/detail?class='.$li['class'].'&id='.$li['id'])}" class="list clear" data-type="{$li.class}">
-			{else/}
-				<a href="{:Url('User/detail2?class='.$li['class'].'&id='.$li['id'])}" class="list clear" data-type="{$li.class}">
-			{/eq}
-			<img src="{$li.front_cover}">
-			<span>{$li.title}</span>
-			{switch name='$li.class'}
-			{case value='1'}<span>[党建责任] 发布人：{$li.publisher}</span>{/case}
-			{case value='2'}<span>[两学一做] 发布人：{$li.publisher}</span>{/case}
-			{case value='3'}<span>[组织建设] 发布人：{$li.publisher}</span>{/case}
-			{case value='4'}<span>[特色创新] 发布人：{$li.publisher}</span>{/case}
-			{case value='5'}<span>[作风建设] 发布人：{$li.publisher}</span>{/case}
-			{case value='6'}<span>[志愿服务] 发布人：{$li.publisher}</span>{/case}
-			{default/}<span>[党风廉政] 发布人：{$li.publisher}</span>
-			{/switch}
-			<span>{$li.create_time}</span>
-			<span class="mui-icon mui-icon-forward"></span>
-			<i class="fail" data-id="{$li.id}" data-class="{$li.class}">删&nbsp;除</i>
-			<i class="pass" data-id="{$li.id}" data-class="{$li.class}"  data-type="{$li.type}" data-style="{$li.style}">修&nbsp;改</i>
-		</a>
-		</li>
-		{/volist}
-	</ul>
-	{/empty}
-</div>
+<div class="main">
+	<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+		<div class="mui-scroll">
+			<div class="list push">
+				{empty name="list"}
+				<div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+				{else/}
+				<ul>
+					{volist name="list" id="li"}
+					<li>
+						{eq name="li.templet" value="1"}
+						<a href="{:Url('User/detail?class='.$li['class'].'&id='.$li['id'])}" class="list clear" data-type="{$li.class}">
+							{else/}
+							<a href="{:Url('User/detail2?class='.$li['class'].'&id='.$li['id'])}" class="list clear" data-type="{$li.class}">
+								{/eq}
+								<img src="{$li.front_cover}">
+								<span>{$li.title}</span>
+								{switch name='$li.class'}
+								{case value='1'}<span>[党建责任] 发布人：{$li.publisher}</span>{/case}
+								{case value='2'}<span>[两学一做] 发布人：{$li.publisher}</span>{/case}
+								{case value='3'}<span>[组织建设] 发布人：{$li.publisher}</span>{/case}
+								{case value='4'}<span>[特色创新] 发布人：{$li.publisher}</span>{/case}
+								{case value='5'}<span>[作风建设] 发布人：{$li.publisher}</span>{/case}
+								{case value='6'}<span>[志愿服务] 发布人：{$li.publisher}</span>{/case}
+								{default/}<span>[党风廉政] 发布人：{$li.publisher}</span>
+								{/switch}
+								<span>{$li.create_time}</span>
+								<span class="mui-icon mui-icon-forward"></span>
+								<i class="fail" data-id="{$li.id}" data-class="{$li.class}">删&nbsp;除</i>
+								<i class="pass" data-id="{$li.id}" data-class="{$li.class}"  data-type="{$li.type}" data-style="{$li.style}">修&nbsp;改</i>
+							</a>
+					</li>
+					{/volist}
+				</ul>
+				{/empty}
+			</div>
 		</div>
 	</div>
+</div>
 {/block}
 
 {block name="script"}
@@ -70,7 +72,7 @@ $(function(){
 		flag = IsPC();
 		if(flag){
 			$("#tab").css({"width":"640px","left":"50%","margin-left":"-320px"});
-			$("#refreshContainer").css({"width":"640px","left":"50%","margin-left":"-320px"})
+			$(".main").css({"backgroundColor":"#fff","width":"640px","left":"50%","min-height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
 			$("ul li a img").css({"width":"90px","height":"60px","margin-top":"15px"});
 			$("ul li a span:nth-child(2)").css({"font-size":"16px","margin-left":"100px"});
 			$("ul li a span:nth-child(4").css({"font-size":"14px","bottom":"15px","right":"40%"})

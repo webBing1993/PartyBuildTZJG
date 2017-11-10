@@ -96,7 +96,7 @@
 
         flag = IsPC();
         if(flag){
-            $(".main").css({"width":"640px","left":"50%","margin-left":"-320px","position":"relative","height":"90vh","margin-top":"5vh"});
+            $(".main").css({"width":"640px","left":"50%","margin-left":"-320px","position":"relative","min-height":"90vh","margin-top":"5vh"});
             $(".list ul li").css("position","relative");
             $(".list ul textarea").css("height","300px");
             $(".goreview+p").css({"width":"640px","margin":"0 auto"});
@@ -193,7 +193,19 @@
                     data['list_images'].push($(this).data("tab")+"")  ;
                 }
             })
+            if( data["templet"] == 2){
+                if(data['list_images'].length==0){
+                    swal({
+                        title: ' ',
+                        text: '请至少上传一张图片',
+                        type: 'error',
+                        showConfirmButton:false,
+                        timer:1500
+                    });
+                    return false;
+                }
 
+            }
 //            data['list_image'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
             $.ajax({
                 type:"post",

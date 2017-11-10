@@ -127,7 +127,7 @@
                     html += '<a href="/home/Organization/detail2/id/' + list.id + '.html">'
                 }
                 html +=
-                        '<p style="font-size: 16px;margin-bottom: 0.5rem">【阵地建设】' + list.title + '</p>' +
+                        '<p style="font-size: 16px;margin-bottom: 0.5rem">'+list.class_text +  list.title + '</p>' +
                         '<span style="font-size: 14px;">' + list.publisher + '</span>' +
                         '<span style="font-size: 14px">' + list.time + '</span>' +
                         '</a>'
@@ -148,7 +148,7 @@
     }
 
     mui('#refreshContainer').on('tap', 'a', function(e) {
-        var url = this.getAttribute("href")+"?"+2;
+        var url = this.getAttribute("href")+"?"+1;
         window.location.href = url;
     });
 

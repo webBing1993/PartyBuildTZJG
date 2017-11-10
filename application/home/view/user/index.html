@@ -5,47 +5,49 @@
 {/block}
 
 {block name="body"}
-{eq name="visit" value="1"}
-<div class="banner">
-	<img src="/home/images/common/vistor.jpg" alt="个人头像" class="up">
-	<div class="name">游客</div>
-</div>
-{else/}
-<div class="banner">
-	{notempty name="$user.header"}
-	<div class="up" data-tab="{$user.header}"></div>
+<div class="main">
+	{eq name="visit" value="1"}
+	<div class="banner">
+		<img src="/home/images/common/vistor.jpg" alt="个人头像" class="up">
+		<div class="name">游客</div>
+	</div>
 	{else/}
-	<div class="up" data-tab="{$user.avatar}"></div>
-	{/notempty}
-	<div class="name">{$user.name}</div>
-	<input type="file" class="hide" id="upload" accept="image/jpg, image/png, image/gif, image/jpeg">
-	<input type="hidden" name="header"  value="" required="">
-</div>
-<div class="lists">
-	<a href="{:Url('User/personal')}" class="list clear">
-		<span>党员ID</span>
-		<i class="fa fa-angle-right fr"></i>
-	</a>
-	<a href="{:Url('Rank/department')}" class="list clear">
-		<span>支部排行榜</span>
-		<i class="fa fa-angle-right fr"></i>
-	</a>
-	<a href="{:Url('User/mynotes')}" class="list clear">
-		<span>我的草稿</span>
-		<i class="fa fa-angle-right fr"></i>
-	</a>
-	<a href="{:Url('User/mypublish')}" class="list clear">
-		<span>我的发布</span>
-		<i class="fa fa-angle-right fr"></i>
-	</a>
-	{eq name="$is" value="0"}
-	<a href="{:Url('User/myintegral')}" class="list clear">
-		<span>积分明细</span>
-		<i class="fa fa-angle-right fr"></i>
-	</a>
+	<div class="banner">
+		{notempty name="$user.header"}
+		<div class="up" data-tab="{$user.header}"></div>
+		{else/}
+		<div class="up" data-tab="{$user.avatar}"></div>
+		{/notempty}
+		<div class="name">{$user.name}</div>
+		<input type="file" class="hide" id="upload" accept="image/jpg, image/png, image/gif, image/jpeg">
+		<input type="hidden" name="header"  value="" required="">
+	</div>
+	<div class="lists">
+		<a href="{:Url('User/personal')}" class="list clear">
+			<span>党员ID</span>
+			<i class="fa fa-angle-right fr"></i>
+		</a>
+		<a href="{:Url('Rank/department')}" class="list clear">
+			<span>支部排行榜</span>
+			<i class="fa fa-angle-right fr"></i>
+		</a>
+		<a href="{:Url('User/mynotes')}" class="list clear">
+			<span>我的草稿</span>
+			<i class="fa fa-angle-right fr"></i>
+		</a>
+		<a href="{:Url('User/mypublish')}" class="list clear">
+			<span>我的发布</span>
+			<i class="fa fa-angle-right fr"></i>
+		</a>
+		{eq name="$is" value="0"}
+		<a href="{:Url('User/myintegral')}" class="list clear">
+			<span>积分明细</span>
+			<i class="fa fa-angle-right fr"></i>
+		</a>
+		{/eq}
+	</div>
 	{/eq}
 </div>
-{/eq}
 {/block}
 
 {block name="script"}
@@ -68,7 +70,8 @@ $(function(){
 
         flag = IsPC();
         if(flag){
-            $(".banner").css({"position":"relative","width":"640px","left":"50%","margin-left":"-320px","height":"320px"});
+			$(".main").css({"width":"640px","left":"50%","min-height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
+			$(".banner").css({"position":"relative","width":"640px","left":"50%","margin-left":"-320px","height":"320px"});
 			$(".banner .up").css({"width":"110px","height":"110px","margin-top":"120px","background-size":"cover"});
 			$(".lists").css({"width":"640px","margin":"0 auto"});
 			$(".lists .list").css({"height":"75px","line-height":"75px"});

@@ -400,15 +400,32 @@
         for(var i = 0; i< len;i++){
             var list = lists[i];
             if(list.templet==1){
-                html += '<a href="/home/Learn/detail/id/'+list.id+'.html">'
+                if (flag) {
+                    html += '<a href="/home/Learn/detail/id/'+list.id+'.html" style="padding: 10px 15px">'
+                }else {
+                    html += '<a href="/home/Learn/detail/id/'+list.id+'.html">'
+                }
             }else{
-                html += '<a href="/home/Learn/detail2/id/'+list.id+'.html">'
+                if (flag) {
+                    html += '<a href="/home/Learn/detail2/id/'+list.id+'.html" style="padding: 10px 15px">'
+                }else {
+                    html += '<a href="/home/Learn/detail2/id/'+list.id+'.html">'
+                }
             }
-            html +=
-                    '<p>'+list.title+'</p>'+
-                    '<span>'+list.publisher+'</span>'+
-                    '<span>'+list.time+'</span>'+
-                    '</a>'
+            if (flag) {
+                html +=
+                        '<p style="font-size: 16px;margin-bottom: .5rem">'+list.title+'</p>'+
+                        '<span>'+list.publisher+'</span>'+
+                        '<span>'+list.time+'</span>'+
+                        '</a>'
+            }else {
+                html +=
+                        '<p>'+list.title+'</p>'+
+                        '<span>'+list.publisher+'</span>'+
+                        '<span>'+list.time+'</span>'+
+                        '</a>'
+            }
+
         }
        switch (type){
            case "0":
