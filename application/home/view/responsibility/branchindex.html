@@ -114,9 +114,10 @@
             $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"});
             $("#tab").css({"width":"640px","left":"50%","margin-left":"-320px","top":"0"});
             $("#refreshContainer").css({"top":"0","width":"640px","left":"50%","margin-left":"-320px"});
+            $(".list").css("margin-top","1rem");
             $(".list ul a").css("padding","10px 15px");
             $(".list ul a img").css({"width":"90px","height":"60px"});
-            $(".list ul a p").css({"font-size":"16px","margin-bottom":"30px"});
+            $(".list ul a p").css({"font-size":"16px","margin-bottom":"30px","-webkit-line-clamp":"1"});
             $(".list ul a span").css("font-size","14px");
             $(".list ul a span:nth-child(3)").css("bottom","10px");
             $(".list ul a span:nth-child(4)").css("bottom","10px");
@@ -214,7 +215,7 @@
                     html += '<a href="/home/responsibility/detail2/id/' + list.id + '.html">'
                 }
                 html +=
-                        '<p style="margin-bottom: 30px;font-size: 16px;">' + list.title + '</p>' +
+                        '<p style="margin-bottom: 30px;font-size: 16px;-webkit-line-clamp:1">' + list.title + '</p>' +
                         '<span style="font-size: 14px;">' + list.publisher + '</span>' +
                         '<span style="font-size: 14px;">' + list.time + '</span>' +
                         '</a>'
