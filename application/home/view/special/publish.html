@@ -2,6 +2,11 @@
 
 {block name="style"}
 <link rel="stylesheet" href="/home/css/common/publish.css">
+<style>
+    .content{
+        padding: 0;
+    }
+</style>
 {/block}
 
 {block name="body"}
@@ -46,7 +51,7 @@
                 <input type="file" class="hide" id="upimg" accept="image/jpg, image/png, image/gif, image/jpeg">
                 <input type="hidden" name="id" value="{$msg.id || default=''}">
 
-                <div style="color: #333;font-size: 0.38rem;margin-left: 0.2rem">请在下方添加表彰照片<span style="font-size:0.32rem;color: #999;;">（最多上传3张图片，图片小于3M）</span>:</div>
+                <div style="color: #333;font-size: 0.38rem;margin-left: 0.2rem;height: 0.8rem;line-height: 0.8rem;">请在下方添加表彰照片:</div>
                 <div class="imgs clear">
                     {notempty name="$msg.commend_img"}
                     {volist name="msg.commend_img" id="img2"}
@@ -63,7 +68,7 @@
                 <input type="file" class="hide" id="upimg2" accept="image/jpg, image/png, image/gif, image/jpeg">
                 <input type="hidden" name="id" value="{$msg.id || default=''}">
 
-                <div style="color: #333;font-size: 0.38rem;margin-left: 0.2rem">请在下方添加交流凭证<span style="font-size:0.32rem;color: #999;;">（最多上传3张图片，图片小于3M）</span>:</div>
+                <div style="color: #333;font-size: 0.38rem;margin-left: 0.2rem;height: 0.8rem;line-height: 0.8rem;">请在下方添加交流凭证:</div>
                 <div class="imgs clear">
                     {notempty name="$msg"}
                     {volist name="msg.voucher_img" id="img3"}
@@ -79,6 +84,7 @@
                 </div>
                 <input type="file" class="hide" id="upimg3" accept="image/jpg, image/png, image/gif, image/jpeg">
                 <input type="hidden" name="id" value="{$msg.id || default=''}">
+                <p style="font-size: 0.32rem;color: #999 ;height: 1rem;line-height:1rem;">(每个入口最多上传3张图片，图片小于3M)</p>
             </div>
         </ul>
     </div>
