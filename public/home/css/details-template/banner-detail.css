@@ -160,6 +160,9 @@ body {
     height: 0.5rem;
     display: inline-block;
     margin-right: 0.3rem;
+    line-height:0.6rem !important;
+}
+.article .content .like span.linePc{
     line-height:0.5rem !important;
 }
 .article .content .note_ span{
