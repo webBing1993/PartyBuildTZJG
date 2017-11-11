@@ -6,7 +6,7 @@
     background: #e4e4e4;
     position: fixed;
     top:0;
-    z-index: 9;
+    z-index: 109;
 }
 .search input{
     height:0.93rem;
