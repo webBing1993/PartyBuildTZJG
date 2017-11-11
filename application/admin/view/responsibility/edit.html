@@ -282,7 +282,6 @@
                 var id= $(this).attr("id");
                 if(size <= 1024*5){
                     var file = $(this)[0].files[0];
-                    console.log(file)
                     var formData = new FormData();
                     formData.append("download",file);
                     $.ajax({
@@ -295,7 +294,6 @@
                             var data = $.parseJSON(d);
                             if(data.status == 1){
                                 $("#"+id).next("input[name='file']").val(data.data.id);
-                                console.log(data.data)
                             }else {
                                 warning({msg:"上传失败"});
                             }

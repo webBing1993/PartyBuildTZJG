@@ -48,7 +48,7 @@ class File extends Base
                     'location' => strtolower($driver) ? 1 : 0,
                 );
 
-                $id = $this->create($data);
+                $id = $this->save($data);
                 if($id){
                     $value['id'] = $id;
                 } else {

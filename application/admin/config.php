@@ -17,7 +17,7 @@ return [
     'download_upload' => array(
         'mimes'    => '', //允许上传的文件MiMe类型
         'maxSize'  => 20*1024*1024, //上传的文件大小限制 (0-不做限制)
-        'exts'     => 'jpg,gif,png,jpeg,zip,rar,tar,gz,7z,doc,docx,txt,xml,mp4,avi,wav,remvb,mp3,wma', //允许上传的文件后缀
+        'exts'     => 'jpg,gif,png,jpeg,zip,rar,tar,gz,7z,doc,docx,txt,xml,mp4,avi,wav,remvb,mp3,wma,xlsx,xls,pdf,ppt', //允许上传的文件后缀
         'autoSub'  => true, //自动子目录保存文件
         'subName'  => array('date', 'Y-m-d'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
         'rootPath' => './uploads/download/', //保存根路径
