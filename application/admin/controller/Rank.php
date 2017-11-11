@@ -20,11 +20,20 @@ class Rank extends Admin
      * 首页
      */
     public function index(){
+        $search = input('search');
         // 获取考核人员列表
         $map = array(
             'tagid' => 1,
-            
+
         );
+        if ($search != '') {
+            $where['name'] = ['like','%'.$search.'%'];
+            $arr = WechatUser::where($where)->column('userid');
+            $map = array(
+                'tagid' => 1,
+                'userid' => ['in',$arr]
+            );
+        }
         $list = WechatUserTag::where($map)->select();
         foreach($list as $key => $value){
             $User = WechatUser::where('userid',$value->userid)->find();
@@ -35,17 +44,19 @@ class Rank extends Admin
                 $score5 = $User['score_up']; // 被上级机关查处通报
                 $score6 = $User['score_float']; // 被市级查处通报
                 $score7 = $User['score_low'];  // 反馈本单位处理
+                $score8 = $User['score_work'];  // 党建责任  工作计划
                 $Arr = Db::name('score')->where('userid',$value->userid)->whereTime('create_time','y')->select();
                 $score4 = 0;
                 foreach($Arr as $val){
                     $score4 += ($val['score_up'] / $val['score_down']);
                 }
-                $value['score'] = $score1 + $score2 + $score3 + $score4 - $score5 - $score6 - $score7;
+                $value['score'] = $score1 + $score2 + $score3 + $score4 - $score5 - $score6 - $score7 + $score8;
                 $value['name'] = $User['name'];
                 $value['efficiency'] = $score1;
                 $value['form'] = $score2;
                 $value['satisfaction'] = $score3;
                 $value['push'] = $score4;
+                $value['work'] = $score8;
                 $score5 == 0 ? $value['up'] = $score5 : $value['up'] = '- '.$score5;
                 $score6 == 0 ? $value['float'] = $score6 : $value['float'] = '- '.$score6;
                 $score7 == 0 ? $value['low'] = $score7 : $value['low'] = '- '.$score7;
@@ -74,7 +85,16 @@ class Rank extends Admin
      * 操作日志
      */
     public function book(){
-        $list =  $this->lists('Handle');
+        $search = input('search');
+        $where = array();
+        if ($search != '') {
+            $map['name'] = ['like','%'.$search.'%'];
+            $arr = WechatUser::where($map)->column('userid');
+            $where = array(
+                'userid' => ['in',$arr]
+            );
+        }
+        $list =  $this->lists('Handle',$where);
         foreach($list as $value){
             $name = WechatUser::where('userid',$value['userid'])->value('name');
             switch ($value['class']){
@@ -102,6 +122,10 @@ class Rank extends Admin
                     $pre = "反馈本单位处理";
                     $num = 1;
                     break;
+                case 7:
+                    $pre = "党建责任-工作计划";
+                    $num = 1;
+                    break;
             }
             if ($value['type'] == 1){
                 $ps = "减去";
@@ -119,7 +143,7 @@ class Rank extends Admin
     public function handle(){
         $data = input('post.');
         $userid = $data['userid'];
-        $class = $data['class'];  // 1 机关效能 2 四种形态 3 满意度测评 4 被上级机关查处通报 5 被市级查处通报 6  反馈本单位处理
+        $class = $data['class'];  // 1 机关效能 2 四种形态 3 满意度测评 4 被上级机关查处通报 5 被市级查处通报 6  反馈本单位处理 7 党建责任-工作计划
         $type = $data['type'];  // 1 减  2 加
         $User = WechatUser::where('userid',$userid)->find();
         $flag = true;
@@ -153,6 +177,10 @@ class Rank extends Admin
                 $field = 'score_low';
                 $num = 1;
                 $flag = false;
+                break;
+            case 7:
+                $field = 'score_work';
+                $num = 1;
                 break;
         }
         $create_user = $_SESSION['think']['user_auth']['id'];

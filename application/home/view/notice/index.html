@@ -32,6 +32,24 @@
     #refreshContainer{
         margin-top: 17vw;
     }
+    .list ul a p {
+        margin-bottom: 0;
+    }
+    .list ul a span:nth-child(3).notes {
+        position: absolute;
+        bottom: 2vw;
+        display: inline-block;
+        width: 68vw;
+    }
+    .list ul a span:nth-child(3).notes span {
+        display: inline-block;
+    }
+    .fl {
+        float: left;
+    }
+    .fr {
+        float: right;
+    }
 </style>
 
 {/block}
@@ -60,8 +78,10 @@
                             <a href="{:Url('Notice/detail?id='.$lo['id'])}">
                                 <img src="{$lo.front_cover}" alt="图片" class="img">
                                 <p>{$lo.title}</p>
-                                <span>{$lo.publisher}</span>
-                                <span>{$lo.create_time}</span>
+                                <span class="notes">
+                                    <span class="fl">{$lo.publisher}</span>
+                                    <span class="fr">{$lo.create_time}</span>
+                                </span>
                             </a>
                             {/volist}
                         </ul>
@@ -81,8 +101,10 @@
                             <a href="{:Url('dynamicdetail','id='.$li['id'])}">
                                 <img src="{$li.front_cover}" alt="图片" class="img">
                                 <p>{$li.title}</p>
-                                <span>{$li.publisher}</span>
-                                <span>{$li.create_time}</span>
+                                <span class="notes">
+                                    <span class="fl">{$li.publisher}</span>
+                                    <span class="fr">{$li.create_time}</span>
+                                </span>
                             </a>
                             {/volist}
                         </ul>
@@ -127,8 +149,10 @@
                     $("#tab").css({"width":"640px","height":"45px","top":"5vh"});
                     $("#tab a").css({"line-height":"auto","height":"auto","margin-top":"0","line-height":"38px"});
                     $("#refreshContainer").css("margin-top","45px");
-                    $(".list ul a span:nth-child(3)").css("width",'45%');
                     $(".tag").css({"height":"30px","line-height":"30px"});
+                    $(".list ul a p").css({"font-size":"16px","-webkit-line-clamp":"1"});
+                    $(".list ul a span:nth-child(3).notes").css({"width":"490px","bottom":"10px"});
+                    $(".list ul a").css("padding","10px 15px");
                     $(".list ul a img").css({"width":"90px","height":"60px"});
                     $(".lists .list .img").css({"width":"640px","height":"180px"});
                     $(".dynamic .s_title, .notice .s_title").css("font-size","18px");
@@ -158,7 +182,7 @@
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
         }
-    }
+    };
 
     //初始化下拉加载
     mui.init({
@@ -206,25 +230,40 @@
         var len = lists.length;
         for (var i = 0; i < len; i++) {
             var list = lists[i];
-            if (type == 0 ){
+            if (flag) {
+                if (type == 0) {
+                    html += '<a href="/home/Notice/detail/id/' + list.id + '" style="padding: 10px 15px">'
+                } else if (type == 1) {
+                    html += '<a href="/home/Notice/dynamicdetail/id/' + list.id + '" style="padding: 10px 15px">'
+                }
                 html +=
-                        '<a href="/home/Notice/detail/id/'+list.id+'">'
-            }else if(type==1){
+                        '<img src="' + list.front_cover + '" alt="图片" class="img" style="width: 90px;height: 60px">' +
+                        '<p style="font-size:16px;-webkit-line-clamp:1">' + list.title + '</p>' +
+                        '<span class="notes" style="width: 490px;bottom: 10px">'+
+                        '<span class="fl">' + list.publisher + '</span>' +
+                        '<span class="fr">' + list.create_time + '</span>' +
+                        '</span>'+
+                        '</a>';
+            } else {
+                if (type == 0) {
+                    html += '<a href="/home/Notice/detail/id/' + list.id + '">'
+                } else if (type == 1) {
+                    html += '<a href="/home/Notice/dynamicdetail/id/' + list.id + '">'
+                }
                 html +=
-                        '<a href="/home/Notice/dynamicdetail/id/'+list.id+'">'
+                        '<img src="' + list.front_cover + '" alt="图片" class="img">' +
+                        '<p>' + list.title + '</p>' +
+                        '<span class="notes">'+
+                        '<span class="fl">' + list.publisher + '</span>' +
+                        '<span class="fr">' + list.create_time + '</span>' +
+                        '</span>'+
+                        '</a>';
             }
-           html+=
-
-                    '<img src="'+list.front_cover+'" alt="图片" class="img">'+
-                    '<p>'+list.title+'</p>'+
-                    '<span>'+list.publisher+'</span>'+
-                    '<span>'+list.create_time+'</span>'+
-                    '</a>';
+            if (type == 0) {
+                $(".notice ul").append(html);
+            } else if (type == 1) {
+                $(".dynamic ul").append(html);
             }
-        if (type == 0) {
-            $(".notice ul").append(html);
-        } else if (type == 1) {
-            $(".dynamic ul").append(html);
         }
     }
 

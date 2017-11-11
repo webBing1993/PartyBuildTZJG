@@ -4,7 +4,7 @@
 <style>
     .shadow{width: 100%;height: 100%;position: absolute;left: 0;top: 0;background: rgba(0,0,0,0.4);z-index: 88;}
     input[name='jg'],input[name='xt'],input[name='my']{width:40px;text-align: center;margin:0 10px;}
-    input[name='up'],input[name='float'],input[name='low']{width:40px;text-align: center;margin:0 10px;}
+    input[name='up'],input[name='float'],input[name='low'],input[name='work']{width:40px;text-align: center;margin:0 10px;}
     .minus,.add,.add1,.down b{cursor: pointer;display: inline-block;
         width: 20px;
         text-align: center;}
@@ -42,7 +42,14 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>详情列表</h5>
+                    <form method="get" action="index.html" class="pull-left mail-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" name="search" placeholder="搜索用户名">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-sm btn-primary">搜索</button>
+                            </div>
+                        </div>
+                    </form>
                     <div class="ibox-tools">
                         <a data-toggle="modal" class="btn btn-sm btn-primary" href="{:Url('Rank/book')}">操作日志</a>
                     </div>
@@ -62,6 +69,7 @@
                                 <th width="8%">被上级机关查处通报(- 4)</th>
                                 <th width="8%">被市级查处通报(- 2)</th>
                                 <th width="8%">反馈本单位处理(- 1)</th>
+                                <th width="8%">党建责任-工作计划</th>
                             </tr>
                             </table>
                         </div>
@@ -80,6 +88,7 @@
                                 <td width="8%"><span class="down" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.up}" name="up" readonly></td>
                                 <td width="8%"><span class="down" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.float}" name="float" readonly></td>
                                 <td width="8%"><span class="down" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.low}" name="low" readonly></td>
+                                <td width="8%"><span class="minus" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.work}" name="work" readonly><span class="add" style="font-size: 20px"><b>+</b></span></td>
                             </tr>
                             {/volist}
                             </tbody>
@@ -88,7 +97,6 @@
                             <tfoot>
                             <tr>
                                 <td colspan="10">
-                                    <div class="page"></div>
                                 </td>
                             </tr>
                             </tfoot>
@@ -174,8 +182,10 @@
                 var _class = 1;
             } else if (name == "xt") {
                 var _class = 2;
-            } else {
+            } else if (name == "my"){
                 var _class = 3;
+            }else if (name == "work"){
+                var _class = 7;
             }
 
             if (val == 1) {
@@ -200,8 +210,10 @@
                 var _class = 1;
             } else if (name == "xt") {
                 var _class = 2;
-            } else {
+            } else if (name == "my"){
                 var _class = 3;
+            }else if (name == "work"){
+                var _class = 7;
             }
             if (val == 1) {
                 $(this).css("visibility", "hidden");
@@ -223,8 +235,10 @@
                 var _class = 1;
             } else if (name == "xt") {
                 var _class = 2;
-            } else {
+            } else if (name == "my"){
                 var _class = 3;
+            }else if (name == "work"){
+                var _class = 7;
             }
             var id = $(this).parent().children(".minus").data("id");
             var val = $(this).parent().children("input").val();
