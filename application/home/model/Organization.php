@@ -32,16 +32,16 @@ class Organization extends Model {
         foreach ($res as $value) {
             switch ($value['class']) {
                 case 1:
-                    $value['class_text'] = "【阵地建设】";
+                    $value['class_text'] = "[阵地建设]";
                     break;
                 case 2:
-                    $value['class_text'] = "【按期换届】";
+                    $value['class_text'] = "[按期换届]";
                     break;
                 case 3:
-                    $value['class_text'] = "【主题党日】";
+                    $value['class_text'] = "[主题党日]";
                     break;
                 default:
-                    $value['class_text'] = "【无】";
+                    $value['class_text'] = "[无]";
                     break;
             }
         }
@@ -99,16 +99,16 @@ class Organization extends Model {
             $value['time'] = date("Y-m-d",$value['create_time']);
             switch ($value['class']) {
                 case 1:
-                    $value['class_text'] = "【阵地建设】";
+                    $value['class_text'] = "[阵地建设]";
                     break;
                 case 2:
-                    $value['class_text'] = "【按期换届】";
+                    $value['class_text'] = "[按期换届]";
                     break;
                 case 3:
-                    $value['class_text'] = "【主题党日】";
+                    $value['class_text'] = "[主题党日]";
                     break;
                 default:
-                    $value['class_text'] = "【无】";
+                    $value['class_text'] = "[无]";
                     break;
             }
         }
