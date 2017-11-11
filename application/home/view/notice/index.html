@@ -253,8 +253,10 @@
                 html +=
                         '<img src="' + list.front_cover + '" alt="图片" class="img">' +
                         '<p>' + list.title + '</p>' +
-                        '<span>' + list.publisher + '</span>' +
-                        '<span>' + list.create_time + '</span>' +
+                        '<span class="notes">'+
+                        '<span class="fl">' + list.publisher + '</span>' +
+                        '<span class="fr">' + list.create_time + '</span>' +
+                        '</span>'+
                         '</a>';
             }
             if (type == 0) {
