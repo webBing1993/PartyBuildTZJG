@@ -156,5 +156,11 @@
         var url = this.getAttribute("href")+"?"+4;
         window.location.href = url;
     });
+
+    mui("#refreshContainer").on("touchstart","a",function(){
+        $(this).css("backgroundColor","rgba(0,0,0,.1)");
+    }).on("touchend","a", function () {
+        $(this).css("backgroundColor","#fff");
+    });
 </script>
 {/block}
