@@ -16,7 +16,7 @@
             {empty name="msg"}
             <li>
                 模板
-                <a id="openPopover" href="#popover">普通型</a>
+                <a id="openPopover" href="#popover">轮播型</a>
                 <span class="triangle-down"></span>
             </li>
             {else/}
@@ -128,6 +128,7 @@
             $(".list ul li").css("position","relative");
             $(".list ul textarea").css("height","300px");
             $(".goreview+p").css({"width":"640px","margin":"0 auto"});
+            $("#popover").css({"left":"auto","right":"0" ,"top":"65px"});
         }
     $("title").text("特色创新");
         imgresize();
