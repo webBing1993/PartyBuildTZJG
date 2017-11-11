@@ -161,21 +161,30 @@
                             <div class="col-lg-1 text-right control-label">
                                 <label>上传附件:</label>
                             </div>
+                            {empty name="msg"}
                             <div class="videogroup">
                                 <div class="col-lg-3 videofile show">
                                     <input type="file" id="file" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
-                                    <input type="hidden" name="file" class="img localpath"  value="{$msg.file||default=''}" required="">
+                                    <input type="hidden" name="file" class="img localpath"  value="" required="">
                                 </div>
                                 <div class="col-lg-3 videofile hide">
                                     <input type="file" id="file2" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
-                                    <input type="hidden" name="file" class="img localpath"  value="{$msg.file||default=''}" required="">
+                                    <input type="hidden" name="file" class="img localpath"  value="" required="">
                                 </div>
                                 <div class="col-lg-3 videofile hide">
                                     <input type="file" id="file3" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
-                                    <input type="hidden" name="file" class="img localpath"  value="{$msg.file||default=''}" required="">
+                                    <input type="hidden" name="file" class="img localpath"  value="" required="">
                                 </div>
                                 <div class="add">+</div>
                             </div>
+                            {else/}
+                            {volist name="msg.file" id="f" key="k"}
+                            <div class="col-lg-3 videofile show">
+                                <input type="file" id="file{k}" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
+                                <input type="hidden" name="file" class="img localpath"  value="{$f}" required="">
+                            </div>
+                            {/volist}
+                            {/empty}
                             <div class="clear"></div>
                         </div>
                         <input type="hidden" name="id" value="{$msg.id || default=''}">

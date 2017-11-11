@@ -44,6 +44,7 @@ class Responsibility extends Admin {
             if(empty($data['id'])) {
                 unset($data['id']);
             }
+            isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
             $Model = new ResponsibilityModel();
             $data['create_user'] = $_SESSION['think']['user_auth']['id'];
             $res = $Model->validate(true)->save($data);
@@ -68,6 +69,7 @@ class Responsibility extends Admin {
         $Model = new ResponsibilityModel();
         if(IS_POST) {
             $data = input('post.');
+            isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
             $res = $Model->validate(true)->save($data,['id'=>input('id')]);
             if($res){
                 return $this->success("修改成功",Url("Responsibility/index"));
@@ -78,6 +80,9 @@ class Responsibility extends Admin {
             $this->default_pic();
             $id = input('id');
             $msg = $Model::get($id);
+            if($msg['file']) {
+                $msg['file'] = json_decode($msg['file']);
+            }
             $this->assign('msg',$msg);
             return $this->fetch();
         }
