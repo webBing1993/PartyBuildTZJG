@@ -115,8 +115,10 @@ class Learn extends Admin {
                     $arr[$key]['id'] = $value;
                     $arr[$key]['name'] = Db::name('file')->where('id',$value)->value('name');
                 }
+                $msg['files'] = $arr;
+            }else{
+                $msg['files'] = '';
             }
-            $msg['files'] = $arr;
             $this->assign('msg',$msg);
             return $this->fetch();
         }

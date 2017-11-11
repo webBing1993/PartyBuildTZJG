@@ -87,14 +87,14 @@ class Learn extends Model {
         $map1 = array(
             'type' => 3,
             'status' => 1,
-            'class' => 1
+            'class' => 5
         );
         $one = $this->where($map1)->order("create_time desc")->limit(8)->select();
 
         $map2 = array(
             'type' => 3,
             'status' => 1,
-            'class' => 2
+            'class' => 6
         );
         $two = $this->where($map2)->order("create_time desc")->limit(8)->select();
 

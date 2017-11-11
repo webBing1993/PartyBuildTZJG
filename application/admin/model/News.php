@@ -8,7 +8,7 @@
 
 namespace app\admin\model;
 use think\Model;
-
+use think\Db;
 class News extends Model
 {
     public $insert = [
@@ -23,7 +23,18 @@ class News extends Model
         if (empty($id)){
             $list = null;
         }else{
-            $list = $this->where(['id' => $id ,'status' => 0])->find();
+            $list = $this->where(['id' => $id])->find();
+            if($list['file']) {
+                $temp = json_decode($list['file']);
+                $arr[] = [];
+                foreach($temp as $key => $value){
+                    $arr[$key]['id'] = $value;
+                    $arr[$key]['name'] = Db::name('file')->where('id',$value)->value('name');
+                }
+                $list['files'] = $arr;
+            }else{
+                $list['files'] = '';
+            }
         }
         return $list;
     }
