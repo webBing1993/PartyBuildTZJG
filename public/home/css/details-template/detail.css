@@ -135,7 +135,7 @@ body {
     height: 0.5rem;
     display: inline-block;
     margin-right: 0.3rem;
-    line-height:0.6rem;
+    line-height:0.5rem !important;
 }
 .article .content .note_ span{
     margin-right: 0;
