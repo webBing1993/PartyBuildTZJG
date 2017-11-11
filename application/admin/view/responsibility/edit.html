@@ -23,7 +23,7 @@
     .hide{
         display: none;
     }
-    .add{
+    .add,.add2{
         font-size: 32px;
         font-weight: bold;
         cursor: pointer;
@@ -161,17 +161,17 @@
                             <div class="col-lg-1 text-right control-label">
                                 <label>上传附件:</label>
                             </div>
-                            {empty name="msg"}
                             <div class="videogroup">
-                                <div class="col-lg-3 videofile show">
-                                    <input type="file" id="file" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
+                                {empty name="msg"}
+                                <div class="col-lg-3 videofile show original">
+                                    <input type="file" id="file1" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
                                     <input type="hidden" name="file" class="img localpath"  value="" required="">
                                 </div>
-                                <div class="col-lg-3 videofile hide">
+                                <div class="col-lg-3 videofile hide original">
                                     <input type="file" id="file2" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
                                     <input type="hidden" name="file" class="img localpath"  value="" required="">
                                 </div>
-                                <div class="col-lg-3 videofile hide">
+                                <div class="col-lg-3 videofile hide original">
                                     <input type="file" id="file3" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
                                     <input type="hidden" name="file" class="img localpath"  value="" required="">
                                 </div>
@@ -179,11 +179,12 @@
                             </div>
                             {else/}
                             {volist name="msg.file" id="f" key="k"}
-                            <div class="col-lg-3 videofile show">
-                                <input type="file" id="file{k}" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
+                            <div class="col-lg-3 videofile show modify">
+                                <input type="file" id="file{k}" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file" value="22">
                                 <input type="hidden" name="file" class="img localpath"  value="{$f}" required="">
                             </div>
                             {/volist}
+                            <div class="add2">+</div>
                             {/empty}
                             <div class="clear"></div>
                         </div>
@@ -213,6 +214,14 @@
 <script src="/admin/js/chosen.jquery.js"></script>
 <script>
     $(function(){
+        var len1 = $(".original.show").length;
+        var len2 = $(".modify.show").length;
+        if(len1==3){
+            $(".add").hide();
+        }
+        if(len2==3){
+            $(".add2").hide();
+        }
         highlight_subnav("{:Url('Responsibility/index')}");
 
         var cl = $("select[name = 'type']").val();
@@ -285,6 +294,20 @@
                     }
             });
 
+            $(".add2").on("click",function(){
+                var filelen = $(".videofile.show").length;
+                var html='';
+                html+=
+                    '<div class="col-lg-3 videofile show">'+
+                    '<input type="file" id="file3" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">'+
+                    '<input type="hidden" name="file" class="img localpath"  value="" required="">'+
+                    '</div>'
+                $(".videogroup").append(html);
+                if(filelen==2){
+                    $(".add2").hide();
+                }
+            });
+
             //上传文件
             $("input[name='input-file']").on("change",function(){
                 var size = ($(this)[0].files[0].size / 1024).toFixed(2);
@@ -323,7 +346,9 @@
             var file=[];
             var it=$(this);
             $(".videofile").each(function(){
-                file.push($(this).children("input[name='file']").val());
+                if($(this).children("input[name='file']").val()){
+                    file.push($(this).children("input[name='file']").val());
+                }
             });
             var data = {
                 id:$("input[name='id']").val(),
