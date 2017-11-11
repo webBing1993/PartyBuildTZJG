@@ -27,6 +27,12 @@
                     {volist name="detail.images" id="li"}
                     <img src="{$li|get_cover='path'}">
                     {/volist}
+                    {volist name="$detail.commend_img" id="img"}
+                    <img src="{$img|get_cover='path'}" alt="笔记图片" class="img" style="width:100%"><br>
+                    {/volist}
+                    {volist name="$detail.voucher_img" id="img"}
+                    <img src="{$img|get_cover='path'}" alt="笔记图片" class="img" style="width:100%"><br>
+                    {/volist}
                     <div class="article-content">{$detail.content}</div>
                     {notempty name="$detail.files"}
                     {volist name="detail.files" id="de"}
