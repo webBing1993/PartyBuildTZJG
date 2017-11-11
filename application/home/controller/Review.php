@@ -196,6 +196,17 @@ class Review extends Base{
         if(!empty($info['list_images'])){
             $info['list_images'] = json_decode($info['list_images']);
         }
+        if ($type == 4){
+            if(!empty($info['commend_img'])){
+                $info['commend_img'] = json_decode($info['commend_img']);
+            }
+            if(!empty($info['voucher_img'])){
+                $info['voucher_img'] = json_decode($info['voucher_img']);
+            }
+        }else{
+            $info['commend_img'] = '';
+            $info['voucher_img'] = '';
+        }
         return $info;
     }
     /**

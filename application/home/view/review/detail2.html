@@ -28,6 +28,18 @@
                 <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
             </div>
             {/volist}
+            {volist name="$info.commend_img" id="li"}
+            <div class="swiper-slide">
+                <!--支持循环，需要重复图片节点-->
+                <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
+            </div>
+            {/volist}
+            {volist name="$info.voucher_img" id="li"}
+            <div class="swiper-slide">
+                <!--支持循环，需要重复图片节点-->
+                <div class="mui-slider-item"><img src="{$li|get_cover='path'}"></div>
+            </div>
+            {/volist}
         </div>
     </div>
     <div class="article">
