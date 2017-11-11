@@ -142,12 +142,12 @@ body {
 
         flag = IsPC();
         if(flag){
-            $(".banner").css({"width":"640px","height":"320px","margin":"0 auto"})
+            $(".banner").css({"width":"640px","height":"320px","margin":"0 auto"});
             $("#tab a").css("font-size","18px");
-            $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"})
+            $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"});
             $("#tab").css({"margin-top":"320px","width":"640px","position":"static","top":"0","margin":"0 auto"})
             $(".main").css({"width":"640px","left":"50%","min-height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
-            $("#refreshContainer").css("top","320px");
+            $("#refreshContainer").css("top","390px");
             $(".list ul a").css("padding","10px 15px");
             $(".list ul a img").css({"width":"90px","height":"60px"});
             $(".list ul a p").css("font-size","16px");
@@ -239,12 +239,12 @@ body {
             var list = lists[i];
             if(flag){
             if(list.templet==1){
-                html += '<a href="/home/volunteer/detail/id/'+list.id+'.html">'
+                html += '<a href="/home/volunteer/detail/id/'+list.id+'.html" style="padding: 10px 15px">'
             }else{
-                html += '<a href="/home/volunteer/detail2/id/'+list.id+'.html">'
+                html += '<a href="/home/volunteer/detail2/id/'+list.id+'.html" style="padding: 10px 15px">'
             }
             html +=
-                    '<img src="'+list.path+'">'+
+                    '<img src="'+list.path+'" style="width: 90px;height: 60px">'+
                     '<p style="font-size:16px;">'+list.title+'</p>'+
                     '<span style="font-size:14px;bottom:10px;">'+list.publisher+'</span>'+
                     '<span style="font-size:14px;bottom:10px">'+list.time+'</span>'+
