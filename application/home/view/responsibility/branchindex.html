@@ -10,6 +10,9 @@
     .mui-slider-group{
         padding-top: 0.26rem;
     }
+    input::-webkit-input-placeholder {
+        font-size: .37rem;
+    }
 </style>
 {/block}
 
@@ -108,14 +111,17 @@
 
         flag = IsPC();
         if(flag){
-            $(".main").css({"width":"640px","left":"50%","min-height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
-            $(".search").css({"width":"640px","left":"50%","margin-left":"-320px"});
+            $(".main").css({"width":"640px","left":"50%","min-height":"90vh","margin":"70px 0 0 -320px","position":"relative"});
+            $(".search").css({"width":"640px","left":"50%","margin-left":"-320px","height":"70px"});
+//            $(".search input").css({"height":"3.6vh","font-size":"14px"});
+//            $(".search input::-webkit-input-placeholder").css({"height":"3.6vh","font-size":"14px"});
             $("#tab a").css("font-size","18px");
             $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"});
             $("#tab").css({"width":"640px","left":"50%","margin-left":"-320px","top":"0"});
             $("#refreshContainer").css({"top":"0","width":"640px","left":"50%","margin-left":"-320px"});
             $(".list").css("margin-top","1rem");
             $(".list ul a").css("padding","10px 15px");
+//            $(".search .mui-icon-search").css("font-size","2.2vh");
             $(".list ul a img").css({"width":"90px","height":"60px"});
             $(".list ul a p").css({"font-size":"16px","margin-bottom":"30px","-webkit-line-clamp":"1"});
             $(".list ul a span").css("font-size","14px");
