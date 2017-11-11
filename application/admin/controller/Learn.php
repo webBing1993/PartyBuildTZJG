@@ -29,7 +29,7 @@ class Learn extends Admin {
         );
         $list = $this->lists('Learn',$map);
         int_to_string($list, array(
-            'type' => array(1=>"方案部署",2=>"三会一课",3=>"年度计划",4=>"主题党日"),
+            'type' => array(1=>"方案部署",2=>"三会一课",3=>"年度计划",4=>"支部活动"),
             'status' => array(0=>'待审核',1=>'已发布',2=>'未通过',3=>'草稿'),
         ));
         $this->assign('list',$list);
@@ -153,7 +153,7 @@ class Learn extends Admin {
                         $value['type_text'] = "【年度计划】";
                         break;
                     case 4:
-                        $value['type_text'] = "【主题党日】";
+                        $value['type_text'] = "【支部活动】";
                         break;
                     default:
                         $value['type_text'] = "【无】";
@@ -194,7 +194,7 @@ class Learn extends Admin {
                         $value['type_text'] = "【年度计划】";
                         break;
                     case 4:
-                        $value['type_text'] = "【主题党日】";
+                        $value['type_text'] = "【支部活动】";
                         break;
                     default:
                         $value['type_text'] = "【无】";
@@ -233,7 +233,7 @@ class Learn extends Admin {
                     $type_name1 = "【年度计划】";
                     break;
                 case 4:
-                    $type_name1 = "【主题党日】";
+                    $type_name1 = "【支部活动】";
                     break;
                 default:
                     $type_name1 = "【暂无】";
@@ -274,7 +274,7 @@ class Learn extends Admin {
                         $type_name = "【年度计划】";
                         break;
                     case 4:
-                        $type_name = "【主题党日】";
+                        $type_name = "【支部活动】";
                         break;
                     default:
                         $type_name = "【暂无】";
