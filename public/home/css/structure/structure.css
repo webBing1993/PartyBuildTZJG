@@ -140,6 +140,7 @@ body {
   position: absolute;
   top: 0;
   width: 99vw;
+  background-color: #fff;
 }
 .listbox .box .box_ {
   position: relative;

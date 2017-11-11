@@ -8,6 +8,7 @@
 	}
 	.main {
 		background-color: #fff;
+		min-height: 100vh;
 	}
 	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
 		color: #FF9800;
@@ -3924,14 +3925,14 @@ $('title' ).text('通讯名录');
 
 	flag = IsPC();
 	if(flag){
-		$(".main").css({"width":"640px","left":"50%","height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
+		$(".main").css({"width":"640px","left":"50%","min-height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
 		$(".banner").css({"width":"640px","height":"320px"});
 		$("#tab").css({"width":"640px","position":"relative","left":"50%","margin-left":"-320px"});
 		$("#tab .tab").css({"width":"320px","margin":"0 auto"});
 		$(".listbox").css({"width":"640px","left":"50%","margin-left":"-320px"});
 		$(".listbox .box").css("width","640px");
 		$(".listbox .box.summary .box_").css({"width":"560px","padding":"100px 15px","margin":"20px"});
-		$(".listbox .box .box_").css({"padding":"100px 15px","margin":"20px"})
+		$(".listbox .box .box_").css({"padding":"100px 15px","margin":"20px","width":"93.6%"})
 
 	}
 
