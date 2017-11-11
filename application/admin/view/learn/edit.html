@@ -174,14 +174,14 @@
                                 {empty name="msg"}
                                 <select class="form-control" name="class2">
                                     <option value="0" >--请选择类型--</option>
-                                    <option value="1" >培训计划</option>
-                                    <option value="2" >理论研究</option>
+                                    <option value="5" >培训计划</option>
+                                    <option value="6" >理论研究</option>
                                 </select>
                                 {else/}
                                 <select class="form-control" name="class2">
                                     <option value="0" {eq name="$msg.class2" value="0"}selected{/eq}>--请选择类型--</option>
-                                    <option value="1" {eq name="$msg.class2" value="1"}selected{/eq}>培训计划</option>
-                                    <option value="2" {eq name="$msg.class2" value="2"}selected{/eq}>理论研究</option>
+                                    <option value="5" {eq name="$msg.class2" value="5"}selected{/eq}>培训计划</option>
+                                    <option value="6" {eq name="$msg.class2" value="6"}selected{/eq}>理论研究</option>
                                 </select>
                                 {/empty}
                             </div>
