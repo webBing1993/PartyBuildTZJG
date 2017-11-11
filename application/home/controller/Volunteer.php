@@ -11,7 +11,7 @@ use app\home\model\Like;
 use app\home\model\Picture;
 use app\home\model\WechatUser;
 use app\home\model\Volunteer as VolunteerModel;
-
+use think\Db;
 class Volunteer extends Base{
     /* 志愿服务 */
     public function index(){
@@ -100,6 +100,21 @@ class Volunteer extends Base{
         $info['link'] = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REDIRECT_URL'];
         $info['desc'] = str_replace('&nbsp;','',strip_tags($info['content']));
 
+        // 获取文件
+        if($info['file']) {
+            $temp = json_decode($info['file']);
+            $arr[] = [];
+            foreach($temp as $key => $value){
+                $savepath = Db::name('file')->where('id',$value)->value('savepath');
+                $savename = Db::name('file')->where('id',$value)->value('savename');
+                $arr[$key]['url'] = "http://".$_SERVER["SERVER_NAME"]."/uploads/download/".$savepath.$savename;
+                $arr[$key]['name'] = Db::name('file')->where('id',$value)->value('name');
+            }
+            $info['files'] = $arr;
+        }else{
+            $info['files'] = '';
+        }
+
         //获取 文章点赞
         $likeModel = new Like();
         $like = $likeModel->getLike(8,$id,$userId);
@@ -138,6 +153,21 @@ class Volunteer extends Base{
         $info['share_image'] = "http://".$_SERVER['SERVER_NAME'].$image['path'];
         $info['link'] = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REDIRECT_URL'];
         $info['desc'] = str_replace('&nbsp;','',strip_tags($info['content']));
+
+        // 获取文件
+        if($info['file']) {
+            $temp = json_decode($info['file']);
+            $arr[] = [];
+            foreach($temp as $key => $value){
+                $savepath = Db::name('file')->where('id',$value)->value('savepath');
+                $savename = Db::name('file')->where('id',$value)->value('savename');
+                $arr[$key]['url'] = "http://".$_SERVER["SERVER_NAME"]."/uploads/download/".$savepath.$savename;
+                $arr[$key]['name'] = Db::name('file')->where('id',$value)->value('name');
+            }
+            $info['files'] = $arr;
+        }else{
+            $info['files'] = '';
+        }
 
         //获取 文章点赞
         $likeModel = new Like();

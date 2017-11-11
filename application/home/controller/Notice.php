@@ -14,6 +14,7 @@ use app\home\model\WechatUserTag;
 use com\wechat\TPQYWechat;
 use app\home\model\Picture;
 use think\Config;
+use think\Db;
 /**
  * Class Notice
  * @package 通知公告

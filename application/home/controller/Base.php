@@ -422,6 +422,20 @@ class Base extends Controller {
             $list['desc'] = str_replace('&nbsp;','',strip_tags($list['content']));
         }
         $list['link'] = Config::get('host_url').$_SERVER['REDIRECT_URL'];
+        // 获取文件
+        if($list['file']) {
+            $temp = json_decode($list['file']);
+            $arr[] = [];
+            foreach($temp as $key => $value){
+                $savepath = Db::name('file')->where('id',$value)->value('savepath');
+                $savename = Db::name('file')->where('id',$value)->value('savename');
+                $arr[$key]['url'] = "http://".$_SERVER["SERVER_NAME"]."/uploads/download/".$savepath.$savename;
+                $arr[$key]['name'] = Db::name('file')->where('id',$value)->value('name');
+            }
+            $list['files'] = $arr;
+        }else{
+            $list['files'] = '';
+        }
         //获取 文章点赞
         $likeModel = new Like;
         $like = $likeModel->getLike($type,$id,$userId);

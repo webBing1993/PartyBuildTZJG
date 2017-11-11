@@ -207,6 +207,20 @@ class Review extends Base{
             $info['commend_img'] = '';
             $info['voucher_img'] = '';
         }
+        // 获取文件
+        if($info['file']) {
+            $temp = json_decode($info['file']);
+            $arr[] = [];
+            foreach($temp as $key => $value){
+                $savepath = Db::name('file')->where('id',$value)->value('savepath');
+                $savename = Db::name('file')->where('id',$value)->value('savename');
+                $arr[$key]['url'] = "http://".$_SERVER["SERVER_NAME"]."/uploads/download/".$savepath.$savename;
+                $arr[$key]['name'] = Db::name('file')->where('id',$value)->value('name');
+            }
+            $info['files'] = $arr;
+        }else{
+            $info['files'] = '';
+        }
         return $info;
     }
     /**
