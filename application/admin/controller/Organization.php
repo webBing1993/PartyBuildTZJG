@@ -13,7 +13,7 @@ use app\admin\model\Picture;
 use app\admin\model\Push;
 use com\wechat\TPQYWechat;
 use think\Config;
-
+use think\Db;
 /**
  * Class Organization
  * @package app\admin\controller
@@ -79,6 +79,15 @@ class Organization extends Admin {
             $this->default_pic();
             $id = input('id');
             $msg = $Model::get($id);
+            if($msg['file']) {
+                $temp = json_decode($msg['file']);
+                $arr[] = [];
+                foreach($temp as $key => $value){
+                    $arr[$key]['id'] = $value;
+                    $arr[$key]['name'] = Db::name('file')->where('id',$value)->value('name');
+                }
+            }
+            $msg['files'] = $arr;
             $this->assign('msg',$msg);
             return $this->fetch();
         }

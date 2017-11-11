@@ -13,6 +13,7 @@ use app\admin\model\Picture;
 use app\admin\model\Push;
 use com\wechat\TPQYWechat;
 use think\Config;
+use think\Db;
 /**
  * Class Special
  * @package app\admin\controller
@@ -93,6 +94,15 @@ class Special extends Admin {
                     $msg['voucher_img'.($k+1)] = $val;
                 }
             }
+            if($msg['file']) {
+                $temp = json_decode($msg['file']);
+                $arr[] = [];
+                foreach($temp as $key => $value){
+                    $arr[$key]['id'] = $value;
+                    $arr[$key]['name'] = Db::name('file')->where('id',$value)->value('name');
+                }
+            }
+            $msg['files'] = $arr;
             $this->assign('msg',$msg);
             return $this->fetch();
         }

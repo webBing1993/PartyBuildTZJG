@@ -13,7 +13,7 @@ use app\admin\model\Picture;
 use app\admin\model\Push;
 use com\wechat\TPQYWechat;
 use think\Config;
-
+use think\Db;
 /**
  * Class Learn
  * @package app\admin\controller
@@ -108,6 +108,15 @@ class Learn extends Admin {
                 $msg['class1'] = 0;
                 $msg['class2'] = 0;
             }
+            if($msg['file']) {
+                $temp = json_decode($msg['file']);
+                $arr[] = [];
+                foreach($temp as $key => $value){
+                    $arr[$key]['id'] = $value;
+                    $arr[$key]['name'] = Db::name('file')->where('id',$value)->value('name');
+                }
+            }
+            $msg['files'] = $arr;
             $this->assign('msg',$msg);
             return $this->fetch();
         }
