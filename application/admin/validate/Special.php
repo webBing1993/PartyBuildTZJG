@@ -20,7 +20,7 @@ class Special extends Validate {
     protected $message = [
         'title.require' => '标题不能为空',
         'content.require' => '内容不能为空',
-        'publisher' => '发布人不能为空'
+        'publisher.require' => '发布人不能为空'
     ];
 
 }

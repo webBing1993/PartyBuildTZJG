@@ -45,7 +45,9 @@ class Special extends Admin {
             }
             $Model = new SpecialModel();
             $data['create_user'] = $_SESSION['think']['user_auth']['id'];
-            $res = $Model->validate(true)->save($data);
+            isset($data["commend_img"]) ? $data["commend_img"] = json_encode($data["commend_img"]) : $data["commend_img"] = "";
+            isset($data["voucher_img"]) ? $data["voucher_img"] = json_encode($data["voucher_img"]) : $data["voucher_img"] = "";
+            $res = $Model->create($data);
             if($res){
                 get_score(4,$res,$_SESSION['think']['user_auth']['id']);
                 return $this->success("新增成功",Url("Special/index"));
@@ -67,6 +69,8 @@ class Special extends Admin {
         $Model = new SpecialModel();
         if(IS_POST) {
             $data = input('post.');
+            isset($data["commend_img"]) ? $data["commend_img"] = json_encode($data["commend_img"]) : $data["commend_img"] = "";
+            isset($data["voucher_img"]) ? $data["voucher_img"] = json_encode($data["voucher_img"]) : $data["voucher_img"] = "";
             $res = $Model->validate(true)->save($data,['id'=>input('id')]);
             if($res){
                 return $this->success("修改成功",Url("Special/index"));
@@ -77,6 +81,18 @@ class Special extends Admin {
             $this->default_pic();
             $id = input('id');
             $msg = $Model::get($id);
+            if($msg['commend_img']){
+                $images = json_decode($msg['commend_img']);
+                foreach($images as $k => $val){
+                    $msg['commend_img'.($k+1)] = $val;
+                }
+            }
+            if($msg['voucher_img']){
+                $images = json_decode($msg['voucher_img']);
+                foreach($images as $k => $val){
+                    $msg['voucher_img'.($k+1)] = $val;
+                }
+            }
             $this->assign('msg',$msg);
             return $this->fetch();
         }
