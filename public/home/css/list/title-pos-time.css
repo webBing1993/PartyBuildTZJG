@@ -9,7 +9,7 @@ html,body{
 .list ul a{
     display: block;
     border-bottom: 1px solid #f1f1f1;
-    padding: 0.26rem 0.4rem;
+    padding: 2.7vw 4vw;
 
 }
 .list ul a p{

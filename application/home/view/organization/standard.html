@@ -3,34 +3,61 @@
 {block name="style"}
 <link rel="stylesheet" href="/home/css/list/title-pos-time.css">
 <title>规范化建设</title>
+<style>
+    .list ul a {
+        position: relative;
+        height: 20.8vw;
+    }
+    .list ul a p {
+        margin-bottom: 0;
+    }
+    .list ul a span:nth-child(2).notes {
+        position: absolute;
+        bottom: 2vw;
+        width: 92vw;
+    }
+    .list ul a span:nth-child(2).notes span:last-of-type {
+        width: auto;
+    }
+    .fl {
+        float: left;
+    }
+    .fr {
+        float: right;
+    }
+</style>
 {/block}
 
 {block name="body"}
-<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-    <div class="mui-scroll">
-        <div class="list">
-            {empty name="$list"}
-            <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
-            {else/}
-            <ul>
-                {volist name="list" id="vo"}
-                {eq name="vo.templet" value="1"}
-                <a href="{:Url('Organization/detail?id='.$vo['id'])}">
+<div class="main">
+    <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+        <div class="mui-scroll">
+            <div class="list">
+                {empty name="$list"}
+                <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
                 {else/}
-                <a href="{:Url('Organization/detail2?id='.$vo['id'])}">
-                {/eq}
-                    <p>{$vo.class_text}{$vo.title}</p>
-                    <span>{$vo.publisher}</span>
-                    <span>{$vo.create_time|time_format="Y-m-d"}</span>
-                </a>
-                {/volist}
-            </ul>
-            {/empty}
+                <ul>
+                    {volist name="list" id="vo"}
+                    {eq name="vo.templet" value="1"}
+                    <a href="{:Url('Organization/detail?id='.$vo['id'])}">
+                        {else/}
+                        <a href="{:Url('Organization/detail2?id='.$vo['id'])}">
+                            {/eq}
+                            <p>{$vo.class_text}{$vo.title}</p>
+                            <span class="notes">
+                                <span class="fl">{$vo.publisher}</span>
+                                <span class="fr">{$vo.create_time|time_format="Y-m-d"}</span>
+                            </span>
+                        </a>
+                        {/volist}
+                </ul>
+                {/empty}
+            </div>
         </div>
     </div>
+    <!--[悬浮按钮]-->
+    <a href="{:Url('Organization/publish?type=1')}" class="after manager" id="publish"></a>
 </div>
-<!--[悬浮按钮]-->
-<a href="{:Url('Organization/publish?type=1')}" class="after manager" id="publish"></a>
 {/block}
 
 {block name="script"}
@@ -68,8 +95,10 @@
         flag = IsPC();
         if(flag){
             $(".main").css({"width":"640px","left":"50%","margin-left":"-320px","position":"relative","min-height":"90vh","margin-top":"5vh"});
-            $(".list ul a p").css({"margin-bottom":"0.5rem","font-size":"16px"});
-            $(".list ul a span").css({"font-size":"14px"});
+            $(".list ul a").css({"padding":"10px 15px","height":"110px"});
+            $(".list ul a p").css({"margin-bottom":"0","font-size":"16px"});
+            $(".list ul a span:nth-child(2).notes").css({"width":"610px","bottom":"10px"});
+            $(".list ul a span:nth-child(2).notes span:last-of-type").css({"font-size":"14px","width":"auto"});
             $(".default img").css("width","60px");
         }
     });
@@ -122,14 +151,16 @@
             var list = lists[i];
             if(flag) {
                 if (list.templet == 1) {
-                    html += '<a href="/home/Organization/detail/id/' + list.id + '.html">'
+                    html += '<a href="/home/Organization/detail/id/' + list.id + '.html" style="padding: 10px 15px;height: 110px">'
                 } else {
-                    html += '<a href="/home/Organization/detail2/id/' + list.id + '.html">'
+                    html += '<a href="/home/Organization/detail2/id/' + list.id + '.html" style="padding: 10px 15px;height: 110px">'
                 }
                 html +=
-                        '<p style="font-size: 16px;margin-bottom: 0.5rem">'+list.class_text +  list.title + '</p>' +
-                        '<span style="font-size: 14px;">' + list.publisher + '</span>' +
-                        '<span style="font-size: 14px">' + list.time + '</span>' +
+                        '<p style="font-size: 16px;margin-bottom: 0">'+list.class_text +  list.title + '</p>' +
+                        '<span class="notes" style="width: 610px;bottom: 10px">' +
+                        '<span class="fl" style="font-size: 14px;">' + list.publisher + '</span>' +
+                        '<span class="fr" style="font-size: 14px;width: auto">' + list.time + '</span>' +
+                        '</span>'+
                         '</a>'
             }else{
                 if (list.templet == 1) {
@@ -139,8 +170,10 @@
                 }
                 html +=
                         '<p>'+list.class_text + list.title + '</p>' +
-                        '<span>' + list.publisher + '</span>' +
-                        '<span>' + list.time + '</span>' +
+                        '<span class="notes">' +
+                        '<span class="fl" ">' + list.publisher + '</span>' +
+                        '<span class="fr">' + list.time + '</span>' +
+                        '</span>'+
                         '</a>'
             }
         }
