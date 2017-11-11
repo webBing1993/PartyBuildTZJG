@@ -104,13 +104,14 @@ class Responsibility extends Base{
             foreach($temp as $key => $value){
                 $savepath = Db::name('file')->where('id',$value)->value('savepath');
                 $savename = Db::name('file')->where('id',$value)->value('savename');
-                $arr[$key]['url'] = "/uploads/download/".$savepath.$savename;
+                $arr[$key]['url'] = "http://".$_SERVER["SERVER_NAME"]."/uploads/download/".$savepath.$savename;
                 $arr[$key]['name'] = Db::name('file')->where('id',$value)->value('name');
             }
             $info['files'] = $arr;
         }else{
             $info['files'] = '';
         }
+        dump($info['files']);
         //获取 文章点赞
         $likeModel = new Like();
         $like = $likeModel->getLike(3,$id,$userId);
