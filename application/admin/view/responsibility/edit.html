@@ -27,6 +27,41 @@
         font-size: 32px;
         font-weight: bold;
         cursor: pointer;
+        line-height:28px;
+        margin-left: 20px;
+        display: inline-block;
+    }
+    /*a  upload */
+    .videofile {
+        position: relative;
+        display: inline-block;
+        background: #dfdfdf;
+        border: 1px solid #999;
+        border-radius: 4px;
+        padding: 4px 12px;
+        overflow: hidden;
+        color: #333;
+        text-decoration: none;
+        text-indent: 0;
+        line-height: 20px;
+        width:280px;
+    }
+    .videofile:nth-child(2),.videofile:nth-child(3){
+        margin-left: 20px;
+    }
+
+    .videofile input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+    .videofile:hover {
+        background: #AADFFD;
+        border-color: #78C3F3;
+        color: #004974;
+        text-decoration: none;
     }
 </style>
 {/block}
@@ -163,15 +198,15 @@
                             </div>
                             <div class="videogroup">
                                 {empty name="msg"}
-                                <div class="col-lg-3 videofile show original">
+                                <div class="col-lg-3 videofile show original">选择文件：<span id="filename1">未选择上传文件</span>
                                     <input type="file" id="file1" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
                                     <input type="hidden" name="file" class="img localpath"  value="" required="">
                                 </div>
-                                <div class="col-lg-3 videofile hide original">
+                                <div class="col-lg-3 videofile hide original">选择文件：<span id="filename2">未选择上传文件</span>
                                     <input type="file" id="file2" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
                                     <input type="hidden" name="file" class="img localpath"  value="" required="">
                                 </div>
-                                <div class="col-lg-3 videofile hide original">
+                                <div class="col-lg-3 videofile hide original">选择文件：<span id="filename3">未选择上传文件</span>
                                     <input type="file" id="file3" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
                                     <input type="hidden" name="file" class="img localpath"  value="" required="">
                                 </div>
@@ -179,7 +214,7 @@
                             </div>
                             {else/}
                             {volist name="msg.file" id="f" key="k"}
-                            <div class="col-lg-3 videofile show modify">
+                            <div class="col-lg-3 videofile show modify">选择文件：<span id="filename{k}">未选择上传文件</span>
                                 <input type="file" id="file{k}" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file" value="22">
                                 <input type="hidden" name="file" class="img localpath"  value="{$f}" required="">
                             </div>
@@ -298,7 +333,8 @@
                 var filelen = $(".videofile.show").length;
                 var html='';
                 html+=
-                    '<div class="col-lg-3 videofile show">'+
+                    '<div class="col-lg-3 videofile show">选择文件：'+
+                    '<span id="filename"'+filelen+'>未选择上传文件</span>'+
                     '<input type="file" id="file3" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">'+
                     '<input type="hidden" name="file" class="img localpath"  value="" required="">'+
                     '</div>'
@@ -312,6 +348,7 @@
             $("input[name='input-file']").on("change",function(){
                 var size = ($(this)[0].files[0].size / 1024).toFixed(2);
                 var id= $(this).attr("id");
+                var nameid= $(this).parent(".videofile").find("span").attr("id");
                 if(size <= 1024*5){
                     var file = $(this)[0].files[0];
                     var formData = new FormData();
@@ -324,7 +361,9 @@
                         contentType : false,
                         success:function(d){
                             var data = $.parseJSON(d);
+                            console.log(data)
                             if(data.status == 1){
+                                $("#"+nameid).text(data.data.name);
                                 $("#"+id).next("input[name='file']").val(data.data.id);
                             }else {
                                 warning({msg:"上传失败"});
