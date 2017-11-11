@@ -27,6 +27,11 @@
                     <img src="{$li|get_cover='path'}">
                     {/volist}
                     <div class="article-content">{$detail.content}</div>
+                    {notempty name="$detail.files"}
+                        {volist name="detail.files" id="de"}
+                            <a href="{$de.url}" style="display: block; font-size: 0.38rem;margin-top: 0.2rem">{$de.name}</a>
+                        {/volist}
+                    {/notempty}
                     <div class="like">
                         <span class="read">{$detail.views}</span>
                         {eq name="visit" value="0"}
@@ -258,6 +263,11 @@
                 callback: loadScroll
             }
         }
+    });
+
+    mui('#refreshContainer').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
     });
 
 

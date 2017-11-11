@@ -65,6 +65,11 @@
                 </div>
                 <div class="content">
                     <div class=" article-content"><p>{$info.content}</p></div>
+                    {notempty name="$info.files"}
+                    {volist name="info.files" id="de"}
+                    <a href="{$de.url}" style="display: block; font-size: 0.38rem;margin-top: 0.2rem">{$de.name}</a>
+                    {/volist}
+                    {/notempty}
                     {neq name="info.limit" value="0"}
                     <span id="publish">未读名单</span>
                     {/neq}
@@ -231,6 +236,11 @@
                 callback: loadScroll
             }
         }
+    });
+
+    mui('#refreshContainer').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
     });
     /**
      * 点赞

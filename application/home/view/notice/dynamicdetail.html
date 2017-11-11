@@ -25,6 +25,11 @@
                 </div>
                 <div class="content">
                     <div class="article-content">{$new.content}</div>
+                    {notempty name="$new.files"}
+                    {volist name="new.files" id="de"}
+                    <a href="{$de.url}" style="display: block; font-size: 0.38rem;margin-top: 0.2rem">{$de.name}</a>
+                    {/volist}
+                    {/notempty}
                     <div class="like">
                         <span class="read">{$new.views}</span>
                         {eq name="visit" value="0"}
@@ -133,6 +138,11 @@
         var type = this.getAttribute("data-type");
         var id = this.getAttribute("data-id");
         isGood(this,type,id);
+    });
+
+    mui('#refreshContainer').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href");
+        window.location.href = url;
     });
 
     //点赞

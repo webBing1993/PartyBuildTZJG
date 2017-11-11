@@ -64,6 +64,11 @@
         </div>
         <div class="content">
             <div class="article-content">{$info.content}</div>
+            {notempty name="$info.files"}
+            {volist name="info.files" id="de"}
+            <a href="{$de.url}" style="display: block; font-size: 0.38rem;margin-top: 0.2rem">{$de.name}</a>
+            {/volist}
+            {/notempty}
         </div>
     </div>
 </div>
