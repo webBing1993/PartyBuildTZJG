@@ -2,6 +2,16 @@
 {block name="style"}
 <title>党建责任</title>
 <link rel="stylesheet" href="/home/css/duty/home.css">
+<style>
+    .title:nth-child(odd) .title_box.box_fl:after {
+        left: 22%;
+        width: 10px;
+    }
+    .title:nth-child(even) .title_box.box_fr:after {
+        left: 77%;
+        width: 10px;
+    }
+</style>
 {/block}
 {block name="body"}
 <div class="content">
@@ -53,14 +63,14 @@ $(function(){
 
     var flag = IsPC();
     if(flag){
+        $(".title:nth-child(odd) .title_box").addClass("box_fl");
+        $(".title:nth-child(even) .title_box").addClass("box_fr");
         $(".content").css({"width":"640px","left":"50%","min-height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
         $(".title img").css("width","172px");
         $(".title:nth-child(odd) span").css({"height":"96px","line-height":"96px","font-size":"44px","left":"56px"});
         $(".title:nth-child(even) span").css({"height":"96px","line-height":"96px","font-size":"44px","right":"56px"});
         $(".title:nth-child(odd) .writing").css("left","150px");
         $(".title:nth-child(even) .writing").css("left","280px");
-        $(".title:nth-child(even) .title_box:after").css("display","none");
-        $(".title:nth-child(odd) .title_box:after").css("display","none");
         $(".title .writing").css({"height":"96px","width":"210px"});
         $(".title:nth-child(odd) p").css({"height":"96px","font-size":"44px","left":"178px","line-height":"96px"});
         $(".title:nth-child(even) p").css({"height":"96px","font-size":"44px","right":"178px","line-height":"96px"});
