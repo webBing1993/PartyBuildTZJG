@@ -110,7 +110,7 @@
 
         }
     }
-    .modal-open{overflow:hidden;position:fixed;}
+    .modal-open{overflow:hidden}
 </style>
 {/block}
 
@@ -301,7 +301,7 @@ $(function() {
     });
     $(".modal").click(function(){
         $("html").removeClass("modal-open");
-    })
+    });
     $(".modal-content").on("click",function(e){
         e.stopPropagation();
     })
