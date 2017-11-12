@@ -117,6 +117,13 @@ class Special extends Base{
         }else{
             $info['files'] = '';
         }
+        // 获取 图片
+        if($info['commend_img']){
+            $info['commend_img'] = json_decode($info['commend_img']);
+        }
+        if($info['voucher_img']){
+            $info['voucher_img'] = json_decode($info['voucher_img']);
+        }
         //获取 文章点赞
         $likeModel = new Like();
         $like = $likeModel->getLike(6,$id,$userId);
@@ -168,6 +175,13 @@ class Special extends Base{
             $info['files'] = $arr;
         }else{
             $info['files'] = '';
+        }
+        // 获取 图片
+        if($info['commend_img']){
+            $info['commend_img'] = json_decode($info['commend_img']);
+        }
+        if($info['voucher_img']){
+            $info['voucher_img'] = json_decode($info['voucher_img']);
         }
         //获取 文章点赞
         $likeModel = new Like();
