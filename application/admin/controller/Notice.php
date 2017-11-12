@@ -44,6 +44,7 @@ class Notice extends Admin
         $noticeModel = new NoticeModel();
         if(IS_POST) {
             $data = input('post.');
+            isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
             if (empty($data['id'])){
                 unset($data['id']);
                 $res = $noticeModel->validate(true)->save($data);

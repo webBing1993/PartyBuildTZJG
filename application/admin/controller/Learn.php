@@ -46,6 +46,7 @@ class Learn extends Admin {
                 unset($data['id']);
             }
             $Model = new LearnModel();
+            isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
             $data['create_user'] = $_SESSION['think']['user_auth']['id'];
             if($data['type'] == 2) {
                 if(empty($data['time'])) {
@@ -79,6 +80,7 @@ class Learn extends Admin {
         $Model = new LearnModel();
         if(IS_POST) {
             $data = input('post.');
+            isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
             if($data['type'] == 2) {
                 if(empty($data['time'])) {
                     return $this->error("时间不能为空");

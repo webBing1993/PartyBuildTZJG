@@ -447,7 +447,13 @@
 
         //发布
         $(".post-put").on("click",function(){
+            var file=[];
             var it=$(this);
+            $(".videofile").each(function(){
+                if($(this).children("input[name='file']").val()){
+                    file.push($(this).children("input[name='file']").val());
+                }
+            });
             var cl;
             var type = $("select[name='type']").val();
             var cl1 = $("select[name='class1']").val();
@@ -471,6 +477,7 @@
                 compere:$("input[name='compere']").val(),
                 content:ue.getContent(),
                 publisher:$("input[name='publisher']").val(),
+                file:file
             };
             $.ajax({
                 type:"post",

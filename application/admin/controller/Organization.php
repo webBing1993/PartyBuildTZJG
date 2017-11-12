@@ -42,6 +42,7 @@ class Organization extends Admin {
     public function add() {
         if(IS_POST) {
             $data = input('post.');
+            isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
             if(empty($data['id'])) {
                 unset($data['id']);
             }
@@ -69,6 +70,7 @@ class Organization extends Admin {
         $Model = new OrganizationModel();
         if(IS_POST) {
             $data = input('post.');
+            isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
             $res = $Model->validate(true)->save($data,['id'=>input('id')]);
             if($res){
                 return $this->success("修改成功",Url("Organization/index"));

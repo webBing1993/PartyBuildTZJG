@@ -197,7 +197,7 @@
                                     {empty name="$msg"}
                                     <img src="" alt='图片' class='thumbnail imgbox'>
                                     {else/}
-                                    <img src="{$msg.commend_img1}" alt='图片' class='thumbnail imgbox'>
+                                    <img src="{$msg.commend_img1|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
                                     {/empty}
                                     <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">
                                     <input type="hidden" name="commend_img1" class="img"  value="{$msg.commend_img1||default=''}" required="">
@@ -210,7 +210,7 @@
                                     {empty name="$msg"}
                                     <img src="" alt='图片' class='thumbnail imgbox'>
                                     {else/}
-                                    <img src="{$msg.commend_img2}" alt='图片' class='thumbnail imgbox'>
+                                    <img src="{$msg.commend_img2|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
                                     {/empty}
                                     <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">
                                     <input type="hidden" name="commend_img2" class="img"  value="{$msg.commend_img2||default=''}" required="">
@@ -222,7 +222,7 @@
                                     {empty name="$msg"}
                                     <img src="" alt='图片' class='thumbnail imgbox'>
                                     {else/}
-                                    <img src="{$msg.commend_img3}" alt='图片' class='thumbnail imgbox'>
+                                    <img src="{$msg.commend_img3|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
                                     {/empty}
                                     <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">
                                     <input type="hidden" name="commend_img3" class="img"  value="{$msg.commend_img3||default=''}" required="">
@@ -238,7 +238,7 @@
                                     {empty name="$msg"}
                                     <img src="" alt='图片' class='thumbnail imgbox'>
                                     {else/}
-                                    <img src="{$msg.voucher_img1}" alt='图片' class='thumbnail imgbox'>
+                                    <img src="{$msg.voucher_img1|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
                                     {/empty}
                                     <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">
                                     <input type="hidden" name="voucher_img1" class="img"  value="{$msg.voucher_img1||default=''}" required="">
@@ -251,7 +251,7 @@
                                     {empty name="$msg"}
                                     <img src="" alt='图片' class='thumbnail imgbox'>
                                     {else/}
-                                    <img src="{$msg.voucher_img2}" alt='图片' class='thumbnail imgbox'>
+                                    <img src="{$msg.voucher_img2|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
                                     {/empty}
                                     <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">
                                     <input type="hidden" name="voucher_img2" class="img"  value="{$msg.voucher_img2||default=''}" required="">
@@ -263,7 +263,7 @@
                                     {empty name="$msg"}
                                     <img src="" alt='图片' class='thumbnail imgbox'>
                                     {else/}
-                                    <img src="{$msg.voucher_img3}" alt='图片' class='thumbnail imgbox'>
+                                    <img src="{$msg.voucher_img3|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
                                     {/empty}
                                     <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">
                                     <input type="hidden" name="voucher_img3" class="img"  value="{$msg.voucher_img3||default=''}" required="">
@@ -412,7 +412,13 @@
 
         //发布
         $(".post-put").on("click",function(){
+            var file=[];
             var it=$(this);
+            $(".videofile").each(function(){
+                if($(this).children("input[name='file']").val()){
+                    file.push($(this).children("input[name='file']").val());
+                }
+            });
             var commend_img1 = $("input[name='commend_img1']").val();
             var commend_img2 = $("input[name='commend_img2']").val();
             var commend_img3 = $("input[name='commend_img3']").val();
@@ -441,6 +447,7 @@
                 title:$("input[name='title']").val(),
                 content:ue.getContent(),
                 publisher:$("input[name='publisher']").val(),
+                file:file
             };
             $.ajax({
                 type:"post",

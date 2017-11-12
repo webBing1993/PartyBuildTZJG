@@ -41,6 +41,7 @@ class Special extends Admin {
     public function add() {
         if(IS_POST) {
             $data = input('post.');
+            isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
             if(empty($data['id'])) {
                 unset($data['id']);
             }
@@ -70,6 +71,7 @@ class Special extends Admin {
         $Model = new SpecialModel();
         if(IS_POST) {
             $data = input('post.');
+            isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
             isset($data["commend_img"]) ? $data["commend_img"] = json_encode($data["commend_img"]) : $data["commend_img"] = "";
             isset($data["voucher_img"]) ? $data["voucher_img"] = json_encode($data["voucher_img"]) : $data["voucher_img"] = "";
             $res = $Model->validate(true)->save($data,['id'=>input('id')]);

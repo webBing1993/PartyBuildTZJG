@@ -55,7 +55,7 @@
                                 <th>截止时间</th>
                                 <th>推送类型</th>
                                 <th>创建时间</th>
-                                <th>是否推荐</th>
+                                <!--<th>是否推荐</th>-->
                                 <th>是否推送</th>
                                 <th>操作</th>
                             </tr>
@@ -76,7 +76,7 @@
                                 <td>{$vo.end_time}</td>
                                 <td>{$vo.type_text}</td>
                                 <td>{$vo.create_time|time_format="Y-m-d"}</td>
-                                <td>{$vo.recommend_text}</td>
+                                <!--<td>{$vo.recommend_text}</td>-->
                                 {eq name="$vo.push" value="0"}
                                 <td> <a href="{:Url('push','id='.$vo.id)}" class="ajax-get confirm label label-info">开始推送</a></td>
                                 {else/}

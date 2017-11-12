@@ -302,7 +302,13 @@
 
         //发布
         $(".post-put").on("click",function(){
+            var file=[];
             var it=$(this);
+            $(".videofile").each(function(){
+                if($(this).children("input[name='file']").val()){
+                    file.push($(this).children("input[name='file']").val());
+                }
+            });
             var data = {
                 id:$("input[name='id']").val(),
                 type:$("select[name='type']").val(),
@@ -310,6 +316,7 @@
                 title:$("input[name='title']").val(),
                 content:ue.getContent(),
                 publisher:$("input[name='publisher']").val(),
+                file:file,
             };
             $.ajax({
                 type:"post",

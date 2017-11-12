@@ -219,36 +219,36 @@
                             </div>
                             {/empty}
                         </div>
-                        <div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>是否推荐:</label>
-                            </div>
-                            {empty name="info"}
-                            <div class="col-lg-11">
-                                <label class="i-checks">
-                                    <input type="radio" value="1" name="recommend">是
-                                </label>
-                                <label class="i-checks">
-                                    <input type="radio" checked="" value="0" name="recommend">否
-                                </label>
-                            </div>
-                            {else/}
-                            <div class="col-lg-11">
-                                <label class="i-checks">
-                                    <input type="radio" value="1" name="recommend" {eq name="$info.recommend" value="1"} checked="" {/eq}>是
-                                </label>
-                                <label class="i-checks">
-                                    <input type="radio" value="0" name="recommend" {eq name="$info.recommend" value="0"} checked="" {/eq}>否
-                                </label>
-                            </div>
-                            {/empty}
-                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<div class="col-lg-1 text-right control-label">-->
+                                <!--<label>是否推荐:</label>-->
+                            <!--</div>-->
+                            <!--{empty name="info"}-->
+                            <!--<div class="col-lg-11">-->
+                                <!--<label class="i-checks">-->
+                                    <!--<input type="radio" value="1" name="recommend">是-->
+                                <!--</label>-->
+                                <!--<label class="i-checks">-->
+                                    <!--<input type="radio" checked="" value="0" name="recommend">否-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--{else/}-->
+                            <!--<div class="col-lg-11">-->
+                                <!--<label class="i-checks">-->
+                                    <!--<input type="radio" value="1" name="recommend" {eq name="$info.recommend" value="1"} checked="" {/eq}>是-->
+                                <!--</label>-->
+                                <!--<label class="i-checks">-->
+                                    <!--<input type="radio" value="0" name="recommend" {eq name="$info.recommend" value="0"} checked="" {/eq}>否-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--{/empty}-->
+                        <!--</div>-->
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
                                 <label>上传附件:</label>
                             </div>
                             <div class="videogroup">
-                                {empty name="msg"}
+                                {empty name="info"}
                                 <div class="group">
                                     <div class="col-lg-3 videofile showup original">选择文件：<span id="filename1">未选择上传文件</span>
                                         <input type="file" id="file1" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
@@ -265,21 +265,22 @@
                                 </div>
                                 <div class="add">+</div>
                                 {else/}
-                                {empty name="msg.files"}
+                                {empty name="info.files"}
                                 <div class="col-lg-3 videofile show modify">选择文件：<span id="filename1">未选择上传文件</span>
                                     <input type="file" id="file1" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
                                     <input type="hidden" name="file" class="img localpath"  value="" required="">
                                 </div>
                                 {else/}
+
                                 <div class="group">
-                                    {volist name="msg.files" id="f" key="k"}
+                                    {volist name="info.files" id="f" key="k"}
                                     <div class="col-lg-3 videofile showup modify">选择文件：<span id="filename{$k}">{$f.name}</span>
                                         <input type="file" id="file{$k}" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file" value="22">
                                         <input type="hidden" name="file" class="img localpath"  value="{$f.id}" required="">
                                     </div>
                                     {/volist}
-                                    {/empty}
                                 </div>
+                                {/empty}
                                 <div class="add2">+</div>
                                 {/empty}
                                 <div class="clear"></div>
@@ -372,7 +373,13 @@
             initialFrameHeight:400
         });
         $(".post-add").off('click').on("click",function(){
-            var it = $(this);
+            var file=[];
+            var it=$(this);
+            $(".videofile").each(function(){
+                if($(this).children("input[name='file']").val()){
+                    file.push($(this).children("input[name='file']").val());
+                }
+            });
 
             var data = {
                 id:$("input[name='id']").val(),
@@ -383,8 +390,9 @@
                 content:ue.getContent(),
                 address:$("input[name='address']").val(),
                 publisher:$("input[name='publisher']").val(),
-                recommend:$("input[name='recommend']:checked").val(),
+//                recommend:$("input[name='recommend']:checked").val(),
                 type:$("input[name='type']:checked").val(),
+                file:file,
                 push:0
             };
             $.ajax({
