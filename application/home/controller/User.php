@@ -444,12 +444,16 @@ class User extends Base {
             $score1 = $User['score_efficiency'];  // 机关效能积分
             $score2 = $User['score_form'];  // 四种形态积分
             $score3 = $User['score_satisfaction'];  // 满意度测评积分
+            $score5 = $User['score_up']; // 被上级机关查处通报
+            $score6 = $User['score_float']; // 被市级查处通报
+            $score7 = $User['score_low'];  // 反馈本单位处理
+            $score8 = $User['score_work'];  // 党建责任  工作计划
             $Arr = Db::name('score')->where('userid', $userId)->whereTime('create_time', 'y')->select();
             $score4 = 0;
             foreach ($Arr as $val) {
                 $score4 += ($val['score_up'] / $val['score_down']);
             }
-            $score = $score1 + $score2 + $score3 + $score4;  // 总分
+            $score = $score1 + $score2 + $score3 + $score4 - $score5 - $score6 - $score7 + $score8;  // 总分
         }
         $msg = Db::name('score')->where(['userid' => $userId])->order('id desc')->select();
         foreach($msg as $key => $value){
@@ -466,9 +470,6 @@ class User extends Base {
                             break;
                         case 2:
                             $msg[$key]['str'] = "党建责任-责任清单";
-                            break;
-                        case 4:
-                            $msg[$key]['str'] = "党建责任-工作计划";
                             break;
                         case 5:
                             $msg[$key]['str'] = "党建责任-书记述职";
@@ -487,7 +488,7 @@ class User extends Base {
                             $msg[$key]['str'] = "两学一做-方案部署";
                             break;
                         case 4:
-                            $msg[$key]['str'] = "两学一做-主题党日";
+                            $msg[$key]['str'] = "两学一做-支部活动";
                             break;
                         case 5:
                             $msg[$key]['str'] = "两学一做-培训计划";
@@ -518,7 +519,22 @@ class User extends Base {
                             $msg[$key]['str'] = "组织建设-规范性建设";
                             break;
                         case 2:
+                            $msg[$key]['str'] = "组织建设-离退休党员台账资料";
+                            break;
+                        case 3:
+                            $msg[$key]['str'] = "组织建设-党费收缴";
+                            break;
+                        case 4:
                             $msg[$key]['str'] = "组织建设-信息录用";
+                            break;
+                        case 5:
+                            $msg[$key]['str'] = "组织建设-阵地建设";
+                            break;
+                        case 6:
+                            $msg[$key]['str'] = "组织建设-按期换届";
+                            break;
+                        case 7:
+                            $msg[$key]['str'] = "组织建设-主题党日";
                             break;
                     }
                     break;
@@ -592,14 +608,34 @@ class User extends Base {
             switch ($value['class']){
                 case 1:  // 机关效能
                     $hander[$key]['str'] = "机关效能-人工干预";
+                    $num = 1;
                     break;
                 case 2:  // 四种形态
                     $hander[$key]['str'] = "四种形态-人工干预";
+                    $num = 1;
                     break;
-                default:  // 满意度测评
+                case 3:  // 满意度测评
                     $hander[$key]['str'] = "满意度测评-人工干预";
+                    $num = 1;
+                    break;
+                case 4:  // 被上级机关查处通报
+                    $hander[$key]['str'] = "被上级机关查处通报-人工干预";
+                    $num = 4;
+                    break;
+                case 5:  // 被市级查处通报
+                    $hander[$key]['str'] = "被市级查处通报-人工干预";
+                    $num = 2;
+                    break;
+                case 6:  // 反馈本单位处理
+                    $hander[$key]['str'] = "反馈本单位处理-人工干预";
+                    $num = 1;
+                    break;
+                case 7:  // 党建责任-工作计划
+                    $hander[$key]['str'] = "党建责任-工作计划";
+                    $num = 1;
+                    break;
             }
-            $hander[$key]['score'] = $paly." 1";
+            $hander[$key]['score'] = $paly." ".$num;
         }
         $this->assign('handle',$hander);
         $this->assign('score',$score);
