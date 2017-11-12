@@ -11,6 +11,7 @@ use app\home\model\Comment;
 use app\home\model\Like;
 use app\home\model\Organization as OrganizationModel;
 use app\home\model\Picture;
+use app\home\model\WechatTest;
 use app\home\model\WechatUser;
 use think\Db;
 class Organization extends Base{

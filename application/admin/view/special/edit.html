@@ -194,7 +194,7 @@
                             </div>
                             <div class="col-lg-3">
                                 <div class="imggroup imgfileGroup">
-                                    {empty name="$msg"}
+                                    {empty name="$msg.commend_img1"}
                                     <img src="" alt='图片' class='thumbnail imgbox'>
                                     {else/}
                                     <img src="{$msg.commend_img1|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
@@ -207,7 +207,7 @@
                             <div class="col-lg-3">
                                 <div class=" plus">+</div>
                                 <div class="imggroup imgfileGroup plusimg">
-                                    {empty name="$msg"}
+                                    {empty name="$msg.commend_img2"}
                                     <img src="" alt='图片' class='thumbnail imgbox'>
                                     {else/}
                                     <img src="{$msg.commend_img2|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
@@ -219,7 +219,7 @@
                             <div class="col-lg-3">
                                 <div class="plus plus2">+</div>
                                 <div class="imggroup imgfileGroup plusimg">
-                                    {empty name="$msg"}
+                                    {empty name="$msg.commend_img3"}
                                     <img src="" alt='图片' class='thumbnail imgbox'>
                                     {else/}
                                     <img src="{$msg.commend_img3|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
@@ -412,13 +412,7 @@
 
         //发布
         $(".post-put").on("click",function(){
-            var file=[];
             var it=$(this);
-            $(".videofile").each(function(){
-                if($(this).children("input[name='file']").val()){
-                    file.push($(this).children("input[name='file']").val());
-                }
-            });
             var commend_img1 = $("input[name='commend_img1']").val();
             var commend_img2 = $("input[name='commend_img2']").val();
             var commend_img3 = $("input[name='commend_img3']").val();
@@ -447,7 +441,6 @@
                 title:$("input[name='title']").val(),
                 content:ue.getContent(),
                 publisher:$("input[name='publisher']").val(),
-                file:file
             };
             $.ajax({
                 type:"post",
