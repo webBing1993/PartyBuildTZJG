@@ -16,6 +16,7 @@ return [
     // 数据库连接DSN配置
     'dsn'         => '',
     // 服务器地址
+    'hostname'    => '192.168.1.54',
     'hostname'    => '192.168.1.56',
     // 数据库名
     'database'    => 'tzpb',

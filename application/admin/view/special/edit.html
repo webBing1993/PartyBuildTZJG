@@ -338,6 +338,10 @@
 <script src="/admin/js/chosen.jquery.js"></script>
 <script>
     $(function(){
+        $(".gray-bg").append($(".footer"));
+        $(".ibox-content form").append($(".ibox.float-e-margins>.form-group"));
+        $(".ibox-content form").append($(".ibox.float-e-margins>input[type=hidden]"));
+        $(".ibox-content form").append($(".ibox.float-e-margins>.selblo"));
         var len1 = $(".original.showup").length;
         var len2 = $(".modify.showup").length;
         if(len1==3){
@@ -347,6 +351,20 @@
             $(".add2").hide();
         }
         highlight_subnav("{:Url('Special/index')}");
+        if ($(".plus").next().children("img").attr("src") != "") {
+            $(".plus").hide().next().fadeIn();
+            $(".plus2").show().next().hide();
+            if ($(".plus2").next().children("img").attr("src") != "") {
+                $(".plus2").hide().next().fadeIn();
+            }
+        }
+        if ($(".plus_c").next().children("img").attr("src") != "") {
+            $(".plus_c").hide().next().fadeIn();
+            $(".plus2_c").show().next().hide();
+            if ($(".plus2_c").next().children("img").attr("src") != "") {
+                $(".plus2_c").hide().next().fadeIn();
+            }
+        }
 
         //上传图片
         var plus = $('.plus');
