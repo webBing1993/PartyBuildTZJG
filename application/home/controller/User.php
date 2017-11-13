@@ -441,19 +441,15 @@ class User extends Base {
         if (empty($User)){
             $score = 0;
         }else{
-            $score1 = $User['score_efficiency'];  // 机关效能积分
-            $score2 = $User['score_form'];  // 四种形态积分
-            $score3 = $User['score_satisfaction'];  // 满意度测评积分
-            $score5 = $User['score_up']; // 被上级机关查处通报
-            $score6 = $User['score_float']; // 被市级查处通报
-            $score7 = $User['score_low'];  // 反馈本单位处理
-            $score8 = $User['score_work'];  // 党建责任  工作计划
+            $score1 = $User['score_party'];  // 党风廉政 4
+            $score2 = $User['score_satisfaction'];  // 满意度测评积分
+            $score3 = $User['score_work'];  // 两新党建
             $Arr = Db::name('score')->where('userid', $userId)->whereTime('create_time', 'y')->select();
             $score4 = 0;
             foreach ($Arr as $val) {
                 $score4 += ($val['score_up'] / $val['score_down']);
             }
-            $score = $score1 + $score2 + $score3 + $score4 - $score5 - $score6 - $score7 + $score8;  // 总分
+            $score = $score1 + $score2 + $score3 + $score4;  // 总分
         }
         $msg = Db::name('score')->where(['userid' => $userId])->order('id desc')->select();
         foreach($msg as $key => $value){
@@ -606,32 +602,16 @@ class User extends Base {
                 $paly = '+';
             }
             switch ($value['class']){
-                case 1:  // 机关效能
-                    $hander[$key]['str'] = "机关效能-人工干预";
+                case 1:  // 党风廉政
+                    $hander[$key]['str'] = "党风廉政-人工干预";
                     $num = 1;
                     break;
-                case 2:  // 四种形态
-                    $hander[$key]['str'] = "四种形态-人工干预";
-                    $num = 1;
-                    break;
-                case 3:  // 满意度测评
+                case 2:  // 满意度测评
                     $hander[$key]['str'] = "满意度测评-人工干预";
                     $num = 1;
                     break;
-                case 4:  // 被上级机关查处通报
-                    $hander[$key]['str'] = "被上级机关查处通报-人工干预";
-                    $num = 4;
-                    break;
-                case 5:  // 被市级查处通报
-                    $hander[$key]['str'] = "被市级查处通报-人工干预";
-                    $num = 2;
-                    break;
-                case 6:  // 反馈本单位处理
-                    $hander[$key]['str'] = "反馈本单位处理-人工干预";
-                    $num = 1;
-                    break;
-                case 7:  // 党建责任-工作计划
-                    $hander[$key]['str'] = "党建责任-工作计划";
+                case 3:  // 两新党建
+                    $hander[$key]['str'] = "两新党建-人工干预";
                     $num = 1;
                     break;
             }
