@@ -27,8 +27,8 @@ class Review extends Base{
         $len = array('responsibility' => 0,'learn' => 0,'organization' => 0,'special' => 0,'style' => 0,'volunteer' => 0,'incorrupt' => 0);
         $list1 = $this ->getDataList($len);  // 发布审核
         // 获取 推送审核列表
-        $Push = new Push();
-        $list2 = $Push->get_list();
+//        $Push = new Push();
+//        $list2 = $Push->get_list();
         $list3 = $this ->getDataList($len,2);  // 已审核
         foreach($list3['data'] as $key => $value){
             //  获取审核人
@@ -44,7 +44,7 @@ class Review extends Base{
             }
         }
         $this ->assign('list1',$list1['data']);
-        $this ->assign('list2',$list2);
+//        $this ->assign('list2',$list2);
         $this ->assign('list3',$list3['data']);
         return $this->fetch();
     }
@@ -392,23 +392,23 @@ class Review extends Base{
     /**
      * 推送审核  去审核
      */
-    public function push(){
-        $msg = input('post.');
-        $userId = session('userId');
-        $user = WechatUser::where('userid', $userId)->find();
-        $username = $user['name'];
-        $info = Push::where('id',$msg['id'])->find();
-        if($msg['status'] == 1 ){  // 审核通过  推送消息
-            $this->push_detail($info['class'],$info['focus_main'],$info['focus_vice']);
-        }
-        $res = Push::where('id',$msg['id'])->update(['status' => $msg['status']]);
-        if ($res){
-            PushReview::create(['push_id' => $msg['id'],'user_id' => $userId, 'username' => $username,'review_time' => time(),'status' => $msg['status']]);
-            return $this->success('审核成功');
-        }else{
-            return $this->error('审核失败');
-        }
-    }
+//    public function push(){
+//        $msg = input('post.');
+//        $userId = session('userId');
+//        $user = WechatUser::where('userid', $userId)->find();
+//        $username = $user['name'];
+//        $info = Push::where('id',$msg['id'])->find();
+//        if($msg['status'] == 1 ){  // 审核通过  推送消息
+//            $this->push_detail($info['class'],$info['focus_main'],$info['focus_vice']);
+//        }
+//        $res = Push::where('id',$msg['id'])->update(['status' => $msg['status']]);
+//        if ($res){
+//            PushReview::create(['push_id' => $msg['id'],'user_id' => $userId, 'username' => $username,'review_time' => time(),'status' => $msg['status']]);
+//            return $this->success('审核成功');
+//        }else{
+//            return $this->error('审核失败');
+//        }
+//    }
     /**
      *  改变状态值
      */
@@ -452,161 +452,161 @@ class Review extends Base{
      * 获取推送详情
      * 党建责任 responsibility  两学一做 learn 组织建设 organization 特色创新 special 作风建设 style 志愿服务 volunteer 党风廉政 incorrupt
      */
-    public function push_detail($type,$main,$vice=''){
-        switch ($type) {    //根据类别获取表明
-            case 1:
-                $table = "responsibility";
-                $pre = "【党建责任】";
-                $temp = Db::name($table)->where('id',$main)->value('templet');
-                if ($temp == 1){
-                    $url = "Responsibility/detail";
-                }else{
-                    $url = "Responsibility/detail2";
-                }
-                $agentid = 1000002;
-                $Wechat = new TPQYWechat(Config::get('responsibility'));
-                break;
-            case 2:
-                $table = "learn";
-                $pre = "【两学一做】";
-                $temp = Db::name($table)->where('id',$main)->value('templet');
-                if ($temp == 1){
-                    $url = "Learn/detail";
-                }else{
-                    $url = "Learn/detail2";
-                }
-                $agentid = 1000003;
-                $Wechat = new TPQYWechat(Config::get('learn'));
-                break;
-            case 3:
-                $table = "organization";
-                $pre = "【组织建设】";
-                $temp = Db::name($table)->where('id',$main)->value('templet');
-                if ($temp == 1){
-                    $url = "Organization/detail";
-                }else{
-                    $url = "Organization/detail2";
-                }
-                $agentid = 1000004;
-                $Wechat = new TPQYWechat(Config::get('organization'));
-                break;
-            case 4:
-                $table = "special";
-                $pre = "【特色创新】";
-                $temp = Db::name($table)->where('id',$main)->value('templet');
-                if ($temp == 1){
-                    $url = "Special/detail";
-                }else{
-                    $url = "Special/detail2";
-                }
-                $agentid = 1000005;
-                $Wechat = new TPQYWechat(Config::get('special'));
-                break;
-            case 5:
-                $table = "style";
-                $pre = "【作风建设】";
-                $temp = Db::name($table)->where('id',$main)->value('templet');
-                if ($temp == 1){
-                    $url = "Style/detail";
-                }else{
-                    $url = "Style/detail2";
-                }
-                $agentid = 1000013;
-                $Wechat = new TPQYWechat(Config::get('style'));
-                break;
-            
-            case 6:
-                $table = "volunteer";
-                $pre = "【志愿服务】";
-                $temp = Db::name($table)->where('id',$main)->value('templet');
-                if ($temp == 1){
-                    $url = "Volunteer/detail";
-                }else{
-                    $url = "Volunteer/detail2";
-                }
-                $agentid = 1000006;
-                $Wechat = new TPQYWechat(Config::get('volunteer'));
-                break;
-            case 7:
-                $table = "incorrupt";
-                $pre = "【党风廉政】";
-                $temp = Db::name($table)->where('id',$main)->value('templet');
-                if ($temp == 1){
-                    $url = "Incorrupt/detail";
-                }else{
-                    $url = "Incorrupt/detail2";
-                }
-                $agentid = 1000007;
-                $Wechat = new TPQYWechat(Config::get('incorrupt'));
-                break;
-            default:
-                return $this->error("无该数据表");
-        }
-        //活动基本信息  主图文
-        $focus1 = Db::name($table)->where('id',$main)->find();
-        if (empty($focus1)){
-            $this ->error('该内容不存在或已删除!');
-        }
-        $title1 = $focus1['title'];
-        $str1 = strip_tags($focus1['content']);
-        $des1 = mb_substr($str1, 0, 40);
-        $content1 = str_replace("&nbsp;", "", $des1);  //空格符替换成空
-        $url1 = Config::get('host_url')."/home/".$url."/id/" . $focus1['id'] . ".html";
-        $img1 = Picture::get($focus1['front_cover']);
-        $path1 = Config::get('host_url') . $img1['path'];
-        $information1 = array(
-            "title" => $pre . $title1,
-            "description" => $content1,
-            "url" => $url1,
-            "picurl" => $path1,
-        );
-        $information = array();
-        if (!empty($vice)) {
-            //副图文信息
-            $vice = json_decode($vice);
-            $information2 = array();
-            foreach ($vice as $key => $value) {
-                $focus2 = Db::name($table)->where('id',$value)->find();
-                $title2 = $focus2['title'];
-                $str2 = strip_tags($focus2['content']);
-                $des2 = mb_substr($str2, 0, 41);
-                $content2 = str_replace("&nbsp;", "", $des2);  //空格符替换成空
-                $url2 = Config::get('host_url')."/home/".$url."/id/" . $focus2['id'] . ".html";
-                $img2 = Picture::get($focus2['front_cover']);
-                $path2 = Config::get('host_url') . $img2['path'];
-                $info = array(
-                    "title" =>$pre.$title2,
-                    "description" => $content2,
-                    "url" => $url2,
-                    "picurl" => $path2,
-                );
-                $information2[] = $info;
-            }
-            //数组合并，主图文放在首位
-            foreach ($information2 as $k => $v) {
-                $information[0] = $information1;
-                $information[$k + 1] = $v;
-            }
-        } else {
-            $information[0] = $information1;
-        }
-        //重组成article数据
-        $send = array();
-        $re[] = $information;
-        foreach ($re as $key => $value) {
-            $key = "articles";
-            $send[$key] = $value;
-        }
-        //发送给服务号
-        $message = array(
-//            'touser' =>'17557289172',
-                   "touser" => "@all",   //发送给全体，@all
-            "msgtype" => 'news',
-            "agentid" =>$agentid,
-            "news" => $send,
-            "safe" => "0"
-        );
-        $suc = $Wechat->sendMessage($message);
-        return $suc;
-    }
+//    public function push_detail($type,$main,$vice=''){
+//        switch ($type) {    //根据类别获取表明
+//            case 1:
+//                $table = "responsibility";
+//                $pre = "【党建责任】";
+//                $temp = Db::name($table)->where('id',$main)->value('templet');
+//                if ($temp == 1){
+//                    $url = "Responsibility/detail";
+//                }else{
+//                    $url = "Responsibility/detail2";
+//                }
+//                $agentid = 1000002;
+//                $Wechat = new TPQYWechat(Config::get('responsibility'));
+//                break;
+//            case 2:
+//                $table = "learn";
+//                $pre = "【两学一做】";
+//                $temp = Db::name($table)->where('id',$main)->value('templet');
+//                if ($temp == 1){
+//                    $url = "Learn/detail";
+//                }else{
+//                    $url = "Learn/detail2";
+//                }
+//                $agentid = 1000003;
+//                $Wechat = new TPQYWechat(Config::get('learn'));
+//                break;
+//            case 3:
+//                $table = "organization";
+//                $pre = "【组织建设】";
+//                $temp = Db::name($table)->where('id',$main)->value('templet');
+//                if ($temp == 1){
+//                    $url = "Organization/detail";
+//                }else{
+//                    $url = "Organization/detail2";
+//                }
+//                $agentid = 1000004;
+//                $Wechat = new TPQYWechat(Config::get('organization'));
+//                break;
+//            case 4:
+//                $table = "special";
+//                $pre = "【特色创新】";
+//                $temp = Db::name($table)->where('id',$main)->value('templet');
+//                if ($temp == 1){
+//                    $url = "Special/detail";
+//                }else{
+//                    $url = "Special/detail2";
+//                }
+//                $agentid = 1000005;
+//                $Wechat = new TPQYWechat(Config::get('special'));
+//                break;
+//            case 5:
+//                $table = "style";
+//                $pre = "【作风建设】";
+//                $temp = Db::name($table)->where('id',$main)->value('templet');
+//                if ($temp == 1){
+//                    $url = "Style/detail";
+//                }else{
+//                    $url = "Style/detail2";
+//                }
+//                $agentid = 1000013;
+//                $Wechat = new TPQYWechat(Config::get('style'));
+//                break;
+//
+//            case 6:
+//                $table = "volunteer";
+//                $pre = "【志愿服务】";
+//                $temp = Db::name($table)->where('id',$main)->value('templet');
+//                if ($temp == 1){
+//                    $url = "Volunteer/detail";
+//                }else{
+//                    $url = "Volunteer/detail2";
+//                }
+//                $agentid = 1000006;
+//                $Wechat = new TPQYWechat(Config::get('volunteer'));
+//                break;
+//            case 7:
+//                $table = "incorrupt";
+//                $pre = "【党风廉政】";
+//                $temp = Db::name($table)->where('id',$main)->value('templet');
+//                if ($temp == 1){
+//                    $url = "Incorrupt/detail";
+//                }else{
+//                    $url = "Incorrupt/detail2";
+//                }
+//                $agentid = 1000007;
+//                $Wechat = new TPQYWechat(Config::get('incorrupt'));
+//                break;
+//            default:
+//                return $this->error("无该数据表");
+//        }
+//        //活动基本信息  主图文
+//        $focus1 = Db::name($table)->where('id',$main)->find();
+//        if (empty($focus1)){
+//            $this ->error('该内容不存在或已删除!');
+//        }
+//        $title1 = $focus1['title'];
+//        $str1 = strip_tags($focus1['content']);
+//        $des1 = mb_substr($str1, 0, 40);
+//        $content1 = str_replace("&nbsp;", "", $des1);  //空格符替换成空
+//        $url1 = Config::get('host_url')."/home/".$url."/id/" . $focus1['id'] . ".html";
+//        $img1 = Picture::get($focus1['front_cover']);
+//        $path1 = Config::get('host_url') . $img1['path'];
+//        $information1 = array(
+//            "title" => $pre . $title1,
+//            "description" => $content1,
+//            "url" => $url1,
+//            "picurl" => $path1,
+//        );
+//        $information = array();
+//        if (!empty($vice)) {
+//            //副图文信息
+//            $vice = json_decode($vice);
+//            $information2 = array();
+//            foreach ($vice as $key => $value) {
+//                $focus2 = Db::name($table)->where('id',$value)->find();
+//                $title2 = $focus2['title'];
+//                $str2 = strip_tags($focus2['content']);
+//                $des2 = mb_substr($str2, 0, 41);
+//                $content2 = str_replace("&nbsp;", "", $des2);  //空格符替换成空
+//                $url2 = Config::get('host_url')."/home/".$url."/id/" . $focus2['id'] . ".html";
+//                $img2 = Picture::get($focus2['front_cover']);
+//                $path2 = Config::get('host_url') . $img2['path'];
+//                $info = array(
+//                    "title" =>$pre.$title2,
+//                    "description" => $content2,
+//                    "url" => $url2,
+//                    "picurl" => $path2,
+//                );
+//                $information2[] = $info;
+//            }
+//            //数组合并，主图文放在首位
+//            foreach ($information2 as $k => $v) {
+//                $information[0] = $information1;
+//                $information[$k + 1] = $v;
+//            }
+//        } else {
+//            $information[0] = $information1;
+//        }
+//        //重组成article数据
+//        $send = array();
+//        $re[] = $information;
+//        foreach ($re as $key => $value) {
+//            $key = "articles";
+//            $send[$key] = $value;
+//        }
+//        //发送给服务号
+//        $message = array(
+////            'touser' =>'17557289172',
+//                   "touser" => "@all",   //发送给全体，@all
+//            "msgtype" => 'news',
+//            "agentid" =>$agentid,
+//            "news" => $send,
+//            "safe" => "0"
+//        );
+//        $suc = $Wechat->sendMessage($message);
+//        return $suc;
+//    }
 }
