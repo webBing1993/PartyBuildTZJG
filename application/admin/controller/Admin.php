@@ -475,4 +475,15 @@ class Admin extends Controller {
         $name = $Model->get($id);
         $this->assign('name',$name['nickname']);
     }
+
+    /**
+     * 获取当月时间
+     */
+    public function getMonthTime() {
+        $date = getdate();
+        $time = mktime(0, 0, 0, $date['mon'], 1, $date['year']);
+        $res = array('egt',$time);
+        return $res;
+    }
+    
 }

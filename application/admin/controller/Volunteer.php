@@ -123,8 +123,9 @@ class Volunteer extends Admin {
             $info = array(
                 'id' => array('neq',$id),
                 'status' => 1,
+                'create_time' => $this->getMonthTime()
             );
-            $infoes = $Model::where($info)->whereTime('create_time','m')->select();
+            $infoes = $Model::where($info)->select();
             foreach ($infoes as $value) {
                 switch ($value['type']) {
                     case 1:
@@ -158,8 +159,9 @@ class Volunteer extends Admin {
 
             $info = array(
                 'status' => 1,
+                'create_time' => $this->getMonthTime()
             );
-            $infoes = $Model::where($info)->whereTime('create_time','m')->select();
+            $infoes = $Model::where($info)->select();
             foreach ($infoes as $value) {
                 switch ($value['type']) {
                     case 1:
@@ -278,13 +280,13 @@ class Volunteer extends Admin {
         }
 
         //发送给服务号
-        $Wechat = new TPQYWechat(Config::get('audit'));
+        $Wechat = new TPQYWechat(Config::get('volunteer'));
         $message = array(
 //            'totag' => "2", //审核标签用户
             "touser" => "18768112486",
 //            "touser" => "@all",   //发送给全体，@all
             "msgtype" => 'news',
-            "agentid" => 1000012,
+            "agentid" => 1000006,
             "news" => $send,
             "safe" => "0"
         );

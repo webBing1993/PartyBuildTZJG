@@ -138,8 +138,9 @@ class Special extends Admin {
             $info = array(
                 'id' => array('neq',$id),
                 'status' => 1,
+                'create_time' => $this->getMonthTime()
             );
-            $infoes = $Model::where($info)->whereTime('create_time','m')->select();
+            $infoes = $Model::where($info)->select();
             foreach ($infoes as $value) {
                     $value['type_text'] = "【特色创新】";
             }
@@ -163,8 +164,9 @@ class Special extends Admin {
 
             $info = array(
                 'status' => 1,
+                'create_time' => $this->getMonthTime()
             );
-            $infoes = $Model::where($info)->whereTime('create_time','m')->select();
+            $infoes = $Model::where($info)->select();
             foreach ($infoes as $value) {
                 $value['type_text'] = "【特色创新】";
             }
@@ -253,13 +255,13 @@ class Special extends Admin {
         }
 
         //发送给服务号
-        $Wechat = new TPQYWechat(Config::get('audit'));
+        $Wechat = new TPQYWechat(Config::get('special'));
         $message = array(
 //            'totag' => "2", //审核标签用户
             "touser" => "18768112486",
 //            "touser" => "@all",   //发送给全体，@all
             "msgtype" => 'news',
-            "agentid" => 1000012,
+            "agentid" => 1000005,
             "news" => $send,
             "safe" => "0"
         );

@@ -92,9 +92,10 @@ class News extends Admin
             //副图文本周内的新闻消息
             $info = array(
                 'id' => array('neq',$id),
-                'status' => 0
+                'status' => 0,
+                'create_time' => $this->getMonthTime()
             );
-            $infoes = NewsModel::where($info)->whereTime('create_time','m')->select();
+            $infoes = NewsModel::where($info)->select();
             return $this->success($infoes);
         }else{
             //新闻消息列表
@@ -104,7 +105,11 @@ class News extends Admin
             ));
             $this->assign('list',$list);
             //主图文本周内的新闻消息
-            $infoes = NewsModel::where(['status' => 0])->whereTime('create_time','m')->select();
+            $map = array(
+                'status' => 0,
+                'create_time' => $this->getMonthTime()
+            );
+            $infoes = NewsModel::where($map)->select();
             $this->assign('info',$infoes);
             return $this->fetch();
         }
