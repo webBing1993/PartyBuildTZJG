@@ -15,7 +15,7 @@
         <!--<a class="mui-control-item" href="#item2mobile" data-index="1">
             <span>推送审核</span>
         </a>-->
-        <a class="mui-control-item" href="#item3mobile" data-index="2">
+        <a class="mui-control-item" href="#item3mobile" data-index="1">
             <span>已审核</span>
         </a>
     </div>
@@ -191,12 +191,6 @@
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
             }
-        }else if(c==1){
-            if ($(".push ul li").length < 7) {
-                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
-            } else {
-                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
-            }
         }else if(c==2){
             if ($(".Audited ul li").length < 7) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
@@ -237,11 +231,6 @@
             data.type=c;
             var url = "{:Url('Review/moreDataList')}";
         }else if(c==1){
-            var len = $('.push ul a').length;
-            data.len=len;
-            data.type=c;
-            var url = "{:Url('Review/more')}";
-        }else if(c==2){
             var responsibility_len = $('.Audited ul .list[data-type=1]').length;
             var learn_len = $('.Audited ul .list[data-type=2]').length;
             var organization_len = $('.Audited ul .list[data-type=3]').length;
@@ -425,12 +414,6 @@
         c = this.getAttribute("data-index");
         if(c==0){
             if($(".publish ul li").length<7){
-                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
-            }else{
-                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
-            }
-        }else if(c==1){
-            if($(".push ul li").length<7){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
