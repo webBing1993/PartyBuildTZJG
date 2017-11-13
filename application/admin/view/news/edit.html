@@ -500,7 +500,7 @@
             var id= $(this).attr("id");
             var nameid= $(this).parent(".videofile").find("span").attr("id");
             var num= parseInt(id.replace(/[^0-9]/ig,"")-1);
-            if(size <= 1024*5){
+            if(size <= 10240){
                 var file = $(this)[0].files[0];
                 var formData = new FormData();
                 formData.append("download",file);
@@ -523,7 +523,7 @@
                     }
                 });
             } else {
-                warning({msg:"您选择的视频超过5mb，请重新选择"});
+                warning({msg:"您选择的文件超过10mb，请重新选择"});
                 return;
             }
         });
@@ -546,7 +546,7 @@
         var nameid= $(this).parent(".videofile").find("span").attr("id");
         var num= parseInt(id.replace(/[^0-9]/ig,"")-1);
 //                var str = $("<span class='detelefile'>删除</span>");
-        if(size <= 1024*5){
+        if(size <= 10240){
             var file = $(this)[0].files[0];
             var formData = new FormData();
             formData.append("download",file);
@@ -571,7 +571,7 @@
                 }
             });
         } else {
-            warning({msg:"您选择的视频超过5mb，请重新选择"});
+            warning({msg:"您选择的文件超过10mb，请重新选择"});
             return;
         }
     });
