@@ -103,6 +103,21 @@
         color: #004974;
         text-decoration: none;
     }
+    .detelefile {
+        display: inline-block;
+        margin-left: 10px;
+        line-height: 28px;
+        cursor: pointer;
+    }
+    .detelefile:hover{
+        color: #ff5053;
+    }
+    .hiding{
+        visibility: hidden;
+    }
+    .group{
+        display: inline-block;
+    }
 </style>
 {/block}
 
@@ -277,32 +292,47 @@
                             <div class="videogroup">
                                 {empty name="msg"}
                                 <div class="group">
-                                    <div class="col-lg-3 videofile showup original">选择文件：<span id="filename1">未选择上传文件</span>
-                                        <input type="file" id="file1" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
-                                        <input type="hidden" name="file" class="img localpath"  value="" required="">
+                                    <div class="file1 showup original" style="width: 400px;height: 30px;display: inline-block;">
+                                        <div class="col-lg-3 videofile">选择文件：<span id="filename1">未选择上传文件</span>
+                                            <input type="file" id="file1" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
+                                            <input type="hidden" name="file" class="img localpath"  value="" required="">
+                                        </div>
+                                        <span class="detelefile hiding">删除</span>
                                     </div>
-                                    <div class="col-lg-3 videofile hide original">选择文件：<span id="filename2">未选择上传文件</span>
-                                        <input type="file" id="file2" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
-                                        <input type="hidden" name="file" class="img localpath"  value="" required="">
+                                    <div class="file1 hide original" style="width: 400px;height: 30px;display: inline-block;">
+                                        <div class="col-lg-3 videofile">选择文件：<span id="filename2">未选择上传文件</span>
+                                            <input type="file" id="file2" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
+                                            <input type="hidden" name="file" class="img localpath"  value="" required="">
+                                        </div>
+                                        <span class="detelefile hiding">删除</span>
                                     </div>
-                                    <div class="col-lg-3 videofile hide original">选择文件：<span id="filename3">未选择上传文件</span>
-                                        <input type="file" id="file3" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
-                                        <input type="hidden" name="file" class="img localpath"  value="" required="">
+                                    <div class="file1 hide original" style="width: 400px;height: 30px;display: inline-block;">
+                                        <div class="col-lg-3 videofile">选择文件：<span id="filename3">未选择上传文件</span>
+                                            <input type="file" id="file3" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
+                                            <input type="hidden" name="file" class="img localpath"  value="" required="">
+                                        </div>
+                                        <span class="detelefile hiding">删除</span>
                                     </div>
-                                </div>
-                                <div class="add">+</div>
-                                {else/}
-                                {empty name="msg.files"}
-                                <div class="col-lg-3 videofile show modify">选择文件：<span id="filename1">未选择上传文件</span>
-                                    <input type="file" id="file1" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
-                                    <input type="hidden" name="file" class="img localpath"  value="" required="">
+                                    <div class="add">+</div>
                                 </div>
                                 {else/}
                                 <div class="group">
+                                    {empty name="msg.files"}
+                                    <div class="file1 showup modify" style="width: 450px;height: 30px;display: inline-block;">
+                                        <div class="col-lg-3 videofile">选择文件：<span id="filename1">未选择上传文件</span>
+                                            <input type="file" id="file1" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
+                                            <input type="hidden" name="file" class="img localpath"  value="" required="">
+                                        </div>
+                                        <span class="detelefile hiding">删除</span>
+                                    </div>
+                                    {else/}
                                     {volist name="msg.files" id="f" key="k"}
-                                    <div class="col-lg-3 videofile showup modify">选择文件：<span id="filename{$k}">{$f.name}</span>
-                                        <input type="file" id="file{$k}" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file" value="22">
-                                        <input type="hidden" name="file" class="img localpath"  value="{$f.id}" required="">
+                                    <div class="file1 showup modify" style="width: 450px;height: 30px;display: inline-block;">
+                                        <div class="col-lg-3 videofile">选择文件：<span id="filename{$k}">{$f.name}</span>
+                                            <input type="file" id="file{$k}" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file" value="22">
+                                            <input type="hidden" name="file" class="img localpath"  value="{$f.id}" required="">
+                                        </div>
+                                        <span class="detelefile">删除</span>
                                     </div>
                                     {/volist}
                                     {/empty}
@@ -498,28 +528,38 @@
     })
 
     $(".add").on("click",function(){
-        var filelen = $(".videofile.showup").length;
-        $('.videofile').eq(filelen).removeClass('hide').addClass('showup');
+        var filelen = $(".file1.showup").length;
+        $('.file1').eq(filelen).removeClass('hide').addClass('showup');
         if(filelen==2){
             $(".add").hide();
         }
     });
 
     $(".add2").on("click",function(){
-        var filelen = $(".videofile.showup").length;
+        var filelen = $(".file1.showup").length;
         var len = parseInt(filelen)+1;
         var html='';
         html+=
+                '<div class="file1 showup modify" style="width: 450px;height: 30px;display: inline-block;">'+
                 '<div class="col-lg-3 videofile showup" style="margin-left: 20px;display: inline-block;">选择文件：'+
                 '<span id="filename'+len+'">未选择上传文件</span>'+
                 '<input type="file" id="file'+len+'" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">'+
                 '<input type="hidden" name="file" class="img localpath"  value="" required="">'+
+                '</div>'+
+                '<span class="detelefile hiding">删除</span>'+
                 '</div>'
         $(".group").append(html);
+        $(".detelefile").click(function(){
+            $(this).parent().find("span:first-child").text("未选择上传文件");
+            $(this).parent().find("input[type='file']").val("");
+            $(this).parent().find("input[name='file']").val("");
+            $(this).addClass("hiding");
+        });
         $("input[name='input-file']").on("change",function(){
             var size = ($(this)[0].files[0].size / 1024).toFixed(2);
             var id= $(this).attr("id");
             var nameid= $(this).parent(".videofile").find("span").attr("id");
+            var num= parseInt(id.replace(/[^0-9]/ig,"")-1);
             if(size <= 1024*5){
                 var file = $(this)[0].files[0];
                 var formData = new FormData();
@@ -532,11 +572,11 @@
                     contentType : false,
                     success:function(d){
                         var data = $.parseJSON(d);
-                        console.log(data)
                         if(data.status == 1){
                             console.log(data.data.name)
                             $("#"+nameid).text(data.data.name);
                             $("#"+id).next("input[name='file']").val(data.data.id);
+                            $(".file1").eq(num).find(".detelefile").removeClass("hiding");
                         }else {
                             warning({msg:"上传失败"});
                         }
@@ -552,11 +592,20 @@
         }
     });
 
+    $(".detelefile").click(function(){
+        $(this).parent().find("span:first-child").text("未选择上传文件");
+        $(this).parent().find("input[type='file']").val("");
+        $(this).parent().find("input[name='file']").val("");
+        $(this).addClass("hiding");
+    })
+
     //上传文件
     $("input[name='input-file']").on("change",function(){
         var size = ($(this)[0].files[0].size / 1024).toFixed(2);
         var id= $(this).attr("id");
         var nameid= $(this).parent(".videofile").find("span").attr("id");
+        var num= parseInt(id.replace(/[^0-9]/ig,"")-1);
+//                var str = $("<span class='detelefile'>删除</span>");
         if(size <= 1024*5){
             var file = $(this)[0].files[0];
             var formData = new FormData();
@@ -571,9 +620,11 @@
                     var data = $.parseJSON(d);
                     console.log(data)
                     if(data.status == 1){
-                        console.log(data.data.name)
                         $("#"+nameid).text(data.data.name);
                         $("#"+id).next("input[name='file']").val(data.data.id);
+//                                $(".file1").eq(num).append(str);
+                        $(".file1").eq(num).find(".detelefile").removeClass("hiding");
+//
                     }else {
                         warning({msg:"上传失败"});
                     }
