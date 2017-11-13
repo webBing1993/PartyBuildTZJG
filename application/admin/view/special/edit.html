@@ -338,6 +338,10 @@
 <script src="/admin/js/chosen.jquery.js"></script>
 <script>
     $(function(){
+        $(".gray-bg").append($(".footer"));
+        $(".ibox-content form").append($(".ibox.float-e-margins>.form-group"));
+        $(".ibox-content form").append($(".ibox.float-e-margins>input[type=hidden]"));
+        $(".ibox-content form").append($(".ibox.float-e-margins>.selblo"));
         var len1 = $(".original.showup").length;
         var len2 = $(".modify.showup").length;
         if(len1==3){

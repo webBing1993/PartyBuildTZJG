@@ -16,11 +16,11 @@ return [
     // 数据库连接DSN配置
     'dsn'         => '',
     // 服务器地址
-    'hostname'    => '192.168.1.56 ',
+    'hostname'    => '192.168.1.54',
     // 数据库名
     'database'    => 'tzpb',
     // 数据库用户名
-    'username'    => 'root',
+    'username'    => 'guest',
     // 数据库密码
     'password'    => '123456',
     // 数据库连接端口
