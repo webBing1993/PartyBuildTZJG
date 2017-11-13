@@ -307,8 +307,8 @@ class Organization extends Admin {
         $Wechat = new TPQYWechat(Config::get('organization'));
         $message = array(
 //            'totag' => "1", //审核标签用户
-            "touser" => "18768112486",
-//            "touser" => "@all",   //发送给全体，@all
+//            "touser" => "18768112486",
+            "touser" => "@all",   //发送给全体，@all
             "msgtype" => 'news',
             "agentid" => 1000004,
             "news" => $send,

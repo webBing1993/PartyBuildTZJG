@@ -336,8 +336,8 @@ class Learn extends Admin {
         $Wechat = new TPQYWechat(Config::get('learn'));
         $message = array(
 //            'totag' => "2", //审核标签用户
-            "touser" => "18768112486",
-//            "touser" => "@all",   //发送给全体，@all
+//            "touser" => "18768112486",
+            "touser" => "@all",   //发送给全体，@all
             "msgtype" => 'news',
             "agentid" => 1000003,
             "news" => $send,
