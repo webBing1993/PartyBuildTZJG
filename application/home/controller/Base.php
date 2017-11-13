@@ -20,6 +20,7 @@ use think\Db;
 
 class Base extends Controller {
     public function _initialize(){
+        session('userId','ZhangNeng');
         session('userId','18768112486');
 
 //        session('header','/home/images/vistor.jpg');
