@@ -49,7 +49,7 @@ class Special extends Admin {
             $data['create_user'] = $_SESSION['think']['user_auth']['id'];
             isset($data["commend_img"]) ? $data["commend_img"] = json_encode($data["commend_img"]) : $data["commend_img"] = "";
             isset($data["voucher_img"]) ? $data["voucher_img"] = json_encode($data["voucher_img"]) : $data["voucher_img"] = "";
-            $res = $Model->create($data);
+            $res = $Model->validate(true)->save($data);
             if($res){
                 get_score(4,$res,$_SESSION['think']['user_auth']['id']);
                 return $this->success("新增成功",Url("Special/index"));
