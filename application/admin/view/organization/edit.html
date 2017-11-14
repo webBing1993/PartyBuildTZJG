@@ -243,7 +243,7 @@
                                 {else/}
                                 <div class="group">
                                     {empty name="msg.files"}
-                                    <div class="file1 showup modify" style="width: 450px;height: 30px;display: inline-block;">
+                                    <div class="file1 showup modify" style="width: 400px;height: 30px;display: inline-block;">
                                         <div class="col-lg-3 videofile">选择文件：<span id="filename1">未选择上传文件</span>
                                             <input type="file" id="file1" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
                                             <input type="hidden" name="file" class="img localpath"  value="" required="">
@@ -252,7 +252,7 @@
                                     </div>
                                     {else/}
                                     {volist name="msg.files" id="f" key="k"}
-                                    <div class="file1 showup modify" style="width: 450px;height: 30px;display: inline-block;">
+                                    <div class="file1 showup modify" style="width: 400px;height: 30px;display: inline-block;">
                                         <div class="col-lg-3 videofile">选择文件：<span id="filename{$k}">{$f.name}</span>
                                             <input type="file" id="file{$k}" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file" value="22">
                                             <input type="hidden" name="file" class="img localpath"  value="{$f.id}" required="">
@@ -439,7 +439,7 @@
         var len = parseInt(filelen)+1;
         var html='';
         html+=
-                '<div class="file1 showup modify" style="width: 450px;height: 30px;display: inline-block;">'+
+                '<div class="file1 showup modify" style="width: 400px;height: 30px;display: inline-block;">'+
                 '<div class="col-lg-3 videofile showup" style="margin-left: 20px;display: inline-block;">选择文件：'+
                 '<span id="filename'+len+'">未选择上传文件</span>'+
                 '<input type="file" id="file'+len+'" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">'+
