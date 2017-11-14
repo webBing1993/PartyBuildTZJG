@@ -79,6 +79,16 @@
         display: inline-block;
         margin-left: 15px;
     }
+    .modal-dialog{
+        margin: 200px auto;
+        width:350px;
+    }
+    .modal-footer{
+        text-align: center;
+    }
+    .modal-footer .btn+.btn{
+        margin-left: 60px;
+    }
 </style>
 {/block}
 
@@ -264,6 +274,34 @@
         </div>
     </div>
 </div>
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body" style="font-size: 18px;text-align: center">
+                确定删除此文件？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                </button>
+                <button type="button" class="btn btn-primary detelefile_btn">
+                    确定
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+
+
 {/block}
 
 {block name="script"}
@@ -414,10 +452,27 @@
                 '</div>'
         $(".group").append(html);
         $(".detelefile").click(function(){
-            $(this).parent().find("span:first-child").text("未选择上传文件");
-            $(this).parent().find("input[type='file']").val("");
-            $(this).parent().find("input[name='file']").val("");
-            $(this).addClass("hiding");
+            deletefile_that = $(this);
+            $("#myModal").modal('show');
+            deletefile_id = deletefile_that.parent().find("input[name='file']").val();
+        });
+        $(".detelefile_btn").click(function(){
+            $.ajax({
+                type:"post",
+                url:"{:Url('File/file_delete')}",
+                data:{
+                    id:deletefile_id
+                },
+                success:function(data){
+                    if(data.code == 1){
+                        deletefile_that.parent().find("span:first-child").text("未选择上传文件");
+                        deletefile_that.parent().find("input[type='file']").val("");
+                        deletefile_that.parent().find("input[name='file']").val("");
+                        deletefile_that.addClass("hiding");
+                        $("#myModal").modal('hide');
+                    }
+                }
+            });
         });
 
         $("input[name='input-file']").on("change",function(){
@@ -458,24 +513,32 @@
     });
 
     $(".detelefile").click(function(){
-        var id = $(this).parent().find("input[name='file']").val();
-        var that = $(this);
+         deletefile_that = $(this);
+        $("#myModal").modal('show');
+             deletefile_id = deletefile_that.parent().find("input[name='file']").val();
+    });
+
+
+    $(".detelefile_btn").click(function(){
         $.ajax({
             type:"post",
             url:"{:Url('File/file_delete')}",
             data:{
-                id:id
+                id:deletefile_id
             },
             success:function(data){
                 if(data.code == 1){
-                    that.parent().find("span:first-child").text("未选择上传文件");
-                    that.parent().find("input[type='file']").val("");
-                    that.parent().find("input[name='file']").val("");
-                    that.addClass("hiding");
+                    deletefile_that.parent().find("span:first-child").text("未选择上传文件");
+                    deletefile_that.parent().find("input[type='file']").val("");
+                    deletefile_that.parent().find("input[name='file']").val("");
+                    deletefile_that.addClass("hiding");
+                    $("#myModal").modal('hide');
                 }
             }
         });
     });
+
+
 
     //上传文件
     $("input[name='input-file']").on("change",function(){
