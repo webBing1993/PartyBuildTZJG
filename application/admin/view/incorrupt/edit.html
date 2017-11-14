@@ -454,11 +454,24 @@
     });
 
     $(".detelefile").click(function(){
-        $(this).parent().find("span:first-child").text("未选择上传文件");
-        $(this).parent().find("input[type='file']").val("");
-        $(this).parent().find("input[name='file']").val("");
-        $(this).addClass("hiding");
-    })
+        var id = $(this).parent().find("input[name='file']").val();
+        $.ajax({
+            type:"post",
+            url:"{:Url('File/file_delete')}",
+            data:{
+                id:id
+            },
+            success:function(data){
+                console.log(data)
+                if(data.status == 1){
+                    $(this).parent().find("span:first-child").text("未选择上传文件");
+                    $(this).parent().find("input[type='file']").val("");
+                    $(this).parent().find("input[name='file']").val("");
+                    $(this).addClass("hiding");
+                }
+            }
+        });
+    });
 
     //上传文件
     $("input[name='input-file']").on("change",function(){
@@ -483,7 +496,7 @@
                     if(data.status == 1){
                         $("#"+nameid).text(data.data.name);
                         $("#"+id).next("input[name='file']").val(data.data.id);
-//                                $(".file1").eq(num).append(str);
+//                      $(".file1").eq(num).append(str);
                         $(".file1").eq(num).find(".detelefile").removeClass("hiding");
 //
                     }else {
