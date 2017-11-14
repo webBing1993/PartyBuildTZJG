@@ -274,7 +274,7 @@
                                 <label>上传附件:</label>
                             </div>
                             <div class="videogroup">
-                                {empty name="msg"}
+                                {empty name="info"}
                                 <div class="group">
                                     <div class="file1 showup original" style="width: 400px;height: 30px;display: inline-block;">
                                         <div class="col-lg-3 videofile">选择文件：<span id="filename1">未选择上传文件</span>
@@ -301,7 +301,7 @@
                                 </div>
                                 {else/}
                                 <div class="group">
-                                    {empty name="msg.files"}
+                                    {empty name="info.files"}
                                     <div class="file1 showup modify" style="width: 400px;height: 30px;display: inline-block;">
                                         <div class="col-lg-3 videofile">选择文件：<span id="filename1">未选择上传文件</span>
                                             <input type="file" id="file1" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file">
@@ -310,7 +310,7 @@
                                         <span class="detelefile hiding">删除</span>
                                     </div>
                                     {else/}
-                                    {volist name="msg.files" id="f" key="k"}
+                                    {volist name="info.files" id="f" key="k"}
                                     <div class="file1 showup modify" style="width: 400px;height: 30px;display: inline-block;">
                                         <div class="col-lg-3 videofile">选择文件：<span id="filename{$k}">{empty name="f.name"} 未选择上传文件{else/} {$f.name} {/empty}</span>
                                             <input type="file" id="file{$k}" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file" value="22">

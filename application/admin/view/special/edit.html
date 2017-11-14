@@ -502,7 +502,13 @@
 
         //发布
         $(".post-put").on("click",function(){
+            var file=[];
             var it=$(this);
+            $(".videofile").each(function(){
+                if($(this).children("input[name='file']").val()){
+                    file.push($(this).children("input[name='file']").val());
+                }
+            });
             var commend_img1 = $("input[name='commend_img1']").val();
             var commend_img2 = $("input[name='commend_img2']").val();
             var commend_img3 = $("input[name='commend_img3']").val();
@@ -531,6 +537,7 @@
                 title:$("input[name='title']").val(),
                 content:ue.getContent(),
                 publisher:$("input[name='publisher']").val(),
+                file:file
             };
             $.ajax({
                 type:"post",
@@ -622,7 +629,7 @@
             var id= $(this).attr("id");
             var nameid= $(this).parent(".videofile").find("span").attr("id");
             var num= parseInt(id.replace(/[^0-9]/ig,"")-1);
-            if(size <= 1024*5){
+            if(size <= 10240){
                 var file = $(this)[0].files[0];
                 var formData = new FormData();
                 formData.append("download",file);
@@ -645,7 +652,7 @@
                     }
                 });
             } else {
-                warning({msg:"您选择的视频超过5mb，请重新选择"});
+                warning({msg:"您选择的文件超过10mb，请重新选择"});
                 return;
             }
         });
