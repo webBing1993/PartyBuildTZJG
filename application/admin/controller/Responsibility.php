@@ -25,9 +25,14 @@ class Responsibility extends Admin {
      * 主页
      */
     public function index() {
+        $userId = $_SESSION['think']['user_auth']['id'];
         $map = array(
-            'status' => array('egt',0)
+            'status' => array('egt',0),
+            'create_user' => $userId
         );
+        if($userId == 1) {
+            unset($map['create_user']);
+        }
         $list = $this->lists('Responsibility',$map);
         int_to_string($list, array(
             'type' => array(1=>"专题研究",2=>"责任清单",3=>"述职报告",4=>"工作计划"),

@@ -24,9 +24,14 @@ class Incorrupt extends Admin {
      * 主页
      */
     public function index() {
+        $userId = $_SESSION['think']['user_auth']['id'];
         $map = array(
-            'status' => array('egt',0)
+            'status' => array('egt',0),
+            'create_user' => $userId
         );
+        if($userId == 1) {
+            unset($map['create_user']);
+        }
         $list = $this->lists('Incorrupt',$map);
         int_to_string($list, array(
             'type' => array(1=>"廉政责任",2=>"廉政教育",3=>"纪检报告"),

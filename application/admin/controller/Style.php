@@ -24,9 +24,14 @@ class Style extends Admin {
      * 主页
      */
     public function index() {
+        $userId = $_SESSION['think']['user_auth']['id'];
         $map = array(
-            'status' => array('egt',0)
+            'status' => array('egt',0),
+            'create_user' => $userId
         );
+        if($userId == 1) {
+            unset($map['create_user']);
+        }
         $list = $this->lists('Style',$map);
         int_to_string($list, array(
             'type' => array(1=>'方案部署',2=>'金点子',3=>'培树典型',4=>'党员清单'),

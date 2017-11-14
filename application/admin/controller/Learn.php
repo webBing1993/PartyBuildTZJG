@@ -24,9 +24,14 @@ class Learn extends Admin {
      * 主页
      */
     public function index() {
+        $userId = $_SESSION['think']['user_auth']['id'];
         $map = array(
-            'status' => array('egt',0)
+            'status' => array('egt',0),
+            'create_user' => $userId
         );
+        if($userId == 1) {
+            unset($map['create_user']);
+        }
         $list = $this->lists('Learn',$map);
         int_to_string($list, array(
             'type' => array(1=>"方案部署",2=>"三会一课",3=>"年度计划",4=>"支部活动"),

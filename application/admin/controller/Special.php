@@ -24,9 +24,14 @@ class Special extends Admin {
      * 主页
      */
     public function index() {
+        $userId = $_SESSION['think']['user_auth']['id'];
         $map = array(
-            'status' => array('egt',0)
+            'status' => array('egt',0),
+            'create_user' => $userId
         );
+        if($userId == 1) {
+            unset($map['create_user']);
+        }
         $list = $this->lists('Special',$map);
         int_to_string($list, array(
             'status' => array(0=>'待审核',1=>'已发布',2=>'未通过',3=>'草稿'),
