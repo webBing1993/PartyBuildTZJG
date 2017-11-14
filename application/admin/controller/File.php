@@ -5,6 +5,7 @@ namespace app\admin\controller;
 use app\admin\model\File as FileModel;
 use app\admin\model\Picture;
 use think\Config;
+use think\Db;
 
 class File extends Admin 
 {
@@ -72,5 +73,27 @@ class File extends Admin
         }
 
         return json_encode($return);
+    }
+    /**
+     * 文件删除
+     */
+    public function file_delete(){
+        $id = input('id');
+        if (empty($id)){
+            return $this->error('系统参数错误');
+        }
+        $file = Db::name('file')->find(['id' => $id]);
+        if ($file){
+            $path = "./uploads/download/".$file['savepath'].$file['savename'];
+            if (file_exists($path)){
+                unlink($path);
+                Db::name('file')->delete(['id' => $id]);
+                return $this->success('删除成功');
+            }else{
+                return $this->error('$path'.$path);
+            }
+        }else{
+            return $this->success('删除成功');
+        }
     }
 }
