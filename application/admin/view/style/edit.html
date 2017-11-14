@@ -249,7 +249,12 @@
                                             <input type="hidden" name="file" class="img localpath"  value="{$f.id}" required="">
                                             {/empty}
                                         </div>
+
+                                        {empty name="f.name"}
+                                        <span class="detelefile hiding">删除</span>
+                                        {else/}
                                         <span class="detelefile">删除</span>
+                                        {/empty}
                                     </div>
                                     {/volist}
                                     {/empty}
