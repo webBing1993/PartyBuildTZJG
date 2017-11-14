@@ -118,6 +118,16 @@
         display: inline-block;
         margin-left: 15px;
     }
+    .modal-dialog{
+        margin: 200px auto;
+        width:350px;
+    }
+    .modal-footer{
+        text-align: center;
+    }
+    .modal-footer .btn+.btn{
+        margin-left: 60px;
+    }
 </style>
 {/block}
 
@@ -328,11 +338,20 @@
                                     {else/}
                                     {volist name="msg.files" id="f" key="k"}
                                     <div class="file1 showup modify" style="width: 400px;height: 30px;display: inline-block;">
-                                        <div class="col-lg-3 videofile">选择文件：<span id="filename{$k}">{$f.name}</span>
+                                        <div class="col-lg-3 videofile">选择文件：<span id="filename{$k}">{empty name="f.name"} 未选择上传文件{else/} {$f.name} {/empty}</span>
                                             <input type="file" id="file{$k}" accept="application/msword,application/xml-dtd,application/vnd.ms-powerpoint,application/pdf,application/rtf,text/rtf,text/plain,application/vnd.ms-works,application/vnd.ms-excel,aplication/zip,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12" name="input-file" value="22">
+                                            {empty name="f.name"}
+                                            <input type="hidden" name="file" class="img localpath"  value="" required="">
+                                            {else/}
                                             <input type="hidden" name="file" class="img localpath"  value="{$f.id}" required="">
+                                            {/empty}
                                         </div>
+
+                                        {empty name="f.name"}
+                                        <span class="detelefile hiding">删除</span>
+                                        {else/}
                                         <span class="detelefile">删除</span>
+                                        {/empty}
                                     </div>
                                     {/volist}
                                     {/empty}
@@ -356,6 +375,29 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body" style="font-size: 18px;text-align: center">
+                确定删除此文件？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                </button>
+                <button type="button" class="btn btn-primary detelefile_btn">
+                    确定
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
 </div>
 {/block}
 
@@ -550,10 +592,29 @@
                 '</div>'
         $(".group").append(html);
         $(".detelefile").click(function(){
-            $(this).parent().find("span:first-child").text("未选择上传文件");
-            $(this).parent().find("input[type='file']").val("");
-            $(this).parent().find("input[name='file']").val("");
-            $(this).addClass("hiding");
+            deletefile_that = $(this);
+            $("#myModal").modal('show');
+            deletefile_id = deletefile_that.parent().find("input[name='file']").val();
+        });
+
+
+        $(".detelefile_btn").click(function(){
+            $.ajax({
+                type:"post",
+                url:"{:Url('File/file_delete')}",
+                data:{
+                    id:deletefile_id
+                },
+                success:function(data){
+                    if(data.code == 1){
+                        deletefile_that.parent().find("span:first-child").text("未选择上传文件");
+                        deletefile_that.parent().find("input[type='file']").val("");
+                        deletefile_that.parent().find("input[name='file']").val("");
+                        deletefile_that.addClass("hiding");
+                        $("#myModal").modal('hide');
+                    }
+                }
+            });
         });
 
         $("input[name='input-file']").on("change",function(){
@@ -594,11 +655,30 @@
     });
 
     $(".detelefile").click(function(){
-        $(this).parent().find("span:first-child").text("未选择上传文件");
-        $(this).parent().find("input[type='file']").val("");
-        $(this).parent().find("input[name='file']").val("");
-        $(this).addClass("hiding");
-    })
+        deletefile_that = $(this);
+        $("#myModal").modal('show');
+        deletefile_id = deletefile_that.parent().find("input[name='file']").val();
+    });
+
+
+    $(".detelefile_btn").click(function(){
+        $.ajax({
+            type:"post",
+            url:"{:Url('File/file_delete')}",
+            data:{
+                id:deletefile_id
+            },
+            success:function(data){
+                if(data.code == 1){
+                    deletefile_that.parent().find("span:first-child").text("未选择上传文件");
+                    deletefile_that.parent().find("input[type='file']").val("");
+                    deletefile_that.parent().find("input[name='file']").val("");
+                    deletefile_that.addClass("hiding");
+                    $("#myModal").modal('hide');
+                }
+            }
+        });
+    });
 
     //上传文件
     $("input[name='input-file']").on("change",function(){
