@@ -36,15 +36,21 @@
             {/notempty}
         </div>
         <div class="content">
+            {notempty name="$info.list_images"}
             {volist name="$info.list_images" id="img"}
             <img src="{$img|get_cover='path'}" alt="笔记图片" class="img" style="width:100%"><br>
             {/volist}
+            {/notempty}
+            {notempty name="$info.commend_img"}
             {volist name="$info.commend_img" id="img"}
             <img src="{$img|get_cover='path'}" alt="笔记图片" class="img" style="width:100%"><br>
             {/volist}
+            {/notempty}
+            {notempty name="$info.voucher_img"}
             {volist name="$info.voucher_img" id="img"}
             <img src="{$img|get_cover='path'}" alt="笔记图片" class="img" style="width:100%"><br>
             {/volist}
+            {/notempty}
             <div class="article-content">{$info.content}</div>
             {notempty name="$info.files"}
             {volist name="info.files" id="de"}
