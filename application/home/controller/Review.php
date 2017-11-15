@@ -197,15 +197,17 @@ class Review extends Base{
             $info['list_images'] = json_decode($info['list_images']);
         }
         if ($type == 4){
-            if(!empty($info['commend_img'])){
-                $info['commend_img'] = json_decode($info['commend_img']);
+            $info['commend_img'] = json_decode($info['commend_img']);
+            $info['voucher_img'] = json_decode($info['voucher_img']);
+            if ($info['commend_img'][0] == 0){
+                $info['commend_img'] = null;
             }
-            if(!empty($info['voucher_img'])){
-                $info['voucher_img'] = json_decode($info['voucher_img']);
+            if ($info['voucher_img'][0] == 0){
+                $info['voucher_img'] = null;
             }
         }else{
-            $info['commend_img'] = [];
-            $info['voucher_img'] = [];
+            $info['commend_img'] = '';
+            $info['voucher_img'] = '';
         }
         // 获取文件
         if($info['file']) {
