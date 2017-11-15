@@ -204,8 +204,8 @@ class Review extends Base{
                 $info['voucher_img'] = json_decode($info['voucher_img']);
             }
         }else{
-            $info['commend_img'] = '';
-            $info['voucher_img'] = '';
+            $info['commend_img'] = [];
+            $info['voucher_img'] = [];
         }
         // 获取文件
         if($info['file']) {
