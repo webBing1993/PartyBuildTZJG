@@ -478,6 +478,8 @@ class User extends Base {
                         case 8:
                             $msg[$key]['str'] = "党建责任-责任清单";
                             break;
+                        default:
+                            $msg[$key]['str'] = "暂无数据";
                     }
                     break;
                 case 2: // 两学一做
@@ -513,6 +515,8 @@ class User extends Base {
                         case 10:
                             $msg[$key]['str'] = "两学一做-党课";
                             break;
+                        default:
+                            $msg[$key]['str'] = "暂无数据";
                     }
                     break;
                 case 3: // 组织建设
@@ -541,6 +545,8 @@ class User extends Base {
                         case 7:
                             $msg[$key]['str'] = "组织建设-主题党日";
                             break;
+                        default:
+                            $msg[$key]['str'] = "暂无数据";
                     }
                     break;
                 case 4: // 特色创新
@@ -566,6 +572,8 @@ class User extends Base {
                         case 4:
                             $msg[$key]['str'] = "作风建设-党员清单";
                             break;
+                        default:
+                            $msg[$key]['str'] = "暂无数据";
                     }
                     break;
                 case 6: // 志愿服务
@@ -582,6 +590,8 @@ class User extends Base {
                         case 3:
                             $msg[$key]['str'] = "志愿服务-最多跑一次";
                             break;
+                        default:
+                            $msg[$key]['str'] = "暂无数据";
                     }
                     break;
                 default:  // 党风廉政
@@ -598,6 +608,8 @@ class User extends Base {
                         case 3:
                             $msg[$key]['str'] = "党风廉政-纪检报告";
                             break;
+                        default:
+                            $msg[$key]['str'] = "暂无数据";
                     }
 
             }
@@ -626,6 +638,8 @@ class User extends Base {
                     $hander[$key]['str'] = "两新党建-人工干预";
                     $num = 1;
                     break;
+                default:
+                    $msg[$key]['str'] = "暂无数据";
             }
             $hander[$key]['score'] = $paly." ".$num;
         }
