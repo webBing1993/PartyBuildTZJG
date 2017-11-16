@@ -19,6 +19,7 @@ class Responsibility extends Model {
         'create_time' => NOW_TIME,
         'status' => 0
     ];
+
     /**
      * 获取主页列表数据
      */
@@ -33,22 +34,18 @@ class Responsibility extends Model {
     }
 
     /**
-     * 获取type=3数据
+     * 获取type:2,3数据
      */
-    public function getBranchIndex($type) {
-        $map1 = array(
+    public function getTypeIndex($type) {
+        $map = array(
             'type' => $type,
-            'class' => 1,
             'status' => 1
         );
-        $res1 = $this->where($map1)->order('create_time desc')->limit(8)->select();
-        
-        $map2 = array(
-            'type' => $type,
-            'class' => 2,
-            'status' => 1
-        );
-        $res2 = $this->where($map2)->order('create_time desc')->limit(8)->select();
+        $map['class'] = 1;
+        $res1 = $this->where($map)->order('create_time desc')->limit(8)->select();
+
+        $map['class'] = 2;
+        $res2 = $this->where($map)->order('create_time desc')->limit(8)->select();
         $res = array(
             'one' => $res1,
             'two' => $res2,

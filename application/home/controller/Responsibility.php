@@ -62,7 +62,7 @@ class Responsibility extends Base{
             }
         }else {
             $type = input('type');
-            $list = $Model->getBranchIndex($type);
+            $list = $Model->getTypeIndex($type);
             $this->assign('list',$list);
             $this->assign('type',$type);
             return $this->fetch();
@@ -84,7 +84,7 @@ class Responsibility extends Base{
             }
         }else {
             $type = input('type');
-            $list = $Model->getBranchIndex($type);
+            $list = $Model->getTypeIndex($type);
             $this->assign('list',$list);
             $this->assign('type',$type);
             return $this->fetch();
