@@ -138,7 +138,7 @@ textarea{
     display: flex;
 }
 
-.save,.goreview{
+.save,.goreview,.determine div{
     width:5.6rem;
     height:1rem;
     background: #fc6c62;
@@ -148,6 +148,11 @@ textarea{
     text-align: center;
     font-size: 0.36rem;
     line-height: 1rem;
+}
+.determine{
+    display: none;
+    width:100vw;
+    margin: 0 auto;
 }
 .goreview{
     background: #fff;
