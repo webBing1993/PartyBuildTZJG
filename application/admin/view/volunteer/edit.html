@@ -149,14 +149,16 @@
                             <div class="col-lg-11">
                                 {empty name="msg"}
                                 <select class="form-control" name="type">
-                                    <option value="1" >四跑志愿活动</option>
-                                    <option value="2" >一条街三走进</option>
+                                    <option value="1" >四跑志愿服务</option>
+                                    <option value="2" >一条街、三走进</option>
+                                    <option value="3" >三级联动、最多跑一次</option>
                                 </select>
                                 {else/}
                                 <select class="form-control" name="type">
                                     {switch name="$msg.type"}
-                                    {case value="1"}<option value="1" >四跑志愿活动</option>{/case}
-                                    {case value="2"}<option value="2" >一条街三走进</option>{/case}
+                                    {case value="1"}<option value="1" >四跑志愿服务</option>{/case}
+                                    {case value="2"}<option value="2" >一条街、三走进</option>{/case}
+                                    {case value="3"}<option value="2" >三级联动、最多跑一次</option>{/case}
                                     {/switch}
                                 </select>
                                 {/empty}

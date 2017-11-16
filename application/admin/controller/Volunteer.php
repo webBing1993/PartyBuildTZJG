@@ -34,7 +34,7 @@ class Volunteer extends Admin {
         }
         $list = $this->lists('Volunteer',$map);
         int_to_string($list, array(
-            'type' => array(1=>"四跑志愿活动",2=>"一条街三走进"),
+            'type' => array(1=>"四跑志愿服务",2=>"一条街、三走进",3=>"三级联动、最多跑一次"),
             'status' => array(0=>'待审核',1=>'已发布',2=>'未通过',3=>'草稿'),
         ));
         $this->assign('list',$list);

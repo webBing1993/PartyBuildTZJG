@@ -35,9 +35,15 @@ class Volunteer extends Model {
         );
         $two = $this->where($map2)->order('create_time desc')->limit(8)->select();
 
+        $map3 = array(
+            'type' => 3,
+            'status' => 1,
+        );
+        $three = $this->where($map3)->order('create_time desc')->limit(8)->select();
         $data = array(
             'one' => $one,
-            'two' => $two
+            'two' => $two,
+            'three' => $three
         );
         return $data;
     }

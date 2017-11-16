@@ -22,11 +22,11 @@
             {else/}
             <li>
                 模块
-                {eq name="$msg.type" value="1"}
-                <a id="openPopover2" href="#popover2">四跑志愿活动</a>
-                {else/}
-                <a id="openPopover2" href="#popover2">一条街三走进</a>
-                {/eq}
+            {switch name="$msg.type"}
+                {case value="1"}<a id="openPopover2" href="#popover2">四跑志愿活动</a>{/case}
+                {case value="2"}<a id="openPopover2" href="#popover2">一条街三走进</a>{/case}
+                {case value="3"}<a id="openPopover2" href="#popover2">最多跑一次</a>{/case}
+            {/switch}
                 <span class="triangle-down"></span>
             </li>
             <li>
