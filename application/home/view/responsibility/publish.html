@@ -139,7 +139,7 @@
 
            }else if(index==1){
                $("#openPopover2").html("支部书记述职");
-               $("textarea").attr("placeholder","请输入内容，不少于500字...");
+               $("textarea").attr("placeholder","请输入内容，不少于800字...");
            }
        }
     });
@@ -156,7 +156,7 @@
         if(select_it=="书记述职"){
             $("textarea").attr("placeholder","请输入内容，不少于1000字...");
         }else{
-            $("textarea").attr("placeholder","请输入内容，不少于500字...");
+            $("textarea").attr("placeholder","请输入内容，不少于800字...");
         }
         mui('#popover2').popover("hide");
     });
@@ -285,7 +285,7 @@
                 if(data["content"].length<500){
                     swal({
                         title: ' ',
-                        text: '内容不少于500字',
+                        text: '内容不少于800字',
                         type: 'error',
                         showConfirmButton:false,
                         timer:1500
