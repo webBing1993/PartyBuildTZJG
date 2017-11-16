@@ -30,6 +30,18 @@
                 <span class="triangle-down"></span>
             </li>
             {else/}
+            {eq name="$msg.type" value="2"}
+            <li class="type3 none">
+                模块
+                {eq name="$msg.class" value="1"}
+                <a id="openPopover3" href="#popover3">工作要点</a>
+                {else/}
+                <a id="openPopover3" href="#popover3">责任清单</a>
+                {/eq}
+                <span class="triangle-down"></span>
+            </li>
+            {/eq}
+            {eq name="$msg.type" value="3"}
             <li class="type2 none">
                 模块
                 {eq name="$msg.class" value="1"}
@@ -39,6 +51,7 @@
                 {/eq}
                 <span class="triangle-down"></span>
             </li>
+            {/eq}
             <li>
                 模板
                 {eq name="$msg.templet" value="1"}
@@ -303,7 +316,7 @@
                 id:$("input[name='id']").val(),
                 userid:userid,
                 type:type,
-                status:3
+                status:0
             };
             if(_class=="工作要点"){
                 data["class"] = 1;
@@ -345,23 +358,15 @@
                     return;
                 }
             }
-            for(var key in data){
-                if(data["title"]!= ''&& data["content"]!=""){
-//                    if(data["content"].length<300){
-//                        swal({
-//                            title: ' ',
-//                            text: '内容不少于500字',
-//                            type: 'error',
-//                            showConfirmButton:false,
-//                            timer:1500
-//                        });
-//                        return;
-//                    }
-                    single = true;
-                    continue;
-                }
+        }
+
+        for(var key in data){
+            if(data["title"]!= ''&& data["content"]!=""){
+                single = true;
+                continue;
             }
         }
+
         if(single){
             data['list_images']=[];
             if(templet == "普通型"){
