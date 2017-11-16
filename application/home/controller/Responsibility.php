@@ -48,6 +48,28 @@ class Responsibility extends Base{
     }
 
     /**
+     * 责任清单列表页
+     */
+    public function responsibility(){
+        $Model = new ResponsibilityModel();
+        if(IS_POST) {
+            $data = input('post.');
+            $res = $Model->getListMore($data['length'],$data['type'],$data['class']);
+            if($res) {
+                return $this->success("加载成功","",$res);
+            }else {
+                return $this->error("加载失败");
+            }
+        }else {
+            $type = input('type');
+            $list = $Model->getBranchIndex($type);
+            $this->assign('list',$list);
+            $this->assign('type',$type);
+            return $this->fetch();
+        }
+    }
+
+    /**
      * 述职报告列表页
      */
     public function branchindex() {

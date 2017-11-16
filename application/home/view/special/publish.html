@@ -87,7 +87,7 @@
                 </div>
                 <input type="file" class="hide" id="upimg3" accept="image/jpg, image/png, image/gif, image/jpeg">
                 <input type="hidden" name="id" value="{$msg.id || default=''}">
-                <p style="font-size: 0.32rem;color: #999 ;height: 1rem;line-height:1rem;padding-left: .2rem">(每个入口最多上传3张图片，图片小于3M)</p>
+                <p style="font-size: 0.32rem;color: #999 ;height: 1rem;line-height:1rem;padding-left: .2rem">(每个入口最多上传3张图片，图片小于5M)</p>
             </div>
         </ul>
     </div>
@@ -212,7 +212,7 @@
         var this_ = $(this );
         $('#upimg2').click().off("change").on('change',function(){
             var size = ($(this)[0].files[0].size / 1024).toFixed(2);
-            if(size <= 3072){
+            if(size <= 5120){
                 var img = $(this)[0].files[0];
                 var formData = new FormData();
                 formData.append("picture",img);
@@ -253,7 +253,7 @@
             } else {
                 swal({
                     title: ' ',
-                    text: '您的图片超过3M',
+                    text: '您的图片超过5M',
                     type: 'warning',
                     showConfirmButton:false,
                     timer:1500
@@ -270,7 +270,7 @@
         var this_ = $(this );
         $('#upimg3').click().off("change").on('change',function(){
             var size = ($(this)[0].files[0].size / 1024).toFixed(2);
-            if(size <= 3072){
+            if(size <= 5120){
                 var img = $(this)[0].files[0];
                 var formData = new FormData();
                 formData.append("picture",img);
@@ -311,7 +311,7 @@
             } else {
                 swal({
                     title: ' ',
-                    text: '您的图片超过3M',
+                    text: '您的图片超过5M',
                     type: 'warning',
                     showConfirmButton:false,
                     timer:1500

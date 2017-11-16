@@ -9,7 +9,7 @@ $(function(){
         var this_ = $(this );
         $('#upimg').click().off("change").on('change',function(){
             var size = ($(this)[0].files[0].size / 1024).toFixed(2);
-            if(size <= 3072){
+            if(size <= 5120){
                 var img = $(this)[0].files[0];
                 var formData = new FormData();
                 formData.append("picture",img);
@@ -50,7 +50,7 @@ $(function(){
             } else {
                 swal({
                     title: ' ',
-                    text: '您的图片超过3M',
+                    text: '您的图片超过5M',
                     type: 'warning',
                     showConfirmButton:false,
                     timer:1500

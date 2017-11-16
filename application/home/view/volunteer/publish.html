@@ -57,7 +57,7 @@
                     <div class="img fl hide"></div>
                     <div class="add fl"></div>
                 </div>
-                <div style="color: #666;font-size: 0.32rem">（您最多上传3张图片，图片小于3M）</div>
+                <div style="color: #666;font-size: 0.32rem">（您最多上传3张图片，图片小于5M）</div>
                 <input type="file" class="hide" id="upimg" accept="image/jpg, image/png, image/gif, image/jpeg">
                 <input type="hidden" name="id" value="{$msg.id || default=''}">
             </div>
@@ -78,6 +78,7 @@
         <ul class="mui-table-view">
             <li class="mui-table-view-cell"><a>四跑志愿活动</a></li>
             <li class="mui-table-view-cell"><a>一条街三走进</a></li>
+            <li class="mui-table-view-cell"><a>最多跑一次</a></li>
         </ul>
     </div>
 
@@ -124,6 +125,8 @@
                 $("textarea").attr("placeholder","请输入内容，不少于800字...");
             }else if(c==1){
                 $("#openPopover2").html("一条街三走进");
+            }else if(c==2){
+                $("#openPopover2").html("最多跑一次");
             }
         }else{
             if(style==1){
@@ -131,6 +134,8 @@
                 $("textarea").attr("placeholder","请输入内容，不少于800字...");
             }else if(style==2){
                 $("#openPopover2").html("一条街三走进");
+            }else if(style==2){
+                $("#openPopover2").html("最多跑一次");
             }
         }
 
@@ -157,8 +162,10 @@
             }
             if(_class == "四跑志愿活动"){
                 data["type"] = 1;
-            }else{
+            }else if(_class == "一条街三走进"){
                 data["type"] = 2;
+            }else{
+                data["type"] = 3;
             }
             data["status"] = 3;
             $(".img img").each(function(){
@@ -238,8 +245,10 @@
                         return;
                     }
                 data["type"] = 1;
-            }else{
+            }else if(_class == "一条街三走进"){
                 data["type"] = 2;
+            }else{
+                data["type"] = 3;
             }
             data["status"] = 0;
             $(".img img").each(function(){

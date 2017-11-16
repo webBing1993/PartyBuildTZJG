@@ -58,13 +58,16 @@ body {
         <a class="mui-control-item" href="#item2mobile" data-index="1">
             <span>一条街三走进</span>
         </a>
+        <a class="mui-control-item" href="#item2mobile" data-index="1">
+            <span>最多跑一次</span>
+        </a>
     </div>
     <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
         <div class="mui-scroll">
 
             <div class="mui-slider-group">
                 <div id="item1mobile" class="mui-slider-item mui-control-content">
-                    <!--培训计划-->
+                    <!--四跑志愿活动-->
                     <div class="list training">
                         {empty name="$list.one"}
                         <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
@@ -87,7 +90,7 @@ body {
                     </div>
                 </div>
                 <div id="item2mobile" class="mui-slider-item mui-control-content">
-                    <!--理论研究-->
+                    <!--一条街三走进-->
                     <div class="list theory">
                         {empty name="$list.two"}
                         <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
@@ -109,6 +112,29 @@ body {
                         {/empty}
                     </div>
                 </div>
+                <div id="item3mobile" class="mui-slider-item mui-control-content">
+                    <!--最多跑一次-->
+                    <div class="list onetime">
+                        {empty name="$list.three"}
+                        <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                        {else/}
+                        <ul>
+                            {volist name="list.three" id="three"}
+                            {eq name="three.templet" value="1"}
+                            <a href="{:Url('Volunteer/detail?id='.$three['id'])}">
+                                {else/}
+                                <a href="{:Url('Volunteer/detail2?id='.$three['id'])}">
+                                    {/eq}
+                                    <img src="{$three.front_cover|get_cover='path'}">
+                                    <p>{$three.title}</p>
+                                    <span>{$three.publisher}</span>
+                                    <span>{$three.create_time|time_format='Y-m-d'}</span>
+                                </a>
+                                {/volist}
+                        </ul>
+                        {/empty}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -120,7 +146,6 @@ body {
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
-    var c = 0;
     $(function(){
         //模块标题
         $('title' ).text('志愿服务');
@@ -158,18 +183,13 @@ body {
         }
 
         //tab初始化和数据存储
-        var co = getCookie("type");
-        if(co == 0 || co == 1){
-            c = co;
-        }else{
-            c = 0;
-        }
+        var c = getCookie("type")?getCookie("type"):0;
         $("#tab a").eq(c).addClass('mui-active');
         $(".mui-slider-group>div").eq(c).addClass('mui-active');
     });
     window.onload = function() {
      if(flag){
-                    $(".mui-pull .mui-pull-caption").css("font-size","15px");
+            $(".mui-pull .mui-pull-caption").css("font-size","15px");
                 }
         moveanyway("publish");
         if(c==0){
@@ -180,6 +200,12 @@ body {
             }
         }else if(c==1){
             if ($(".theory ul a").length < 8) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==2){
+            if ($(".onetime ul a").length < 8) {
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             } else {
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -204,6 +230,8 @@ body {
             var len = $(".training ul a").length;
         }else if(c==1){
             var len = $(".theory ul a").length;
+        }else if(c==2){
+            var len = $(".onetime ul a").length;
         }
         $.ajax({
             type:"post",
@@ -268,6 +296,8 @@ body {
             $('.training ul').append(html);
         }else if(type==1){
             $('.theory ul').append(html);
+        }else if(type==2){
+            $('.onetime ul').append(html);
         }
     }
 
@@ -285,6 +315,12 @@ body {
             }
         }else if(c==1){
             if($(".theory ul a").length<8){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==2){
+            if($(".onetime ul a").length<8){
                 mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
             }else{
                 mui('#refreshContainer').pullRefresh().enablePullupToRefresh();

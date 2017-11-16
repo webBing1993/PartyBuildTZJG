@@ -19,6 +19,11 @@
                 <a id="openPopover2" href="#popover2">书记述职</a>
                 <span class="triangle-down"></span>
             </li>
+            <li class="type3 none">
+                模块
+                <a id="openPopover3" href="#popover3">工作要点</a>
+                <span class="triangle-down"></span>
+            </li>
             <li>
                 模板
                 <a id="openPopover" href="#popover">普通型</a>
@@ -61,7 +66,7 @@
                     <div class="img fl hide"></div>
                     <div class="add fl"></div>
                 </div>
-                <div style="color: #666;font-size: 0.32rem">（您最多上传3张图片，图片小于3M）</div>
+                <div style="color: #666;font-size: 0.32rem">（您最多上传3张图片，图片小于5M）</div>
                 <input type="file" class="hide" id="upimg" accept="image/jpg, image/png, image/gif, image/jpeg">
                 <input type="hidden" name="id" value="{$msg.id || default=''}">
             </div>
@@ -82,6 +87,14 @@
         <ul class="mui-table-view">
             <li class="mui-table-view-cell"><a>书记述职</a></li>
             <li class="mui-table-view-cell"><a>支部书记述职</a></li>
+        </ul>
+    </div>
+
+
+    <div id="popover3" class="mui-popover" >
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell"><a>工作要点</a></li>
+            <li class="mui-table-view-cell"><a>责任清单</a></li>
         </ul>
     </div>
 </div>
@@ -124,31 +137,41 @@
             $("title").text("专题研究");
         }else if(type==2){
             $("title").text("责任清单");
+            $(".type3").show();
+            if(index>=0){
+                if(index==0){
+                    $("#openPopover3").html("工作要点");
+                }else if(index==1){
+                    $("#openPopover3").html("责任清单");
+                }
+            }
         }else if(type==3){
             $("title").text("述职报告");
-        } else if(type==4){
-            $("title").text("工作计划");
-        }
-        if(type==3){
             $(".type2").show();
-        }
-       if(index>=0){
-           if(index==0){
-               $("#openPopover2").html("书记述职");
-               $("textarea").attr("placeholder","请输入内容，不少于1000字...");
+            if(index>=0){
+                if(index==0){
+                    $("#openPopover2").html("书记述职");
+                    $("textarea").attr("placeholder","请输入内容，不少于1000字...");
 
-           }else if(index==1){
-               $("#openPopover2").html("支部书记述职");
-               $("textarea").attr("placeholder","请输入内容，不少于800字...");
-           }
-       }
+                }else if(index==1){
+                    $("#openPopover2").html("支部书记述职");
+                    $("textarea").attr("placeholder","请输入内容，不少于800字...");
+                }
+            }
+        }
     });
 
     $("#popover ul li").click(function(){
         var select_it = $(this).text();
         $("#openPopover").html(select_it);
         mui('#popover').popover("hide");
-    })
+    });
+
+    $("#popover3 ul li").click(function(){
+        var select_it = $(this).text();
+        $("#openPopover3").html(select_it);
+        mui('#popover3').popover("hide");
+    });
 
     $("#popover2 ul li").click(function(){
         var select_it = $(this).text();
@@ -162,13 +185,12 @@
     });
 
 
-
   //保存
     $(".save").click(function(){
         var templet = $("#openPopover").html();
         var userid = "{$userId}";
         var data = {};
-        if(type!==3){
+        if(type==1){
             var data={
                 class:0,
                 title:$("input[name='title']").val(),
@@ -178,6 +200,21 @@
                 type:type,
                 status:3
             };
+        }else if(type==2){
+            var _class = $("#openPopover3").html();
+            var data={
+                title:$("input[name='title']").val(),
+                content:$("textarea[name='content']").val(),
+                id:$("input[name='id']").val(),
+                userid:userid,
+                type:type,
+                status:3
+            };
+            if(_class=="工作要点"){
+                data["class"] = 1;
+            }else{
+                data["class"] = 2;
+            }
         }else if(type==3){
             var _class = $("#openPopover2").html();
             var data={
@@ -242,7 +279,7 @@
         var single = false;
         var templet = $("#openPopover").html();
         var userid = "{$userId}";
-        if(type!==3){
+        if(type==1){
             var data={
                 class:0,
                 title:$("input[name='title']").val(),
@@ -257,6 +294,21 @@
                     single = true;
                     continue;
                 }
+            }
+        }else if(type==2){
+            var _class = $("#openPopover3").html();
+            var data={
+                title:$("input[name='title']").val(),
+                content:$("textarea[name='content']").val(),
+                id:$("input[name='id']").val(),
+                userid:userid,
+                type:type,
+                status:3
+            };
+            if(_class=="工作要点"){
+                data["class"] = 1;
+            }else{
+                data["class"] = 2;
             }
         }else if(type==3){
             var _class = $("#openPopover2").html();

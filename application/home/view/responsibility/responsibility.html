@@ -1,0 +1,355 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/duty/duty-search.css">
+<link rel="stylesheet" href="/home/css/list/title-pos-time.css">
+<style>
+    .list{
+        margin-top: 2.2rem;
+    }
+    .mui-slider-group{
+        padding-top: 0.26rem;
+    }
+    input::-webkit-input-placeholder {
+        font-size: .37rem;
+    }
+</style>
+{/block}
+
+{block name="body"}
+<div class="main">
+    <div class="search">
+        <input placeholder="请输入支部名称或发布人名称" id="search" type="search">
+        <span class="mui-icon mui-icon-search"></span>
+    </div>
+    <div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+        <a class="mui-control-item" href="#item1mobile" data-index="0">
+            <span>工作要点</span>
+        </a>
+        <a class="mui-control-item" href="#item2mobile" data-index="1">
+            <span>责任清单</span>
+        </a>
+    </div>
+    <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+        <div class="mui-scroll">
+            <div class="mui-slider-group">
+                <div id="item1mobile" class="mui-slider-item mui-control-content">
+                    <!--工作要点-->
+                    <div class="list secretary">
+                        {empty name="$list.one"}
+                        <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                        {else/}
+                        <ul class="search-result-one">
+                        </ul>
+                        <ul class="secretary-all">
+                            {volist name="$list.one" id="vo1"}
+                            {eq name="vo1.templet" value="1"}
+                            <a href="{:Url('Responsibility/detail?id='.$vo1['id'])}">
+                                {else/}
+                                <a href="{:Url('Responsibility/detail2?id='.$vo1['id'])}">
+                                    {/eq}
+                                    <p>{$vo1.title}</p>
+                                    <span>{$vo1.publisher}</span>
+                                    <span>{$vo1.create_time|time_format='Y-m-d'}</span>
+                                </a>
+                                {/volist}
+                        </ul>
+                        {/empty}
+                    </div>
+                </div>
+                <div id="item2mobile" class="mui-slider-item mui-control-content">
+                    <!--责任清单-->
+                    <div class="list branch-secretary">
+                        {empty name="$list.two"}
+                        <div class="default"><img src="/home/images/common/nomessage.png" alt="暂无消息"> </div>
+                        {else/}
+                        <ul class="search-result-two">
+                        </ul>
+                        <ul class="branch-secretary-all">
+                            {volist name="$list.two" id="vo2"}
+                            {eq name="vo2.templet" value="1"}
+                            <a href="{:Url('Responsibility/detail?id='.$vo2['id'])}">
+                                {else/}
+                                <a href="{:Url('Responsibility/detail2?id='.$vo2['id'])}">
+                                    {/eq}
+                                    <p>{$vo2.title}</p>
+                                    <span>{$vo2.publisher}</span>
+                                    <span>{$vo2.create_time|time_format='Y-m-d'}</span>
+                                </a>
+                                {/volist}
+                        </ul>
+                        {/empty}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--[悬浮按钮]-->
+    <span href="{:Url('responsibility/publish?type='.$type.'&style=2')}" class="after manager" id="publish"></span>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script>
+    var type =  parseInt(window.location.href.split("index/type/")[1]);
+    $(function(){
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        flag = IsPC();
+        if(flag){
+            $(".main").css({"width":"640px","left":"50%","min-height":"90vh","margin":"70px 0 0 -320px","position":"relative"});
+            $(".search").css({"width":"640px","left":"50%","margin-left":"-320px","height":"70px"});
+//            $(".search input").css({"height":"3.6vh","font-size":"14px"});
+//            $(".search input::-webkit-input-placeholder").css({"height":"3.6vh","font-size":"14px"});
+            $("#tab a").css("font-size","18px");
+            $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"});
+            $("#tab").css({"width":"640px","left":"50%","margin-left":"-320px","top":"0"});
+            $("#refreshContainer").css({"top":"0","width":"640px","left":"50%","margin-left":"-320px"});
+            $(".list").css("margin-top","1rem");
+            $(".list ul a").css("padding","10px 15px");
+//            $(".search .mui-icon-search").css("font-size","2.2vh");
+            $(".list ul a img").css({"width":"90px","height":"60px"});
+            $(".list ul a p").css({"font-size":"16px","margin-bottom":"30px","-webkit-line-clamp":"1"});
+            $(".list ul a span").css("font-size","14px");
+            $(".list ul a span:nth-child(3)").css("bottom","10px");
+            $(".list ul a span:nth-child(4)").css("bottom","10px");
+            $(".default img").css("width","60px");
+        }
+        $("title").text("责任清单");
+        //tab初始化和数据存储
+        var co = getCookie("type");
+        if(co == 0 || co == 1 ){
+            c = co;
+        }else{
+            c=0;
+        }
+        $("#tab a").eq(c).addClass('mui-active');
+        $(".mui-slider-group>div").eq(c).addClass('mui-active');
+    });
+
+    window.onload = function() {
+        if(flag){
+            $(".mui-pull .mui-pull-caption").css("font-size","15px");
+        }
+        moveanyway("publish");
+        if(c==0){
+            if ($(".secretary ul a").length < 8) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==1){
+            if ($(".branch-secretary ul a").length < 8) {
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            } else {
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }
+    }
+
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
+        }
+    });
+
+    //上拉加载更多
+    function loadScroll(){
+        if(c==0){
+            var len  = $(".secretary ul a").length;
+        }else if(c==1){
+            var len  = $(".branch-secretary ul a").length;
+        }
+        var cla = parseInt(c)+1;
+        var type = {$type};
+        $.ajax({
+            type:"post",
+            url: "{:Url('Responsibility/branchindex')}",
+            data:{
+                length:len,
+                type:type,
+                class:cla
+            },
+            beforeSend: function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                if(data.code == 1){
+                    addLists(data,c,1);
+                    var dataLen =data.data.length;
+                    if(data.data.length == 8){
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                    }else{
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                    }
+                }else{
+                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                }
+            }
+        })
+    }
+
+    function addLists(data,type,index){
+
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++){
+            var list = lists[i];
+            if(flag) {
+                if (list.templet == 1) {
+                    html += '<a href="/home/responsibility/detail/id/' + list.id + '.html" style="padding: 10px 15px">'
+                } else {
+                    html += '<a href="/home/responsibility/detail2/id/' + list.id + '.html" style="padding: 10px 15px">'
+                }
+                html +=
+                        '<p style="margin-bottom: 30px;font-size: 16px;-webkit-line-clamp:1">' + list.title + '</p>' +
+                        '<span style="font-size: 14px;">' + list.publisher + '</span>' +
+                        '<span style="font-size: 14px;">' + list.time + '</span>' +
+                        '</a>'
+            }else{
+                if (list.templet == 1) {
+                    html += '<a href="/home/responsibility/detail/id/' + list.id + '.html">'
+                } else {
+                    html += '<a href="/home/responsibility/detail2/id/' + list.id + '.html">'
+                }
+                html +=
+                        '<p>' + list.title + '</p>' +
+                        '<span>' + list.publisher + '</span>' +
+                        '<span>' + list.time + '</span>' +
+                        '</a>'
+
+            }
+        }
+        if(type==0){
+            if(index==1){
+                $('.secretary .secretary-all').append(html);
+            }else{
+                $('.secretary .search-result-one').html(html);
+                $('.branch-secretary .search-result-two').html(html);
+            }
+
+        }else if(type==1){
+            if(index==1){
+                $('.branch-secretary .branch-secretary-all').append(html);
+            }else{
+                $('.secretary .search-result-one').html(html);
+                $('.branch-secretary .search-result-two').html(html);
+            }
+
+        }
+    }
+
+    mui('#refreshContainer').on('tap', 'a', function(e) {
+        var url = this.getAttribute("href")+"?"+type;
+        window.location.href = url;
+    });
+
+    mui("#refreshContainer").on("touchstart","a",function(){
+        $(this).css("backgroundColor","rgba(0,0,0,.1)");
+    }).on("touchend","a", function () {
+        $(this).css("backgroundColor","#fff");
+    });
+
+    //tab点击事件
+    mui('#tab').on('tap', 'a', function(e) {
+        mui('#refreshContainer').pullRefresh().scrollTo(0,0);
+        mui('#refreshContainer').scroll().scrollTo(0,0);
+        mui('#refreshContainer').pullRefresh().refresh(true);
+        c = this.getAttribute("data-index");
+        if(c==0){
+            if($(".secretary ul a").length<8){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }else if(c==1){
+            if($(".branch-secretary ul a").length<8){
+                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+            }else{
+                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+            }
+        }
+        setCookie('type',c);
+    });
+
+    mui('body').on('tap', '#publish', function(e) {
+        var url = this.getAttribute("href")+"?"+c;
+        window.location.href = url;
+    });
+
+
+    var sendAjax = function(obj) {
+        var val= $("#search").val();
+        if(val==""){
+            $(".secretary-all").show();
+            $(".search-result-one").text("").hide();
+            $(".branch-secretary-all").show();
+            $(".search-result-two").text("").hide();
+            return;
+        }
+        $.ajax({
+            type:"post",
+            url: "{:Url('Responsibility/search')}",
+            data:{
+                name:val
+            },
+            beforeSend: function(XMLHttpRequest){
+
+            },
+            success:function(data){
+                if(data.code == 1){
+                    $(".secretary-all").hide();
+                    $(".noresult").hide();
+                    $(".search-result-one").show();
+                    $(".branch-secretary-all").hide();
+                    $(".noresult").hide();
+                    $(".search-result-two").show();
+                    addLists(data,c,2);
+                    var dataLen =data.data.length;
+                    if(data.data.length == 8){
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                    }else{
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                    }
+                }else{
+                    $(".secretary-all").hide();
+                    $(".search-result-one").show().html("<p class='noresult'>无搜索结果</P>")
+                    $(".branch-secretary-all").hide();
+                    $(".search-result-two").show().html("<p class='noresult'>无搜索结果</P>")
+
+                }
+            }
+        })
+
+    };
+    var debounce = function() {
+        var wait = 300;
+        var timeout;
+        return function () {
+            if (timeout) clearTimeout(timeout);
+            timeout = setTimeout(sendAjax, wait);
+        }
+    };
+
+    document.getElementById('search').addEventListener('input', debounce(), false);
+</script>
+{/block}
