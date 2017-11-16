@@ -39,7 +39,7 @@ body {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space:nowrap;
-    width: 50%;
+    width: 45%;
     position: absolute;
     bottom: 2vw;
 }
