@@ -215,7 +215,6 @@
     //图片预览
     $('.add2' ).on('click',function(){
         var imglen = $('.img2 img' ).length;
-        alert(imglen)
         var this_ = $(this );
         $('#upimg2').click().off("change").on('change',function(){
             var size = ($(this)[0].files[0].size / 1024).toFixed(2);
