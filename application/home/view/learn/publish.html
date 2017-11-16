@@ -87,6 +87,7 @@
                 <a id="openPopover" href="#popover">支部委员大会</a>
                 <span class="triangle-down"></span>
             </li>
+            <div class="nogroup">
                 <li class="type2">
                     模块
                     <a id="openPopover3" href="#popover3">培训计划</a>
@@ -201,12 +202,16 @@
                     <input type="file" class="hide" id="upimg" accept="image/jpg, image/png, image/gif, image/jpeg">
                     <input type="hidden" name="id" value="{$msg.id || default=''}">
                 </div>
+            </div>
         </ul>
     </div>
+    <div class="nogroup">
         <div class="sure">确定</div>
         <div class="save">保&emsp;存</div>
         <div class="goreview">去审核</div>
         <p>注：点击保存将保存至个人中心-我的草稿；点击去审核，审核通过后将在相应栏目发布，并保存至我的发布。</p>
+    </div>
+
     <div id="popover" class="mui-popover" >
         <ul class="mui-table-view">
             <div class="mui-scroll-wrapper">
@@ -291,12 +296,8 @@
                 $(".template").hide();
                 if(index==1){
                     $("#openPopover").html("支部委员大会");
-                    $(".nogroup").show();
-                    $(".determine").hide();
                 }else if(index==2){
                     $("#openPopover").html("党支部委员会");
-                    $(".nogroup").show();
-                    $(".determine").hide();
                 }else if(index==3){
                     $("#openPopover").html("党小组会");
                 }else if(index==4){
@@ -358,6 +359,7 @@
                     $(".yes_no").siblings("li").show();
                     $(".content").show();
                     $(".main>.nogroup").show();
+                    $(".main .nogroup .type2").hide();
                     $(".sure").hide().siblings().show();
                 }else if ($(".yes_no .clice").eq(1).hasClass("active")) {
                     $(".main>.nogroup").show();
@@ -369,6 +371,7 @@
             $(".yes_no").siblings("li").show();
             $(".content").show();
             $(".main>.nogroup").show();
+            $(".type2").hide();
         }
         mui('#popover').popover("hide");
     });
