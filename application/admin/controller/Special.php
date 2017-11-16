@@ -115,7 +115,6 @@ class Special extends Admin {
                 $msg['files'] = '';
             }
             $this->assign('msg',$msg);
-            dump($msg);
             return $this->fetch();
         }
     }
