@@ -380,9 +380,16 @@
             if(val == 2){
                 $("#two").show();
                 $("#three").hide();
+                $("#two").find("select[name = 'class']").on("change",function(){
+                    var _class = $(this).val();
+                })
             }else if(val == 3){
                 $("#two").hide();
                 $("#three").show();
+                $("#three").find("select[name = 'class']").on("change",function(){
+                    var _class = $(this).val();
+                    console.log(_class)
+                })
             }else{
                 $("#two").hide();
                 $("#three").hide();
