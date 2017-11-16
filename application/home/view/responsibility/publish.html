@@ -92,7 +92,7 @@
 <script>
     var type =  parseInt(window.location.href.split("publish/type/")[1]);
     var c =  parseInt(window.location.href.split("style/")[1]);
-    var index =  parseInt(window.location.href.split("?")[1]);
+    var index = window.location.href.split("?")[1]?window.location.href.split("?")[1]:-1;
     $(function(){
         function IsPC() {
             var userAgentInfo = navigator.userAgent;
@@ -132,7 +132,6 @@
         if(type==3){
             $(".type2").show();
         }
-
        if(index>=0){
            if(index==0){
                $("#openPopover2").html("书记述职");
@@ -142,18 +141,8 @@
                $("#openPopover2").html("支部书记述职");
                $("textarea").attr("placeholder","请输入内容，不少于500字...");
            }
-       }else{
-           if(c==1){
-               $("#openPopover2").html("书记述职");
-               $("textarea").attr("placeholder","请输入内容，不少于1000字...");
-
-           }else if(c==2){
-               $("#openPopover2").html("支部书记述职");
-               $("textarea").attr("placeholder","请输入内容，不少于500字...");
-           }
        }
-
-    })
+    });
 
     $("#popover ul li").click(function(){
         var select_it = $(this).text();
