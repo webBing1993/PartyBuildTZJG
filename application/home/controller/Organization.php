@@ -24,6 +24,8 @@ class Organization extends Base{
         $Model = new OrganizationModel();
         $list = $Model->getStandard();
         $this->assign('list',$list);
+        $userid = session('userId');
+        $this->checkUserPower($userid);
         return $this->fetch();
     }
 
@@ -35,6 +37,8 @@ class Organization extends Base{
         $Model = new OrganizationModel();
         $list = $Model->getRetirement();
         $this->assign('list',$list);
+        $userid = session('userId');
+        $this->checkUserPower($userid);
         return $this->fetch();
     }
 
@@ -46,6 +50,8 @@ class Organization extends Base{
         $Model = new OrganizationModel();
         $list = $Model->getFee();
         $this->assign('list',$list);
+        $userid = session('userId');
+        $this->checkUserPower($userid);
         return $this->fetch();
     }
 
@@ -57,6 +63,8 @@ class Organization extends Base{
         $Model = new OrganizationModel();
         $list = $Model->getInformation();
         $this->assign('list',$list);
+        $userid = session('userId');
+        $this->checkUserPower($userid);
         return $this->fetch();
     }
 

@@ -11,6 +11,7 @@ namespace app\home\controller;
 use app\home\model\Browse;
 use app\home\model\Comment;
 use app\home\model\Like;
+use app\home\model\WechatUserTag;
 use app\user\model\WechatUser;
 use think\Config;
 use think\Controller;
@@ -20,8 +21,8 @@ use think\Db;
 
 class Base extends Controller {
     public function _initialize(){
-        session('userId','ZhangNeng');
-        session('userId','18768112486');
+//        session('userId','ZhangNeng');
+//        session('userId','18768112486');
 
 //        session('header','/home/images/vistor.jpg');
 //        session('nickname','游客');
@@ -447,5 +448,21 @@ class Base extends Controller {
         $comment = $commentModel->getComment($type,$id,$userId);
         $list['comment'] = $comment;
         return $list;
+    }
+
+    /**
+     * 检查用户是否具备发布权限
+     * 1具备发布，0隐藏菜单
+     */
+    public function checkUserPower($userid) {
+        $map = array(
+            'userid' => $userid
+        );
+        $res = WechatUserTag::where($map)->find();
+        if($res) {
+            return $this->assign('pub',1);
+        }else {
+            return $this->assign('pub',0);
+        }
     }
 }

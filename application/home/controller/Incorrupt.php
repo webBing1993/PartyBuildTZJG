@@ -35,6 +35,8 @@ class Incorrupt extends Base{
             $list = $Model->getIndex($type);
             $this->assign('list',$list);
             $this->assign('type',$type);
+            $userid = session('userId');
+            $this->checkUserPower($userid);
             return $this->fetch();
         }
     }
@@ -55,6 +57,8 @@ class Incorrupt extends Base{
             $list = $Model->getIndex($type);
             $this->assign('list',$list);
             $this->assign('type',$type);
+            $userid = session('userId');
+            $this->checkUserPower($userid);
             return $this->fetch();
         }
     }

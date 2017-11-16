@@ -24,6 +24,8 @@ class Learn extends Base{
         $Model = new LearnModel;
         $list = $Model->getProgram();
         $this->assign('list',$list);
+        $userid = session('userId');
+        $this->checkUserPower($userid);
         return $this->fetch();
     }
 
@@ -32,6 +34,8 @@ class Learn extends Base{
         $Model = new LearnModel;
         $list = $Model->getLesson();
         $this->assign('list',$list);
+        $userid = session('userId');
+        $this->checkUserPower($userid);
         return $this->fetch();
     }
 
@@ -40,6 +44,8 @@ class Learn extends Base{
         $Model = new LearnModel;
         $list = $Model->getPlan();
         $this->assign('list',$list);
+        $userid = session('userId');
+        $this->checkUserPower($userid);
         return $this->fetch();
     }
 
@@ -48,6 +54,8 @@ class Learn extends Base{
         $Model = new LearnModel;
         $list = $Model->getTheme();
         $this->assign('list',$list);
+        $userid = session('userId');
+        $this->checkUserPower($userid);
         return $this->fetch();
     }
 

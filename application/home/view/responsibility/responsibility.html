@@ -85,7 +85,9 @@
         </div>
     </div>
     <!--[悬浮按钮]-->
-    <span href="{:Url('responsibility/publish?type='.$type.'&style=2')}" class="after manager" id="publish"></span>
+    {eq name="pub" value="1"}
+    <span href="{:Url('Responsibility/publish?type='.$type.'&style=2')}" class="after manager" id="publish"></span>
+    {/eq}
 </div>
 {/block}
 

@@ -27,6 +27,8 @@ class Special extends Base{
         }else {
             $list = $Model->getIndex();
             $this->assign('list',$list);
+            $userid = session('userId');
+            $this->checkUserPower($userid);
             return $this->fetch();
         }
     }
