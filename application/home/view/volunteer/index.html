@@ -58,7 +58,7 @@ body {
         <a class="mui-control-item" href="#item2mobile" data-index="1">
             <span>一条街三走进</span>
         </a>
-        <a class="mui-control-item" href="#item2mobile" data-index="2">
+        <a class="mui-control-item" href="#item3mobile" data-index="2">
             <span>最多跑一次</span>
         </a>
     </div>
@@ -146,6 +146,7 @@ body {
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+    var c = 0;
     $(function(){
         //模块标题
         $('title' ).text('志愿服务');
@@ -183,7 +184,7 @@ body {
         }
 
         //tab初始化和数据存储
-        var c = getCookie("type")?getCookie("type"):0;
+         c = getCookie("type")?getCookie("type"):0;
         $("#tab a").eq(c).addClass('mui-active');
         $(".mui-slider-group>div").eq(c).addClass('mui-active');
     });
