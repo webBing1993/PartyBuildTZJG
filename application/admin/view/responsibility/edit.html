@@ -374,6 +374,8 @@
             $("#two").hide();
             $("#three").hide();
         }
+
+        var _class = null;
         //选择类别
         $("select[name = 'type']").on("change",function(){
             var val = $(this).val();
@@ -381,14 +383,13 @@
                 $("#two").show();
                 $("#three").hide();
                 $("#two").find("select[name = 'class']").on("change",function(){
-                    var _class = $(this).val();
+                     _class = $(this).val();
                 })
             }else if(val == 3){
                 $("#two").hide();
                 $("#three").show();
                 $("#three").find("select[name = 'class']").on("change",function(){
-                    var _class = $(this).val();
-                    console.log(_class)
+                     _class = $(this).val();
                 })
             }else{
                 $("#two").hide();
@@ -606,7 +607,7 @@
             var data = {
                 id:$("input[name='id']").val(),
                 type:$("select[name='type']").val(),
-                class:$("select[name='class']").val(),
+                class:_class,
                 front_cover:$("input[name='front_cover']").val(),
                 title:$("input[name='title']").val(),
                 content:ue.getContent(),
