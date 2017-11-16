@@ -29,6 +29,51 @@
         border-bottom: solid 1px #ccc;
         font-size: 0.32rem;
     }
+    .yes_no {
+        display: none;
+        text-align: center;
+    }
+    .clice {
+        margin-left: 20vw;
+    }
+    .clice:before {
+        float: left;
+        content: '';
+        width: 4.8vw;
+        height: 4.8vw;
+        border: 1px solid #d7d7d7;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 3.2vw;
+        margin-top: .32rem;
+    }
+    .clice span {
+        display: inline-block;
+        float: left;
+    }
+    .clice.active:before {
+        content: '';
+        background-color: #fc6c62;
+    }
+    .fl {
+        float: left;
+    }
+    .sure {
+        width: 5.6rem;
+        height: 1rem;
+        background: #fc6c62;
+        border-radius: 5px;
+        color: #fff;
+        margin: 0.5rem auto;
+        text-align: center;
+        font-size: 0.36rem;
+        line-height: 1rem;
+        display: none;
+        position: absolute;
+        bottom: 10vw;
+        left: 50%;
+        margin-left: -2.8rem;
+    }
 </style>
 {/block}
 
@@ -42,128 +87,133 @@
                 <a id="openPopover" href="#popover">支部委员大会</a>
                 <span class="triangle-down"></span>
             </li>
-          <div class="nogroup">
-            <li class="type2">
-                模块
-                <a id="openPopover3" href="#popover3">培训计划</a>
-                <span class="triangle-down"></span>
-            </li>
-            <li class="template">
-                模板
-                <a id="openPopover2" href="#popover2">普通型</a>
-                <span class="triangle-down"></span>
-            </li>
-            {else/}
-            {switch name="$msg.class"}{case value="1"}
-            <li class="type1">
-                模块
-                <a id="openPopover" href="#popover">支部委员大会</a>
-                <span class="triangle-down"></span>
-            </li>
-            {/case}
-            {case value="2"}
-            <li class="type1">
-                模块
-                <a id="openPopover" href="#popover">党支部委员会</a>
-                <span class="triangle-down"></span>
-            </li>
-            {/case}
-            {case value="3"}
-            <li class="type1">
-                模块
-                <a id="openPopover" href="#popover">党小组会</a>
-                <span class="triangle-down"></span>
-            </li>
-            {/case}
-            {case value="4"}
-            <li class="type1">
-                模块
-                <a id="openPopover" href="#popover">党课</a>
-                <span class="triangle-down"></span>
-            </li>
-            {/case}
-            {case value="5"}
-            <li class="type2">
-                模块
-                <a id="openPopover3" href="#popover3">培训计划</a>
-                <span class="triangle-down"></span>
-            </li>
-            {/case}
-            {case value="6"}
-            <li class="type2">
-                模块
-                <a id="openPopover3" href="#popover3">理论研究</a>
-                <span class="triangle-down"></span>
-            </li>
-            {/case}
-            {/switch}
-            <li class="template">
-                模板
-                {eq name="$msg.templet" value="1"}
-                <a id="openPopover2" href="#popover2">普通型</a>
+            <div class="nogroup">
+                <li class="type2">
+                    模块
+                    <a id="openPopover3" href="#popover3">培训计划</a>
+                    <span class="triangle-down"></span>
+                </li>
+                <li class="template">
+                    模板
+                    <a id="openPopover2" href="#popover2">普通型</a>
+                    <span class="triangle-down"></span>
+                </li>
                 {else/}
-                <a id="openPopover2" href="#popover2">轮播型</a>
-                {/eq}
-                <span class="triangle-down"></span>
-            </li>
-            {/empty}
-            <li>
-                标题
-                <input type="text" placeholder="请输入标题" value="{$msg.title || default=''}" name="title">
-            </li>
-            <li class="type1">
-                时间
-                {empty name="msg"}
-                <input type="input" placeholder="请选择时间"  name="time" id="date" readonly>
-                {else/}
-                {empty name="msg.time"}
-                <input type="input" placeholder="请选择时间" name="time" id="date" readonly>
-                {else/}
-                <input type="input" placeholder="请选择时间" name="time" value="{$msg.time|time_format='Y-m-d H:i'}" id="date" readonly>
+                {switch name="$msg.class"}{case value="1"}
+                <li class="type1">
+                    模块
+                    <a id="openPopover" href="#popover">支部委员大会</a>
+                    <span class="triangle-down"></span>
+                </li>
+                {/case}
+                {case value="2"}
+                <li class="type1">
+                    模块
+                    <a id="openPopover" href="#popover">党支部委员会</a>
+                    <span class="triangle-down"></span>
+                </li>
+                {/case}
+                {case value="3"}
+                <li class="type1">
+                    模块
+                    <a id="openPopover" href="#popover">党小组会</a>
+                    <span class="triangle-down"></span>
+                </li>
+                {/case}
+                {case value="4"}
+                <li class="type1">
+                    模块
+                    <a id="openPopover" href="#popover">党课</a>
+                    <span class="triangle-down"></span>
+                </li>
+                {/case}
+                {case value="5"}
+                <li class="type2">
+                    模块
+                    <a id="openPopover3" href="#popover3">培训计划</a>
+                    <span class="triangle-down"></span>
+                </li>
+                {/case}
+                {case value="6"}
+                <li class="type2">
+                    模块
+                    <a id="openPopover3" href="#popover3">理论研究</a>
+                    <span class="triangle-down"></span>
+                </li>
+                {/case}
+                {/switch}
+                <li class="template">
+                    模板
+                    {eq name="$msg.templet" value="1"}
+                    <a id="openPopover2" href="#popover2">普通型</a>
+                    {else/}
+                    <a id="openPopover2" href="#popover2">轮播型</a>
+                    {/eq}
+                    <span class="triangle-down"></span>
+                </li>
                 {/empty}
-                {/empty}
-            </li>
-            <li class="type1">
-                地点
-                <input type="text" placeholder="请输入地点" name="address" value="{$msg.address || default=''}">
-            </li>
-            <li class="type1">
-                参会人数
-                <input type="text" placeholder="请输入参会人数" name="people" value="{$msg.people || default=''}">
-            </li>
-            <li class="type1">
-                主持人
-                <input type="text" placeholder="请输入主持人"name="compere" value="{$msg.compere || default=''}">
-            </li>
-            <div class="content">
-                <textarea placeholder="请输入内容..." name="content">{$msg.content || default=''}</textarea>
-                <div class="imgs clear">
-                    {notempty name="$msg"}
-                    {volist name="msg.list_images" id="img"}
-                    <div class="img fl "><img src="{$img|get_cover='path'}" alt="" data-tab="{$img}"></div>
-                    {/volist}
-                    {/notempty}
-                    <div class="img fl hide"></div>
-                    <div class="img fl hide"></div>
-                    <div class="img fl hide"></div>
-                    <div class="img fl hide"></div>
-                    <div class="add fl"></div>
+                <li class="yes_no">
+                    <div class="clice fl"><span>是</span></div>
+                    <div class="clice fl"><span>否</span></div>
+                </li>
+                <li class = type1>
+                    标题
+                    <input type="text" placeholder="请输入标题" value="{$msg.title || default=''}" name="title">
+                </li>
+                <li class="type1">
+                    时间
+                    {empty name="msg"}
+                    <input type="input" placeholder="请选择时间"  name="time" id="date" readonly>
+                    {else/}
+                    {empty name="msg.time"}
+                    <input type="input" placeholder="请选择时间" name="time" id="date" readonly>
+                    {else/}
+                    <input type="input" placeholder="请选择时间" name="time" value="{$msg.time|time_format='Y-m-d H:i'}" id="date" readonly>
+                    {/empty}
+                    {/empty}
+                </li>
+                <li class="type1">
+                    地点
+                    <input type="text" placeholder="请输入地点" name="address" value="{$msg.address || default=''}">
+                </li>
+                <li class="type1">
+                    参会人数
+                    <input type="text" placeholder="请输入参会人数" name="people" value="{$msg.people || default=''}">
+                </li>
+                <li class="type1">
+                    主持人
+                    <input type="text" placeholder="请输入主持人"name="compere" value="{$msg.compere || default=''}">
+                </li>
+                <div class="content">
+                    <textarea placeholder="请输入内容..." name="content">{$msg.content || default=''}</textarea>
+                    <div class="imgs clear">
+                        {notempty name="$msg"}
+                        {volist name="msg.list_images" id="img"}
+                        <div class="img fl "><img src="{$img|get_cover='path'}" alt="" data-tab="{$img}"></div>
+                        {/volist}
+                        {/notempty}
+                        <div class="img fl hide"></div>
+                        <div class="img fl hide"></div>
+                        <div class="img fl hide"></div>
+                        <div class="img fl hide"></div>
+                        <div class="add fl"></div>
+                    </div>
+                    <div style="color: #666;font-size: 0.32rem">（您最多上传3张图片，图片小于5M）</div>
+                    <input type="file" class="hide" id="upimg" accept="image/jpg, image/png, image/gif, image/jpeg">
+                    <input type="hidden" name="id" value="{$msg.id || default=''}">
                 </div>
-                <div style="color: #666;font-size: 0.32rem">（您最多上传3张图片，图片小于5M）</div>
-                <input type="file" class="hide" id="upimg" accept="image/jpg, image/png, image/gif, image/jpeg">
-                <input type="hidden" name="id" value="{$msg.id || default=''}">
             </div>
-          </div>
         </ul>
     </div>
     <div class="nogroup">
-    <div class="save">保&emsp;存</div>
-    <div class="goreview">去审核</div>
-    <p>注：点击保存将保存至个人中心-我的草稿；点击去审核，审核通过后将在相应栏目发布，并保存至我的发布。</p>
-</div>
+        <div class="sure">确定</div>
+        <div class="save">保&emsp;存</div>
+        <div class="goreview">去审核</div>
+        <p>注：点击保存将保存至个人中心-我的草稿；点击去审核，审核通过后将在相应栏目发布，并保存至我的发布。</p>
+    </div>
 
     <div class="determine" style="position: absolute;bottom:10vw;">
-    <div>确&emsp;定</div>
+        <div>确&emsp;定</div>
     </div>
 
     <div id="popover" class="mui-popover" >
@@ -264,21 +314,21 @@
                 break;
             case 3:
                 $(".type1").hide();
-                    if(index>=0){
-                        if(index==0){
-                            $("#openPopover3").html("培训计划");
-                        }else if(index==1){
-                            $("#openPopover3").html("理论研究");
-                            $("textarea").attr("placeholder","请输入内容，不少于1500字...");
-                        }
-                    }else{
-                        if(c==5){
-                            $("#openPopover3").html("培训计划");
-                        }else if(c==6){
-                            $("#openPopover3").html("理论研究");
-                            $("textarea").attr("placeholder","请输入内容，不少于1500字...");
-                        }
+                if(index>=0){
+                    if(index==0){
+                        $("#openPopover3").html("培训计划");
+                    }else if(index==1){
+                        $("#openPopover3").html("理论研究");
+                        $("textarea").attr("placeholder","请输入内容，不少于1500字...");
                     }
+                }else{
+                    if(c==5){
+                        $("#openPopover3").html("培训计划");
+                    }else if(c==6){
+                        $("#openPopover3").html("理论研究");
+                        $("textarea").attr("placeholder","请输入内容，不少于1500字...");
+                    }
+                }
 
                 break;
             case 4:
@@ -305,6 +355,24 @@
         var select_it = $(this).text();
         $("#openPopover").html(select_it);
         if(select_it=="党小组会"){
+            $(".yes_no").show();
+            $(".yes_no").siblings("li").hide();
+            $(".content").hide();
+            $(".main>.nogroup").hide();
+            $(".yes_no .clice").on("click", function () {
+                $(".yes_no .clice").removeClass("active");
+                $(this).addClass("active");
+                $(".yes_no").hide();
+                if ($(".yes_no .clice").eq(0).hasClass("active")) {
+                    $(".yes_no").siblings("li").show();
+                    $(".content").show();
+                    $(".main>.nogroup").show();
+                    $(".sure").hide().siblings().show();
+                }else if ($(".yes_no .clice").eq(1).hasClass("active")) {
+                    $(".main>.nogroup").show();
+                    $(".sure").show().siblings().hide();
+                }
+            })
         }else{
 
         }
@@ -339,6 +407,32 @@
     mui('.mui-scroll-wrapper').scroll({
         deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
     });
+
+    // 确定
+    $(".sure").on("click", function () {
+        $.ajax({
+            type:"post",
+            url: "{:Url('Learn/play')}",
+            success:function(data){
+                if(data.code == 1){
+                    window.history.go(-1);
+                }else{
+                    swal({
+                        title: ' ',
+                        text: data.msg,
+                        type: 'error',
+                        showConfirmButton:false,
+                        timer:1500
+                    });
+                    setTimeout(function () {
+                        window.history.go(-1);
+                    },2000);
+                }
+            },error: function () {
+            }
+        });
+
+    })
 
     //保存
     $(".save").click(function(){
@@ -408,46 +502,46 @@
                 status:3
             };
         }
-            data['list_images']=[];
-            if(templet == "普通型"){
-                data["templet"] = 1;
-            }else{
-                data["templet"] = 2;
+        data['list_images']=[];
+        if(templet == "普通型"){
+            data["templet"] = 1;
+        }else{
+            data["templet"] = 2;
+        }
+        $(".img img").each(function(){
+            if($(this).data("tab")){
+                data['list_images'].push($(this).data("tab")+"")  ;
             }
-            $(".img img").each(function(){
-                if($(this).data("tab")){
-                    data['list_images'].push($(this).data("tab")+"")  ;
-                }
-            })
+        })
 //            data['list_image'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
-            $.ajax({
-                type:"post",
-                url: "{:Url('Learn/publish')}",
-                data:data,
-                success:function(data){
-                    if(data.code == 1){
-                        swal({
-                            title: "保存成功",
-                            text: '请至个人中心——我的草稿中查看',
-                            type: 'success',
-                            showCancelButton: false,
-                            confirmButtonText: "确定",
-                            allowOutsideClick:false
-                        });
-                        setTimeout(function(){
-                            window.history.go(-1);
-                        },1500)
-                    }else{
-                        swal({
-                            title: ' ',
-                            text: data.msg,
-                            type: 'error',
-                            showConfirmButton:false,
-                            timer:1500
-                        });
-                    }
+        $.ajax({
+            type:"post",
+            url: "{:Url('Learn/publish')}",
+            data:data,
+            success:function(data){
+                if(data.code == 1){
+                    swal({
+                        title: "保存成功",
+                        text: '请至个人中心——我的草稿中查看',
+                        type: 'success',
+                        showCancelButton: false,
+                        confirmButtonText: "确定",
+                        allowOutsideClick:false
+                    });
+                    setTimeout(function(){
+                        window.history.go(-1);
+                    },1500)
+                }else{
+                    swal({
+                        title: ' ',
+                        text: data.msg,
+                        type: 'error',
+                        showConfirmButton:false,
+                        timer:1500
+                    });
                 }
-            });
+            }
+        });
     });
 
 
@@ -537,16 +631,16 @@
                 data["class"] = 5;
             }else{
                 data["class"] = 6;
-                    if(data["content"].length<1500){
-                        swal({
-                            title: ' ',
-                            text: '内容不少于1500字',
-                            type: 'error',
-                            showConfirmButton:false,
-                            timer:1500
-                        });
-                        return;
-                    }
+                if(data["content"].length<1500){
+                    swal({
+                        title: ' ',
+                        text: '内容不少于1500字',
+                        type: 'error',
+                        showConfirmButton:false,
+                        timer:1500
+                    });
+                    return;
+                }
             }
         }else if(type==4){
             var data={

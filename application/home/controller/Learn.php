@@ -241,7 +241,7 @@ class Learn extends Base{
                 \think\Db::name('score')->insert(['class' => 2,'type' => 9,'aid' => 0,'userid' => $userid,'score_up' => 1,'score_down' => 1,'create_time' => time()]);
                 return $this->success('积分成功');
             }else{
-                return $this->error('已经积分成功');
+                return $this->error('您已积分~');
             }
         }
     }
