@@ -166,19 +166,39 @@
                                 {/empty}
                             </div>
                         </div>
-                        <div class="form-group" id="one">
+                        <div class="form-group" id="two">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>党建责任:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                {empty name="msg"}
+                                <select class="form-control value2" name="class">
+                                    <option value="0" >--请选择类型--</option>
+                                    <option value="1" >工作要点</option>
+                                    <option value="2" >责任清单</option>
+                                </select>
+                                {else/}
+                                <select class="form-control value2" name="class">
+                                    <option value="0" {eq name="$msg.class" value="0"}selected{/eq}>--请选择类型--</option>
+                                    <option value="1" {eq name="$msg.class" value="1"}selected{/eq}>工作要点</option>
+                                    <option value="2" {eq name="$msg.class" value="2"}selected{/eq}>责任清单</option>
+                                </select>
+                                {/empty}
+                            </div>
+                        </div>
+                        <div class="form-group" id="three">
                             <div class="col-lg-1 text-right control-label">
                                 <label>述职报告:</label>
                             </div>
                             <div class="col-lg-11">
                                 {empty name="msg"}
-                                <select class="form-control" name="class">
+                                <select class="form-control value3" name="class">
                                     <option value="0" >--请选择类型--</option>
                                     <option value="1" >书记述职</option>
                                     <option value="2" >支部书记述职</option>
                                 </select>
                                 {else/}
-                                <select class="form-control" name="class">
+                                <select class="form-control value3" name="class">
                                     <option value="0" {eq name="$msg.class" value="0"}selected{/eq}>--请选择类型--</option>
                                     <option value="1" {eq name="$msg.class" value="1"}selected{/eq}>书记述职</option>
                                     <option value="2" {eq name="$msg.class" value="2"}selected{/eq}>支部书记述职</option>
@@ -344,18 +364,28 @@
         highlight_subnav("{:Url('Responsibility/index')}");
 
         var cl = $("select[name = 'type']").val();
-        if(cl == 3){
-            $("#one").show();
+        if(cl == 2){
+            $("#two").show();
+            $("#three").hide();
+        }else if(cl == 3){
+            $("#two").hide();
+            $("#three").show();
         }else{
-            $("#one").hide();
+            $("#two").hide();
+            $("#three").hide();
         }
         //选择类别
         $("select[name = 'type']").on("change",function(){
             var val = $(this).val();
-            if(val == 3){
-                $("#one").show();
+            if(val == 2){
+                $("#two").show();
+                $("#three").hide();
+            }else if(val == 3){
+                $("#two").hide();
+                $("#three").show();
             }else{
-                $("#one").hide();
+                $("#two").hide();
+                $("#three").hide();
             }
         });
 
