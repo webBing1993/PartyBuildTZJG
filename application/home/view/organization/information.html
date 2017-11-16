@@ -6,7 +6,7 @@
 <style>
     .list ul a {
         position: relative;
-        height: 20.8vw;
+        height: 22vw;
     }
     .list ul a p {
         margin-bottom: 0;
@@ -18,6 +18,16 @@
     }
     .list ul a span:nth-child(2).notes span:last-of-type {
         width: auto;
+    }
+    .list ul a span:nth-child(2){
+        position: static;
+        bottom:0;
+    }
+    .list ul a span:nth-child(2).notes span.fl{
+        width:60%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
     .fl {
         float: left;
