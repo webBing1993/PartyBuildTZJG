@@ -316,13 +316,16 @@ function get_score($class,$aid,$userid){
                                 $type = 9;
                                 $beginThismonth=mktime(0,0,0,date('m'),1,date('Y'));
                                 $endThismonth=mktime(23,59,59,date('m'),date('t'),date('Y'));
-                                $maps = ['class' => $class,'type' => $type,'userid' => $userid,'create_time' => ['between',[$beginThismonth,$endThismonth]]];  // 每月
-                                $count = \think\Db::name('score')->where($maps)->count();  // 获取已发布个数
-                                $mapp = $map = ['class' => $class,'type' => $type,'userid' => $userid];
-                                $counts = \think\Db::name('score')->where($mapp)->whereTime('create_time','y')->count();
-                                if ($count < 1 && $counts < 10){
-                                    // 可以积分
-                                    \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 10,'create_time' => time()]);
+                                $flag = \think\Db::name('score')->where(['class' => $class,'type' => $type,'userid' => $userid,'aid' =>0])->whereTime('create_time','y')->find();
+                                if (!$flag){
+                                    $maps = ['class' => $class,'type' => $type,'userid' => $userid,'create_time' => ['between',[$beginThismonth,$endThismonth]]];  // 每月
+                                    $count = \think\Db::name('score')->where($maps)->count();  // 获取已发布个数
+                                    $mapp = $map = ['class' => $class,'type' => $type,'userid' => $userid];
+                                    $counts = \think\Db::name('score')->where($mapp)->whereTime('create_time','y')->count();
+                                    if ($count < 1 && $counts < 10){
+                                        // 可以积分
+                                        \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 10,'create_time' => time()]);
+                                    }
                                 }
                                 break;
                             case 4:

@@ -482,8 +482,12 @@ class User extends Base {
                     break;
                 case 2: // 两学一做
                     $table = "learn";
-                    $info = Db::name($table)->where(['id' => $value['aid']])->find();
-                    $msg[$key]['title'] = $info['title'];
+                    if ($value['aid'] == 0){
+                        $msg[$key]['title'] = "无党小组会数据";
+                    }else{
+                        $info = Db::name($table)->where(['id' => $value['aid']])->find();
+                        $msg[$key]['title'] = $info['title'];
+                    }
                     switch ($value['type']){
                         case 1:
                             $msg[$key]['str'] = "两学一做-方案部署";

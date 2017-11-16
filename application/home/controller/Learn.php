@@ -226,4 +226,23 @@ class Learn extends Base{
         $this->assign('comment',$comment);
         return $this->fetch();
     }
+    /**
+     * 无 党小组 操作
+     */
+    public function play(){
+        $userid = session('userId');
+        $user = \app\home\model\WechatUserTag::where(['tagid' => 1 ,'userid' => $userid])->find();
+        if ($user){
+            // 是否考核人员
+            $map = ['class' => 2,'type' => 9,'userid' => $userid]; // 三会一课  党小组会
+            $count = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();
+            if ($count < 1){
+                // 可以积分
+                \think\Db::name('score')->insert(['class' => 2,'type' => 9,'aid' => 0,'userid' => $userid,'score_up' => 1,'score_down' => 1,'create_time' => time()]);
+                return $this->success('积分成功');
+            }else{
+                return $this->error('已经积分成功');
+            }
+        }
+    }
 }
