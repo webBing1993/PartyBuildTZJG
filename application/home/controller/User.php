@@ -640,6 +640,7 @@ class User extends Base {
                     break;
                 default:
                     $msg[$key]['str'] = "暂无数据";
+
             }
             $hander[$key]['score'] = $paly." ".$num;
         }
