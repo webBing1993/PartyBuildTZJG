@@ -261,3 +261,15 @@ ul li a span:nth-child(4) {
     transform:translate(-50%,-50%);
 }
 
+@media screen and (device-width: 320px) {
+    .Audited ul li a span:nth-child(2){
+        margin-top: 0.25rem;
+    }
+    .Audited ul li a p:nth-child(4),.Audited ul li a span:nth-child(5){
+            bottom:0.1rem;
+    }
+    .Audited ul li a p:nth-child(3){
+            bottom:5.8vw;
+    }
+}
+
