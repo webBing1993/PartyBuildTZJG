@@ -440,7 +440,11 @@
 
         //上传图片
         var plus = $('.plus');
-        var imgnum  = 1;
+        if({$msg}) {
+            var imgnum = {$msg.c}
+        }else {
+            var imgnum  = 1;
+        }
         plus.on('click',function(){
             var it = $(this);
             it.hide().next().fadeIn();
@@ -452,7 +456,11 @@
         });
 
         var plus_c = $('.plus_c');
-        var imgnum_c  = 1;
+        if({$msg}) {
+            var imgnum_c = {$msg.v}
+        }else {
+            var imgnum_c  = 1;
+        }
         plus_c.on('click',function(){
             var it = $(this);
             it.hide().next().fadeIn();

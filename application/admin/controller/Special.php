@@ -79,24 +79,26 @@ class Special extends Admin {
             isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
             isset($data["commend_img"]) ? $data["commend_img"] = json_encode($data["commend_img"]) : $data["commend_img"] = "";
             isset($data["voucher_img"]) ? $data["voucher_img"] = json_encode($data["voucher_img"]) : $data["voucher_img"] = "";
-            $res = $Model->validate(true)->save($data,['id'=>input('id')]);
-            if($res){
-                return $this->success("修改成功",Url("Special/index"));
-            }else{
-                return $this->get_update_error_msg($Model->getError());
-            }
+//            $res = $Model->validate(true)->save($data,['id'=>input('id')]);
+//            if($res){
+//                return $this->success("修改成功",Url("Special/index"));
+//            }else{
+//                return $this->get_update_error_msg($Model->getError());
+//            }
         }else{
             $this->default_pic();
             $id = input('id');
             $msg = $Model::get($id);
             if($msg['commend_img']){
                 $images = json_decode($msg['commend_img']);
+                $msg['c'] = count($images);
                 foreach($images as $k => $val){
                     $msg['commend_img'.($k+1)] = $val;
                 }
             }
             if($msg['voucher_img']){
                 $images = json_decode($msg['voucher_img']);
+                $msg['v'] = count($images);
                 foreach($images as $k => $val){
                     $msg['voucher_img'.($k+1)] = $val;
                 }
@@ -113,6 +115,7 @@ class Special extends Admin {
                 $msg['files'] = '';
             }
             $this->assign('msg',$msg);
+            dump($msg);
             return $this->fetch();
         }
     }
