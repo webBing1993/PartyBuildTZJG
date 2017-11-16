@@ -153,8 +153,8 @@
                 </li>
                 {/empty}
                 <li class="yes_no">
-                    <div class="clice fl"><span>是</span></div>
-                    <div class="clice fl"><span>否</span></div>
+                    <div class="clice fl"><span>有党小组</span></div>
+                    <div class="clice fl"><span>无党小组</span></div>
                 </li>
                 <li class = type1>
                     标题
@@ -374,7 +374,10 @@
                 }
             })
         }else{
-
+            $(".yes_no").hide();
+            $(".yes_no").siblings("li").show();
+            $(".content").show();
+            $(".main>.nogroup").show();
         }
         mui('#popover').popover("hide");
     });
