@@ -362,6 +362,7 @@
                     $(".content").show();
                     $(".main>.nogroup").show();
                     $(".main .nogroup .type2").hide();
+                    $(".template").hide();
                     $(".sure").hide().siblings().show();
                 }else if ($(".yes_no .clice").eq(1).hasClass("active")) {
                     $(".main>.nogroup").show();
@@ -374,6 +375,7 @@
             $(".content").show();
             $(".main>.nogroup").show();
             $(".type2").hide();
+            $(".template").hide();
         }
         mui('#popover').popover("hide");
     });
