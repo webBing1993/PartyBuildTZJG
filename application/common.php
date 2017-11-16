@@ -198,9 +198,21 @@ function get_score($class,$aid,$userid){
                         }
                         break;
                     case 2:  // 责任清单
-                        if ($count < 1){
+                        switch($info['class']){
+                            case 1: // 工作要点
+                                $type = 7;
+                                break;
+                            case 2:  //责任清单
+                                $type = 8;
+                                break;
+                            default:
+                                $type = 0;
+                        }
+                        $mapp = ['class' => $class,'type' => $type,'userid' => $userid];
+                        $counts = \think\Db::name('score')->where($mapp)->whereTime('create_time','y')->count();  // 获取已发布个数
+                        if ($counts < 1){
                             // 可以积分
-                            \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 2,'score_down' => 1,'create_time' => time()]);
+                            \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 1,'score_down' => 1,'create_time' => time()]);
                         }
                         break;
                     case 3:  // 述职报告
@@ -421,17 +433,11 @@ function get_score($class,$aid,$userid){
             case 6:  // 志愿服务
                 $table = "volunteer";
                 $info = \think\Db::name($table)->where(['id' => $aid])->find();
-                $map = ['class' => $class,'type' => $info['type'],'userid' => $userid]; // 1四跑志愿活动，2一条街三走进
+                $map = ['class' => $class,'type' => $info['type'],'userid' => $userid]; // 1四跑志愿活动，2一条街三走进 3 最多跑一次
                 $count = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();  // 获取已发布个数
                 if ($count < 1){
                     // 可以积分
-                    switch($info['type']){
-                        case 1: // 四跑志愿活动
-                            \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 2,'score_down' => 1,'create_time' => time()]);
-                            break;
-                        default:
-                            \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 4,'score_down' => 1,'create_time' => time()]);
-                    }
+                    \think\Db::name('score')->insert(['class' => $class,'type' => $info['type'],'aid' => $aid,'userid' => $userid,'score_up' => 2,'score_down' => 1,'create_time' => time()]);
                 }
                 break;
             case 7:  // 党风廉政

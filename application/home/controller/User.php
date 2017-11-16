@@ -466,14 +466,17 @@ class User extends Base {
                         case 1:
                             $msg[$key]['str'] = "党建责任-专题研究";
                             break;
-                        case 2:
-                            $msg[$key]['str'] = "党建责任-责任清单";
-                            break;
                         case 5:
                             $msg[$key]['str'] = "党建责任-书记述职";
                             break;
                         case 6:
                             $msg[$key]['str'] = "党建责任-支部书记述职";
+                            break;
+                        case 7:
+                            $msg[$key]['str'] = "党建责任-工作要点";
+                            break;
+                        case 8:
+                            $msg[$key]['str'] = "党建责任-责任清单";
                             break;
                     }
                     break;
@@ -567,10 +570,13 @@ class User extends Base {
                     $msg[$key]['title'] = $info['title'];
                     switch ($value['type']){
                         case 1:
-                            $msg[$key]['str'] = "志愿服务-四跑志愿活动";
+                            $msg[$key]['str'] = "志愿服务-四跑志愿服务";
                             break;
                         case 2:
                             $msg[$key]['str'] = "志愿服务-一条街三走进";
+                            break;
+                        case 3:
+                            $msg[$key]['str'] = "志愿服务-最多跑一次";
                             break;
                     }
                     break;
