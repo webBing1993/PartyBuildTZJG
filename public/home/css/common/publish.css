@@ -120,8 +120,8 @@ textarea{
 }
 
 .content .add,.content .add2,.content .add3{
-    width: 2rem;
-    height: 2rem;
+    width: calc(2rem + 4px);
+    height: calc(2rem + 4px);
     margin-left: 0.2rem;
     margin-bottom: 0.2rem;
     border: 2px solid #d9d9d9;
