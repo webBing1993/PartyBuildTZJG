@@ -79,12 +79,12 @@ class Special extends Admin {
             isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
             isset($data["commend_img"]) ? $data["commend_img"] = json_encode($data["commend_img"]) : $data["commend_img"] = "";
             isset($data["voucher_img"]) ? $data["voucher_img"] = json_encode($data["voucher_img"]) : $data["voucher_img"] = "";
-//            $res = $Model->validate(true)->save($data,['id'=>input('id')]);
-//            if($res){
-//                return $this->success("修改成功",Url("Special/index"));
-//            }else{
-//                return $this->get_update_error_msg($Model->getError());
-//            }
+            $res = $Model->validate(true)->save($data,['id'=>input('id')]);
+            if($res){
+                return $this->success("修改成功",Url("Special/index"));
+            }else{
+                return $this->get_update_error_msg($Model->getError());
+            }
         }else{
             $this->default_pic();
             $id = input('id');
