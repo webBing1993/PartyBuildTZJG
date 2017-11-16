@@ -637,7 +637,7 @@
             });
         });
 
-        $("input[name='input-file']").on("change",function(){
+        $("#file"+len).on("change",function(){
             var size = ($(this)[0].files[0].size / 1024).toFixed(2);
             var id= $(this).attr("id");
             var nameid= $(this).parent(".videofile").find("span").attr("id");
