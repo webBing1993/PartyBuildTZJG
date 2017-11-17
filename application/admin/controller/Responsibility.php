@@ -47,19 +47,23 @@ class Responsibility extends Admin {
      */
     public function add() {
         if(IS_POST) {
+            $Model = new ResponsibilityModel();
             $data = input('post.');
             if(empty($data['id'])) {
                 unset($data['id']);
             }
             isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
-            $Model = new ResponsibilityModel();
             $data['create_user'] = $_SESSION['think']['user_auth']['id'];
-            $res = $Model->validate(true)->save($data);
-            if($res){
-                get_score(1,$res,$_SESSION['think']['user_auth']['id']);
-                return $this->success("新增成功",Url("Responsibility/index"));
-            }else{
-                return $this->error($Model->getError());
+            if($data['type'] != 1 && $data['class'] == 0) {
+                return $this->error("类别不能为空，请选择对应类别");
+            }else {
+                $res = $Model->validate(true)->save($data);
+                if($res){
+                    get_score(1,$res,$_SESSION['think']['user_auth']['id']);
+                    return $this->success("新增成功",Url("Responsibility/index"));
+                }else{
+                    return $this->error($Model->getError());
+                }
             }
         }else{
             $this->default_pic();
@@ -77,11 +81,15 @@ class Responsibility extends Admin {
         if(IS_POST) {
             $data = input('post.');
             isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
-            $res = $Model->validate(true)->save($data,['id'=>input('id')]);
-            if($res){
-                return $this->success("修改成功",Url("Responsibility/index"));
-            }else{
-                return $this->get_update_error_msg($Model->getError());
+            if($data['type'] != 1 && $data['class'] == 0) {
+                return $this->error("类别不能为空，请选择对应类别");
+            }else {
+                $res = $Model->validate(true)->save($data,['id'=>input('id')]);
+                if($res){
+                    return $this->success("修改成功",Url("Responsibility/index"));
+                }else{
+                    return $this->get_update_error_msg($Model->getError());
+                }
             }
         }else{
             $this->default_pic();
