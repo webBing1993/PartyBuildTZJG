@@ -380,29 +380,14 @@
             if(val == 2){
                 $("#two").show();
                 $("#three").hide();
-                $("#two").find("select[name = 'class']").on("change",function(){
-                     _class = $(this).val();
-                })
             }else if(val == 3){
                 $("#two").hide();
                 $("#three").show();
-                $("#three").find("select[name = 'class']").on("change",function(){
-                     _class = $(this).val();
-                })
             }else{
                 $("#two").hide();
                 $("#three").hide();
-                _class = 0;
             }
         });
-
-        $("#two").find("select[name = 'class']").on("change",function(){
-            _class = $(this).val();
-        })
-
-        $("#three").find("select[name = 'class']").on("change",function(){
-            _class = $(this).val();
-        })
 
         //上传图片
         var plus = $('.plus');
@@ -604,6 +589,11 @@
 
         //发布
         $(".post-put").on("click",function(){
+            if($("#three").is(":hidden")){
+                var _class = $("#two").find("select[name = 'class']").find("option:selected").val()
+            }else{
+                var _class = $("#three").find("select[name = 'class']").find("option:selected").val()
+            }
             var file=[];
             var it=$(this);
             $(".videofile").each(function(){
