@@ -5,8 +5,15 @@
 $(function(){
     //图片预览
     $('.add' ).on('click',function(){
-        var imglen = $('.img img' ).length;
         var this_ = $(this );
+        var ua = navigator.userAgent.toLowerCase();
+        var isiOS = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1);  // ios终端
+        if(!isiOS){
+            this_.parent(".imgs").siblings("input").attr('capture','camera');
+        }
+        this_.parent(".imgs").siblings("input").fadeOut();
+        this_.parent(".imgs").after('<input type="file" class="hide" id="upimg" accept="image/*">');
+        var imglen = $('.img img' ).length;
         $('#upimg').click().off("change").on('change',function(){
             var size = ($(this)[0].files[0].size / 1024).toFixed(2);
             if(size <= 5120){
