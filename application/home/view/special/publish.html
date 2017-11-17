@@ -51,7 +51,7 @@
                     <div class="img fl hide"></div>
                     <div class="add fl"></div>
                 </div>
-                <input type="file" class="hide" id="upimg" accept="image/jpg, image/png, image/gif, image/jpeg">
+                <input type="file" class="hide" id="upimg" accept="image/*">
                 <input type="hidden" name="id" value="{$msg.id || default=''}">
 
                 <div style="color: #333;font-size: 0.38rem;margin-left: 0.2rem;height: 0.8rem;line-height: 0.8rem;">请在下方添加表彰照片:</div>
@@ -68,7 +68,7 @@
                     <div class="add2 fl">
                     </div>
                 </div>
-                <input type="file" class="hide" id="upimg2" accept="image/jpg, image/png, image/gif, image/jpeg">
+                <input type="file" class="hide" id="upimg2" accept="image/*">
                 <input type="hidden" name="id" value="{$msg.id || default=''}">
 
                 <div style="color: #333;font-size: 0.38rem;margin-left: 0.2rem;height: 0.8rem;line-height: 0.8rem;">请在下方添加交流凭证:</div>
@@ -85,7 +85,7 @@
                     <div class="add3 fl">
                     </div>
                 </div>
-                <input type="file" class="hide" id="upimg3" accept="image/jpg, image/png, image/gif, image/jpeg">
+                <input type="file" class="hide" id="upimg3" accept="image/*">
                 <input type="hidden" name="id" value="{$msg.id || default=''}">
                 <p style="font-size: 0.32rem;color: #999 ;height: 1rem;line-height:1rem;padding-left: .2rem">(每个入口最多上传3张图片，图片小于5M)</p>
             </div>
@@ -104,6 +104,8 @@
         </ul>
     </div>
 </div>
+<div class="loading"></div>
+<div class="shadow"></div>
 {/block}
 
 {block name="script"}
@@ -214,8 +216,15 @@
 
     //图片预览
     $('.add2' ).on('click',function(){
-        var imglen = $('.img2 img' ).length;
         var this_ = $(this );
+        var ua = navigator.userAgent.toLowerCase();
+        var isiOS = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1);  // ios终端
+        if(!isiOS){
+            this_.parent(".imgs").siblings("input").attr('capture','camera');
+        }
+        this_.parent(".imgs").siblings("input").fadeOut();
+        this_.parent(".imgs").after('<input type="file" class="hide" id="upimg2" accept="image/*">');
+        var imglen = $('.img2 img' ).length;
         $('#upimg2').click().off("change").on('change',function(){
             var size = ($(this)[0].files[0].size / 1024).toFixed(2);
             if(size <= 5120){
@@ -229,11 +238,12 @@
                     processData : false,
                     contentType : false,
                     beforeSend: function(XMLHttpRequest){
-//							swal('');
-//							swal.showLoading();
-                        $('.swal2-confirm' ).css({'background-color':'#c1c1c1','border-left-color':'#c1c1c1','border-right-color':'#c1c1c1'})
+                        $(".loading").show();
+                        $(".shadow").show();
                     },
                     success:function(data){
+                        $(".loading").hide();
+                        $(".shadow").hide();
                         swal.close();
                         var msg = $.parseJSON(data);
                         if(msg.code == 1){
@@ -272,8 +282,15 @@
 
     //图片预览
     $('.add3' ).on('click',function(){
-        var imglen = $('.img3 img' ).length;
         var this_ = $(this );
+        var ua = navigator.userAgent.toLowerCase();
+        var isiOS = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1);  // ios终端
+        if(!isiOS){
+            this_.parent(".imgs").siblings("input").attr('capture','camera');
+        }
+        this_.parent(".imgs").siblings("input").fadeOut();
+        this_.parent(".imgs").after('<input type="file" class="hide" id="upimg3" accept="image/*">');
+        var imglen = $('.img3 img' ).length;
         $('#upimg3').click().off("change").on('change',function(){
             var size = ($(this)[0].files[0].size / 1024).toFixed(2);
             if(size <= 5120){
@@ -287,11 +304,12 @@
                     processData : false,
                     contentType : false,
                     beforeSend: function(XMLHttpRequest){
-//							swal('');
-//							swal.showLoading();
-                        $('.swal2-confirm' ).css({'background-color':'#c1c1c1','border-left-color':'#c1c1c1','border-right-color':'#c1c1c1'})
+                        $(".loading").show();
+                        $(".shadow").show();
                     },
                     success:function(data){
+                        $(".loading").hide();
+                        $(".shadow").hide();
                         swal.close();
                         var msg = $.parseJSON(data);
                         if(msg.code == 1){
