@@ -20,11 +20,12 @@ $(function(){
                     processData : false,
                     contentType : false,
                     beforeSend: function(XMLHttpRequest){
-//							swal('');
-//							swal.showLoading();
-                        $('.swal2-confirm' ).css({'background-color':'#c1c1c1','border-left-color':'#c1c1c1','border-right-color':'#c1c1c1'})
+                        $(".loading").show();
+                        $(".shadow").show();
                     },
                     success:function(data){
+                        $(".loading").hide();
+                        $(".shadow").hide();
                         swal.close();
                         var msg = $.parseJSON(data);
                         if(msg.code == 1){
