@@ -396,6 +396,14 @@
             }
         });
 
+        $("#two").find("select[name = 'class']").on("change",function(){
+            _class = $(this).val();
+        })
+
+        $("#three").find("select[name = 'class']").on("change",function(){
+            _class = $(this).val();
+        })
+
         //上传图片
         var plus = $('.plus');
         var imgnum  = $('[n]' ).attr('n');
@@ -595,7 +603,6 @@
         });
 
         //发布
-        var _class = 0;
         $(".post-put").on("click",function(){
             var file=[];
             var it=$(this);
