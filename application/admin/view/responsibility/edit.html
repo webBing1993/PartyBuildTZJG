@@ -374,7 +374,6 @@
             $("#three").hide();
         }
 
-        var _class = null;
         //选择类别
         $("select[name = 'type']").on("change",function(){
             var val = $(this).val();
@@ -393,6 +392,7 @@
             }else{
                 $("#two").hide();
                 $("#three").hide();
+                _class = 0;
             }
         });
 
@@ -595,6 +595,7 @@
         });
 
         //发布
+        var _class = 0;
         $(".post-put").on("click",function(){
             var file=[];
             var it=$(this);
