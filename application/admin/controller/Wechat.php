@@ -9,11 +9,14 @@
 namespace app\admin\controller;
 
 
+use app\admin\model\AuthGroupAccess;
+use app\admin\model\Member;
 use app\admin\model\WechatDepartment;
 use app\admin\model\WechatDepartmentUser;
 use app\admin\model\WechatTag;
 use app\admin\model\WechatUser;
 use app\admin\model\WechatUserTag;
+use app\user\model\UcenterMember;
 use com\wechat\QYWechat;
 use com\wechat\TPWechat;
 use think\Config;
@@ -62,6 +65,7 @@ class Wechat extends Admin
 
         /* 同步部门 */
         $list = $Wechat->getDepartment();
+        dump($list);
 //
         /* 同步最顶级部门下面的用户 */
         foreach ($list['department'] as $key=>$value) {
@@ -141,6 +145,14 @@ class Wechat extends Admin
 
         /* 同步标签 */
         WechatTag::where('1=1')->delete();
+        WechatUserTag::where('1=1')->delete();
+        AuthGroupAccess::where('1=1')->delete();
+        $map = array(
+            'id' => array('gt',1)
+        );
+        UcenterMember::where($map)->delete();
+        Member::where($map)->delete();
+
         $tags = $Wechat->getTagList();
         foreach ($tags['taglist'] as $tag) {
             if(WechatTag::get(['tagid'=>$tag['tagid']])) {
@@ -149,9 +161,7 @@ class Wechat extends Admin
                 WechatTag::create($tag);
             }
         }
-
-        /* 同步标签-用户关系表 */
-        WechatUserTag::where('1=1')->delete();
+//        /* 同步标签-用户关系表 */
         foreach ($tags['taglist'] as $value) {
             $users = $Wechat->getTag($value['tagid']);
             if(empty($users['userlist'])){
@@ -195,7 +205,6 @@ class Wechat extends Admin
                 }
             }
         }
-
         $data = "同步标签数:".count($tags['taglist'])."!";
 
         return $this->success("同步成功", '', $data);
