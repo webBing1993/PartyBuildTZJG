@@ -65,8 +65,7 @@ class Wechat extends Admin
 
         /* 同步部门 */
         $list = $Wechat->getDepartment();
-        dump($list);
-//
+
         /* 同步最顶级部门下面的用户 */
         foreach ($list['department'] as $key=>$value) {
             $users = $Wechat->getUserListInfo($list['department'][$key]['id']);
@@ -118,18 +117,9 @@ class Wechat extends Admin
                 if(empty(WechatDepartmentUser::where($data)->find())){
                     WechatDepartmentUser::create($data);
                 }
-                
-//                if($value['id'] != 1) {
-//                    $data1 = ['departmentid' => 1, 'userid' => $user['userid']];     //当部门补位1时补全用户
-//                    if(empty(WechatDepartmentUser::where($data1)->find())){
-//                        WechatDepartmentUser::create($data1);
-//                    }
-//                }
             }
         }
-
         $data = "同步部门数:".count($list['department'])."!";
-
         return $this->success("同步成功", '', $data);
     }
 
@@ -144,15 +134,6 @@ class Wechat extends Admin
         }
 
         /* 同步标签 */
-        WechatTag::where('1=1')->delete();
-        WechatUserTag::where('1=1')->delete();
-        AuthGroupAccess::where('1=1')->delete();
-        $map = array(
-            'id' => array('gt',1)
-        );
-        UcenterMember::where($map)->delete();
-        Member::where($map)->delete();
-
         $tags = $Wechat->getTagList();
         foreach ($tags['taglist'] as $tag) {
             if(WechatTag::get(['tagid'=>$tag['tagid']])) {
@@ -161,7 +142,16 @@ class Wechat extends Admin
                 WechatTag::create($tag);
             }
         }
-//        /* 同步标签-用户关系表 */
+
+        /* 同步标签-用户关系表 */
+        WechatUserTag::where('1=1')->delete();
+        AuthGroupAccess::where('1=1')->delete();
+        $map = array(
+            'id' => array('gt',1)
+        );
+        UcenterMember::where($map)->delete();
+        Member::where($map)->delete();
+
         foreach ($tags['taglist'] as $value) {
             $users = $Wechat->getTag($value['tagid']);
             if(empty($users['userlist'])){
