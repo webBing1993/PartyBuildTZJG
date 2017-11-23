@@ -133,70 +133,60 @@ class Wechat extends Admin
             return $this->error("同步出错");
         }
 
+        $TagModel = new WechatTag();
+        $TagUserModel = new WechatUserTag();
+        $UcenterMemberModel = new UcenterMember();
+        $MemberModel = new Member();
         /* 同步标签 */
         $tags = $Wechat->getTagList();
         foreach ($tags['taglist'] as $tag) {
-            if(WechatTag::get(['tagid'=>$tag['tagid']])) {
-                WechatTag::where(['tagid'=>$tag['tagid']])->update($tag);
+            if($TagModel->get(['tagid'=>$tag['tagid']])) {
+                $TagModel->where(['tagid'=>$tag['tagid']])->update($tag);
             } else {
-                WechatTag::create($tag);
+                $TagModel->create($tag);
             }
         }
 
         /* 同步标签-用户关系表 */
-        WechatUserTag::where('1=1')->delete();
-        AuthGroupAccess::where('1=1')->delete();
-        $map = array(
-            'id' => array('gt',1)
-        );
-        UcenterMember::where($map)->delete();
-        Member::where($map)->delete();
-
         foreach ($tags['taglist'] as $value) {
             $users = $Wechat->getTag($value['tagid']);
-            if(empty($users['userlist'])){
-                foreach ($users['partylist'] as $user){
-                    $info = $Wechat->getUserListInfo($user);
-                    foreach ($info['userlist'] as $val){
-                        $data = ['tagid' => $value['tagid'],'userid' => $val['userid']];
-                        if(empty(WechatUserTag::where($data)->find())){
-                            $res = WechatUserTag::create($data);
-                            if($res) {
-                                $map = array(
-                                    'username' => $val['userid'],
-                                    'password' => '123456',
-                                    'repassword' => '123456',
-                                    'email' => '',
-                                    'group_id' => $value['tagid']
-                                );
-                                $UserController = new User();
-                                $UserController->add($map['username'],$map['password'],$map['repassword'],$map['email'],$map['group_id']);
-                            }
-                        }
+            foreach ($users['userlist'] as $key => $user) {
+                $map1 = ['tagid' => $value['tagid'],'name'=>$user['name']];
+                $map2 = ['tagid' => $value['tagid'],'userid' => $user['userid']];
+                $data = ['tagid'=>$value['tagid'],'name'=>$user['name'], 'userid'=>$user['userid']];
+                $res1 = $TagUserModel->where($map1)->find();
+                $res2 = $TagUserModel->where($map2)->find();
+                if($res1) {
+                    //存在name相同，userid不同 则修改wechat_tag 和 ucenter_member
+                    if($res1['userid'] != $user['userid']) {
+                        $TagUserModel->save($data,['id'=>$res1['id']]);
+                        $UcenterMemberModel->where('username',$res1['userid'])->update(['username'=>$user['userid']]);
                     }
-                };
-            }else{
-                foreach ($users['userlist'] as $user) {
-                    $data = ['tagid'=>$value['tagid'], 'userid'=>$user['userid']];
-                    if(empty(WechatUserTag::where($data)->find())){
-                        $res = WechatUserTag::create($data);
-                        if($res) {
-                            $map = array(
-                                'username' => $user['userid'],
-                                'password' => '123456',
-                                'repassword' => '123456',
-                                'email' => '',
-                                'group_id' => $value['tagid']
-                            );
-                            $UserController = new User();
-                            $UserController->add($map['username'],$map['password'],$map['repassword'],$map['email'],$map['group_id']);
-                        }
+                }elseif ($res2){
+                    //存在userid相同，name不同 则修改wechat_tag 和 member
+                    if($res2['name'] != $user['name']) {
+                        $TagUserModel->save($data,['id'=>$res2['id']]);
+                        $res = $UcenterMemberModel->where('username',$res2['userid'])->find();
+                        $MemberModel->where('id',$res['id'])->update(['nickname' => $user['name']]);
+                    }
+                }else {
+                    //否则新增
+                    $res = WechatUserTag::create($data);
+                    if($res) {
+                        $map = array(
+                            'username' => $user['userid'],
+                            'password' => '123456',
+                            'email' => '',
+                            'group_id' => $value['tagid'],
+                            'nickname' => $user['name']
+                        );
+                        $Model =  new WechatTag();
+                        $Model->setUser($map);  //创建后台管理员账号及权限
                     }
                 }
             }
         }
         $data = "同步标签数:".count($tags['taglist'])."!";
-
         return $this->success("同步成功", '', $data);
     }
     
