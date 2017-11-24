@@ -86,7 +86,7 @@
             {empty name="msg"}
             <li class="type1">
                 模块
-                <a id="openPopover" href="#popover">支部委员大会</a>
+                <a id="openPopover" href="#popover">支部党员大会</a>
                 <span class="triangle-down"></span>
             </li>
             <div class="nogroup">
@@ -104,7 +104,7 @@
                 {switch name="$msg.class"}{case value="1"}
                 <li class="type1">
                     模块
-                    <a id="openPopover" href="#popover">支部委员大会</a>
+                    <a id="openPopover" href="#popover">支部党员大会</a>
                     <span class="triangle-down"></span>
                 </li>
                 {/case}
@@ -218,7 +218,7 @@
         <ul class="mui-table-view">
             <div class="mui-scroll-wrapper">
                 <div class="mui-scroll">
-                    <li class="mui-table-view-cell"><a>支部委员大会</a></li>
+                    <li class="mui-table-view-cell"><a>支部党员大会</a></li>
                     <li class="mui-table-view-cell"><a>党支部委员会</a></li>
                     <li class="mui-table-view-cell"><a>党小组会</a></li>
                     <li class="mui-table-view-cell"><a>党课</a></li>
@@ -299,7 +299,7 @@
                 $(".type2").hide();
                 $(".template").hide();
                 if(index==1){
-                    $("#openPopover").html("支部委员大会");
+                    $("#openPopover").html("支部党员大会");
                 }else if(index==2){
                     $("#openPopover").html("党支部委员会");
                 }else if(index==3){
@@ -466,7 +466,7 @@
                 status:3
             };
             switch (_class){
-                case "支部委员大会":
+                case "支部党员大会":
                     data["class"] = 1;
                     break;
                 case "党支部委员会":
@@ -584,7 +584,7 @@
                 status:0
             };
             switch (_class){
-                case "支部委员大会":
+                case "支部党员大会":
                     data["class"] = 1;
                     break;
                 case "党支部委员会":
