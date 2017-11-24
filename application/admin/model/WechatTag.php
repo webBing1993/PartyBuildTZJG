@@ -23,7 +23,7 @@ class WechatTag extends Base {
         $UcenterMemberModel = new UcenterMember();
         $ucenter = array(
             'username' => $data['username'],
-            'password' => think_ucenter_md5($data['password'], Config::get('uc_auth_key')),
+            'password' => think_ucenter_md5($data['password'], config('uc_auth_key')),
             'email' => $data['email'],
             'reg_ip' => get_client_ip(1)
         );
