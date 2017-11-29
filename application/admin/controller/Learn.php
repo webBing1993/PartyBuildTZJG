@@ -65,7 +65,8 @@ class Learn extends Admin {
                 $res = $Model->validate('Learn.one')->save($data);
             }
             if($res){
-                get_score(2,$res,$_SESSION['think']['user_auth']['id']);
+                $user_id = Db::name('ucenter_member')->where('id',$_SESSION['think']['user_auth']['id'])->value('username');
+                get_score(2,$res,$user_id);
                 return $this->success("新增成功",Url("Learn/index"));
             }else{
                 return $this->error($Model->getError());

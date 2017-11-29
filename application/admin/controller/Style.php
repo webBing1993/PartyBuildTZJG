@@ -55,7 +55,8 @@ class Style extends Admin {
             $data['create_user'] = $_SESSION['think']['user_auth']['id'];
             $res = $Model->validate(true)->save($data);
             if($res){
-                get_score(5,$res,$_SESSION['think']['user_auth']['id']);
+                $user_id = Db::name('ucenter_member')->where('id',$_SESSION['think']['user_auth']['id'])->value('username');
+                get_score(5,$res,$user_id);
                 return $this->success("新增成功",Url("Style/index"));
             }else{
                 return $this->error($Model->getError());

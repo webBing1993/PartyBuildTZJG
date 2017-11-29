@@ -56,7 +56,8 @@ class Special extends Admin {
             isset($data["voucher_img"]) ? $data["voucher_img"] = json_encode($data["voucher_img"]) : $data["voucher_img"] = "";
             $res = $Model->validate(true)->save($data);
             if($res){
-                get_score(4,$res,$_SESSION['think']['user_auth']['id']);
+                $user_id = Db::name('ucenter_member')->where('id',$_SESSION['think']['user_auth']['id'])->value('username');
+                get_score(4,$res,$user_id);
                 return $this->success("新增成功",Url("Special/index"));
             }else{
                 return $this->error($Model->getError());
@@ -89,6 +90,7 @@ class Special extends Admin {
             $this->default_pic();
             $id = input('id');
             $msg = $Model::get($id);
+            $msg['c'] = 0;
             if($msg['commend_img']){
                 $images = json_decode($msg['commend_img']);
                 $msg['c'] = count($images);
@@ -96,6 +98,7 @@ class Special extends Admin {
                     $msg['commend_img'.($k+1)] = $val;
                 }
             }
+            $msg['v'] = 0;
             if($msg['voucher_img']){
                 $images = json_decode($msg['voucher_img']);
                 $msg['v'] = count($images);
