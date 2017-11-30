@@ -206,12 +206,12 @@ class Special extends Admin {
             $des1 = mb_substr($str1, 0, 100);
             $content1 = str_replace("&nbsp;", "", $des1);  //空格符替换成空
             if($focus1['templet'] == 1) {
-                $url1 = "http://tzjg.0571ztnet.com/home/special/detail/id/" . $focus1['id'] . ".html";
+                $url1 = "http://www.0576ztnet.com/home/special/detail/id/" . $focus1['id'] . ".html";
             }else {
-                $url1 = "http://tzjg.0571ztnet.com/home/special/detail2/id/" . $focus1['id'] . ".html";
+                $url1 = "http://www.0576ztnet.com/home/special/detail2/id/" . $focus1['id'] . ".html";
             }
             $img1 = Picture::get($focus1['front_cover']);
-            $path1 = "http://tzjg.0571ztnet.com" . $img1['path'];
+            $path1 = "http://www.0576ztnet.com" . $img1['path'];
             $information1 = array(
                 "title" => $type_name1 . $title1,
                 "description" => $content1,
@@ -232,12 +232,12 @@ class Special extends Admin {
                 $des = mb_substr($str, 0, 100);
                 $content = str_replace("&nbsp;", "", $des);  //空格符替换成空
                 if($focus['templet'] == 1) {
-                    $url = "http://tzjg.0571ztnet.com/home/special/detail/id/" . $focus['id'] . ".html";
+                    $url = "http://www.0576ztnet.com/home/special/detail/id/" . $focus['id'] . ".html";
                 }else {
-                    $url = "http://tzjg.0571ztnet.com/home/special/detail2/id/" . $focus['id'] . ".html";
+                    $url = "http://www.0576ztnet.com/home/special/detail2/id/" . $focus['id'] . ".html";
                 }
                 $img = Picture::get($focus['front_cover']);
-                $path = "http://tzjg.0571ztnet.com" . $img['path'];
+                $path = "http://www.0576ztnet.com" . $img['path'];
                 $info = array(
                     "title" => $type_name . $title,
                     "description" => $content,
