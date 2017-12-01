@@ -71,9 +71,11 @@
 
            flag = IsPC();
            if(flag){
+               $("body,html").css("backgroundColor","#f1f1f1");
                $(".main").css({"width":"640px","left":"50%","min-height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
+               $(".list ul a").css({"height":"120px","padding":"15px 10px"});
                $(".list ul a p").css({"margin-bottom":"0.5rem","font-size":"16px"});
-               $(".list ul a span").css({"font-size":"14px"});
+               $(".list ul a span").css({"font-size":"14px","bottom":"10px"});
                $(".default img").css("width","60px");
            }
 
