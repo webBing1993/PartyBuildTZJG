@@ -49,8 +49,10 @@ $(function(){
                             imgresize();
 
                         } else {
-                            return;
                         }
+                    },
+                    error : function (date) {
+                        alert(JSON.parse(date));
                     }
                 });
             } else {
