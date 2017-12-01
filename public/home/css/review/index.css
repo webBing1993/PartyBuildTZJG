@@ -97,6 +97,11 @@ body {
     width: 0.8rem;
     background: #090;
 }
+.Audited .noreview{
+    right: 0;
+    width: 0.8rem;
+    background: yellow;
+}
 .Audited .refuse:after,.Audited .pass:after,.Audited .noreview:after{
     display: block;
     content: '';
@@ -158,7 +163,7 @@ ul li a img {
     margin-top: 0.3rem;
 }
 
-ul li a span:nth-child(2) {
+ul li a span:nth-child(2){
     color: #333;
     font-size: 0.36rem;
     margin-left: 25vw;

@@ -49,7 +49,7 @@
 							<i class="refuse"></i>
 							{/eq}
 							{eq name="ll.review_status" value="0"}
-							<i style="right: 0;width: 0.8rem;background: #ffff00;"></i>
+							<i class="noreview"></i>
 							{/eq}
 						</a>
 					</li>
@@ -213,7 +213,7 @@ function addLists(data){
 			} else if (list.review_status == 2) {
 				html += '<i class="refuse"></i>';
 			} else if (list.review_status == 0) {
-				html += '<i style="right: 0;width: 0.8rem;background: #ffff00;"></i>';
+				html += '<i class="noreview"></i>';
 			}
 			html += '</a>' +
 					'</li>';
@@ -233,7 +233,7 @@ function addLists(data){
 			} else if (list.review_status == 2) {
 				html += '<i class="refuse"></i>';
 			} else if (list.review_status == 0) {
-				html += '<i style="right: 0;width: 0.8rem;background: #ffff00;"></i>';
+				html += '<i class="noreview"></i>';
 			}
 			html += '</a>' +
 					'</li>';
