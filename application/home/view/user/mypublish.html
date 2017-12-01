@@ -110,7 +110,7 @@ window.onload = function() {
 		$(".mui-pull .mui-pull-caption").css("font-size","15px");
 	}
 	if ($(".Audited ul li").length > 0) {
-		if ($(".Audited ul li").length < 7) {
+		if ($(".Audited ul li").length < 14) {
 			mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
 		} else {
 			mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -160,7 +160,7 @@ function loadScroll(){
 				if(data.code == 1){
 					addLists(data);
 					var dataLen =data.data.length;
-					if(data.data.length == 7){
+					if(data.data.length == 14){
 						mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
 					}else{
 						mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);

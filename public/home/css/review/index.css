@@ -100,7 +100,7 @@ body {
 .Audited .noreview{
     right: 0;
     width: 0.8rem;
-    background: yellow;
+    background: #f1a417;
 }
 .Audited .refuse:after,.Audited .pass:after,.Audited .noreview:after{
     display: block;

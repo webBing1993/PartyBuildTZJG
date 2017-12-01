@@ -142,7 +142,7 @@ class User extends Base {
                 $list['data'][$key]['review_status'] = $review['status'];
                 $list['data'][$key]['review_time'] = date('Y-m-d',$review['create_time']);
             }else{
-                $list['data'][$key]['username'] = "*** 数据缺失 ***";
+                $list['data'][$key]['username'] = "*** 暂无 ***";
                 $list['data'][$key]['review_status'] = 0;
                 $list['data'][$key]['review_time'] = "0000-00-00";
             }
@@ -168,7 +168,7 @@ class User extends Base {
                     $list['data'][$key]['review_status'] = $review['status'];
                     $list['data'][$key]['review_time'] = date('Y-m-d',$review['create_time']);
                 }else{
-                    $list['data'][$key]['username'] = "*** 数据缺失 ***";
+                    $list['data'][$key]['username'] = "*** 暂无 ***";
                     $list['data'][$key]['review_status'] = 0;
                     $list['data'][$key]['review_time'] = "0000-00-00";
                 }
@@ -203,7 +203,7 @@ class User extends Base {
         while(true)
         {
             // 党建责任
-            if (!$responsibility_check && count($all_list) < 7){
+            if (!$responsibility_check && count($all_list) < 14){
                 $res1 = $this->get_con(1,$count1,$status);
                 if (empty($res1)){
                     $responsibility_check = true;
@@ -213,7 +213,7 @@ class User extends Base {
                 }
             }
             // 两学一做
-            if(!$learn_check && count($all_list) < 7) {
+            if(!$learn_check && count($all_list) < 14) {
                 $res2 = $this->get_con(2,$count2,$status);
                 if(empty($res2)) {
                     $learn_check = true;
@@ -223,7 +223,7 @@ class User extends Base {
                 }
             }
             // 组织建设
-            if(!$organization_check && count($all_list) < 7)
+            if(!$organization_check && count($all_list) < 14)
             {
                 $res3 = $this->get_con(3,$count3,$status);
                 if(empty($res3))
@@ -235,7 +235,7 @@ class User extends Base {
                 }
             }
             // 特色创新
-            if (!$special_check && count($all_list) < 7){
+            if (!$special_check && count($all_list) < 14){
                 $res4 = $this->get_con(4,$count4,$status);
                 if (empty($res4)){
                     $special_check = true;
@@ -245,7 +245,7 @@ class User extends Base {
                 }
             }
             // 作风建设
-            if (!$style_check && count($all_list) < 7){
+            if (!$style_check && count($all_list) < 14){
                 $res5 = $this->get_con(5,$count5,$status);
                 if (empty($res5)){
                     $style_check = true;
@@ -255,7 +255,7 @@ class User extends Base {
                 }
             }
             //  志愿服务
-            if (!$volunteer_check && count($all_list) < 7){
+            if (!$volunteer_check && count($all_list) < 14){
                 $res6 = $this->get_con(6,$count6,$status);
                 if (empty($res6)){
                     $volunteer_check = true;
@@ -265,7 +265,7 @@ class User extends Base {
                 }
             }
             //  党风廉政
-            if (!$incorrupt_check && count($all_list) < 7){
+            if (!$incorrupt_check && count($all_list) < 14){
                 $res7 = $this->get_con(7,$count7,$status);
                 if (empty($res7)){
                     $incorrupt_check = true;
@@ -274,7 +274,7 @@ class User extends Base {
                     $all_list = $this->changeTpye($all_list,$res7,7);
                 }
             }
-            if(count($all_list) >= 7 || ($responsibility_check && $organization_check && $learn_check && $incorrupt_check && $volunteer_check && $style_check && $special_check)) {
+            if(count($all_list) >= 14 || ($responsibility_check && $organization_check && $learn_check && $incorrupt_check && $volunteer_check && $style_check && $special_check)) {
                 break;
             }
         }
@@ -376,20 +376,26 @@ class User extends Base {
                 break;
         }
         $userid = session('userId');
+        $order = 'create_time desc';
+        $limit = "$count,2";
         if ($status == 2){
             $map = array(
                 'userid' => $userid,
-                'status' => ['in',[1,$status]],
+                'status' => ['in',[0,1,$status]],
             );
+            $user_id = Db::name('ucenter_member')->where('username',$userid)->value('id');
+            $mapp = array(
+                'create_user' => $user_id,
+                'status' => ['in',[0,1,$status]],
+             );
+            $list = Db::name($table)->where($map)->whereOr($mapp) ->order($order) ->limit($limit) ->select();
         }else{
             $map = array(
                 'userid' => $userid,
                 'status' => ['eq',$status],
             );
+            $list = Db::name($table)->where($map) ->order($order) ->limit($limit) ->select();
         }
-        $order = 'create_time desc';
-        $limit = "$count,1";
-        $list = Db::name($table)->where($map) ->order($order) ->limit($limit) ->select();
         foreach($list as $key => $value){
             $list[$key]['create_time'] = date('Y-m-d',$value['create_time']);  // 时间转换
             if (empty($value['front_cover'])){  // 封面图
