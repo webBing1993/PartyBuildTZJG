@@ -145,7 +145,7 @@
                 if($(this).data("tab")){
                     data['list_images'].push($(this).data("tab")+"")  ;
                 }
-            })
+            });
 
 //            data['list_image'] = [$('.img:nth-child(1) img').attr('data-tab'),$('.img:nth-child(2) img').attr('data-tab'),$('.img:nth-child(3) img').attr('data-tab')];
             $.ajax({
@@ -192,26 +192,28 @@
             type:type,
             status:0
         };
+        data['list_images']=[];
+        $(".img img").each(function(){
+            if($(this).data("tab")){
+                data['list_images'].push($(this).data("tab")+"")  ;
+            }
+        });
         for(var key in data){
-            if(data["title"]!= ''&& data["content"]!=""){
-                single = true;
-                continue;
+            if(data["title"]!= ''){
+                if(data["content"]!=""||data["list_images"].length!==0) {
+                    single = true;
+                    continue;
+                }
             }
         }
         if(single){
-            data['list_images']=[];
+
             if(templet == "普通型"){
                 data["templet"] = 1;
             }else{
                 data["templet"] = 2;
             }
             data["status"] = 0;
-            $(".img img").each(function(){
-                if($(this).data("tab")){
-                    data['list_images'].push($(this).data("tab")+"")  ;
-                }
-            });
-
             if( data["templet"] == 2){
                 if(data['list_images'].length==0){
                     swal({

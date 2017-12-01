@@ -310,7 +310,7 @@
                 status:0
             };
             for(var key in data){
-                if(data["title"]!= ''&& data["content"]!=""){
+                if(data["title"]!= ''){
                     single = true;
                     continue;
                 }
@@ -368,7 +368,7 @@
         }
 
         for(var key in data){
-            if(data["title"]!= ''&& data["content"]!=""){
+            if(data["title"]!= ''){
                 single = true;
                 continue;
             }
@@ -386,6 +386,16 @@
                     data['list_images'].push($(this).data("tab")+"")  ;
                 }
             });
+            if(data["content"]==""&& data["list_images"].length==0){
+                swal({
+                    title: ' ',
+                    text: '信息输入不完整',
+                    type: 'error',
+                    showConfirmButton:false,
+                    timer:1500
+                });
+                return false;
+            }
             if( data["templet"] == 2){
                 if(data['list_images'].length==0){
                     swal({

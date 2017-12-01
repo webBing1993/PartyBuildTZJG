@@ -226,15 +226,21 @@
             id:$("input[name='id']").val(),
             status:0
         };
+        data['list_images']=[];
+        $(".img img").each(function(){
+            if($(this).data("tab")){
+                data['list_images'].push($(this).data("tab")+"")  ;
+            }
+        });
         for(var key in data){
-            if(data["title"]!= ''&& data["content"]!=""){
-
-                single = true;
-                continue;
+            if(data["title"]!= ''){
+                if(data["content"]!=""||data["list_images"].length!==0) {
+                    single = true;
+                    continue;
+                }
             }
         }
         if(single){
-            data['list_images']=[];
             if(templet == "普通型"){
                 data["templet"] = 1;
             }else{
@@ -258,12 +264,6 @@
                 data["type"] = 3;
             }
             data["status"] = 0;
-            $(".img img").each(function(){
-                if($(this).data("tab")){
-                    data['list_images'].push($(this).data("tab")+"")  ;
-                }
-            });
-
             if( data["templet"] == 2){
                 if(data['list_images'].length==0){
                     swal({
