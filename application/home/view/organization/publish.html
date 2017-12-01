@@ -2,6 +2,58 @@
 
 {block name="style"}
 <link rel="stylesheet" href="/home/css/common/publish.css">
+<style>
+    .yes_no {
+        display: none;
+        text-align: center;
+        padding:0!important;
+        padding-bottom: 0!important;
+        border-bottom: 0 !important;
+        margin-top: 30vw;
+    }
+    .clice {
+        width: 50vw;
+        display: inline-block;
+        float: left;
+        text-align: center;
+        position: relative;
+    }
+    .clice:before {
+        content: '';
+        width: 4.8vw;
+        height: 4.8vw;
+        border: 1px solid #d7d7d7;
+        border-radius: 50%;
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        margin-top: -2.4vw;
+    }
+    .clice span {
+        display: inline-block;
+        padding-left: 8vw;
+    }
+    .clice.active:before {
+        content: '';
+        background-color: #fc6c62;
+    }
+    .sure {
+        width: 5.6rem;
+        height: 1rem;
+        background: #fc6c62;
+        border-radius: 5px;
+        color: #fff;
+        margin: 0.5rem auto;
+        text-align: center;
+        font-size: 0.36rem;
+        line-height: 1rem;
+        display: none;
+        position: absolute;
+        bottom: 10vw;
+        left: 50%;
+        margin-left: -2.8rem;
+    }
+</style>
 {/block}
 
 {block name="body"}
@@ -43,6 +95,10 @@
                 <span class="triangle-down"></span>
             </li>
             {/empty}
+            <li class="yes_no">
+                <div class="clice fl"><span>有离退休党支部</span></div>
+                <div class="clice fl"><span>无离退休党支部</span></div>
+            </li>
             <li>
                 标题
                 <input style="text" placeholder="请输入标题" name="title" value="{$msg.title || default=''}">
@@ -67,6 +123,7 @@
             </div>
         </ul>
     </div>
+    <div class="sure">确定</div>
     <!--<div class="save">保&emsp;存</div>-->
     <div class="goreview">确定上传</div>
     <p>注：点击确定上传，系统自动积分。上传的内容将发至管理员处进行审核，审核通过后将在相应栏目发送，并保存至个人中心-我的发布。</p>
@@ -122,19 +179,60 @@
         if($(".img img").length==3){
             $(".add").hide();
         }
-        if(type==1){
+        if(type == 1){
             $("title").text("规范化建设");
             $(".showup").show();
-        }else if(type==2){
+        }else if(type == 2){
             $("title").text("离退休党员台账资料");
-        }else if(type==3){
+            $(".yes_no").show().siblings("li").hide();
+            $(".content,.goreview,.goreview+p").hide();
+            $(".yes_no .clice span").on("click", function () {
+                $(this).parent(".clice").addClass("active").siblings(".clice").removeClass("active");
+                if ($(".clice:first-of-type").hasClass("active")) {
+                    setTimeout(function () {
+                        $(".yes_no").hide().siblings("li").show();
+                        $(".content,.goreview,.goreview+p").show();
+                    },500)
+                }else if ($(".clice:last-of-type").hasClass("active")) {
+                    setTimeout(function () {
+                        $(".yes_no").hide();
+                        $(".sure").show();
+                    },500)
+                }
+            })
+        }else if(type == 3){
             $("title").text("党费收缴");
-        }else if(type==4){
+        }else if(type == 4){
             $("title").text("信息录用");
         }
     });
 
-    //保存
+    // 确定
+    $(".sure").on("click", function () {
+        $.ajax({
+            type:"post",
+            url: "{:Url('Organization/retirement')}",
+            success:function(data){
+                if(data.code == 1){
+                    window.history.go(-1);
+                }else{
+                    swal({
+                        title: ' ',
+                        text: data.msg,
+                        type: 'success',
+                        showConfirmButton:false,
+                        timer:1500
+                    });
+                    setTimeout(function () {
+                        window.history.go(-1);
+                    },2000);
+                }
+            },error: function () {
+            }
+        });
+    });
+
+    // 保存
     $(".save").click(function(){
         var templet = $("#openPopover").html();
         var userid = "{$userId}";
@@ -211,7 +309,7 @@
     });
 
 
-    //去审核
+    // 去审核
     $(".goreview").click(function(){
         var single = false;
         var templet = $("#openPopover").html();
@@ -236,7 +334,7 @@
                     data["class"] = 3;
                     break;
             }
-        }else{
+        } else{
             var data={
                 title:$("input[name='title']").val(),
                 content:$("textarea[name='content']").val(),
@@ -322,7 +420,7 @@
         var select_it = $(this).text();
         $("#openPopover").html(select_it);
         mui('#popover').popover("hide");
-    })
+    });
 
     $("#popover2 ul li").click(function(){
         var select_it = $(this).text();

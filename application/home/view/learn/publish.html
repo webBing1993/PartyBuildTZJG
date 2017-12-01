@@ -358,17 +358,22 @@
             $(".yes_no .clice").on("click", function () {
                 $(".yes_no .clice").removeClass("active");
                 $(this).addClass("active");
-                $(".yes_no").hide();
                 if ($(".yes_no .clice").eq(0).hasClass("active")) {
-                    $(".yes_no").siblings("li").show();
-                    $(".content").show();
-                    $(".main>.nogroup").show();
-                    $(".main .nogroup .type2").hide();
-                    $(".template").hide();
-                    $(".sure").hide().siblings().show();
+                    setTimeout(function () {
+                        $(".yes_no").hide();
+                        $(".yes_no").siblings("li").show();
+                        $(".content").show();
+                        $(".main>.nogroup").show();
+                        $(".main .nogroup .type2").hide();
+                        $(".template").hide();
+                        $(".sure").hide().siblings().show();
+                    },500)
                 }else if ($(".yes_no .clice").eq(1).hasClass("active")) {
-                    $(".main>.nogroup").show();
-                    $(".sure").show().siblings().hide();
+                    setTimeout(function () {
+                        $(".yes_no").hide();
+                        $(".main>.nogroup").show();
+                        $(".sure").show().siblings().hide();
+                    },500)
                 }
             })
         }else{
@@ -423,7 +428,7 @@
                     swal({
                         title: ' ',
                         text: data.msg,
-                        type: 'error',
+                        type: 'success',
                         showConfirmButton:false,
                         timer:1500
                     });
