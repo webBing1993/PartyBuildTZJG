@@ -25,7 +25,11 @@
 				<ul>
 					{volist name="list" id="ll"}
 					<li>
-						<a href="#" class="list clear" data-type="{$ll.class}">
+						{eq name="ll.templet" value="1"}
+							<a href="{:Url('User/detail?class='.$ll['class'].'&id='.$ll['id'])}" class="list clear" data-type="{$ll.class}">
+							{else/}
+							<a href="{:Url('User/detail2?class='.$ll['class'].'&id='.$ll['id'])}" class="list clear" data-type="{$ll.class}">
+							{/eq}
 							<img src="{$ll.front_cover}">
 							<span>{$ll.title}</span>
 							{switch name='ll.class'}
@@ -173,7 +177,11 @@ function addLists(data){
 	var len = lists.length;
 	for(var i = 0; i< len;i++){
 		var list = lists[i];
-		var link = '/home/review/detail/class/'+list.class+'/id/'+list.id;
+		if(list.templet == 1){
+			link  = '/home/user/detail/class/'+list.class+'/id/'+list.id;
+		}else {
+			link  = '/home/user/detail2/class/'+list.class+'/id/'+list.id;
+		}
 		if(list.class == 1){
 			class_name = '[党建责任]';
 		}else if(list.class == 2){
@@ -192,7 +200,7 @@ function addLists(data){
 		if(flag) {
 			html +=
 					'<li>' +
-					'<a href="#" class="list clear" data-type="' + list.class + '" style="height:90px;">' +
+					'<a href="' + link + '" class="list clear" data-type="' + list.class + '" style="height:90px;">' +
 					'<img src="' + list.front_cover + '" style="width:90px;height:60px;margin-top:15px">' +
 					'<span font-size:14px;margin-left:100px;width:440px;margin-top:5px">' + list.title + '</span>' +
 					'<p style="margin-left:100px;font-size:12px;bottom:30px;">' + class_name + '</p>' +
@@ -212,14 +220,14 @@ function addLists(data){
 		}else{
 			html +=
 					'<li>' +
-					'<a href="#" class="list clear" data-type="' + list.class + '">' +
+					'<a href="' + link + '" class="list clear" data-type="' + list.class + '">' +
 					'<img src="' + list.front_cover + '">' +
 					'<span>' + list.title + '</span>' +
 					'<p>' + class_name + '</p>' +
 					'<p>' +
 					'	审核人：  ' + list.username + '' +
 					'</p>' +
-					'<span> ' + list.review_time + '</span>'
+					'<span> ' + list.review_time + '</span>';
 			if (list.review_status == 1) {
 				html += '<i class="pass"></i>';
 			} else if (list.review_status == 2) {
@@ -235,5 +243,16 @@ function addLists(data){
 	}
 	$(".Audited ul" ).append(html);
 }
+
+mui('#refreshContainer').on('tap', 'a', function(e) {
+	var url = this.getAttribute("href");
+	window.location.href = url;
+});
+
+mui("#refreshContainer").on("touchstart","a",function(){
+	$(this).css("backgroundColor","rgba(0,0,0,.1)");
+}).on("touchend","a", function () {
+	$(this).css("backgroundColor","#fff");
+});
 </script>
 {/block}
