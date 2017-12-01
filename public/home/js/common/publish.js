@@ -53,7 +53,14 @@ $(function(){
                     },
                     error : function (date) {
                         $(".showbox").hide();
-                        alert(JSON.stringify(date));
+                        //alert(JSON.stringify(date));
+                        swal({
+                            title: ' ',
+                            text: '上传失败，请重新上传',
+                            type: 'warning',
+                            showConfirmButton:false,
+                            timer:1500
+                        });
                     }
                 });
             } else {
