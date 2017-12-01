@@ -252,6 +252,7 @@
 
         flag = IsPC();
         if(flag){
+            $("body,html").css("backgroundColor","#f1f1f1");
             $(".default img").css("width","60px");
             $(".main").css({"width":"640px","left":"50%","margin-left":"-320px","position":"relative","min-height":"90vh","margin-top":"5vh"});
             $("#refreshContainer").css("top","calc(230px + 1rem)");
@@ -262,7 +263,7 @@
             $("#tab").css("width","940px");
             $(".nav .arr").css("width","60px");
             $(".nav").css({"width":"640px","left":"50%","margin-left":"-320px"});
-            $(".list ul a").css("padding","10px 15px");
+            $(".list ul a").css({"padding":"10px 15px","height":"120px"});
             $(".list ul a p").css({"font-size":"16px","margin-bottom":"0.5rem"});
             $(".list ul a span").css({"font-size":"14px"});
             $(".list ul a span:nth-child(3)").css("bottom","10px");

@@ -71,7 +71,9 @@
 
         flag = IsPC();
         if(flag){
+            $("body,html").css("backgroundColor","#f1f1f1");
             $(".main").css({"width":"640px","left":"50%","position":"relative","margin-left":"-320px","margin-top":"5vh","min-height":'90vh'});
+            $(".list ul a").css({"padding":"10px 15px","height":"120px"});
             $(".list ul a p").css({"margin-bottom":"0.5rem","font-size":"16px"});
             $(".list ul a span").css({"font-size":"14px"});
             $(".mui-pull .mui-pull-caption").css("font-size","15px");

@@ -22,11 +22,12 @@ use think\Db;
 class Base extends Controller {
     public function _initialize(){
 //        session('userId','ZhangNeng');
-//        session('userId','18768112486');
+//        session('userId','13968699567');
+        session('userId','13586095588');
 
 //        session('header','/home/images/vistor.jpg');
 //        session('nickname','游客');
-        session('requestUri', 'http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]);
+//        session('requestUri', 'http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]);
         $userId = session('userId');
 
         if(Config::get('WEB_SITE_CLOSE')){
