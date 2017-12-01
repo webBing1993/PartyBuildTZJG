@@ -27,12 +27,10 @@ $(function(){
                     processData : false,
                     contentType : false,
                     beforeSend: function(XMLHttpRequest){
-                        $(".loading").show();
-                        $(".shadow").show();
+                        $(".showbox").show();
                     },
                     success:function(data){
-                        $(".loading").hide();
-                        $(".shadow").hide();
+                        $(".showbox").hide();
                         swal.close();
                         var msg = $.parseJSON(data);
                         if(msg.code == 1){
