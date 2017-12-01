@@ -97,7 +97,7 @@ body {
     width: 0.8rem;
     background: #090;
 }
-.Audited .refuse:after,.Audited .pass:after{
+.Audited .refuse:after,.Audited .pass:after,.Audited .noreview:after{
     display: block;
     content: '';
     background: url("/home/images/review/refused.png");
@@ -109,6 +109,11 @@ body {
 }
 .Audited .pass:after{
     background: url("/home/images/review/pass.png");
+    background-size: 0.5rem 0.5rem;
+}
+
+.Audited .noreview:after{
+    background: url("/home/images/review/refuse.png");
     background-size: 0.5rem 0.5rem;
 }
 
