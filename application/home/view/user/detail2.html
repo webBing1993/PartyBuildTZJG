@@ -58,6 +58,11 @@
             <img src="{$img|get_cover='path'}" alt="笔记图片" class="img" style="width:100%"><br>
             {/volist}
             <div class="article-content">{$info.content}</div>
+            {notempty name="$info.files"}
+            {volist name="$info.files" id="de"}
+            <a href="{$de.url}" style="display: block; font-size: 0.38rem;margin-top: 0.2rem">{$de.name}</a>
+            {/volist}
+            {/notempty}
         </div>
     </div>
 </div>

@@ -328,6 +328,20 @@ class User extends Base {
             if(!empty($info['list_images'])){
                 $info['list_images'] = json_decode($info['list_images']);
             }
+            // 获取文件
+            if($info['file']) {
+                $temp = json_decode($info['file']);
+                $arr[] = [];
+                foreach($temp as $key => $value){
+                    $savepath = Db::name('file')->where('id',$value)->value('savepath');
+                    $savename = Db::name('file')->where('id',$value)->value('savename');
+                    $arr[$key]['url'] = "http://".$_SERVER["SERVER_NAME"]."/uploads/download/".$savepath.$savename;
+                    $arr[$key]['name'] = Db::name('file')->where('id',$value)->value('name');
+                }
+                $info['files'] = $arr;
+            }else{
+                $info['files'] = '';
+            }
             if ($type == 4){
                 $info['commend_img'] = json_decode($info['commend_img']);
                 $info['voucher_img'] = json_decode($info['voucher_img']);
@@ -351,25 +365,25 @@ class User extends Base {
     public function get_con($type,$count=0,$status=0){
         switch ($type) {    //根据类别获取表明
             case 1:
-                $table = "responsibility";
+                $table = "pb_responsibility";
                 break;
             case 2:
-                $table = "learn";
+                $table = "pb_learn";
                 break;
             case 3:
-                $table = "organization";
+                $table = "pb_organization";
                 break;
             case 4:
-                $table = "special";
+                $table = "pb_special";
                 break;
             case 5:
-                $table = "style";
+                $table = "pb_style";
                 break;
             case 6:
-                $table = "volunteer";
+                $table = "pb_volunteer";
                 break;
             case 7:
-                $table = "incorrupt";
+                $table = "pb_incorrupt";
                 break;
             default:
                 return $this->error("无该数据表");
@@ -379,22 +393,19 @@ class User extends Base {
         $order = 'create_time desc';
         $limit = "$count,2";
         if ($status == 2){
-            $map = array(
-                'userid' => $userid,
-                'status' => ['in',[0,1,$status]],
-            );
             $user_id = Db::name('ucenter_member')->where('username',$userid)->value('id');
-            $mapp = array(
-                'create_user' => $user_id,
-                'status' => ['in',[0,1,$status]],
-             );
-            $list = Db::name($table)->where($map)->whereOr($mapp) ->order($order) ->limit($limit) ->select();
+            if ($user_id){
+                $list = Db::query("select * from {$table} where userid = {$userid} or create_user = {$user_id} and status in (0,1,2) order BY {$order} limit {$limit}");
+            }else{
+                $list = Db::query("select * from {$table} where userid = {$userid} and status in (0,1,2) order BY {$order} limit {$limit}");
+            }
+
         }else{
             $map = array(
                 'userid' => $userid,
                 'status' => ['eq',$status],
             );
-            $list = Db::name($table)->where($map) ->order($order) ->limit($limit) ->select();
+            $list = Db::table($table)->where($map) ->order($order) ->limit($limit) ->select();
         }
         foreach($list as $key => $value){
             $list[$key]['create_time'] = date('Y-m-d',$value['create_time']);  // 时间转换
