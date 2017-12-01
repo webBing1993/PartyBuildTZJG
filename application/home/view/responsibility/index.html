@@ -65,6 +65,7 @@
 
         flag = IsPC();
         if(flag){
+            $("body,html").css("backgroundColor","#f1f1f1");
             $(".main").css({"width":"640px","left":"50%","min-height":"90vh","margin":"5vh 0 0 -320px","position":"relative"});
             $(".banner").css({"width":"640px","height":"320px","margin":"0 auto"});
             $(".search").css({"width":"640px","left":"50%","margin-left":"-320px"});
@@ -72,10 +73,10 @@
             $(".banner img").css({"width":"640px","height":"320px","margin":"0 auto"});
             $("#tab").css({"margin-top":"320px","width":"640px","position":"static","top":"0","margin":"0 auto"});
             $(".list").css("margin-top",0);
-            $(".list ul a").css("padding","10px 15px");
+            $(".list ul a").css({"padding":"10px 15px","height":"120px"});
             $(".list ul a img").css({"width":"90px","height":"60px"});
             $(".list ul a p").css({"font-size":"16px","margin-bottom":"30px","-webkit-line-clamp":"1"});
-            $(".list ul a span").css("font-size","14px");
+            $(".list ul a span").css({"font-size":"14px","bottom":"10px"});
             $(".list ul a span:nth-child(3)").css("bottom","10px");
             $(".list ul a span:nth-child(4)").css("bottom","10px");
             $(".default").css({"height":"90vh","margin-top":"-1.2rem"});

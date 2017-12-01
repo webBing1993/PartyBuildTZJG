@@ -113,6 +113,7 @@
 
         flag = IsPC();
         if(flag){
+            $("body,html").css("backgroundColor","#f1f1f1");
             $(".main").css({"width":"640px","left":"50%","min-height":"90vh","margin":"70px 0 0 -320px","position":"relative"});
             $(".search").css({"width":"640px","left":"50%","margin-left":"-320px","height":"70px"});
 //            $(".search input").css({"height":"3.6vh","font-size":"14px"});
@@ -122,11 +123,11 @@
             $("#tab").css({"width":"640px","left":"50%","margin-left":"-320px","top":"0"});
             $("#refreshContainer").css({"top":"0","width":"640px","left":"50%","margin-left":"-320px"});
             $(".list").css("margin-top","1rem");
-            $(".list ul a").css("padding","10px 15px");
+            $(".list ul a").css({"padding":"10px 15px","height":"120px"});
 //            $(".search .mui-icon-search").css("font-size","2.2vh");
             $(".list ul a img").css({"width":"90px","height":"60px"});
             $(".list ul a p").css({"font-size":"16px","margin-bottom":"30px","-webkit-line-clamp":"1"});
-            $(".list ul a span").css("font-size","14px");
+            $(".list ul a span").css({"font-size":"14px","bottom":"10px"});
             $(".list ul a span:nth-child(3)").css("bottom","10px");
             $(".list ul a span:nth-child(4)").css("bottom","10px");
             $(".default img").css("width","60px");
