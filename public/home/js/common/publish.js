@@ -52,6 +52,7 @@ $(function(){
                         }
                     },
                     error : function (date) {
+                        $(".showbox").hide();
                         alert(JSON.parse(date));
                     }
                 });
