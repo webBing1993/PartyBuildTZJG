@@ -189,7 +189,7 @@ ul li a span:nth-child(2){
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     width: calc(100% - 36vw);
-    line-height: 0.42rem;
+    line-height: 1.2;
 }
 .Audited ul li p{
     font-size: 0.32rem;
