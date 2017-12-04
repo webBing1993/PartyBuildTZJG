@@ -199,6 +199,7 @@
                 if ($(".clice:first-of-type").hasClass("active")) {
                     setTimeout(function () {
                         $(".yes_no").hide().siblings("li").show();
+                        $(".showup").hide();
                         $(".content,.goreview,.goreview+p").show();
                     },500)
                 }else if ($(".clice:last-of-type").hasClass("active")) {
