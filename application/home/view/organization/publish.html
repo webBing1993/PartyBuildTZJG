@@ -220,10 +220,19 @@
     $(".sure").on("click", function () {
         $.ajax({
             type:"post",
-            url: "{:Url('Organization/retirement')}",
+            url: "{:Url('Organization/play')}",
             success:function(data){
                 if(data.code == 1){
-                    window.history.go(-1);
+                    swal({
+                        title: ' ',
+                        text: data.msg,
+                        type: 'success',
+                        showConfirmButton:false,
+                        timer:1500
+                    });
+                    setTimeout(function () {
+                        window.history.go(-1);
+                    },2000);
                 }else{
                     swal({
                         title: ' ',

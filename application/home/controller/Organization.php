@@ -230,4 +230,23 @@ class Organization extends Base{
         $this->assign('comment',$comment);
         return $this->fetch();
     }
+    /**
+     * 无 离退休党支部 操作
+     */
+    public function play(){
+        $userid = session('userId');
+        $user = \app\home\model\WechatUserTag::where(['tagid' => 1 ,'userid' => $userid])->find();
+        if ($user){
+            // 是否考核人员
+            $map = ['class' => 3,'type' => 2,'userid' => $userid]; // 组织建设  离退党支部
+            $count = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();
+            if ($count < 1){
+                // 可以积分
+                \think\Db::name('score')->insert(['class' => 3,'type' => 2,'aid' => 0,'userid' => $userid,'score_up' => 3,'score_down' => 1,'create_time' => time()]);
+                return $this->success('积分成功');
+            }else{
+                return $this->error('您已积分~');
+            }
+        }
+    }
 }

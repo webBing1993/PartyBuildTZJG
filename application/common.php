@@ -384,10 +384,13 @@ function get_score($class,$aid,$userid){
                         }
                         break;
                     case 2:  // 台账资料
-                        $count = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();  // 获取已发布个数
-                        if ($count < 1) {
-                            // 可以积分
-                            \think\Db::name('score')->insert(['class' => $class, 'type' => $info['type'], 'aid' => $aid, 'userid' => $userid, 'score_up' => 3, 'score_down' => 1, 'create_time' => time()]);
+                        $flag = \think\Db::name('score')->where(['class' => $class,'type' => $info['type'],'userid' => $userid,'aid' =>0])->whereTime('create_time','y')->find();
+                        if (!$flag){
+                            $count = \think\Db::name('score')->where($map)->whereTime('create_time','y')->count();  // 获取已发布个数
+                            if ($count < 1) {
+                                // 可以积分
+                                \think\Db::name('score')->insert(['class' => $class, 'type' => $info['type'], 'aid' => $aid, 'userid' => $userid, 'score_up' => 3, 'score_down' => 1, 'create_time' => time()]);
+                            }
                         }
                         break;
                     case 3: // 党课
