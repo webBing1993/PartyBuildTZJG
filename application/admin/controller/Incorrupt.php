@@ -101,6 +101,9 @@ class Incorrupt extends Admin {
             }else{
                 $msg['files'] = '';
             }
+            if ($msg['list_images']){
+                $msg['list_images'] = json_decode($msg['list_images']);
+            }
             $this->assign('msg',$msg);
             return $this->fetch();
         }
