@@ -196,9 +196,9 @@
                             <div class="col-lg-5">
                                 {volist name="msg.list_images" id="mo"}
                                 <div class="imggroup photo">
-                                    <img src="{$mo.list_images|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
+                                    <img src="{$mo|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
                                     <input type="file" class="imgfile"  accept="image/jpg, image/png, image/gif, image/jpeg">
-                                    <input type="hidden" name="list_images" class="img"  value="{$mo.list_images}" required="">
+                                    <input type="hidden" name="list_images" class="img"  value="{$mo}" required="">
                                 </div>
                                 {/volist}
                             <div class="clear"></div>
