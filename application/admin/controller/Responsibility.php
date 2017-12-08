@@ -26,14 +26,17 @@ class Responsibility extends Admin {
      */
     public function index() {
         $userId = $_SESSION['think']['user_auth']['id'];
-        $map = array(
-            'status' => array('egt',0),
-            'create_user' => $userId
-        );
+        $user_id = Db::name('ucenter_member')->where('id',$userId)->value('username');
+        $where = array();
         if($userId == 1) {
-            unset($map['create_user']);
+            $where = array(
+                'status' => array('egt',0),
+            );
+        }else{
+            $where['create_user|userid'] = array(['eq',$userId],['eq',$user_id],'or');
+            $where['status'] = array('egt',0);
         }
-        $list = $this->lists('Responsibility',$map);
+        $list = $this->lists('Responsibility',$where);
         int_to_string($list, array(
             'type' => array(1=>"专题研究",2=>"责任清单",3=>"述职报告",4=>"工作计划"),
             'status' => array(0=>'待审核',1=>'已发布',2=>'不通过',3=>'草稿'),

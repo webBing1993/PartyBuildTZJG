@@ -25,14 +25,17 @@ class Style extends Admin {
      */
     public function index() {
         $userId = $_SESSION['think']['user_auth']['id'];
-        $map = array(
-            'status' => array('egt',0),
-            'create_user' => $userId
-        );
+        $user_id = Db::name('ucenter_member')->where('id',$userId)->value('username');
+        $where = array();
         if($userId == 1) {
-            unset($map['create_user']);
+            $where = array(
+                'status' => array('egt',0),
+            );
+        }else{
+            $where['create_user|userid'] = array(['eq',$userId],['eq',$user_id],'or');
+            $where['status'] = array('egt',0);
         }
-        $list = $this->lists('Style',$map);
+        $list = $this->lists('Style',$where);
         int_to_string($list, array(
             'type' => array(1=>'方案部署',2=>'金点子',3=>'培树典型',4=>'党员清单'),
             'status' => array(0=>'待审核',1=>'已发布',2=>'未通过',3=>'草稿'),

@@ -25,14 +25,17 @@ class Volunteer extends Admin {
      */
     public function index() {
         $userId = $_SESSION['think']['user_auth']['id'];
-        $map = array(
-            'status' => array('egt',0),
-            'create_user' => $userId
-        );
+        $user_id = Db::name('ucenter_member')->where('id',$userId)->value('username');
+        $where = array();
         if($userId == 1) {
-            unset($map['create_user']);
+            $where = array(
+                'status' => array('egt',0),
+            );
+        }else{
+            $where['create_user|userid'] = array(['eq',$userId],['eq',$user_id],'or');
+            $where['status'] = array('egt',0);
         }
-        $list = $this->lists('Volunteer',$map);
+        $list = $this->lists('Volunteer',$where);
         int_to_string($list, array(
             'type' => array(1=>"四跑志愿服务",2=>"一条街、三走进",3=>"三级联动、最多跑一次"),
             'status' => array(0=>'待审核',1=>'已发布',2=>'未通过',3=>'草稿'),

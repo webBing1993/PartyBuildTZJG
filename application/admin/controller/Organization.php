@@ -25,14 +25,17 @@ class Organization extends Admin {
      */
     public function index() {
         $userId = $_SESSION['think']['user_auth']['id'];
-        $map = array(
-            'status' => array('egt',0),
-            'create_user' => $userId
-        );
+        $user_id = Db::name('ucenter_member')->where('id',$userId)->value('username');
+        $where = array();
         if($userId == 1) {
-            unset($map['create_user']);
+            $where = array(
+                'status' => array('egt',0),
+            );
+        }else{
+            $where['create_user|userid'] = array(['eq',$userId],['eq',$user_id],'or');
+            $where['status'] = array('egt',0);
         }
-        $list = $this->lists('Organization',$map);
+        $list = $this->lists('Organization',$where);
         int_to_string($list, array(
             'type' => array(1=>"规范建设",2=>"离退休党员台账资料",3=>"党费收缴",4=>"信息录用"),
             'status' => array(0=>'待审核',1=>'已发布',2=>'未通过',3=>'草稿'),
