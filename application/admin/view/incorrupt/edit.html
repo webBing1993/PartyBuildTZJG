@@ -89,6 +89,9 @@
     .modal-footer .btn+.btn{
         margin-left: 60px;
     }
+    .photo{
+        display: inline-block;
+    }
 </style>
 {/block}
 
@@ -184,6 +187,28 @@
                                 </div>
                             </div>
                         </div>
+
+
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>上传图片:</label>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="imggroup photo">
+                                    {eq name="$msg" value=""}
+                                    <img src="{$front_pic|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
+                                    {else/}
+                                    <img src="{$msg.front_cover|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
+                                    {/eq}
+                                    <input type="file" class="imgfile"  accept="image/jpg, image/png, image/gif, image/jpeg">
+                                    <input type="hidden" name="front_cover" class="img"  value="{$msg.front_cover||default=$front_pic}" required="">
+                                </div>
+                            <div class="clear"></div>
+                        </div>
+
+
+
+
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
                                 <label>发布人:</label>
