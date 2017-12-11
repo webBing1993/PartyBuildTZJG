@@ -51,6 +51,7 @@ class Incorrupt extends Admin {
         if(IS_POST) {
             $data = input('post.');
             isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
+            isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";
             if(empty($data['id'])) {
                 unset($data['id']);
             }
@@ -80,6 +81,7 @@ class Incorrupt extends Admin {
         if(IS_POST) {
             $data = input('post.');
             isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
+            isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";
             $res = $Model->validate(true)->save($data,['id'=>input('id')]);
             if($res){
                 return $this->success("修改成功",Url("Incorrupt/index"));
@@ -119,6 +121,9 @@ class Incorrupt extends Admin {
         );
         $sta = IncorruptModel::where('id',$id)->update($info);
         if($sta){
+            if (Db::name('score')->where(['class' => 7,'aid' => $id])->find()){
+                Db::name('score')->where(['class' => 7,'aid' => $id])->delete(); // 党风廉政
+            }
             return $this->success('删除成功!');
         }else{
             return $this->error('删除失败!');
