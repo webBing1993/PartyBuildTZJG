@@ -395,11 +395,10 @@ class User extends Base {
         if ($status == 2){
             $user_id = Db::name('ucenter_member')->where('username',$userid)->value('id');
             if ($user_id){
-                $list = Db::query("select * from {$table} where userid = '{$userid}' or create_user = '{$user_id}' and status in (0,1,2) order BY {$order} limit {$limit}");
+                $list = Db::query("select * from {$table} where (userid = '{$userid}' or create_user = '{$user_id}') and status IN (0,1,2) order BY {$order} limit {$limit}");
             }else{
-                $list = Db::query("select * from {$table} where userid = '{$userid}' and status in (0,1,2) order BY {$order} limit {$limit}");
+                $list = Db::query("select * from {$table} where (userid = '{$userid}') and status IN (0,1,2) order BY {$order} limit {$limit}");
             }
-
         }else{
             $map = array(
                 'userid' => $userid,
