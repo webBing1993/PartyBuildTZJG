@@ -335,4 +335,17 @@ class Incorrupt extends Admin {
             return $this->error("发送失败");
         }
     }
+
+    /**
+     * 新闻通知预览
+     */
+    public function preview(){
+        $this->default_pic4();
+
+        $id = input('id');
+        $list = IncorruptModel::get($id);
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
 }
