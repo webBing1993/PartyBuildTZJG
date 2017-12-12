@@ -128,6 +128,11 @@
     };
 
     $(function(){
+        $(".content img").each(function(){
+            if($(this).attr("src").split(".")[$(this).attr("src").split(".").length-1]=='gif'){
+                $(this).css({"width":"0.4rem","height":"0.4rem"})
+            }
+        });
         function IsPC() {
             var userAgentInfo = navigator.userAgent;
             var Agents = ["Android", "iPhone",

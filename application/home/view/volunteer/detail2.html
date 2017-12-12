@@ -102,6 +102,11 @@
 <script>
     var c =  parseInt(window.location.href.split("?")[1]);
     $(function(){
+        $(".content img").each(function(){
+            if($(this).attr("src").split(".")[$(this).attr("src").split(".").length-1]=='gif'){
+                $(this).css({"width":"0.4rem","height":"0.4rem"})
+            }
+        });
         $("title").text("志愿服务");
         var mySwiper = new Swiper('.swiper-container', {
             autoplay: 3000,
