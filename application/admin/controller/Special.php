@@ -50,6 +50,7 @@ class Special extends Admin {
         if(IS_POST) {
             $data = input('post.');
             isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
+            isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";
             if(empty($data['id'])) {
                 unset($data['id']);
             }
@@ -83,6 +84,7 @@ class Special extends Admin {
             isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
             isset($data["commend_img"]) ? $data["commend_img"] = json_encode($data["commend_img"]) : $data["commend_img"] = "";
             isset($data["voucher_img"]) ? $data["voucher_img"] = json_encode($data["voucher_img"]) : $data["voucher_img"] = "";
+            isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";
             $res = $Model->validate(true)->save($data,['id'=>input('id')]);
             if($res){
                 return $this->success("修改成功",Url("Special/index"));
@@ -120,6 +122,9 @@ class Special extends Admin {
             }else{
                 $msg['files'] = '';
             }
+            if ($msg['list_images']){
+                $msg['list_images'] = json_decode($msg['list_images']);
+            }
             $this->assign('msg',$msg);
             return $this->fetch();
         }
@@ -135,6 +140,9 @@ class Special extends Admin {
         );
         $sta = SpecialModel::where('id',$id)->update($info);
         if($sta){
+            if (Db::name('score')->where(['class' => 4,'aid' => $id])->find()){
+                Db::name('score')->where(['class' => 4,'aid' => $id])->delete(); // 特色创新
+            }
             return $this->success('删除成功!');
         }else{
             return $this->error('删除失败!');

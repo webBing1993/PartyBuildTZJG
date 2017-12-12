@@ -146,7 +146,6 @@ class Wechat extends Admin
                 $TagModel->create($tag);
             }
         }
-
         /* 同步标签-用户关系表 */
         foreach ($tags['taglist'] as $value) {
             $users = $Wechat->getTag($value['tagid']);
@@ -160,7 +159,7 @@ class Wechat extends Admin
                     //存在name相同，userid不同 则修改wechat_tag 和 ucenter_member
                     if($res1['userid'] != $user['userid']) {
                         $TagUserModel->save($data,['id'=>$res1['id']]);
-                        $UcenterMemberModel->where('username',$res1['userid'])->update(['username'=>$user['userid']]);
+                        $UcenterMemberModel->where('username',$res1['userid'])->update(['username' =>$user['userid']]);
                     }
                 }elseif ($res2){
                     //存在userid相同，name不同 则修改wechat_tag 和 member

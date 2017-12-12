@@ -520,7 +520,7 @@ class User extends Base {
                             $msg[$key]['str'] = "两学一做-理论研究";
                             break;
                         case 7:
-                            $msg[$key]['str'] = "两学一做-支部委员大会";
+                            $msg[$key]['str'] = "两学一做-支部党员大会";
                             break;
                         case 8:
                             $msg[$key]['str'] = "两学一做-党支部委员会";

@@ -55,6 +55,7 @@ class Responsibility extends Admin {
                 unset($data['id']);
             }
             isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
+            isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";
             $Model = new ResponsibilityModel();
             $data['create_user'] = $_SESSION['think']['user_auth']['id'];
             $res = $Model->validate(true)->save($data);
@@ -81,6 +82,7 @@ class Responsibility extends Admin {
         if(IS_POST) {
             $data = input('post.');
             isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
+            isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";
             $res = $Model->validate(true)->save($data,['id'=>input('id')]);
             if($res){
                 return $this->success("修改成功",Url("Responsibility/index"));
@@ -102,6 +104,9 @@ class Responsibility extends Admin {
             }else{
                 $msg['files'] = '';
             }
+            if ($msg['list_images']){
+                $msg['list_images'] = json_decode($msg['list_images']);
+            }
             $this->assign('msg',$msg);
             return $this->fetch();
         }
@@ -117,6 +122,9 @@ class Responsibility extends Admin {
         );
         $sta = ResponsibilityModel::where('id',$id)->update($info);
         if($sta){
+            if (Db::name('score')->where(['class' => 1,'aid' => $id])->find()){
+                Db::name('score')->where(['class' => 1,'aid' => $id])->delete(); // 党风廉政
+            }
             return $this->success('删除成功!');
         }else{
             return $this->error('删除失败!');

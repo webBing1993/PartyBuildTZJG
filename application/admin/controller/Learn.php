@@ -55,6 +55,7 @@ class Learn extends Admin {
             }
             $Model = new LearnModel();
             isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
+            isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";
             $data['create_user'] = $_SESSION['think']['user_auth']['id'];
             if($data['type'] == 2) {
                 if(empty($data['time'])) {
@@ -90,6 +91,7 @@ class Learn extends Admin {
         if(IS_POST) {
             $data = input('post.');
             isset($data["file"]) ? $data["file"] = json_encode($data["file"]) : $data["file"] = "";
+            isset($data["list_images"]) ? $data["list_images"] = json_encode($data["list_images"]) : $data["list_images"] = "";
             if($data['type'] == 2) {
                 if(empty($data['time'])) {
                     return $this->error("时间不能为空");
@@ -98,6 +100,7 @@ class Learn extends Admin {
                 }
                 $res = $Model->validate('Learn.two')->save($data,['id'=>input('id')]);
             }else {
+                $data['time'] = strtotime($data['time']);
                 $res = $Model->validate('Learn.one')->save($data,['id'=>input('id')]);
             }
             if($res){
@@ -130,6 +133,9 @@ class Learn extends Admin {
             }else{
                 $msg['files'] = '';
             }
+            if ($msg['list_images']){
+                $msg['list_images'] = json_decode($msg['list_images']);
+            }
             $this->assign('msg',$msg);
             return $this->fetch();
         }
@@ -145,6 +151,9 @@ class Learn extends Admin {
         );
         $sta = LearnModel::where('id',$id)->update($info);
         if($sta){
+            if (Db::name('score')->where(['class' => 2,'aid' => $id])->find()){
+                Db::name('score')->where(['class' => 2,'aid' => $id])->delete(); // 两学一做
+            }
             return $this->success('删除成功!');
         }else{
             return $this->error('删除失败!');

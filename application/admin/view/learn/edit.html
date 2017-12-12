@@ -481,7 +481,7 @@
         if(len2==3){
             $(".add2").hide();
         }
-        if($(".photo").length==4){
+        if($(".photo").length==3){
             $(".addimg").hide();
         }
         highlight_subnav("{:Url('Learn/index')}");
@@ -546,13 +546,13 @@
             var html = "";
             html +=
                     '<div class="imggroup photo">'+
-                    '<img src="" alt="图片" class="thumbnail imgbox">'+
+                    '<img  class="thumbnail imgbox">'+
                     '<input type="file" class="imgfile"  accept="image/jpg, image/png, image/gif, image/jpeg">'+
                     '<input type="hidden" name="list_images" class="img"  value="" required="">'+
                     '<img src="/admin/images/close.png" class="close-img">'+
                     '</div>'
             $(".phone-img").append(html);
-            if($(".photo").length==4){
+            if($(".photo").length==3){
                 $(".addimg").hide();
             }
             $(".imgfile").on("change",function(){

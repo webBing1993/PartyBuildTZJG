@@ -41,7 +41,7 @@
 							{case value='6'}<p>[志愿服务]</p><p>审核人：{$ll.username}</p>{/case}
 							{default/}<p>[党风廉政]</p><p>审核人：{$ll.username}</p>
 							{/switch}
-							<span>{$ll.review_time}</span>
+							<span>{$ll.create_time}</span>
 							{eq name="ll.review_status" value="1"}
 							<i class="pass"></i>
 							{/eq}
@@ -207,7 +207,7 @@ function addLists(data){
 					'<p style="font-size:12px;margin-left:100px">' +
 					'	审核人：  ' + list.username + '' +
 					'</p>' +
-					'<span style="font-size:12px;bottom:15px"> ' + list.review_time + '</span>'
+					'<span style="font-size:12px;bottom:15px"> ' + list.create_time + '</span>'
 			if (list.review_status == 1) {
 				html += '<i class="pass"></i>';
 			} else if (list.review_status == 2) {
@@ -227,7 +227,7 @@ function addLists(data){
 					'<p>' +
 					'	审核人：  ' + list.username + '' +
 					'</p>' +
-					'<span> ' + list.review_time + '</span>';
+					'<span> ' + list.create_time + '</span>';
 			if (list.review_status == 1) {
 				html += '<i class="pass"></i>';
 			} else if (list.review_status == 2) {
