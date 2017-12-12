@@ -14,12 +14,4 @@ class Incorrupt extends Base {
         'create_time' => NOW_TIME,
         'status' => 0
     ];
-    // 获取数据列表
-    public function get_list($status){
-        $map = array(
-            'status' => $status
-        );
-        $list = $this->where($map)->order('create_time','desc')->select();
-        return $list;
-    }
 }
