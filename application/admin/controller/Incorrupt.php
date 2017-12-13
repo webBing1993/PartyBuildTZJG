@@ -340,10 +340,10 @@ class Incorrupt extends Admin {
      * 新闻通知预览
      */
     public function preview(){
-        $this->default_pic4();
-
+        $Model = new IncorruptModel();
+        $this->default_pic();
         $id = input('id');
-        $list = IncorruptModel::get($id);
+        $list = $Model::get($id);
         $this->assign('list',$list);
 
         return $this->fetch();

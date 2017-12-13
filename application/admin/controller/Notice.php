@@ -138,4 +138,17 @@ class Notice extends Admin
             $this->error($Wechat->errMsg);
         }
     }
+
+    /**
+     * 新闻通知预览
+     */
+    public function preview(){
+        $noticeModel = new NoticeModel();
+        $this->default_pic();
+        $id = input('id');
+        $list = $noticeModel::get($id);
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
 }

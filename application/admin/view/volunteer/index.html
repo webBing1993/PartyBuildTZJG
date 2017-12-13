@@ -59,6 +59,7 @@
                                 <td>{$vo.create_time|time_format="Y-m-d"}</td>
                                 <td>{$vo.status_text}</td>
                                 <td>
+                                    <a href="javascript:showIframe({$vo.id})">预览</a>
                                     <a href="{:Url('Volunteer/edit?id='.$vo['id'])}">编辑</a>
                                     <a href="{:Url('Volunteer/del?id='.$vo['id'])}" class="confirm ajax-del">删除</a>
                                 </td>
@@ -94,5 +95,21 @@
             radioClass: 'iradio_square-green',
         });
     });
+
+    function showIframe(myid){
+        var iframe = $("#iframe");
+        var url = "/admin/volunteer/preview/id/" + myid;
+        iframe.attr("src",url);
+        iframe.show();
+        $(".shadow").show();
+        $(".wrapper").css("z-index",0);
+        close(iframe);
+    }
+    function close(ele){
+        $(".shadow").on('click',function(){
+            $(this).hide();
+            ele.hide();
+        });
+    }
 </script>
 {/block}

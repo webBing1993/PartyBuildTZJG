@@ -348,4 +348,17 @@ class Responsibility extends Admin {
             return $this->error("发送失败");
         }
     }
+
+    /**
+     * 新闻通知预览
+     */
+    public function preview(){
+        $Model = new ResponsibilityModel();
+        $this->default_pic();
+        $id = input('id');
+        $list = $Model::get($id);
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
 }
