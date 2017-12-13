@@ -357,8 +357,26 @@ class Responsibility extends Admin {
         $this->default_pic();
         $id = input('id');
         $list = $Model::get($id);
+        if ($list['list_images']){
+            $list['list_images'] = json_decode($list['list_images']);
+        }
+        // 获取文件
+        if($list['file']) {
+            $temp = json_decode($list['file']);
+            $arr[] = [];
+            foreach($temp as $key => $value){
+                $savepath = Db::name('file')->where('id',$value)->value('savepath');
+                $savename = Db::name('file')->where('id',$value)->value('savename');
+                $arr[$key]['url'] = "http://".$_SERVER["SERVER_NAME"]."/uploads/download/".$savepath.$savename;
+                $arr[$key]['see_url'] = "http://ow365.cn/?i=14505&furl=http://".$_SERVER["SERVER_NAME"]."/uploads/download/".$savepath.$savename;
+                $arr[$key]['name'] = Db::name('file')->where('id',$value)->value('name');
+            }
+            $list['files'] = $arr;
+        }else{
+            $list['files'] = '';
+        }
         $this->assign('list',$list);
-
+        $this->assign('url',"http://ow365.cn/?i=14505&furl=http://".$_SERVER["SERVER_NAME"]);
         return $this->fetch();
     }
 }
