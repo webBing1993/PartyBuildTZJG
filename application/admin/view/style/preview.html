@@ -63,4 +63,13 @@
     </div>
 </div>
 </body>
+<script src="/admin/js/jquery-2.1.1.js"></script>
+<script>
+    $(".z_text img").each(function(){
+        if($(this).attr("src").split(".")[$(this).attr("src").split(".").length-1]=='gif'){
+            $(this).css({"width":"15px","height":"15px"})
+        }
+    });
+
+</script>
 </html>
