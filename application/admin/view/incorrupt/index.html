@@ -32,6 +32,7 @@
                 <div class="ibox-title">
                     <h5>详情列表</h5>
                     <div class="ibox-tools">
+                        <a data-toggle="modal" class="btn btn-sm btn-primary check">审核</a>
                         <a data-toggle="modal" class="btn btn-sm btn-primary" href="{:Url('Incorrupt/add')}">新增</a>
                     </div>
                 </div>
@@ -52,7 +53,7 @@
                             <tbody>
                             {volist name="list" id="vo"}
                             <tr>
-                                <td><input type="checkbox" class="i-checks" name="input[]"></td>
+                                <td  data-id="{$vo.id}"><input type="checkbox" class="i-checks" name="input[]"></td>
                                 <td>{$vo.title|msubstr=0,30}</td>
                                 <td>{$vo.type_text}</td>
                                 <td>{$vo.publisher}</td>
@@ -95,6 +96,54 @@
             radioClass: 'iradio_square-green',
         });
     });
+
+    var checkArr = [];
+    $(".check").on("click",function(){
+        $("td .icheckbox_square-green").each(function(){
+            if($(this).hasClass("checked")){
+                checkArr.push($(this).parent().data("id")+'');
+            }
+        });
+        swal({
+            title: "",
+            text: "是否通过审核？",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#1ab394",
+            cancelButtonColor: "#f00",
+            confirmButtonText: "通过",
+            cancelButtonText: "不通过",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function(isConfirm){
+            if (isConfirm) {
+                $.ajax({
+                    type:"post",
+                    url:"{:Url('File/upload')}",
+                    data:{
+
+                    },
+                    success:function(res){
+
+                    }
+                });
+            } else {
+                $.ajax({
+                    type:"post",
+                    url:"{:Url('File/upload')}",
+                    data:{
+
+                    },
+                    success:function(res){
+
+                    }
+                });
+            }
+        });
+    });
+
+
 
     function showIframe(myid){
         var iframe = $("#iframe");
