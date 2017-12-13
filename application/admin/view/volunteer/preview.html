@@ -52,7 +52,7 @@
         </div>
         <!--文章-->
         <div class="col-xs-12 col-md-12 text">
-            {volist name="list.images" id="li"}
+            {volist name="list.list_images" id="li"}
             <img src="{$li|get_cover='path'}">
             {/volist}
             <div class="z_text" data-url="{$url}">{$list.content}</div>

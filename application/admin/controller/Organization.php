@@ -353,12 +353,62 @@ class Organization extends Admin {
      */
     public function preview(){
         $Model = new OrganizationModel();
-        $this->default_pic();
         $id = input('id');
         $list = $Model::get($id);
+        if ($list['list_images']){
+            $list['list_images'] = json_decode($list['list_images']);
+        }
+        // 获取文件
+        if($list['file']) {
+            $temp = json_decode($list['file']);
+            $arr[] = [];
+            foreach($temp as $key => $value){
+                $savepath = Db::name('file')->where('id',$value)->value('savepath');
+                $savename = Db::name('file')->where('id',$value)->value('savename');
+                $arr[$key]['url'] = "http://".$_SERVER["SERVER_NAME"]."/uploads/download/".$savepath.$savename;
+                $arr[$key]['see_url'] = "http://ow365.cn/?i=14505&furl=http://".$_SERVER["SERVER_NAME"]."/uploads/download/".$savepath.$savename;
+                $arr[$key]['name'] = Db::name('file')->where('id',$value)->value('name');
+            }
+            $list['files'] = $arr;
+        }else{
+            $list['files'] = '';
+        }
         $this->assign('list',$list);
-
+        $this->assign('url',"http://ow365.cn/?i=14505&furl=http://".$_SERVER["SERVER_NAME"]);
         return $this->fetch();
+    }
+    /**
+     * 审核
+     */
+    public function review(){
+        $userId = $_SESSION['think']['user_auth']['id'];
+        $user_id = Db::name('ucenter_member')->where('id',$userId)->value('username');
+        $nickname = Db::name('member')->where('id',$userId)->value('nickname');
+        $arr = input('post.');
+        $id = $arr['id'];  // 获取数组
+        $pass = $arr['pass'];  // 审核状态  1 通过 2 不通过
+        if (empty($id)){
+            return $this->error('系统参数错误');
+        }
+        $res = OrganizationModel::where('id','in',$id)->update(['status' => $pass]);
+        if ($res){
+            $data = array();
+            foreach($id as $value){
+                $tem = array(
+                    'class' => 3,
+                    'aid' => $value,
+                    'userid' => $user_id,
+                    'username' => $nickname,
+                    'create_time' => time(),
+                    'status' => $pass
+                );
+                array_push($data,$tem);
+            }
+            Db::name('review')->insertAll($data);
+            return $this->success('审核成功');
+        }else{
+            return $this->error('审核失败');
+        }
     }
 
 }

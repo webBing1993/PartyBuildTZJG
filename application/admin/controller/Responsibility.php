@@ -384,21 +384,22 @@ class Responsibility extends Admin {
     public function review(){
         $userId = $_SESSION['think']['user_auth']['id'];
         $user_id = Db::name('ucenter_member')->where('id',$userId)->value('username');
+        $nickname = Db::name('member')->where('id',$userId)->value('nickname');
         $arr = input('post.');
         $id = $arr['id'];  // 获取数组
         $pass = $arr['pass'];  // 审核状态  1 通过 2 不通过
         if (empty($id)){
             return $this->error('系统参数错误');
         }
-        $res = IncorruptModel::where('id','in',$id)->update(['status' => $pass]);
+        $res = ResponsibilityModel::where('id','in',$id)->update(['status' => $pass]);
         if ($res){
             $data = array();
             foreach($id as $value){
                 $tem = array(
-                    'class' => 7,
+                    'class' => 1,
                     'aid' => $value,
                     'userid' => $user_id,
-                    'username' => $this->getPublisher(),
+                    'username' => $nickname,
                     'create_time' => time(),
                     'status' => $pass
                 );
