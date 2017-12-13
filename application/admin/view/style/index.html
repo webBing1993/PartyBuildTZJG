@@ -32,6 +32,7 @@
                 <div class="ibox-title">
                     <h5>详情列表</h5>
                     <div class="ibox-tools">
+                        <a data-toggle="modal" class="btn btn-sm btn-primary check">审核</a>
                         <a data-toggle="modal" class="btn btn-sm btn-primary" href="{:Url('Style/add')}">新增</a>
                     </div>
                 </div>
@@ -82,6 +83,30 @@
 </div>
 <iframe id="iframe" src="" style="height: 80%;width: 392px;z-index: 99;position: absolute;top: 10%;border: 0;left: 32%;background: #fff;display: none;" scrolling="auto" seamless></iframe>
 <div class="shadow" style="display: none"></div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin: 300px auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body" style="font-size: 18px;text-align: center">
+                是否通过审核？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default refuse_btn" style="background: #f00;color: #fff;float: left">不通过
+                </button>
+                <button type="button" class="btn btn-primary pass_btn">
+                    通过
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
 {/block}
 
 {block name="script"}
@@ -94,7 +119,48 @@
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
         });
+        $('.check-all').on('ifChecked', function(event){
+            $('input').iCheck('check');
+        });
+
+        $('.check-all').on('ifUnchecked', function(event){
+            $('input').iCheck('uncheck');
+        });
     });
+
+
+    $(".check").on("click",function(){
+        var checkArr = [];
+        $("td .icheckbox_square-green").each(function(){
+            if($(this).hasClass("checked")){
+                checkArr.push($(this).parent().data("id")+'');
+            }
+        });
+        console.log(checkArr);
+        $("#myModal").modal('show');
+        $(".refuse_btn").on("click",function(){
+            reviewAjax();
+        })
+        $(".pass_btn").on("click",function(){
+            reviewAjax();
+        })
+    });
+
+    var reviewAjax = function(){
+        $.ajax({
+            type:"post",
+            url:"{:Url('File/file_delete')}",
+            data:{
+
+            },
+            success:function(data){
+                if(data.code == 1){
+
+                }
+            }
+        });
+    };
+
 
     function showIframe(myid){
         var iframe = $("#iframe");
