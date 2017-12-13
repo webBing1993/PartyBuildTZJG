@@ -60,7 +60,7 @@
                             <tbody>
                             {volist name="list" id="vo"}
                             <tr>
-                                <td><input type="checkbox" class="i-checks" name="input[]"></td>
+                                <td  data-id="{$vo.id}"><input type="checkbox" class="i-checks"  {neq name="vo.status" value="0" } disabled {/neq}name="input[]"></td>
                                 <td>{$vo.title}</td>
                                 <td>{$vo.publisher}</td>
                                 <!--<td>{$vo.recommend_text}</td>-->
@@ -134,6 +134,7 @@
     });
 
 
+
     $(".check").on("click",function(){
         var checkArr = [];
         $("td .icheckbox_square-green").each(function(){
@@ -141,26 +142,30 @@
                 checkArr.push($(this).parent().data("id")+'');
             }
         });
-        console.log(checkArr);
         $("#myModal").modal('show');
         $(".refuse_btn").on("click",function(){
-            reviewAjax();
+            reviewAjax(checkArr,2);
         })
         $(".pass_btn").on("click",function(){
-            reviewAjax();
+            reviewAjax(checkArr,1);
         })
     });
 
-    var reviewAjax = function(){
+    var reviewAjax = function(arr,pass){
         $.ajax({
             type:"post",
-            url:"{:Url('File/file_delete')}",
+            url:"{:Url('News/review')}",
             data:{
-
+                id:arr,
+                pass:pass
             },
             success:function(data){
                 if(data.code == 1){
-
+                    $("#myModal").modal('hide');
+                    updateAlert("审核成功",'success');
+                    setTimeout(function(){
+                        window.location.reload();
+                    },2000)
                 }
             }
         });
