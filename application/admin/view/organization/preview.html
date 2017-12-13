@@ -58,6 +58,7 @@
             {notempty name="$list.files"}
             {volist name="list.files" id="de"}
             <a href="{$de.url}" style="display: block; font-size: 14px;margin-top: 0.2rem">{$de.name}</a>
+            <a href='{$de.see_url}' style='font-size: 12px;padding-left: 15px'>点击预览</a>
             {/volist}
             {/notempty}
         </div>
@@ -71,6 +72,13 @@
             $(this).css({"width":"15px","height":"15px"})
         }
     });
+
+    $(".z_text a").each(function(){
+        var src = $(this).attr("href");
+        console.log(src)
+        $(this).after("<a href='' style='font-size: 12px;padding-left: 15px'>点击预览</a>")
+    });
+
 
 </script>
 </html>

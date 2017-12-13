@@ -54,10 +54,11 @@
             {volist name="list.images" id="li"}
             <img src="{$li|get_cover='path'}">
             {/volist}
-            <div class="z_text">{$list.content}</div>
+            <div class="z_text" data-url="{$url}">{$list.content}</div>
             {notempty name="$list.files"}
             {volist name="list.files" id="de"}
-            <a href="{$de.url}" style="display: block; font-size: 14px;margin-top: 0.2rem">{$de.name}</a>
+            <a href="{$de.url}" style="font-size: 14px;margin-top: 0.2rem">{$de.name}</a>
+            <a href='{$de.see_url}' style='font-size: 12px;padding-left: 15px'>点击预览</a>
             {/volist}
             {/notempty}
         </div>
@@ -70,6 +71,13 @@
         if($(this).attr("src").split(".")[$(this).attr("src").split(".").length-1]=='gif'){
             $(this).css({"width":"15px","height":"15px"})
         }
+    });
+
+    $(".z_text a").each(function(){
+        var url = $(".z_text").data("url");
+        var src = $(this).attr("href");
+        var href = url+src;
+        $(this).after("<a href='"+href+"' style='font-size: 12px;padding-left: 15px'>点击预览</a>")
     });
 
 </script>
