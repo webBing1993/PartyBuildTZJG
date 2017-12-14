@@ -56,12 +56,21 @@
             <img src="{$li|get_cover='path'}">
             {/volist}
             {/notempty}
+            {notempty name="$list.commend_img"}
             {volist name="$list.commend_img" id="img"}
+                {notempty name='img'}
             <img src="{$img|get_cover='path'}" alt="笔记图片" class="img" style="width:100%"><br>
+                {/notempty}
             {/volist}
+
+            {/notempty}
+            {notempty name="$list.voucher_img"}
             {volist name="$list.voucher_img" id="img"}
+            {notempty name='img'}
             <img src="{$img|get_cover='path'}" alt="笔记图片" class="img" style="width:100%"><br>
+            {/notempty}
             {/volist}
+            {/notempty}
             <div class="z_text" data-url="{$url}">{$list.content}</div>
             {notempty name="$list.files"}
             {volist name="list.files" id="de"}

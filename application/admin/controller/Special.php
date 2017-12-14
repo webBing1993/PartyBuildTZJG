@@ -314,13 +314,15 @@ class Special extends Admin {
         if ($list['list_images']){
             $list['list_images'] = json_decode($list['list_images']);
         }
-        $list['c'] = 0;
-        if($list['commend_img']){
+        if(json_decode($list['commend_img'])){
             $list['commend_img'] = json_decode($list['commend_img']);
+        }else{
+            $list['commend_img'] = array();
         }
-        $list['v'] = 0;
-        if($list['voucher_img']){
+        if(json_decode($list['voucher_img'])){
             $list['voucher_img'] = json_decode($list['voucher_img']);
+        }else{
+            $list['voucher_img'] = array();
         }
         // 获取文件
         if($list['file']) {
