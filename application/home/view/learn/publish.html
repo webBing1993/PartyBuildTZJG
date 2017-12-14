@@ -311,6 +311,31 @@
                     $("#openPopover").html("党支部委员会");
                 }else if(index==3){
                     $("#openPopover").html("党小组会");
+                    $(".yes_no").show();
+                    $(".yes_no").siblings("li").hide();
+                    $(".content").hide();
+                    $(".main>.nogroup").hide();
+                    $(".yes_no .clice").on("click", function () {
+                        $(".yes_no .clice").removeClass("active");
+                        $(this).addClass("active");
+                        if ($(".yes_no .clice").eq(0).hasClass("active")) {
+                            setTimeout(function () {
+                                $(".yes_no").hide();
+                                $(".yes_no").siblings("li").show();
+                                $(".content").show();
+                                $(".main>.nogroup").show();
+                                $(".main .nogroup .type2").hide();
+                                $(".template").hide();
+                                $(".sure").hide().siblings().show();
+                            },500)
+                        }else if ($(".yes_no .clice").eq(1).hasClass("active")) {
+                            setTimeout(function () {
+                                $(".yes_no").hide();
+                                $(".main>.nogroup").show();
+                                $(".sure").show().siblings().hide();
+                            },500)
+                        }
+                    })
                 }else if(index==4){
                     $("#openPopover").html("党课");
                 }
