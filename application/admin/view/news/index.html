@@ -39,7 +39,6 @@
                         </div>
                     </form>
                     <div class="ibox-tools">
-                        <a data-toggle="modal" class="btn btn-sm btn-primary check">审核</a>
                         <a data-toggle="modal" class="btn btn-sm btn-primary" href="{:Url('News/edit')}">添加</a>
                     </div>
                 </div>
@@ -67,7 +66,6 @@
                                 <td>{$vo.create_time|time_format="Y-m-d H:i"}</td>
                                 <td>{$vo.status_text}</td>
                                 <td>
-                                    <a href="javascript:showIframe({$vo.id})">预览</a>
                                     <a href="{:Url('News/edit?id='.$vo['id'])}">修改</a>&emsp;
                                     <a href="{:Url('News/del?id='.$vo['id'])}" class="confirm ajax-del">删除</a>
                                 </td>

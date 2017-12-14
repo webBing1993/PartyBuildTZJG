@@ -314,6 +314,14 @@ class Special extends Admin {
         if ($list['list_images']){
             $list['list_images'] = json_decode($list['list_images']);
         }
+        $list['c'] = 0;
+        if($list['commend_img']){
+            $list['commend_img'] = json_decode($list['commend_img']);
+        }
+        $list['v'] = 0;
+        if($list['voucher_img']){
+            $list['voucher_img'] = json_decode($list['voucher_img']);
+        }
         // 获取文件
         if($list['file']) {
             $temp = json_decode($list['file']);

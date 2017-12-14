@@ -39,7 +39,6 @@
                         </div>
                     </form>
                     <div class="ibox-tools">
-                        <a data-toggle="modal" class="btn btn-sm btn-primary check">审核</a>
                         <a data-toggle="modal" class="btn btn-sm btn-primary" href="{:Url('Notice/edit')}">添加</a>
                     </div>
                 </div>
@@ -84,7 +83,6 @@
                                 <td><span class="label label-info" style="background: #999">已推送</span></td>
                                 {/eq}
                                 <td>
-                                    <a href="javascript:showIframe({$vo.id})">预览</a>
                                     <a href="{:Url('Notice/edit?id='.$vo['id'])}">修改</a>&emsp;
                                     <a href="{:Url('Notice/del?id='.$vo['id'])}" class="confirm ajax-del">删除</a>
                                 </td>
