@@ -136,6 +136,10 @@
                 checkArr.push($(this).parent().data("id")+'');
             }
         });
+        if(checkArr.length===0){
+            updateAlert("未选择审核列表",'error');
+            return false;
+        }
         $("#myModal").modal('show');
         $(".refuse_btn").on("click",function(){
             reviewAjax(checkArr,2);
