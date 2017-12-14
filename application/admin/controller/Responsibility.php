@@ -41,6 +41,7 @@ class Responsibility extends Admin {
             'type' => array(1=>"专题研究",2=>"责任清单",3=>"述职报告",4=>"工作计划"),
             'status' => array(0=>'待审核',1=>'已发布',2=>'不通过',3=>'草稿'),
         ));
+        $this->assign('userid',$userId);
         $this->assign('list',$list);
         return $this->fetch();
     }

@@ -40,6 +40,7 @@ class Style extends Admin {
             'type' => array(1=>'方案部署',2=>'金点子',3=>'培树典型',4=>'党员清单'),
             'status' => array(0=>'待审核',1=>'已发布',2=>'未通过',3=>'草稿'),
         ));
+        $this->assign('userid',$userId);
         $this->assign('list',$list);
         return $this->fetch();
     }

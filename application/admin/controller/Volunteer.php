@@ -40,6 +40,7 @@ class Volunteer extends Admin {
             'type' => array(1=>"四跑志愿服务",2=>"一条街、三走进",3=>"三级联动、最多跑一次"),
             'status' => array(0=>'待审核',1=>'已发布',2=>'未通过',3=>'草稿'),
         ));
+        $this->assign('userid',$userId);
         $this->assign('list',$list);
         return $this->fetch();
     }

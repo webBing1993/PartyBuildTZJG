@@ -32,7 +32,9 @@
                 <div class="ibox-title">
                     <h5>详情列表</h5>
                     <div class="ibox-tools">
+                        {eq name ="$userid" value="1"}
                         <a data-toggle="modal" class="btn btn-sm btn-primary check">审核</a>
+                        {/eq}
                         <a data-toggle="modal" class="btn btn-sm btn-primary" href="{:Url('Responsibility/add')}">新增</a>
                     </div>
                 </div>
@@ -60,7 +62,9 @@
                                 <td>{$vo.create_time|time_format="Y-m-d"}</td>
                                 <td>{$vo.status_text}</td>
                                 <td>
+                                    {eq name ="$userid" value="1"}
                                     <a href="javascript:showIframe({$vo.id})">预览</a>
+                                    {/eq}
                                     <a href="{:Url('Responsibility/edit?id='.$vo['id'])}">编辑</a>
                                     <a href="{:Url('Responsibility/del?id='.$vo['id'])}" class="confirm ajax-del">删除</a>
                                 </td>

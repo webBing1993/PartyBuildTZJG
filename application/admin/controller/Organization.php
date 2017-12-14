@@ -40,6 +40,7 @@ class Organization extends Admin {
             'type' => array(1=>"规范建设",2=>"离退休党员台账资料",3=>"党费收缴",4=>"信息录用"),
             'status' => array(0=>'待审核',1=>'已发布',2=>'未通过',3=>'草稿'),
         ));
+        $this->assign('userid',$userId);
         $this->assign('list',$list);
         return $this->fetch();
     }

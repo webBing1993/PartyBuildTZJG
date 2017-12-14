@@ -40,6 +40,7 @@ class Incorrupt extends Admin {
             'type' => array(1=>"廉政责任",2=>"廉政教育",3=>"纪检报告"),
             'status' => array(0=>'待审核',1=>'已发布',2=>'未通过',3=>'草稿'),
         ));
+        $this->assign('userid',$userId);
         $this->assign('list',$list);
         return $this->fetch();
     }

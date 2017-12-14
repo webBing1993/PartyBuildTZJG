@@ -40,6 +40,7 @@ class Learn extends Admin {
             'type' => array(1=>"方案部署",2=>"三会一课",3=>"年度计划",4=>"支部活动"),
             'status' => array(0=>'待审核',1=>'已发布',2=>'未通过',3=>'草稿'),
         ));
+        $this->assign('userid',$userId);
         $this->assign('list',$list);
         return $this->fetch();
     }
