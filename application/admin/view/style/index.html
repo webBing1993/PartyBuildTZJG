@@ -136,7 +136,7 @@
     $(".check").on("click",function(){
         var checkArr = [];
         $("td .icheckbox_square-green").each(function(){
-            if($(this).hasClass("checked")){
+            if($(this).hasClass("checked")&& $(this).hasClass("disabled")==false){
                 checkArr.push($(this).parent().data("id")+'');
             }
         });
