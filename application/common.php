@@ -469,11 +469,35 @@ function get_score($class,$aid,$userid){
                     // 可以积分
                     $table = "special";
                     $info = \think\Db::name($table)->where(['id' => $aid])->find();
-                    if ((empty($info['commend_img']) || $info['commend_img'] == '[""]') && (empty($info['voucher_img']) || $info['voucher_img'] == '[""]')){  // 1200字以上+2分
+                    if ($info['commend_img']){
+                        $commend_flag = true;
+                        foreach(json_decode($info['commend_img']) as $val){
+                            if ($val){
+                                $commend_flag = false;
+                                break;
+                            }
+                        }
+                    }else{
+                        // 空
+                        $commend_flag = true;
+                    }
+                    if ($info['voucher_img']){
+                        $voucher_flag = true;
+                        foreach(json_decode($info['voucher_img']) as $val){
+                            if ($val){
+                                $voucher_flag = false;
+                                break;
+                            }
+                        }
+                    }else{
+                        // 空
+                        $voucher_flag = true;
+                    }
+                    if ($commend_flag && $voucher_flag){  // 1200字以上+2分
                         \think\Db::name('score')->insert(['class' => $class,'type' => 0,'aid' => $aid,'userid' => $userid,'score_up' => 2,'score_down' => 1,'create_time' => time()]);
-                    }else if((empty($info['commend_img']) || $info['commend_img'] == '[""]') && !(empty($info['voucher_img']) || $info['voucher_img'] == '[""]')){ // 提供交流凭证+3分
+                    }else if($commend_flag && !$voucher_flag){ // 提供交流凭证+3分
                         \think\Db::name('score')->insert(['class' => $class,'type' => 0,'aid' => $aid,'userid' => $userid,'score_up' => 5,'score_down' => 1,'create_time' => time()]);
-                    }else if(!(empty($info['commend_img']) || $info['commend_img'] == '[""]') && (empty($info['voucher_img']) || $info['voucher_img'] == '[""]')){  // 提供表彰、刊发照片+5分
+                    }else if(!$commend_flag && $voucher_flag){  // 提供表彰、刊发照片+5分
                         \think\Db::name('score')->insert(['class' => $class,'type' => 0,'aid' => $aid,'userid' => $userid,'score_up' => 7,'score_down' => 1,'create_time' => time()]);
                     }else{
                         \think\Db::name('score')->insert(['class' => $class,'type' => 0,'aid' => $aid,'userid' => $userid,'score_up' => 10,'score_down' => 1,'create_time' => time()]);
