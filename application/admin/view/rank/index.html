@@ -77,7 +77,7 @@
                                 <td width="3%">{$i}</td>
                                 <td width="15%">{$vo.name}</td>
                                 <td width="5%">{$vo.score}</td>
-                                <td width="5%">{$vo.push}</td>
+                                <td width="5%"><a href="{:Url('Rank/detail?id='.$vo['userid'])}">{$vo.push}</a></td>
                                 <td width="6%"><span class="minus" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.party}" name="jg" readonly><span class="add2" style="font-size: 20px"><b>+</b></span></td>
                                 <td width="6%"><span class="minus" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.satisfaction}" name="my" readonly><span class="add1" style="font-size: 20px"><b>+</b></span></td>
                                 <td width="8%"><span class="minus" data-id="{$vo.userid}" style="font-size: 20px"><b>-</b></span><input value="{$vo.work}" name="work" readonly><span class="add" style="font-size: 20px"><b>+</b></span></td>
