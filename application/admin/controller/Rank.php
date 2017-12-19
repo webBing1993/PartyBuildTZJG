@@ -163,6 +163,7 @@ class Rank extends Admin
         if (empty($res)){
             return $this->error('非考核人员 , 暂无权限');
         }
+        $name = WechatUser::where('userid',$id)->value('name');
         $data = array(
             0 => array(
                 'table' => 'responsibility',
@@ -345,6 +346,7 @@ class Rank extends Admin
                 'str' => '【 党风廉政--纪检报告 】 （ 总：2分 ) '
             ),
         );
+        $sum = 0;
         foreach($data as $key => $value){
             $msg = Db::name('score')->where(['userid' => $id , 'class' => $value['class'] , 'type' => $value['type']])->order('id desc')->select();
             $score = 0;
@@ -360,8 +362,11 @@ class Rank extends Admin
             }
             $data[$key]['score'] = $score;
             $data[$key]['content'] = $content;
+            $sum += $score;
         }
         $this->assign('list',$data);
+        $this->assign('sum',$sum);
+        $this->assign('name',$name);
         return $this->fetch();
     }
 }
