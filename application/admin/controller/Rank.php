@@ -163,203 +163,205 @@ class Rank extends Admin
         if (empty($res)){
             return $this->error('非考核人员 , 暂无权限');
         }
-        $responsibility = array(
+        $data = array(
             0 => array(
+                'table' => 'responsibility',
+                'class' => 1,
                 'type' => 1,
-                'str' => '党建责任-专题研究 ( 2分 ) '
+                'str' => '【 党建责任--专题研究 】 （ 总：2分 ） '
             ),
             1 => array(
+                'table' => 'responsibility',
+                'class' => 1,
                 'type' => 5,
-                'str' => '党建责任-书记述职 ( 1分 ) '
+                'str' => '【 党建责任--书记述职 】 （ 总：1分 ） '
             ),
             2 => array(
+                'table' => 'responsibility',
+                'class' => 1,
                 'type' => 6,
-                'str' => '党建责任-支部书记述职 ( 1分 ) '
+                'str' => '【 党建责任--支部书记述职 】 （ 总：1分 ） '
             ),
             3 => array(
+                'table' => 'responsibility',
+                'class' => 1,
                 'type' => 7,
-                'str' => '党建责任-工作要点 ( 1分 ) '
+                'str' => '【 党建责任--工作要点 】 （ 总：1分 ） '
             ),
             4 => array(
+                'table' => 'responsibility',
+                'class' => 1,
                 'type' => 8,
-                'str' => '党建责任-责任清单 ( 1分 ) '
+                'str' => '【 党建责任--责任清单 】 （ 总：1分 ） '
+            ),
+            5 => array(
+                'table' => 'learn',
+                'class' => 2,
+                'type' => 1,
+                'str' => '【 两学一做--方案部署 】 （ 总：2分 ） '
+            ),
+            6 => array(
+                'table' => 'learn',
+                'class' => 2,
+                'type' => 4,
+                'str' => '【 两学一做--支部活动 】 （ 总：2分 ） '
+            ),
+            7 => array(
+                'table' => 'learn',
+                'class' => 2,
+                'type' => 5,
+                'str' => '【 两学一做--培训计划 】 （ 总：1分 ） '
+            ),
+            8 => array(
+                'table' => 'learn',
+                'class' => 2,
+                'type' => 6,
+                'str' => '【 两学一做--理论研究 】 （ 总：1分 ） '
+            ),
+            9 => array(
+                'table' => 'learn',
+                'class' => 2,
+                'type' => 7,
+                'str' => '【 两学一做--支部党员大会 】 （ 总：1分 ） '
+            ),
+            10 => array(
+                'table' => 'learn',
+                'class' => 2,
+                'type' => 8,
+                'str' => '【 两学一做--党支部委员会 】 （ 总：1分 ） '
+            ),
+            11 => array(
+                'table' => 'learn',
+                'class' => 2,
+                'type' => 9,
+                'str' => '【 两学一做--党小组会 】 （ 总：1分 ） '
+            ),
+            12 => array(
+                'table' => 'learn',
+                'class' => 2,
+                'type' => 10,
+                'str' => '【 两学一做--党课 】 （ 总：1分 ） '
+            ),
+            13 => array(
+                'table' => 'organization',
+                'class' => 3,
+                'type' => 2,
+                'str' => '【 组织建设--离退休党员台账资料 】 （ 总：3分 ） '
+            ),
+            14 => array(
+                'table' => 'organization',
+                'class' => 3,
+                'type' => 3,
+                'str' => '【 组织建设--党费收缴 】 （ 总：1分 ） '
+            ),
+            15 => array(
+                'table' => 'organization',
+                'class' => 3,
+                'type' => 4,
+                'str' => '【 组织建设--信息录用 】 （ 总：2分 ） '
+            ),
+            16 => array(
+                'table' => 'organization',
+                'class' => 3,
+                'type' => 5,
+                'str' => '【 组织建设--阵地建设 】 （ 总：0.5分 ） '
+            ),
+            17 => array(
+                'table' => 'organization',
+                'class' => 3,
+                'type' => 6,
+                'str' => '【 组织建设--按期换届 】 （ 总：0.5分 ） '
+            ),
+            18 => array(
+                'table' => 'organization',
+                'class' => 3,
+                'type' => 7,
+                'str' => '【 组织建设--主题党日 】 （ 总：1分 ） '
+            ),
+            19 => array(
+                'table' => 'special',
+                'class' => 4,
+                'type' => 0,
+                'str' => '【 特色创新 】 （ 总：10分 ） '
+            ),
+            20 => array(
+                'table' => 'style',
+                'class' => 5,
+                'type' => 1,
+                'str' => '【 作风建设--方案部署 】 （ 总：2分 ） '
+            ),
+            21 => array(
+                'table' => 'style',
+                'class' => 5,
+                'type' => 2,
+                'str' => '【 作风建设--金点子 】 （ 总：2分 ） '
+            ),
+            22 => array(
+                'table' => 'style',
+                'class' => 5,
+                'type' => 3,
+                'str' => '【 作风建设--培树典型 】 （ 总：2分 ） '
+            ),
+            23 => array(
+                'table' => 'style',
+                'class' => 5,
+                'type' => 4,
+                'str' => '【 作风建设--党员清单 】 （ 总：2分 ) '
+            ),
+            24 => array(
+                'table' => 'volunteer',
+                'class' => 6,
+                'type' => 1,
+                'str' => '【 志愿服务--四跑志愿服务 】 （ 总：2分 ) '
+            ),
+            25 => array(
+                'table' => 'volunteer',
+                'class' => 6,
+                'type' => 2,
+                'str' => '【 志愿服务--一条街三走进 】 （ 总：2分 ) '
+            ),
+            26 => array(
+                'table' => 'volunteer',
+                'class' => 6,
+                'type' => 3,
+                'str' => '【 志愿服务--最多跑一次 】 （ 总：2分 ) '
+            ),
+            27 => array(
+                'table' => 'incorrupt',
+                'class' => 7,
+                'type' => 1,
+                'str' => '【 党风廉政--廉政责任 】 （ 总：2分 ) '
+            ),
+            28 => array(
+                'table' => 'incorrupt',
+                'class' => 7,
+                'type' => 2,
+                'str' => '【 党风廉政--廉政教育 】 （ 总：2分 ) '
+            ),
+            29 => array(
+                'table' => 'incorrupt',
+                'class' => 7,
+                'type' => 3,
+                'str' => '【 党风廉政--纪检报告 】 （ 总：2分 ) '
             ),
         );
-        foreach($responsibility as $key => $value){
-            $msg = Db::name('score')->where(['userid' => $id , 'class' => 1 , 'type' => $value['type']])->order('id desc')->select();
+        foreach($data as $key => $value){
+            $msg = Db::name('score')->where(['userid' => $id , 'class' => $value['class'] , 'type' => $value['type']])->order('id desc')->select();
             $score = 0;
             $content = '';
             foreach($msg as $val){
                 $score += $val['score_up'] / $val['score_down'];
-                $title = Db::name("responsibility")->where(['id' => $val['aid']])->value('title');
-                $content .= $title.' ( '.$val['score_up'] / $val['score_down'].' ) ';
+                if ($value['class'] == 2  && $val['aid'] == 0){
+                    $title = '无党小组会数据';
+                }else{
+                    $title = Db::name($value['table'])->where(['id' => $val['aid']])->value('title');
+                }
+                $content .= $title.' （ '.$val['score_up'] / $val['score_down'].' 分 ） ， ';
             }
-            $responsibility[$key]['score'] = $score;
-            $responsibility[$key]['content'] = $content;
+            $data[$key]['score'] = $score;
+            $data[$key]['content'] = $content;
         }
-        dump($responsibility);
-        $msg = Db::name('score')->where(['userid' => $id])->order('id desc')->select();
-        foreach($msg as $key => $value){
-            $msg[$key]['score'] = $value['score_up'] / $value['score_down'];
-            $msg[$key]['create_time'] = date('Y-m-d',$value['create_time']);
-            switch ($value['class']){
-                case 1: // 党建责任
-                    $table = "responsibility";
-                    $info = Db::name($table)->where(['id' => $value['aid']])->find();
-                    $msg[$key]['title'] = $info['title'];
-                    switch ($value['type']){
-                        case 1:
-                            $msg[$key]['str'] = "党建责任-专题研究";
-                            break;
-                        case 5:
-                            $msg[$key]['str'] = "党建责任-书记述职";
-                            break;
-                        case 6:
-                            $msg[$key]['str'] = "党建责任-支部书记述职";
-                            break;
-                        case 7:
-                            $msg[$key]['str'] = "党建责任-工作要点";
-                            break;
-                        case 8:
-                            $msg[$key]['str'] = "党建责任-责任清单";
-                            break;
-                        default:
-                            $msg[$key]['str'] = "暂无数据";
-                    }
-                    break;
-                case 2: // 两学一做
-                    $table = "learn";
-                    if ($value['aid'] == 0){
-                        $msg[$key]['title'] = "无党小组会数据";
-                    }else{
-                        $info = Db::name($table)->where(['id' => $value['aid']])->find();
-                        $msg[$key]['title'] = $info['title'];
-                    }
-                    switch ($value['type']){
-                        case 1:
-                            $msg[$key]['str'] = "两学一做-方案部署";
-                            break;
-                        case 4:
-                            $msg[$key]['str'] = "两学一做-支部活动";
-                            break;
-                        case 5:
-                            $msg[$key]['str'] = "两学一做-培训计划";
-                            break;
-                        case 6:
-                            $msg[$key]['str'] = "两学一做-理论研究";
-                            break;
-                        case 7:
-                            $msg[$key]['str'] = "两学一做-支部党员大会";
-                            break;
-                        case 8:
-                            $msg[$key]['str'] = "两学一做-党支部委员会";
-                            break;
-                        case 9:
-                            $msg[$key]['str'] = "两学一做-党小组会";
-                            break;
-                        case 10:
-                            $msg[$key]['str'] = "两学一做-党课";
-                            break;
-                        default:
-                            $msg[$key]['str'] = "暂无数据";
-                    }
-                    break;
-                case 3: // 组织建设
-                    $table = "organization";
-                    $info = Db::name($table)->where(['id' => $value['aid']])->find();
-                    $msg[$key]['title'] = $info['title'];
-                    switch ($value['type']){
-                        case 1:
-                            $msg[$key]['str'] = "组织建设-规范性建设";
-                            break;
-                        case 2:
-                            $msg[$key]['str'] = "组织建设-离退休党员台账资料";
-                            break;
-                        case 3:
-                            $msg[$key]['str'] = "组织建设-党费收缴";
-                            break;
-                        case 4:
-                            $msg[$key]['str'] = "组织建设-信息录用";
-                            break;
-                        case 5:
-                            $msg[$key]['str'] = "组织建设-阵地建设";
-                            break;
-                        case 6:
-                            $msg[$key]['str'] = "组织建设-按期换届";
-                            break;
-                        case 7:
-                            $msg[$key]['str'] = "组织建设-主题党日";
-                            break;
-                        default:
-                            $msg[$key]['str'] = "暂无数据";
-                    }
-                    break;
-                case 4: // 特色创新
-                    $table = "special";
-                    $info = Db::name($table)->where(['id' => $value['aid']])->find();
-                    $msg[$key]['title'] = $info['title'];
-                    $msg[$key]['str'] = "特色创新";
-                    break;
-                case 5: // 作风建设
-                    $table = "style";
-                    $info = Db::name($table)->where(['id' => $value['aid']])->find();
-                    $msg[$key]['title'] = $info['title'];
-                    switch ($value['type']){
-                        case 1:
-                            $msg[$key]['str'] = "作风建设-方案部署";
-                            break;
-                        case 2:
-                            $msg[$key]['str'] = "作风建设-金点子";
-                            break;
-                        case 3:
-                            $msg[$key]['str'] = "作风建设-培树典型";
-                            break;
-                        case 4:
-                            $msg[$key]['str'] = "作风建设-党员清单";
-                            break;
-                        default:
-                            $msg[$key]['str'] = "暂无数据";
-                    }
-                    break;
-                case 6: // 志愿服务
-                    $table = "volunteer";
-                    $info = Db::name($table)->where(['id' => $value['aid']])->find();
-                    $msg[$key]['title'] = $info['title'];
-                    switch ($value['type']){
-                        case 1:
-                            $msg[$key]['str'] = "志愿服务-四跑志愿服务";
-                            break;
-                        case 2:
-                            $msg[$key]['str'] = "志愿服务-一条街三走进";
-                            break;
-                        case 3:
-                            $msg[$key]['str'] = "志愿服务-最多跑一次";
-                            break;
-                        default:
-                            $msg[$key]['str'] = "暂无数据";
-                    }
-                    break;
-                default:  // 党风廉政
-                    $table = "incorrupt";
-                    $info = Db::name($table)->where(['id' => $value['aid']])->find();
-                    $msg[$key]['title'] = $info['title'];
-                    switch ($value['type']){
-                        case 1:
-                            $msg[$key]['str'] = "党风廉政-廉政责任";
-                            break;
-                        case 2:
-                            $msg[$key]['str'] = "党风廉政-廉政教育";
-                            break;
-                        case 3:
-                            $msg[$key]['str'] = "党风廉政-纪检报告";
-                            break;
-                        default:
-                            $msg[$key]['str'] = "暂无数据";
-                    }
-
-            }
-        }
-        $this->assign('list',$msg);
+        $this->assign('list',$data);
         return $this->fetch();
     }
 }
