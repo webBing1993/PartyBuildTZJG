@@ -29,10 +29,12 @@ class Rank extends Admin
         if ($search != '') {
             $where['name'] = ['like','%'.$search.'%'];
             $arr = WechatUser::where($where)->column('userid');
-            $map = array(
-                'tagid' => 1,
-                'userid' => ['in',$arr]
-            );
+            if (!empty($arr)){
+                $map = array(
+                    'tagid' => 1,
+                    'userid' => ['in',$arr]
+                );
+            }
         }
         $list = WechatUserTag::where($map)->select();
         foreach($list as $key => $value){
@@ -355,6 +357,8 @@ class Rank extends Admin
                 $score += $val['score_up'] / $val['score_down'];
                 if ($value['class'] == 2  && $val['aid'] == 0){
                     $title = '无党小组会数据';
+                }elseif($value['class'] == 3  && $val['aid'] == 0){
+                    $title = '无离退休党员台账资料数据';
                 }else{
                     $title = Db::name($value['table'])->where(['id' => $val['aid']])->value('title');
                 }
