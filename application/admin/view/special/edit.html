@@ -274,47 +274,47 @@
                                 {/empty}
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>大会表彰:</label>
-                            </div>
-                            <div class="col-lg-3" c="{$msg.c || default='1'}">
-                                <div class="imggroup imgfileGroup">
-                                    {empty name="$msg.commend_img1"}
-                                    <img src="" alt='图片' class='thumbnail imgbox'>
-                                    {else/}
-                                    <img src="{$msg.commend_img1|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
-                                    {/empty}
-                                    <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">
-                                    <input type="hidden" name="commend_img1" class="img"  value="{$msg.commend_img1||default=''}" required="">
-                                </div>
-                                <b>推荐尺寸：700*360px</b>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class=" plus">+</div>
-                                <div class="imggroup imgfileGroup plusimg">
-                                    {empty name="$msg.commend_img2"}
-                                    <img src="" alt='图片' class='thumbnail imgbox'>
-                                    {else/}
-                                    <img src="{$msg.commend_img2|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
-                                    {/empty}
-                                    <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">
-                                    <input type="hidden" name="commend_img2" class="img"  value="{$msg.commend_img2||default=''}" required="">
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="plus plus2">+</div>
-                                <div class="imggroup imgfileGroup plusimg">
-                                    {empty name="$msg.commend_img3"}
-                                    <img src="" alt='图片' class='thumbnail imgbox'>
-                                    {else/}
-                                    <img src="{$msg.commend_img3|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
-                                    {/empty}
-                                    <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">
-                                    <input type="hidden" name="commend_img3" class="img"  value="{$msg.commend_img3||default=''}" required="">
-                                </div>
-                            </div>
-                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<div class="col-lg-1 text-right control-label">-->
+                                <!--<label>大会表彰:</label>-->
+                            <!--</div>-->
+                            <!--<div class="col-lg-3" c="{$msg.c || default='1'}">-->
+                                <!--<div class="imggroup imgfileGroup">-->
+                                    <!--{empty name="$msg.commend_img1"}-->
+                                    <!--<img src="" alt='图片' class='thumbnail imgbox'>-->
+                                    <!--{else/}-->
+                                    <!--<img src="{$msg.commend_img1|get_cover='path'}" alt='图片' class='thumbnail imgbox'>-->
+                                    <!--{/empty}-->
+                                    <!--<input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">-->
+                                    <!--<input type="hidden" name="commend_img1" class="img"  value="{$msg.commend_img1||default=''}" required="">-->
+                                <!--</div>-->
+                                <!--<b>推荐尺寸：700*360px</b>-->
+                            <!--</div>-->
+                            <!--<div class="col-lg-3">-->
+                                <!--<div class=" plus">+</div>-->
+                                <!--<div class="imggroup imgfileGroup plusimg">-->
+                                    <!--{empty name="$msg.commend_img2"}-->
+                                    <!--<img src="" alt='图片' class='thumbnail imgbox'>-->
+                                    <!--{else/}-->
+                                    <!--<img src="{$msg.commend_img2|get_cover='path'}" alt='图片' class='thumbnail imgbox'>-->
+                                    <!--{/empty}-->
+                                    <!--<input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">-->
+                                    <!--<input type="hidden" name="commend_img2" class="img"  value="{$msg.commend_img2||default=''}" required="">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="col-lg-3">-->
+                                <!--<div class="plus plus2">+</div>-->
+                                <!--<div class="imggroup imgfileGroup plusimg">-->
+                                    <!--{empty name="$msg.commend_img3"}-->
+                                    <!--<img src="" alt='图片' class='thumbnail imgbox'>-->
+                                    <!--{else/}-->
+                                    <!--<img src="{$msg.commend_img3|get_cover='path'}" alt='图片' class='thumbnail imgbox'>-->
+                                    <!--{/empty}-->
+                                    <!--<input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">-->
+                                    <!--<input type="hidden" name="commend_img3" class="img"  value="{$msg.commend_img3||default=''}" required="">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
                                 <label>交流凭证:</label>
