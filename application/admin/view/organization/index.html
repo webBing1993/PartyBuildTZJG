@@ -54,7 +54,7 @@
                             </thead>
                             <tbody>
                             {volist name="list" id="vo"}
-                            <tr>
+                            <tr data-id="{$vo.id}">
                                 <td  data-id="{$vo.id}"><input type="checkbox" class="i-checks"  {neq name="vo.status" value="0" } disabled {/neq}name="input[]"></td>
                                 <td>{$vo.title|msubstr=0,30}</td>
                                 <td>{$vo.type_text}</td>
@@ -118,6 +118,14 @@
     highlight_subnav("{:Url('Organization/index')}");
 
     $(document).ready(function(){
+        var p =  parseInt(window.location.href.split("id=")[1]);
+        if(p){
+            $("tbody tr").each(function(){
+                if($(this).data("id")==p){
+                    $(this).find('input').iCheck('check');
+                }
+            })
+        }
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
