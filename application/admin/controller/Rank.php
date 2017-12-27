@@ -360,7 +360,11 @@ class Rank extends Admin
                 }elseif($value['class'] == 3  && $val['aid'] == 0){
                     $title = '无离退休党员台账资料数据';
                 }else{
-                    $title = Db::name($value['table'])->where(['id' => $val['aid']])->value('title');
+                    $count = Db::name($value['table'])->where('id','>=',$val['aid'])->count();
+                    // 具体该条数据在第几页
+                    $p = floor($count/10);
+                    $url = "http://".$_SERVER['SERVER_NAME']."/admin/".$value['table']."/index?id=".$val['aid']."&p=".$p;
+                    $title = '<a href="'.$url.'">'.Db::name($value['table'])->where(['id' => $val['aid']])->value('title').'</a>';
                 }
                 $content .= $title.' （ '.$val['score_up'] / $val['score_down'].' 分 ） ， ';
             }
