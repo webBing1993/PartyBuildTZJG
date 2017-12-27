@@ -35,7 +35,6 @@
     </style>
 </head>
 <body>
-<!--startprint-->
 <div class="all">
     <div class="row">
         <!--banner图-->
@@ -67,7 +66,6 @@
         </div>
     </div>
 </div>
-<!--endprint-->
 </body>
 <script src="/admin/js/jquery-2.1.1.js"></script>
 <script>
@@ -83,15 +81,6 @@
         var href = url+src;
         $(this).after("<a href='"+href+"' style='font-size: 12px;padding-left: 15px' target='_blank'>点击预览</a>")
     });
-
-
-    var bdhtml = window.document.body.innerHTML;
-    var sprnstr = "<!--startprint-->";
-    var eprnstr = "<!--endprint-->";
-    var prnhtml = bdhtml.substr(bdhtml.indexOf(sprnstr) + 17);
-    prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
-    window.document.body.innerHTML = prnhtml;
-    window.print();
 
 </script>
 </html>
