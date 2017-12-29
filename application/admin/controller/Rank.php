@@ -24,7 +24,6 @@ class Rank extends Admin
         // 获取考核人员列表
         $map = array(
             'tagid' => 1,
-
         );
         if ($search != '') {
             $where['name'] = ['like','%'.$search.'%'];
@@ -360,11 +359,19 @@ class Rank extends Admin
                 }elseif($value['class'] == 3  && $val['aid'] == 0){
                     $title = '无离退休党员台账资料数据';
                 }else{
-                    $count = Db::name($value['table'])->where('id','>=',$val['aid'])->count();
+                    $count = Db::name($value['table'])->where(['id' => ['>=',$val['aid']],'status' => ['egt',0]])->count();
                     // 具体该条数据在第几页
-                    $p = floor($count/10);
-                    $url = "http://".$_SERVER['SERVER_NAME']."/admin/".$value['table']."/index?id=".$val['aid']."&p=".$p;
-                    $title = '<a href="'.$url.'">'.Db::name($value['table'])->where(['id' => $val['aid']])->value('title').'</a>';
+                    $p = ceil(($count/10));
+                    $url = "http://".$_SERVER['SERVER_NAME']."/admin/".$value['table']."/index/id/".$val['aid']."/p/".$p;
+                    $str = Db::name($value['table'])->where(['id' => $val['aid'] , 'status' => ['egt',0]])->value('title');
+                    if (empty($str)){
+                        // 该条数据已经被删除 需要删掉该条记录积分
+                        $title = '';
+                        Db::name('score')->where(['userid' => $id , 'id' => $val['id']])->delete();
+                        $this->redirect("http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
+                    }else{
+                        $title = '<a href="'.$url.'">'.$str.'</a>';
+                    }
                 }
                 $content .= $title.' （ '.$val['score_up'] / $val['score_down'].' 分 ） ， ';
             }

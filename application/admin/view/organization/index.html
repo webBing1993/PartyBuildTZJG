@@ -118,7 +118,7 @@
     highlight_subnav("{:Url('Organization/index')}");
 
     $(document).ready(function(){
-        var p =  parseInt(window.location.href.split("id=")[1]);
+        var p =  parseInt(window.location.href.split("id/")[1]);
         if(p){
             $("tbody tr").each(function(){
                 if($(this).data("id")==p){
