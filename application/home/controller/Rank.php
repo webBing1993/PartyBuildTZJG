@@ -32,7 +32,7 @@ class Rank extends Base {
             $score1 = $User['score_party'];  // 党风廉政  4
             $score2 = $User['score_satisfaction'];  // 满意度测评积分
             $score3 = $User['score_work']; // 两新党建
-            $Arr = Db::name('score')->where('userid',$value['userid'])->whereTime('create_time','last year')->select();
+            $Arr = Db::name('score')->where('userid',$value['userid'])->whereTime('create_time','y')->select();
             $score4 = 0;
             foreach($Arr as $val){
                 $score4 += ($val['score_up'] / $val['score_down']);
@@ -71,7 +71,7 @@ class Rank extends Base {
                 $score1 = $User['score_party'];  // 党风廉政 4
                 $score2 = $User['score_satisfaction'];  // 满意度测评积分
                 $score3 = $User['score_work']; // 两新党建
-                $Arr = Db::name('score')->where('userid',$value['userid'])->whereTime('create_time','last year')->select();
+                $Arr = Db::name('score')->where('userid',$value['userid'])->whereTime('create_time','y')->select();
                 $score4 = 0;  // 发布所得分数
                 foreach($Arr as $val){
                     $score4 += ($val['score_up'] / $val['score_down']);
