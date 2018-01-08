@@ -17,7 +17,8 @@ return [
 //    ],
 
     /* 默认模块和控制器 */
-    'default_module' => 'home',
+    'default_module' => 'admin',
+    'app_debug' => true,
 
     /* URL配置 */
     'base_url'=>'',
