@@ -462,14 +462,14 @@ class User extends Base {
             $score1 = $User['score_party'];  // 党风廉政 4
             $score2 = $User['score_satisfaction'];  // 满意度测评积分
             $score3 = $User['score_work'];  // 两新党建
-            $Arr = Db::name('score')->where('userid', $userId)->whereTime('create_time', 'last year')->select();
+            $Arr = Db::name('score')->where('userid', $userId)->whereTime('create_time', 'y')->select();
             $score4 = 0;
             foreach ($Arr as $val) {
                 $score4 += ($val['score_up'] / $val['score_down']);
             }
             $score = $score1 + $score2 + $score3 + $score4;  // 总分
         }
-        $msg = Db::name('score')->where(['userid' => $userId])->order('id desc')->select();
+        $msg = Db::name('score')->where(['userid' => $userId])->whereTime('create_time', 'y')->order('id desc')->select();
         foreach($msg as $key => $value){
             $msg[$key]['score'] = $value['score_up'] / $value['score_down'];
             $msg[$key]['create_time'] = date('Y-m-d',$value['create_time']);
@@ -631,7 +631,7 @@ class User extends Base {
             }
         }
         // 人工干预  分数
-        $hander = Db::name('handle')->where(['userid' => $userId])->order('create_time desc')->select();
+        $hander = Db::name('handle')->where(['userid' => $userId])->whereTime('create_time', 'y')->order('create_time desc')->select();
         foreach($hander as $key => $value){
             $hander[$key]['create_time'] = date('Y-m-d',$value['create_time']);
             if ($value['type'] == 1){
