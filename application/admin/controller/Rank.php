@@ -349,7 +349,7 @@ class Rank extends Admin
         );
         $sum = 0;
         foreach($data as $key => $value){
-            $msg = Db::name('score')->where(['userid' => $id , 'class' => $value['class'] , 'type' => $value['type']])->order('id desc')->select();
+            $msg = Db::name('score')->where(['userid' => $id , 'class' => $value['class'] , 'type' => $value['type']])->whereTime('create_time','y')->order('id desc')->select();
             $score = 0;
             $content = '';
             foreach($msg as $val){
