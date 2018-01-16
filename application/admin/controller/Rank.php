@@ -42,7 +42,7 @@ class Rank extends Admin
                 $score1 = $User['score_party'];  // 党风廉政 4
                 $score2 = $User['score_satisfaction'];  // 满意度测评积分 40
                 $score3 = $User['score_work'];  // 两新党建 2
-                $Arr = Db::name('score')->where('userid',$value->userid)->whereTime('create_time','y')->select();
+                $Arr = Db::name('score')->where('userid',$value->userid)->whereTime('create_time','last year')->select();
                 $score4 = 0;
                 foreach($Arr as $val){
                     $score4 += ($val['score_up'] / $val['score_down']);
@@ -349,7 +349,7 @@ class Rank extends Admin
         );
         $sum = 0;
         foreach($data as $key => $value){
-            $msg = Db::name('score')->where(['userid' => $id , 'class' => $value['class'] , 'type' => $value['type']])->whereTime('create_time','y')->order('id desc')->select();
+            $msg = Db::name('score')->where(['userid' => $id , 'class' => $value['class'] , 'type' => $value['type']])->whereTime('create_time','last year')->order('id desc')->select();
             $score = 0;
             $content = '';
             foreach($msg as $val){
