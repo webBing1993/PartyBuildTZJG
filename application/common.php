@@ -175,6 +175,58 @@ function getDay($time){
     }
 }
 /**
+ * 当前月份的个数
+ */
+function mouth_sum($mouth,$class,$type,$userid){
+    // 当前月 已经上传的个数
+    if ($mouth >= 10){
+        $month_first = mktime(0,0,0,10,1,date('Y'));
+        $month_final = mktime(23,59,59,12,date('t'),date('Y'));
+    }else{
+        $month_first = mktime(0,0,0,$mouth,1,date('Y'));
+        $month_final = mktime(23,59,59,$mouth,date('t'),date('Y'));
+    }
+    $maps = ['class' => $class,'type' => $type,'userid' => $userid,'create_time' => ['between',[$month_first,$month_final]]];  // 每月
+    $count = \think\Db::name('score')->where($maps)->count();  // 获取已发布个数
+    return $count;
+}
+/**
+ * 月份 延期算法
+ */
+function mouth_info($class,$type,$userid,$aid,$sum){
+    date_default_timezone_set("PRC");        //初始化时区
+    // 根据总分来确定存储分数
+    $score_up1 = $sum;
+    $score_down1 = 10;
+    $score_up2 = $sum * 7;
+    $score_down2 = 100;
+    // 获取当前月份
+    $mouth = date('n');
+    if ($mouth <= 1){
+        if (mouth_sum($mouth,$class,$type,$userid) < 1){
+            // 可以积分
+            \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => $score_up1,'score_down' => $score_down1,'create_time' => time()]);
+        }
+    }else{
+        if ($mouth > 10){
+            $mouth = 10;
+        }
+        for ($i = 1;$i <= $mouth;$i++){
+            if (mouth_sum($i,$class,$type,$userid) < 1){
+                // 还没存储
+                if ($i < $mouth){
+                    $time = 'Y-'.$i.'-15';
+                    // 可以积分 延期 积分打折
+                    \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => $score_up2,'score_down' => $score_down2,'create_time' => strtotime(date($time))]);
+                }else{
+                    // 可以积分 正常积分
+                    \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => $score_up1,'score_down' => $score_down1,'create_time' => time()]);
+                }
+            }
+        }
+    }
+}
+/**
  * 积分规则
  * $class
  * 1 responsibility   2 learn   3 organization  4 special   5 style   6 volunteer  7 incorrupt
@@ -449,57 +501,5 @@ function get_score($class,$aid,$userid){
                 return $this->error("无该数据表");
                 break;
         }
-    }
-    /**
-     * 月份 延期算法
-     */
-    function mouth_info($class,$type,$userid,$aid,$sum){
-        date_default_timezone_set("PRC");        //初始化时区
-        // 根据总分来确定存储分数
-        $score_up1 = $sum;
-        $score_down1 = 10;
-        $score_up2 = $sum * 7;
-        $score_down2 = 100;
-        // 获取当前月份
-        $mouth = date('n');
-        if ($mouth <= 1){
-            if (mouth_sum($mouth,$class,$type,$userid) < 1){
-                // 可以积分
-                \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => $score_up1,'score_down' => $score_down1,'create_time' => time()]);
-            }
-        }else{
-            if ($mouth > 10){
-                $mouth = 10;
-            }
-            for ($i = 1;$i <= $mouth;$i++){
-                if (mouth_sum($i,$class,$type,$userid) < 1){
-                    // 还没存储
-                    if ($i < $mouth){
-                        $time = 'Y-'.$i.'-15';
-                        // 可以积分 延期 积分打折
-                        \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => $score_up2,'score_down' => $score_down2,'create_time' => strtotime(date($time))]);
-                    }else{
-                        // 可以积分 正常积分
-                        \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => $score_up1,'score_down' => $score_down1,'create_time' => time()]);
-                    }
-                }
-            }
-        }
-    }
-    /**
-     * 当前月份的个数
-     */
-    function mouth_sum($mouth,$class,$type,$userid){
-        // 当前月 已经上传的个数
-        if ($mouth >= 10){
-            $month_first = mktime(0,0,0,10,1,date('Y'));
-            $month_final = mktime(23,59,59,12,date('t'),date('Y'));
-        }else{
-            $month_first = mktime(0,0,0,$mouth,1,date('Y'));
-            $month_final = mktime(23,59,59,$mouth,date('t'),date('Y'));
-        }
-        $maps = ['class' => $class,'type' => $type,'userid' => $userid,'create_time' => ['between',[$month_first,$month_final]]];  // 每月
-        $count = \think\Db::name('score')->where($maps)->count();  // 获取已发布个数
-        return $count;
     }
 }
