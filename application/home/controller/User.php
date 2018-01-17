@@ -471,13 +471,17 @@ class User extends Base {
         }
         $msg = Db::name('score')->where(['userid' => $userId])->whereTime('create_time', 'y')->order('id desc')->select();
         foreach($msg as $key => $value){
+            $opt = '';
             $msg[$key]['score'] = $value['score_up'] / $value['score_down'];
+            if ($value['score_up'] % 7 == 0){
+                $opt = '（补）';
+            }
             $msg[$key]['create_time'] = date('Y-m-d',$value['create_time']);
             switch ($value['class']){
                 case 1: // 党建责任
                     $table = "responsibility";
                     $info = Db::name($table)->where(['id' => $value['aid']])->find();
-                    $msg[$key]['title'] = $info['title'];
+                    $msg[$key]['title'] = $info['title'].$opt;
                     switch ($value['type']){
                         case 1:
                             $msg[$key]['str'] = "党建责任-专题研究";
@@ -504,7 +508,7 @@ class User extends Base {
                         $msg[$key]['title'] = "无党小组会数据";
                     }else{
                         $info = Db::name($table)->where(['id' => $value['aid']])->find();
-                        $msg[$key]['title'] = $info['title'];
+                        $msg[$key]['title'] = $info['title'].$opt;
                     }
                     switch ($value['type']){
                         case 1:
@@ -538,7 +542,7 @@ class User extends Base {
                 case 3: // 组织建设
                     $table = "organization";
                     $info = Db::name($table)->where(['id' => $value['aid']])->find();
-                    $msg[$key]['title'] = $info['title'];
+                    $msg[$key]['title'] = $info['title'].$opt;
                     switch ($value['type']){
                         case 1:
                             $msg[$key]['str'] = "组织建设-规范性建设";
@@ -569,12 +573,12 @@ class User extends Base {
                     $table = "special";
                     $info = Db::name($table)->where(['id' => $value['aid']])->find();
                     $msg[$key]['title'] = $info['title'];
-                    $msg[$key]['str'] = "特色创新";
+                    $msg[$key]['str'] = "特色创新".$opt;
                     break;
                 case 5: // 作风建设
                     $table = "style";
                     $info = Db::name($table)->where(['id' => $value['aid']])->find();
-                    $msg[$key]['title'] = $info['title'];
+                    $msg[$key]['title'] = $info['title'].$opt;
                     switch ($value['type']){
                         case 1:
                             $msg[$key]['str'] = "作风建设-方案部署";
@@ -595,7 +599,7 @@ class User extends Base {
                 case 6: // 志愿服务
                     $table = "volunteer";
                     $info = Db::name($table)->where(['id' => $value['aid']])->find();
-                    $msg[$key]['title'] = $info['title'];
+                    $msg[$key]['title'] = $info['title'].$opt;
                     switch ($value['type']){
                         case 1:
                             $msg[$key]['str'] = "志愿服务-四跑志愿服务";
@@ -613,7 +617,7 @@ class User extends Base {
                 default:  // 党风廉政
                     $table = "incorrupt";
                     $info = Db::name($table)->where(['id' => $value['aid']])->find();
-                    $msg[$key]['title'] = $info['title'];
+                    $msg[$key]['title'] = $info['title'].$opt;
                     switch ($value['type']){
                         case 1:
                             $msg[$key]['str'] = "党风廉政-廉政责任";
