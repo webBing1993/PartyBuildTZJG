@@ -211,16 +211,20 @@ function mouth_info($class,$type,$userid,$aid,$sum){
         if ($mouth > 10){
             $mouth = 10;
         }
-        for ($i = 1;$i <= $mouth;$i++){
-            if (mouth_sum($i,$class,$type,$userid) < 1){
-                // 还没存储
-                if ($i < $mouth){
-                    $time = 'Y-'.$i.'-15';
-                    // 可以积分 延期 积分打折
-                    \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => $score_up2,'score_down' => $score_down2,'create_time' => strtotime(date($time))]);
-                }else{
-                    // 可以积分 正常积分
-                    \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => $score_up1,'score_down' => $score_down1,'create_time' => time()]);
+        if (mouth_sum($mouth,$class,$type,$userid) < 1){
+            for ($i = 1;$i <= $mouth;$i++){
+                if (mouth_sum($i,$class,$type,$userid) < 1){
+                    // 还没存储
+                    if ($i < $mouth){
+                        $time = 'Y-'.$i.'-20';
+                        // 可以积分 延期 积分打折
+                        \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => $score_up2,'score_down' => $score_down2,'create_time' => strtotime(date($time))]);
+                        break;
+                    }else{
+                        // 可以积分 正常积分
+                        \think\Db::name('score')->insert(['class' => $class,'type' => $type,'aid' => $aid,'userid' => $userid,'score_up' => $score_up1,'score_down' => $score_down1,'create_time' => time()]);
+                        break;
+                    }
                 }
             }
         }
